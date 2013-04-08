@@ -1,0 +1,29 @@
+<h2>Hello <em><?php echo $name; ?></em></h2>
+<p>Your template engine seems to work perfectly!</p>
+<p>This rendering is made running:</p>
+<pre>
+    $output = $template_engine->render(
+        'hello.htm',    // this is the view file name
+        array(          // these are the parameters passed to the view file
+                        // as PHP variables
+            'name' => isset($_GET['name']) ? $_GET['name'] : 'Anonymous'
+        )
+    )
+    // which means that, in your view file, you can write:
+    echo $name
+</pre>
+<p>To test it, add a "name" variable to your current URI, for instance <var>name=Myname</var> ...</p>
+<p>In a view file, <var>$_template</var> is the whole template engine and is array-accessible:</p>
+<pre>
+    $_template['web_root_path']
+    // will be rewritten as 
+    $_template->getWebRootPath()
+    // and will be searched in the "view" or "template" objects
+    $_template->template->getWebRootPath()
+    $_template->view->getWebRootPath()
+    
+    // in this case:
+    $_template['web_root_path'] = $_template->template->getWebRootPath()
+        => "<?php echo $_template['web_root_path']; ?>"    
+</pre>
+<p>See the <a href="../phpdocs">documentation</a> for a full PHP objects review.</p>

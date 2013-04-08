@@ -1,0 +1,161 @@
+<h2>Test of templates functions</h2>
+
+<h3>Function <var>_render( $view , $params )</var></h3>
+
+<p>Rendering of a view file with arguments:</p>
+<pre>
+    _render('test.htm', array('args'=>array('one', 3=>'two', 123)));
+</pre>
+<blockquote>
+<?php _render('test.htm', array('args'=>array('one', 3=>'two', 123))); ?>
+</blockquote>
+
+<p>Rendering of a non-existing view file:</p>
+<blockquote>
+<?php _render('qsdf.htm'); ?>
+</blockquote>
+
+<h3>Test functions</h3>
+
+<h4>
+    <var>_isfalse( $val )</var>, <var>_isnotfalse( $val )</var>,
+    <var>_istrue( $val )</var>, <var>_isnottrue( $val )</var>,
+    <var>_isnull( $val )</var>, <var>_isnotnull( $val )</var>
+</h4>
+
+<pre>
+    $val = 'a value';
+    if (_isfalse($val)) echo "Value was false";
+    else echo "Value was not false";
+</pre>
+<blockquote>
+<?php
+    $val = 'a value';
+    if (_isfalse($val)) echo "Value was false";
+    else echo "Value was not false";
+?>
+</blockquote>
+
+<p>Test with a non-existing variable:</p>
+
+<pre>
+    if (_istrue($qsdf)) echo "Value was false";
+    else echo "Value was not false";
+</pre>
+<blockquote>
+<?php
+    if (_istrue($qsdf)) echo "Value was false";
+    else echo "Value was not false";
+?>
+</blockquote>
+
+<h4><var>_if( $condition , $if_true , $if_false )</var></h4>
+
+<pre>
+    $val = 'a value';
+    _if( _isfalse($val), "Value was false", "Value was not false" );
+</pre>
+<blockquote>
+<?php
+    $val = 'a value';
+    _if( _isfalse($val), "Value was false", "Value was not false" );
+?>
+</blockquote>
+
+<p>Test with a callback function:</p>
+
+<pre>
+    $val = 'a value';
+    _if( _isfalse($val), "Value was false", function($condition){ $var = ucfirst('tested'); echo "Value $var was not false!!"; } );
+</pre>
+<blockquote>
+<?php
+    $val = 'a value';
+    _if( _isfalse($val), "Value was false", function($condition){ $var = ucfirst('tested'); return "Value $var was not false!!"; } );
+?>
+</blockquote>
+
+<h4><var>_else( $condition , $if_false , $if_true )</var></h4>
+
+<pre>
+    $val = 'a value';
+    _else( _isfalse($val), "Value was not false", "Value was false" );
+</pre>
+<blockquote>
+<?php
+    $val = 'a value';
+    _else( _isfalse($val), "Value was not false", "Value was false" );
+?>
+</blockquote>
+
+<p>Test with a callback function with arguments:</p>
+
+<pre>
+    $val = 'a value';
+    _else( _isfalse($val), 
+        function($condition, $arg){ $var = ucfirst($arg); echo "Value $var was not false!!"; },
+        function($condition, $arg){ $var = ucfirst($arg); echo "Value $var was false!!"; },
+        array( 'my callback argument' )
+    );
+</pre>
+<blockquote>
+<?php
+    $val = 'a value';
+    _else( _isfalse($val), 
+        function($condition, $arg){ $var = ucfirst($arg); echo "Value $var was not false!!"; },
+        function($condition, $arg){ $var = ucfirst($arg); echo "Value $var was false!!"; },
+        array( 'my callback argument' )
+    );
+?>
+</blockquote>
+
+<p>Test with a callback function that send an error:</p>
+
+<pre>
+    $val = 'a value';
+    _else( _isfalse($val), 
+        function($condition){ fopen(); },
+        function($condition){ fopen(); }
+    );
+</pre>
+<blockquote>
+<?php
+    $val = 'a value';
+    _else( _isfalse($val), 
+        function($condition){ fopen(); },
+        function($condition){ fopen(); }
+    );
+?>
+</blockquote>
+
+<h3>Function <var>_dump( $array , $only_string_index , $mask_item , $mask_global , $no_index_mask )</var></h3>
+
+<pre>
+    $table = array(
+        'a value',
+        'my index'=>'another value',
+        4=> 0987.234,
+        array('one', 'two', 'three')
+    );
+    _dump($table);
+</pre>
+<blockquote>
+<?php
+    $table = array(
+        'a value',
+        'my index'=>'another value',
+        4=> 0987.234,
+        'another index'=>true,
+        array('one', 'two', 'three')
+    );
+    _dump($table);
+?>
+</blockquote>
+<pre>
+    _dump($table, true);
+</pre>
+<blockquote>
+<?php
+    _dump($table, true);
+?>
+</blockquote>
