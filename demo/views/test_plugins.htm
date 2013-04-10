@@ -1,0 +1,84 @@
+<?php
+
+$_template->getTemplateObject('JavascriptTag')->set(array(
+    "
+$(function() {
+    $('table.tablesorter').tablesorter();
+    $('pre.code').highlight({source:0, indent:'tabs', code_lang: 'data-language'});
+});
+    "
+));
+
+?>
+<h2>Test of all default template engine plugins</h2>
+
+<h3>jQuery highlight</h3>
+
+<pre class="code" data-language="php">
+&lt;?php
+    $val = 'a value';
+    if (_isfalse($val)) echo "Value was false";
+    else echo "Value was not false";
+?&gt;
+</pre>
+
+<h3>jQuery tablesorter</h3>
+
+<table class="tablesorter">
+<thead>
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Age</th>
+        <th>Total</th>
+        <th>Discount</th>
+        <th>Date</th>
+
+    </tr>
+</thead>
+<tbody>
+    <tr>
+        <td>Peter</td>
+        <td>Parker</td>
+        <td>28</td>
+        <td>$9.99</td>
+        <td>20%</td>
+        
+        <td>Jul 6, 2006 8:14 AM</td>
+    </tr>
+    <tr>
+        <td>John</td>
+        <td>Hood</td>
+        <td>33</td>
+        <td>$19.99</td>
+        <td>25%</td>
+        
+        <td>Dec 10, 2002 5:14 AM</td>
+    </tr>
+    <tr>
+        <td>Clark</td>
+        <td>Kent</td>
+        <td>18</td>
+        <td>$15.89</td>
+        <td>44%</td>
+        <td>Jan 12, 2003 11:14 AM</td>
+    </tr>
+    <tr>
+        <td>Bruce</td>
+        <td>Almighty</td>
+        <td>45</td>
+        <td>$153.19</td>
+        <td>44%</td>
+        
+        <td>Jan 18, 2001 9:12 AM</td>
+    </tr>
+    <tr>
+        <td>Bruce</td>
+        <td>Evans</td>
+        <td>22</td>
+        <td>$13.19</td>
+        <td>11%</td>
+        <td>Jan 18, 2007 9:12 AM</td>
+    </tr>
+</tbody>
+</table>

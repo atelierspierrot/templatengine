@@ -11,6 +11,15 @@ if (strlen($boilerplate_assets)) {
     $boilerplate_assets = rtrim($boilerplate_assets, '/').'/';
 }
 
+// --------------------------------
+// the "classic" assets web accessible directory
+if (empty($assets)) {
+    $assets = trim(str_replace($_SERVER['DOCUMENT_ROOT'], '', __DIR__.'/../'), '/');
+}
+if (strlen($assets)) {
+    $assets = rtrim($assets, '/').'/';
+}
+
 // ------------------
 // metas
 $old_metas = $_template->getTemplateObject('MetaTag')->get();
@@ -111,9 +120,13 @@ echo
 ?>
         <link rel="stylesheet" href="<?php echo $boilerplate_assets; ?>css/normalize.css">
         <link rel="stylesheet" href="<?php echo $boilerplate_assets; ?>css/main.css">
-        <script src="<?php echo $boilerplate_assets; ?>js/vendor/modernizr-2.6.2.min.js"></script>
+        <link rel="stylesheet" href="<?php echo $assets; ?>vendor/blue/style.css">
+        <link rel="stylesheet" href="<?php echo $assets; ?>vendor/jquery.highlight.css">
+        <link rel="stylesheet" href="<?php echo $assets; ?>css/styles.css">
+        <script src="<?php echo $assets; ?>vendor/modernizr-2.6.2.min.js"></script>
     </head>
     <body>
+    <div id="page-wrapper">
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
@@ -121,15 +134,33 @@ echo
 <?php foreach($_template->getPageStructure() as $item) : ?>
     <?php if (isset($$item)) : ?>
         <div id="<?php echo HtmlHelper::getId($item); ?>" class="structure-<?php echo $item; ?>">
-            <?php echo $$item; ?>
+            <?php if (is_array($$item)) : ?>
+            <ul>
+                <?php foreach($$item as $var=>$val) : ?>
+                <li><a href="<?php echo $var; ?>"><?php echo $val; ?></a></li>
+                <?php endforeach; ?>
+            </ul>
+            <?php else : ?>
+                <?php echo $$item; ?>
+            <?php endif; ?>
         </div>
     <?php endif; ?>
 <?php endforeach; ?>
 
+    </div>
+
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="<?php echo $boilerplate_assets; ?>js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+        <script>window.jQuery || document.write('<script src="<?php echo $assets; ?>vendor/jquery-1.9.1.min.js"><\/script>')</script>
         <script src="<?php echo $boilerplate_assets; ?>js/plugins.js"></script>
-        <script src="<?php echo $boilerplate_assets; ?>js/main.js"></script>
+        <script src="<?php echo $assets; ?>vendor/jquery.highlight.js"></script>
+        <script src="<?php echo $assets; ?>vendor/jquery.metadata.js"></script>
+        <script src="<?php echo $assets; ?>vendor/jquery.tablesorter.min.js"></script>
+        <script src="<?php echo $assets; ?>js/scripts.js"></script>
+<?php
+echo
+	$_template->getTemplateObject('JavascriptTag')->write("%s"),
+	"\n";
+?>
 
     </body>
 </html>

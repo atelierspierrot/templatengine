@@ -1,0 +1,336 @@
+<section>
+
+<h1>H1: Test of HTML(5) tags</h1>
+<p>p: <?php echo _loremipsum(); ?></p>
+
+<h2>H2 header</h2>
+<p>p: <?php echo _loremipsum(); ?></p>
+
+<h3>H3 header</h3>
+<p>p: <?php echo _loremipsum(); ?></p>
+
+<h4>H4 header</h4>
+<p>p: <?php echo _loremipsum(); ?></p>
+
+<h5>H5 header</h5>
+<p>p: <?php echo _loremipsum(); ?></p>
+
+<h6>H6 header</h6>
+<p>p: <?php echo _loremipsum(); ?></p>
+
+<hr />
+
+<p class="text-right">p class=text-right: <?php echo _loremipsum(); ?></p>
+
+<p class="text-center">p class=text-center: <?php echo _loremipsum(); ?></p>
+
+<p class="text-left">p class=text-left: <?php echo _loremipsum(); ?></p>
+
+<hr />
+
+<small>small: <?php echo _loremipsum(); ?></small>
+
+<blockquote>
+blockquote:
+    <?php echo _loremipsum(); ?>
+    <p>p: <?php echo _loremipsum(); ?></p>
+</blockquote>
+
+<hr />
+
+<p>Unordered list</p>
+<ul>
+    <li>li: my first item</li>
+    <li>li: my second item</li>
+    <li>li: my third item<ul>
+        <li>li li: my first sub-item</li>
+        <li>li li: my second sub-item</li>
+    </ul></li>
+    <li>li: my fourth item</li>
+    <li>li: my fifth item<ul>
+        <li>li li: my first sub-item</li>
+        <li>li li: my second sub-item<ul>
+            <li>li li li: my first sub-sub-item</li>
+            <li>li li li: my second sub-sub-item<ul>
+                <li>li li li li: my first sub-sub-sub-item</li>
+                <li>li li li li: my second sub-sub-sub-item</li>
+            </ul></li>
+            <li>li li li: my third sub-sub-item</li>
+        </ul></li>
+        <li>li li: my third sub-item</li>
+    </ul></li>
+    <li>li: my sixth item</li>
+</ul>
+
+<hr />
+
+<p>Ordered list</p>
+<ol>
+    <li>li: my first item</li>
+    <li>li: my second item</li>
+    <li>li: my third item<ul>
+        <li>li li: my first sub-item</li>
+        <li>li li: my second sub-item</li>
+    </ul></li>
+    <li>li: my fourth item</li>
+    <li>li: my fifth item<ol>
+        <li>li li: my first sub-item</li>
+        <li>li li: my second sub-item<ul>
+            <li>li li li: my first sub-sub-item</li>
+            <li>li li li: my second sub-sub-item<ul>
+                <li>li li li li: my first sub-sub-sub-item</li>
+                <li>li li li li: my second sub-sub-sub-item</li>
+            </ul></li>
+            <li>li li li: my third sub-sub-item</li>
+        </ul></li>
+        <li>li li: my third sub-item</li>
+    </ol></li>
+    <li>li: my sixth item</li>
+</ol>
+
+<hr />
+
+<p>Typography</p>
+
+<p>Lorem ipsum dolor sit amet, <b>b: consectetur adipisicing elit</b>, sed do eiusmod tempor <em>em: incididunt ut labore et dolore magna aliqua</em>. Ut enim ad minim veniam, <strong>strong: quis nostrud exercitation ullamco laboris</strong> nisi ut aliquip ex ea commodo consequat. <i>i: Duis aute irure</i> dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+<hr />
+
+<p>Links</p>
+
+<p>Lorem ipsum dolor sit amet, <a href="http://test.com/">external: consectetur adipisicing elit</a>, sed do eiusmod tempor <a href="/?page=test">internal: consectetur adipisicing elit</a>. Ut enim ad minim veniam, <a href="mailto:test@mail.com">mailto: consectetur adipisicing elit</a> nisi ut aliquip ex ea commodo consequat. <a onclick="alert('test');">onclick: dolor in reprehenderit</a> in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+</section>
+<hr />
+<section>
+
+<p>Form</p>
+
+<form name="test_form_1" id="test_form_1" action="#" method="get">
+
+    <fieldset>
+        <legend>Legend of the first fieldset</legend>
+        
+        <p>
+            <label for="input_A">Input type "text":</label>
+            <input type="text" id="input_A" name="input_A" value="" />
+        </p>
+
+        <p>
+            <label for="input_B">Input type "select":</label>
+            <select id="input_B" name="input_B">
+                <option value="B1">Option B1</option>
+                <option value="B2">Option B2</option>
+                <option value="B3">Option B3</option>
+                <option value="B4">Option B4</option>
+            </select>
+        </p>
+
+        <p>
+            <label for="input_C">Input type "textarea":</label>
+            <textarea id="input_C" name="input_C"></textarea>
+        </p>
+
+    </fieldset>
+
+    <fieldset>
+        <legend>Legend of the second fieldset</legend>
+        
+        <p>
+            <label for="input_G_1">Input type "checkbox" 1:</label>
+            <input type="checkbox" id="input_G_1" name="input_G[]" value="value_G1" />
+            <label for="input_G_2">Input type "checkbox" 2:</label>
+            <input type="checkbox" id="input_G_2" name="input_G[]" value="value_G2" />
+        </p>
+
+        <p>
+            <label for="input_H_1">Input type "radio" 1:</label>
+            <input type="radio" id="input_H_1" name="input_H" value="value_H1" />
+            <label for="input_H_2">Input type "radio" 2:</label>
+            <input type="radio" id="input_H_2" name="input_H" value="value_H2" />
+        </p>
+
+        <p>
+            <label for="input_D">Input type "button":</label>
+            <input type="button" id="input_D" name="input_D" value="My button" />
+        </p>
+
+    </fieldset>
+
+    <input type="submit" id="input_E" value="Submit" />
+    <input type="reset" id="input_F" value="Reset" />
+</form>
+
+</section>
+<hr />
+<section>
+
+<p>Content generated by <a href="http://loripsum.net/">http://loripsum.net/</a></p>
+
+<h1>At quanta conantur! Mundum hunc omnem oppidum esse nostrum! Incendi igitur eos, qui audiunt, vides.</h1>
+
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duo Reges: constructio interrete. <code>Negare non possum.</code> Istam voluptatem perpetuam quis potest praestare sapienti? His similes sunt omnes, qui virtuti student levantur vitiis, levantur erroribus, nisi forte censes Ti. Morbo gravissimo affectus, exul, orbus, egens, torqueatur eculeo: quem hunc appellas, Zeno? Negat enim summo bono afferre incrementum diem. Sed potestne rerum maior esse dissensio? <code>Sed quot homines, tot sententiae;</code> <a href='http://loripsum.net/' target='_blank'>Hoc sic expositum dissimile est superiori.</a> Ita cum ea volunt retinere, quae superiori sententiae conveniunt, in Aristonem incidunt; Esse enim, nisi eris, non potes. </p>
+
+<dl>
+	<dt><dfn>Si longus, levis;</dfn></dt>
+	<dd>Effluit igitur voluptas corporis et prima quaeque avolat saepiusque relinquit causam paenitendi quam recordandi.</dd>
+	<dt><dfn>Eam stabilem appellas.</dfn></dt>
+	<dd>Quis non odit sordidos, vanos, leves, futtiles?</dd>
+</dl>
+
+
+<h3>Eiuro, inquit adridens, iniquum, hac quidem de re;</h3>
+
+<p>Quo minus animus a se ipse dissidens secumque discordans gustare partem ullam liquidae voluptatis et liberae potest. Et si in ipsa gubernatione neglegentia est navis eversa, maius est peccatum in auro quam in palea. Quo invento omnis ab eo quasi capite de summo bono et malo disputatio ducitur. Non autem hoc: igitur ne illud quidem. Equidem etiam Epicurum, in physicis quidem, Democriteum puto. Sin autem ad animum, falsum est, quod negas animi ullum esse gaudium, quod non referatur ad corpus. Aderamus nos quidem adolescentes, sed multi amplissimi viri, quorum nemo censuit plus Fadiae dandum, quam posset ad eam lege Voconia pervenire. <a href='http://loripsum.net/' target='_blank'>Quod iam a me expectare noli.</a> Hoc mihi cum tuo fratre convenit. Respondent extrema primis, media utrisque, omnia omnibus. Non enim, si malum est dolor, carere eo malo satis est ad bene vivendum. Ergo illi intellegunt quid Epicurus dicat, ego non intellego? Reguli reiciendam; <a href='http://loripsum.net/' target='_blank'>Praeclare hoc quidem.</a> Tubulum fuisse, qua illum, cuius is condemnatus est rogatione, P. <a href='http://loripsum.net/' target='_blank'>Sullae consulatum?</a> </p>
+
+<blockquote cite='http://loripsum.net'>
+	E quo efficitur, non ut nos non intellegamus quae vis sit istius verbi, sed ut ille suo more loquatur, nostrum neglegat.
+</blockquote>
+
+
+<ol>
+	<li>Plane idem, inquit, et maxima quidem, qua fieri nulla maior potest.</li>
+	<li>Nec enim ignoras his istud honestum non summum modo, sed etiam, ut tu vis, solum bonum videri.</li>
+	<li>Aliam vero vim voluptatis esse, aliam nihil dolendi, nisi valde pertinax fueris, concedas necesse est.</li>
+	<li>Nonne igitur tibi videntur, inquit, mala?</li>
+</ol>
+
+
+<ul>
+	<li>Cur id non ita fit?</li>
+	<li>Mihi quidem Antiochum, quem audis, satis belle videris attendere.</li>
+</ul>
+
+
+<blockquote cite='http://loripsum.net'>
+	Sin dicit obscurari quaedam nec apparere, quia valde parva sint, nos quoque concedimus;
+</blockquote>
+
+
+<p>Sit ista in Graecorum levitate perversitas, qui maledictis insectantur eos, a quibus de veritate dissentiunt. An tu me de L. Quasi ego id curem, quid ille aiat aut neget. Sunt enim quasi prima elementa naturae, quibus ubertas orationis adhiberi vix potest, nec equidem eam cogito consectari. Sed ad haec, nisi molestum est, habeo quae velim. Ergo infelix una molestia, fellx rursus, cum is ipse anulus in praecordiis piscis inventus est? <mark>Laboro autem non sine causa;</mark> <code>Quonam modo?</code> Nec enim, omnes avaritias si aeque avaritias esse dixerimus, sequetur ut etiam aequas esse dicamus. Octavio fuit, cum illam severitatem in eo filio adhibuit, quem in adoptionem D. </p>
+
+<h5>Graecum enim hunc versum nostis omnes-: Suavis laborum est praeteritorum memoria.</h5>
+
+<p>Ad corpus diceres pertinere-, sed ea, quae dixi, ad corpusne refers? <b>Sed potestne rerum maior esse dissensio?</b> Atque ab isto capite fluere necesse est omnem rationem bonorum et malorum. Non est enim vitium in oratione solum, sed etiam in moribus. <b>Ratio enim nostra consentit, pugnat oratio.</b> Videmusne ut pueri ne verberibus quidem a contemplandis rebus perquirendisque deterreantur? Ita fit cum gravior, tum etiam splendidior oratio. Tum Piso: Atqui, Cicero, inquit, ista studia, si ad imitandos summos viros spectant, ingeniosorum sunt; </p>
+
+<h2>Pollicetur certe.</h2>
+
+<p><a href='http://loripsum.net/' target='_blank'>Graccho, eius fere, aequalí?</a> Illis videtur, qui illud non dubitant bonum dicere -; Magni enim aestimabat pecuniam non modo non contra leges, sed etiam legibus partam. Atqui, inquam, Cato, si istud optinueris, traducas me ad te totum licebit. Sed dum efficere vultis beatum sapientem, cum maximas animo voluptates percipiat omnibusque partibus maiores quam corpore, quid occurrat non videtis. <b>Pauca mutat vel plura sane;</b> Nam illud vehementer repugnat, eundem beatum esse et multis malis oppressum. Maximas vero virtutes iacere omnis necesse est voluptate dominante. Sed nunc, quod agimus; <i>A mene tu?</i> </p>
+
+<p>Ipse Epicurus fortasse redderet, ut Sextus Peducaeus, Sex. Sed haec ab Antiocho, familiari nostro, dicuntur multo melius et fortius, quam a Stasea dicebantur. <a href='http://loripsum.net/' target='_blank'>Quam ob rem tandem, inquit, non satisfacit?</a> <i>Sed ego in hoc resisto;</i> Qui autem de summo bono dissentit de tota philosophiae ratione dissentit. <code>Hoc mihi cum tuo fratre convenit.</code> Expressa vero in iis aetatibus, quae iam confirmatae sunt. Intellegi quidem, ut propter aliam quampiam rem, verbi gratia propter voluptatem, nos amemus; Ne discipulum abducam, times. Quod autem ratione actum est, id officium appellamus. </p>
+
+<h2>Qui enim existimabit posse se miserum esse beatus non erit.</h2>
+
+<p>Praetereo multos, in bis doctum hominem et suavem, Hieronymum, quem iam cur Peripateticum appellem nescio. Dicet pro me ipsa virtus nec dubitabit isti vestro beato M. Hic ego: Pomponius quidem, inquam, noster iocari videtur, et fortasse suo iure. <a href='http://loripsum.net/' target='_blank'>Quibus ego vehementer assentior.</a> Paria sunt igitur. Addo etiam illud, multa iam mihi dare signa puerum et pudoris et ingenii, sed aetatem vides. Etenim nec iustitia nec amicitia esse omnino poterunt, nisi ipsae per se expetuntur. Eadem nunc mea adversum te oratio est. </p>
+
+<p>Neque enim civitas in seditione beata esse potest nec in discordia dominorum domus; Quantum Aristoxeni ingenium consumptum videmus in musicis? <i>Ea possunt paria non esse.</i> Ergo omni animali illud, quod appetiti positum est in eo, quod naturae est accommodatum. <b>Uterque enim summo bono fruitur, id est voluptate.</b> <b>Satis est ad hoc responsum.</b> Quod autem magnum dolorem brevem, longinquum levem esse dicitis, id non intellego quale sit. Quem si tenueris, non modo meum Ciceronem, sed etiam me ipsum abducas licebit. Non prorsus, inquit, omnisque, qui sine dolore sint, in voluptate, et ea quidem summa, esse dico. <a href='http://loripsum.net/' target='_blank'>Ille incendat?</a> Quicquid enim a sapientia proficiscitur, id continuo debet expletum esse omnibus suis partibus; <code>Poterat autem inpune;</code> </p>
+
+<ol>
+	<li>Nihil acciderat ei, quod nollet, nisi quod anulum, quo delectabatur, in mari abiecerat.</li>
+	<li>Multoque hoc melius nos veriusque quam Stoici.</li>
+	<li>An hoc usque quaque, aliter in vita?</li>
+	<li>Ita enim vivunt quidam, ut eorum vita refellatur oratio.</li>
+</ol>
+
+
+<ul>
+	<li>Quid est enim aliud esse versutum?</li>
+	<li>Omnibus enim artibus volumus attributam esse eam, quae communis appellatur prudentia, quam omnes, qui cuique artificio praesunt, debent habere.</li>
+	<li>Illa videamus, quae a te de amicitia dicta sunt.</li>
+</ul>
+
+
+<pre>
+Rapior illuc, revocat autem Antiochus, nec est praeterea,
+quem audiamus.
+
+Vitae autem degendae ratio maxime quidem illis placuit
+quieta.
+</pre>
+
+
+<h3>Et quidem iure fortasse, sed tamen non gravissimum est testimonium multitudinis.</h3>
+
+<p>Nec hoc ille non vidit, sed verborum magnificentia est et gloria delectatus. <i>Erat enim Polemonis.</i> Non elogia monimentorum id significant, velut hoc ad portam: Hunc unum plurimae consentiunt gentes populi primarium fuisse virum. <mark>Nescio quo modo praetervolavit oratio.</mark> <i>Eam stabilem appellas.</i> <i>Nemo igitur esse beatus potest.</i> <mark>Ac tamen hic mallet non dolere.</mark> Est autem officium, quod ita factum est, ut eius facti probabilis ratio reddi possit. Sin dicit obscurari quaedam nec apparere, quia valde parva sint, nos quoque concedimus; Atqui haec patefactio quasi rerum opertarum, cum quid quidque sit aperitur, definitio est. Semper enim ex eo, quod maximas partes continet latissimeque funditur, tota res appellatur. </p>
+
+<p>Unum nescio, quo modo possit, si luxuriosus sit, finitas cupiditates habere. <b>Age, inquies, ista parva sunt.</b> Hoc ille tuus non vult omnibusque ex rebus voluptatem quasi mercedem exigit. Vadem te ad mortem tyranno dabis pro amico, ut Pythagoreus ille Siculo fecit tyranno? Alia quaedam dicent, credo, magna antiquorum esse peccata, quae ille veri investigandi cupidus nullo modo ferre potuerit. <a href='http://loripsum.net/' target='_blank'>Eam stabilem appellas.</a> Me ipsum esse dicerem, inquam, nisi mihi viderer habere bene cognitam voluptatem et satis firme conceptam animo atque comprehensam. Cuius similitudine perspecta in formarum specie ac dignitate transitum est ad honestatem dictorum atque factorum. <a href='http://loripsum.net/' target='_blank'>Certe, nisi voluptatem tanti aestimaretis.</a> Ab his oratores, ab his imperatores ac rerum publicarum principes extiterunt. </p>
+
+<p>Sin te auctoritas commovebat, nobisne omnibus et Platoni ipsi nescio quem illum anteponebas? Hoc loco tenere se Triarius non potuit. <a href='http://loripsum.net/' target='_blank'>Frater et T.</a> <mark>Quis est tam dissimile homini.</mark> Sed haec quidem liberius ab eo dicuntur et saepius. Quo modo autem philosophus loquitur? <mark>Bestiarum vero nullum iudicium puto.</mark> </p>
+
+<dl>
+	<dt><dfn>Sed haec omittamus;</dfn></dt>
+	<dd>Est enim effectrix multarum et magnarum voluptatum.</dd>
+	<dt><dfn>Praeclare hoc quidem.</dfn></dt>
+	<dd>Istam voluptatem perpetuam quis potest praestare sapienti?</dd>
+	<dt><dfn>Istic sum, inquit.</dfn></dt>
+	<dd>Naturales divitias dixit parabiles esse, quod parvo esset natura contenta.</dd>
+	<dt><dfn>Sed videbimus.</dfn></dt>
+	<dd>Parvi enim primo ortu sic iacent, tamquam omnino sine animo sint.</dd>
+</dl>
+
+
+<blockquote cite='http://loripsum.net'>
+	Aut, Pylades cum sis, dices te esse Orestem, ut moriare pro amico?
+</blockquote>
+
+
+<pre>
+Quid enim dicis omne animal, simul atque sit ortum,
+applicatum esse ad se diligendum esseque in se conservando
+occupatum?
+
+Nec enim ignoras his istud honestum non summum modo, sed
+etiam, ut tu vis, solum bonum videri.
+</pre>
+
+
+<p>Quis enim confidit <var>semper sibi illud stabile</var> et firmum permansurum, quod fragile et caducum sit? Quid in isto egregio tuo officio et tanta fide-sic enim existimo-ad corpus refers? Atque haec coniunctio confusioque virtutum tamen a philosophis ratione quadam distinguitur. Sed ad bona praeterita redeamus. <i>Quae quidem vel cum periculo est quaerenda vobis;</i> Haec mihi videtur delicatior, ut ita dicam, molliorque ratio, quam virtutis vis gravitasque postulat. </p>
+
+<h1>Dic in quovis conventu te omnia facere, ne doleas.</h1>
+
+<p><code>Aliter enim explicari, quod quaeritur, non potest.</code> Quid iudicant sensus? Ex ea difficultate illae fallaciloquae, ut ait Accius, malitiae natae sunt. <i>Nos commodius agimus.</i> Haec quo modo conveniant, non sane intellego. <code>Haec para/doca illi, nos admirabilia dicamus.</code> <i>Et quidem, inquit, vehementer errat;</i> </p>
+
+<dl>
+	<dt><dfn>Istic sum, inquit.</dfn></dt>
+	<dd>Solum praeterea formosum, solum liberum, solum civem, stultost;</dd>
+	<dt><dfn>Quid vero?</dfn></dt>
+	<dd>Idque testamento cavebit is, qui nobis quasi oraculum ediderit nihil post mortem ad nos pertinere?</dd>
+	<dt><dfn>Optime, inquam.</dfn></dt>
+	<dd>Quam multa vitiosa! summum enim bonum et malum vagiens puer utra voluptate diiudicabit, stante an movente?</dd>
+	<dt><dfn>Praeclarae mortes sunt imperatoriae;</dfn></dt>
+	<dd>Cum ageremus, inquit, vitae beatum et eundem supremum diem, scribebamus haec.</dd>
+</dl>
+
+
+<ol>
+	<li>Quaesita enim virtus est, non quae relinqueret naturam, sed quae tueretur.</li>
+	<li>Morbo gravissimo affectus, exul, orbus, egens, torqueatur eculeo: quem hunc appellas, Zeno?</li>
+</ol>
+
+
+<pre>
+Est enim perspicuum nullam artem ipsam in se versari, sed
+esse aliud artem ipsam, aliud quod propositum sit arti.
+
+Omnium enim rerum principia parva sunt, sed suis
+progressionibus usa augentur nec sine causa;
+</pre>
+
+
+<ul>
+	<li>Sunt etiam turpitudines plurimae, quae, nisi honestas natura plurimum valeat, cur non cadant in sapientem non est facile defendere.</li>
+	<li>Rapior illuc, revocat autem Antiochus, nec est praeterea, quem audiamus.</li>
+	<li>Quid est enim aliud esse versutum?</li>
+	<li>Ex rebus enim timiditas, non ex vocabulis nascitur.</li>
+</ul>
+
+
+<h6>Ad corpus diceres pertinere-, sed ea, quae dixi, ad corpusne refers?</h6>
+
+<p>Quae sunt igitur communia vobis cum antiquis, iis sic utamur quasi concessis; <a href='http://loripsum.net/' target='_blank'>Videsne quam sit magna dissensio?</a> <a href='http://loripsum.net/' target='_blank'>Quonam, inquit, modo?</a> Equidem soleo etiam quod uno Graeci, si aliter non possum, idem pluribus verbis exponere. Quem ad modum quis ambulet, sedeat, qui ductus oris, qui vultus in quoque sit? Si enim, ut mihi quidem videtur, non explet bona naturae voluptas, iure praetermissa est; <code>Ille incendat?</code> Itaque nostrum est-quod nostrum dico, artis est-ad ea principia, quae accepimus. Hanc se tuus Epicurus omnino ignorare dicit quam aut qualem esse velint qui honestate summum bonum metiantur. Sed quamvis comis in amicis tuendis fuerit, tamen, si haec vera sunt-nihil enim affirmo-, non satis acutus fuit. </p>
+
+<h4>Si quae forte-possumus.</h4>
+
+<p>Ergo ita: non posse honeste vivi, nisi honeste vivatur? <mark>Cur iustitia laudatur?</mark> Dolere malum est: in crucem qui agitur, beatus esse non potest. <b>Nihil enim hoc differt.</b> Quodsi vultum tibi, si incessum fingeres, quo gravior viderere, non esses tui similis; Dolor ergo, id est summum malum, metuetur semper, etiamsi non aderit; Numquam hoc ita defendit Epicurus neque Metrodorus aut quisquam eorum, qui aut saperet aliquid aut ista didicisset. <a href='http://loripsum.net/' target='_blank'>Hoc est non dividere, sed frangere.</a> Nihilne te delectat umquam -video, quicum loquar-, te igitur, Torquate, ipsum per se nihil delectat? Qui enim voluptatem ipsam contemnunt, iis licet dicere se acupenserem maenae non anteponere. Saepe ab Aristotele, a Theophrasto mirabiliter est laudata per se ipsa rerum scientia; </p>
+
+</section>

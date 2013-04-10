@@ -20,6 +20,7 @@ class Controller
             ->setToTemplate('setCachePath', __DIR__.'/tmp' )
             ->setToTemplate('setAssetsCachePath', __DIR__.'/tmp' )
             ->setToView('setIncludePath', __DIR__.'/views' )
+            ->setToView('addDefaultViewParam', 'assets', '../www/' )
             ->setToView('addDefaultViewParam', 'boilerplate_assets', '../www/html5boilerplate/' )
             ;
 	}
@@ -62,6 +63,16 @@ class Controller
             ->templateFallback('getTemplateObject', array('TitleTag'))
     		->add( $title );
 
+        if (empty($params['menu'])) {
+            $params['menu'] = array(
+                '/?page=index'=>'Home',
+                '/?page=hello'=>'Simple test',
+                '/?page=fcts'=>'Functions doc',
+                '/?page=test'=>'Plugins test',
+                '/?page=loremipsum'=>'Typographic tests',
+            );
+        }
+
         // this will display the layout on screen and exit
 		$this->template_engine->renderLayout($view, $params, true, true);
     }
@@ -98,6 +109,26 @@ class Controller
 				'fcts.htm'
 			),
 			'title' => "Functions"
+		);
+    }
+
+    function testAction()
+    {
+        return array(
+			'output'=> $this->template_engine->render(
+				'test_plugins.htm'
+			),
+			'title' => "Test of all plugins"
+		);
+    }
+
+    function loremipsumAction()
+    {
+        return array(
+			'output'=> $this->template_engine->render(
+				'loremipsum.htm'
+			),
+			'title' => "Test of HTML(5) tags"
 		);
     }
 
