@@ -17,5 +17,11 @@
         "atelierspierrot/library": "dev-master"
     },
     "require-dev": { "sami/sami": "dev-master" },
-    "autoload": { "psr-0": {  "TemplateEngine": "src" } }
+    "autoload": { "psr-0": {  "TemplateEngine": "src" } },
+    "extra": {
+        "assets": "www"
+    },
+    "scripts": {
+        "post-autoload-dump": "TemplateEngine\\Composer\\AssetsInstaller::postAutoloadDump"
+    }
 }

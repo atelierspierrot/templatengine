@@ -5,6 +5,7 @@
 use TemplateEngine\TemplateEngine;
 
 use Library\Helper\Html as HtmlHelper;
+use Library\Helper\Url as UrlHelper;
 
 class Controller
 {
@@ -65,13 +66,15 @@ class Controller
 
         if (empty($params['menu'])) {
             $params['menu'] = array(
-                '/?page=index'=>'Home',
-                '/?page=hello'=>'Simple test',
-                '/?page=fcts'=>'Functions doc',
-                '/?page=test'=>'Plugins test',
-                '/?page=loremipsum'=>'Typographic tests',
+                'Home'              => UrlHelper::url(array('page'=>'index')),
+                'Simple test'       => UrlHelper::url(array('page'=>'hello')),
+                'Functions doc'     => UrlHelper::url(array('page'=>'fcts')),
+                'Plugins test'      => UrlHelper::url(array('page'=>'test')),
+                'Typographic tests' => UrlHelper::url(array('page'=>'loremipsum')),
             );
         }
+
+        $params['footer'] = array('right'=>'A test of footer');
 
         // this will display the layout on screen and exit
 		$this->template_engine->renderLayout($view, $params, true, true);

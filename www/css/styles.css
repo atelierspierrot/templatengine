@@ -6,7 +6,7 @@ For more information, see http://andreasviklund.com/templates/basic-reader/
 */
 
 *           {margin:0; padding:0;}
-body        {background: #fff; color:#303030; font:82% "Lucida Sans Unicode","Lucida Grande",Verdana,Arial,Helvetica,sans-serif; line-height:1.5em;
+body        {background: #fff; color:#303030; font:88% "Lucida Sans Unicode","Lucida Grande",Verdana,Arial,Helvetica,sans-serif; line-height:1.5em;
             margin: 40px auto; padding:0; width:90%;}
 a           {color:#972323; text-decoration:none;cursor: pointer;}
 a:hover     {text-decoration:underline;}
@@ -26,6 +26,11 @@ pre code    {border: none; text-indent:0; padding: 0;}
 td, th      {padding: .5em;}
 form, fieldset {padding: 1em; margin: .4em;}
 fieldset    {border: 1px dotted #ddd;}
+
+/* utilities */
+.text-right {text-align: right;}
+.text-left {text-align: left;}
+.text-center {text-align: center;}
 .ok         {color: green; font-weight: bold;}
 .error      {color: red; font-weight: bold;}
 .info       {background: none repeat scroll 0 0 #F4F4F4; border: 1px solid #E0E0E0; color: #737373;
@@ -128,10 +133,10 @@ iframe { border: 1px dotted #ccc; }
 table.tablesorter {
 	font-family:arial; background-color: #CDCDCD; margin:10px 0pt 15px; font-size: 1em; width: 100%; text-align: left;}
 table.tablesorter thead tr th, table.tablesorter tfoot tr th {background-color: #F4F4F4; border: 1px solid #FFF; font-size: .9em; padding: 4px;}
-table.tablesorter thead tr .header {background: #F4F4F4 url(double-arrow.png) no-repeat 100% 50%; cursor: pointer;}
+table.tablesorter thead tr .header {background: #F4F4F4 url(../img/double-arrow.png) no-repeat 100% 50%; cursor: pointer;}
 table.tablesorter tbody td {color: #3D3D3D; padding: 4px; background-color: #FFF; vertical-align: top;}
-table.tablesorter thead tr .headerSortUp {background-image: url(arrow-up.png); background-position: 100% 50%;}
-table.tablesorter thead tr .headerSortDown {background-image: url(arrow-down.png); background-position: 100% 50%;}
+table.tablesorter thead tr .headerSortUp {background-image: url(../img/arrow-up.png); background-position: 100% 50%;}
+table.tablesorter thead tr .headerSortDown {background-image: url(../img/arrow-down.png); background-position: 100% 50%;}
 table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {background-color: #F9F9F9;}
 table.tablesorter tbody tr.odd td {background-color:#F9F9F9;}
 

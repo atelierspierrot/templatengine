@@ -133,7 +133,22 @@ echo
 
 <?php foreach($_template->getPageStructure() as $item) : ?>
     <?php if (isset($$item)) : ?>
+
+        <?php
+            $item_layout = $item.'.html.php';
+            $item_template = $_template->getTemplate($item_layout);
+            if (empty($item_template)) {
+                $item_template = $_template->getTemplate('html5boilerplate/'.$item_layout);
+            }
+
+            if (!empty($item_template)) :
+                _render($item_template, array(
+                    'content'=>$$item
+                ));
+            else :
+        ?>
         <div id="<?php echo HtmlHelper::getId($item); ?>" class="structure-<?php echo $item; ?>">
+
             <?php if (is_array($$item)) : ?>
             <ul>
                 <?php foreach($$item as $var=>$val) : ?>
@@ -143,7 +158,9 @@ echo
             <?php else : ?>
                 <?php echo $$item; ?>
             <?php endif; ?>
+
         </div>
+        <?php endif; ?>
     <?php endif; ?>
 <?php endforeach; ?>
 

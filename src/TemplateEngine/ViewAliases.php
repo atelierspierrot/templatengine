@@ -12,28 +12,37 @@ use Library\Helper\Directory as DirectoryHelper;
 use Library\Helper\File as FileHelper;
 use Library\Helper\Html as HtmlHelper;
 use Library\Helper\Text as TextHelper;
+use Library\Helper\Url as UrlHelper;
 
-if (!function_exists('_error')) 
+if (!function_exists('_array')) 
 {
-	function _error($message = 'View error', $file = null, $line = null)
+	function _array($array)
 	{
-	    TemplateEngine::__error($message, $file, $line);
+	    return (is_array($array) ? $array : array($array));
 	}	
 }
 
-if (!function_exists('_set')) 
+if (!function_exists('_attribute')) 
 {
-	function _set($var, $val)
+	function _attribute($var, $val)
 	{
-	    extract(array($var=>$val), EXTR_OVERWRITE);
+	    echo HtmlHelper::parseAttributes(array($var => $val));
 	}	
 }
 
-if (!function_exists('_unset')) 
+if (!function_exists('_bit')) 
 {
-	function _unset($var)
+	function _bit($value)
 	{
-	    extract(array($var=>null), EXTR_OVERWRITE);
+	    echo (true==$value ? 'true' : 'false');
+	}	
+}
+
+if (!function_exists('_cut')) 
+{
+	function _cut($str, $length = 120, $end_str = ' ...')
+	{
+	    echo TextHelper::cut($str, $length, $end_str);
 	}	
 }
 
@@ -42,87 +51,6 @@ if (!function_exists('_default'))
 	function _default($val, $default = '')
 	{
 	    echo (isset($val) ? $val : $default);
-	}	
-}
-
-if (!function_exists('_render')) 
-{
-	function _render($view, array $args = array())
-	{
-	    $_this = TemplateEngine::getInstance();
-	    $known_view = $_this->getTemplate($view);
-	    if (!empty($known_view)) {
-    		$_this->render($view, $args, true, false);
-    	} else {
-    	    _error(sprintf('Unknown view file "%s"!', $view));
-    	}
-	}	
-}
-
-if (!function_exists('_isfalse')) 
-{
-	function _isfalse($val)
-	{
-	    return (bool) false==$val;
-	}	
-}
-
-if (!function_exists('_isnotfalse')) 
-{
-	function _isnotfalse($val)
-	{
-	    return (bool) false!=$val;
-	}	
-}
-
-if (!function_exists('_istrue')) 
-{
-	function _istrue($val)
-	{
-	    return (bool) true==$val;
-	}	
-}
-
-if (!function_exists('_isnottrue')) 
-{
-	function _isnottrue($val)
-	{
-	    return (bool) true!=$val;
-	}	
-}
-
-if (!function_exists('_isnull')) 
-{
-	function _isnull($val)
-	{
-	    return (bool) null==$val;
-	}	
-}
-
-if (!function_exists('_isnotnull')) 
-{
-	function _isnotnull($val)
-	{
-	    return (bool) null!=$val;
-	}	
-}
-
-if (!function_exists('_if')) 
-{
-	function _if($condition, $if_true = '', $if_false = '', $args)
-	{
-	    array_unshift($args, $condition);
-	    echo TemplateEngine::__closurable(
-	        (true===$condition ? $if_true : $if_false), _array($args)
-	    );
-	}	
-}
-
-if (!function_exists('_else')) 
-{
-	function _else($condition, $if_false = '', $if_true = '', $args)
-	{
-	    _if($condition, $if_true, $if_false, _array($args));
 	}	
 }
 
@@ -143,59 +71,19 @@ if (!function_exists('_dump'))
 	}	
 }
 
-if (!function_exists('_keys')) 
+if (!function_exists('_else')) 
 {
-	function _keys($array)
+	function _else($condition, $if_false = '', $if_true = '', $args)
 	{
-	    return array_keys(_array($array));
+	    _if($condition, $if_true, $if_false, _array($args));
 	}	
 }
 
-if (!function_exists('_values')) 
+if (!function_exists('_error')) 
 {
-	function _values($array)
+	function _error($message = 'View error', $file = null, $line = null)
 	{
-	    return array_values(_array($array));
-	}	
-}
-
-if (!function_exists('_replace')) 
-{
-	function _replace($search, $replace, $string)
-	{
-	    echo str_replace($search, $replace, _string($string));
-	}	
-}
-
-if (!function_exists('_string')) 
-{
-	function _string($value, $glue = ', ')
-	{
-	    echo TemplateEngine::__string($value, $glue);
-	}	
-}
-
-if (!function_exists('_array')) 
-{
-	function _array($array)
-	{
-	    return (is_array($array) ? $array : array($array));
-	}	
-}
-
-if (!function_exists('_bit')) 
-{
-	function _bit($value)
-	{
-	    echo (true==$value ? 'true' : 'false');
-	}	
-}
-
-if (!function_exists('_onoff')) 
-{
-	function _onoff($value)
-	{
-	    echo (true==$value ? 'on' : 'off');
+	    TemplateEngine::__error($message, $file, $line);
 	}	
 }
 
@@ -204,6 +92,97 @@ if (!function_exists('_escape'))
 	function _escape($str)
 	{
 	    echo htmlentities(_string($str));
+	}	
+}
+
+if (!function_exists('_filename')) 
+{
+	function _filename($filename, $lowercase = false, $delimiter = '-')
+	{
+	    echo FileHelper::formatFilename($filename, $lowercase, $delimiter);
+	}	
+}
+
+if (!function_exists('_getid')) 
+{
+	function _getid($reference = null, $base_id = null)
+	{
+	    echo HtmlHelper::getId($reference, $base_id);
+	}	
+}
+
+if (!function_exists('_if')) 
+{
+	function _if($condition, $if_true = '', $if_false = '', $args)
+	{
+	    array_unshift($args, $condition);
+	    echo TemplateEngine::__closurable(
+	        (true===$condition ? $if_true : $if_false), _array($args)
+	    );
+	}	
+}
+
+if (!function_exists('_isfalse')) 
+{
+	function _isfalse($val)
+	{
+	    return (bool) false==$val;
+	}	
+}
+
+if (!function_exists('_isnotfalse')) 
+{
+	function _isnotfalse($val)
+	{
+	    return (bool) false!=$val;
+	}	
+}
+
+if (!function_exists('_isnottrue')) 
+{
+	function _isnottrue($val)
+	{
+	    return (bool) true!=$val;
+	}	
+}
+
+if (!function_exists('_isnotnull')) 
+{
+	function _isnotnull($val)
+	{
+	    return (bool) null!=$val;
+	}	
+}
+
+if (!function_exists('_isnull')) 
+{
+	function _isnull($val)
+	{
+	    return (bool) null==$val;
+	}	
+}
+
+if (!function_exists('_istrue')) 
+{
+	function _istrue($val)
+	{
+	    return (bool) true==$val;
+	}	
+}
+
+if (!function_exists('_javascript')) 
+{
+	function _javascript($str, $protect_quotes = false)
+	{
+	    echo HtmlHelper::javascriptProtect($str, $protect_quotes);
+	}	
+}
+
+if (!function_exists('_keys')) 
+{
+	function _keys($array)
+	{
+	    return array_keys(_array($array));
 	}	
 }
 
@@ -219,27 +198,11 @@ if (!function_exists('_loremipsum'))
 	}	
 }
 
-if (!function_exists('_upper')) 
-{
-	function _upper($value)
-	{
-	    echo strtoupper(TemplateEngine::__string($value));
-	}	
-}
-
 if (!function_exists('_lower')) 
 {
 	function _lower($value)
 	{
 	    echo strtolower(TemplateEngine::__string($value));
-	}	
-}
-
-if (!function_exists('_getid')) 
-{
-	function _getid($reference = null, $base_id = null)
-	{
-	    echo HtmlHelper::getId($reference, $base_id);
 	}	
 }
 
@@ -251,35 +214,81 @@ if (!function_exists('_newid'))
 	}	
 }
 
-if (!function_exists('_javascript')) 
+if (!function_exists('_onoff')) 
 {
-	function _javascript($str, $protect_quotes = false)
+	function _onoff($value)
 	{
-	    echo HtmlHelper::javascriptProtect($str, $protect_quotes);
+	    echo (true==$value ? 'on' : 'off');
 	}	
 }
 
-if (!function_exists('_attribute')) 
+if (!function_exists('_render')) 
 {
-	function _attribute($var, $val)
+	function _render($view, array $args = array())
 	{
-	    echo HtmlHelper::parseAttributes(array($var => $val));
+	    $_this = TemplateEngine::getInstance();
+	    $known_view = $_this->getTemplate($view);
+	    if (!empty($known_view)) {
+    		$_this->render($view, $args, true, false);
+    	} else {
+    	    _error(sprintf('Unknown view file "%s"!', $view));
+    	}
 	}	
 }
 
-if (!function_exists('_filename')) 
+if (!function_exists('_replace')) 
 {
-	function _filename($filename, $lowercase = false, $delimiter = '-')
+	function _replace($search, $replace, $string)
 	{
-	    echo FileHelper::formatFilename($filename, $lowercase, $delimiter);
+	    echo str_replace($search, $replace, _string($string));
 	}	
 }
 
-if (!function_exists('_cut')) 
+if (!function_exists('_set')) 
 {
-	function _cut($str, $length = 120, $end_str = ' ...')
+	function _set($var, $val)
 	{
-	    echo TextHelper::cut($str, $length, $end_str);
+	    extract(array($var=>$val), EXTR_OVERWRITE);
+	}	
+}
+
+if (!function_exists('_string')) 
+{
+	function _string($value, $glue = ', ')
+	{
+	    echo TemplateEngine::__string($value, $glue);
+	}	
+}
+
+if (!function_exists('_unset')) 
+{
+	function _unset($var)
+	{
+	    extract(array($var=>null), EXTR_OVERWRITE);
+	}	
+}
+
+if (!function_exists('_upper')) 
+{
+	function _upper($value)
+	{
+	    echo strtoupper(TemplateEngine::__string($value));
+	}	
+}
+
+if (!function_exists('_url')) 
+{
+	function _url($param = null, $value = null, $url = null)
+	{
+	    return UrlHelper::url($param, $value, $url);
+	}	
+}
+
+if (!function_exists('_values')) 
+{
+	function _values($array)
+	{
+	    return array_values(_array($array));
 	}	
 }
 
