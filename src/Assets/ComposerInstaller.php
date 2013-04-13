@@ -18,7 +18,7 @@ use Composer\Script\Event;
 use Composer\Script\EventDispatcher;
 
 use Assets\Util\Filesystem;
-use Assets\Autoload\AssetsAutoloader;
+use Assets\Loader as AssetsLoader;
 use Assets\Autoload\AssetsAutoloaderGenerator;
 
 /**
@@ -47,12 +47,12 @@ class ComposerInstaller extends AutoloadGenerator
      */
     public static function postAutoloadDump(Event $event)
     {
-        $_this = new AssetsInstaller($event->getComposer(), $event->getIO());
+        $_this = new ComposerInstaller($event->getComposer(), $event->getIO());
         if (false!==$ok_assets = $_this->moveAssets()) {
             if ($ok_assets>0) {
                 if (false!==$_assetsDbPath = $_this->_generateAssetsDb()) {
                     $_this->io->write( 
-                        sprintf('Assets json DB written in "%s".', $_assetsDbPath)
+                        sprintf('Assets json DB written in "%s".', str_replace($_this->appBasePath, '', $_assetsDbPath))
                     );
                 } else {
                     $_this->io->write('ERROR while trying to create assets DB file!');
@@ -77,16 +77,22 @@ class ComposerInstaller extends AutoloadGenerator
         $this->appBasePath = rtrim(str_replace($vendor_dir, '', $this->vendorDir), '/');
 
         $extra = $this->package->getExtra();
-        $this->assetsDir = isset($extra['assets']) ? $extra['assets'] : AssetsAutoloader::DEFAULT_ASSETS_DIR;
-        $this->assetsDbFilename = isset($extra['assets_db']) ? $extra['assets_db'] : AssetsAutoloader::DEFAULT_ASSETS_DB;
+        $this->assetsDir = isset($extra['assets']) ? $extra['assets'] : AssetsLoader::DEFAULT_ASSETS_DIR;
+        $this->assetsDbFilename = AssetsLoader::ASSETS_DB_FILENAME;
+    }
+
+
+    public function getAssetsDb()
+    {
+        return $this->assets_db;
     }
 
     protected function _getInstallPath(PackageInterface $package)
     {
-        return $this->_getAssetsRootPath() . '/' . $package->getPrettyName();
+        return $this->getAssetsRootPath() . '/' . $package->getPrettyName();
     }
 
-    protected function _getAssetsRootPath()
+    public function getAssetsRootPath()
     {
         $path = $this->appBasePath . '/' . $this->assetsDir;
         $this->filesystem->ensureDirectoryExists($path);
@@ -134,7 +140,10 @@ class ComposerInstaller extends AutoloadGenerator
             $target = $this->_getInstallPath($package);
             if (file_exists($from)) {
                 $this->filesystem->copy($from, $target);
-                $this->assets_db[$package->getPrettyName()] = $target;
+                $this->assets_db[$package->getPrettyName()] = array(
+                    'path'=>$target,
+                    'version'=>$package->getVersion(),
+                );
             } else {
                 throw new \Exception(
                     'Unable to find assets in package "'.$package->getPrettyName().'"'

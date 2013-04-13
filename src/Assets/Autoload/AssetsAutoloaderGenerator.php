@@ -26,12 +26,23 @@ class AssetsAutoloaderGenerator
 
     protected function _getAssetsDbPath()
     {
-        return ($this->installer->vendorDir ? $this->installer->vendorDir.'/' : '') . $this->installer->assetsDbFilename;
+        return ($this->assets_installer->vendorDir ? $this->assets_installer->vendorDir.'/' : '') . $this->assets_installer->assetsDbFilename;
     }
 
     public function generate()
     {
-        return file_put_contents($this->_getAssetsDbPath(), json_encode($this->installer->assets_db));
+        $assets_file = $this->_getAssetsDbPath();
+        $assets_db = $this->assets_installer->getAssetsDb();
+        
+        $full_db = array(
+            'assets_dir' => $this->assets_installer->assetsDir,
+            'packages' => $assets_db
+        );
+        
+        if (file_put_contents($assets_file, json_encode($full_db, version_compare(PHP_VERSION, '5.4')>0 ? JSON_PRETTY_PRINT : 0))) {
+            return $assets_file;
+        }
+        return false;
     }
     
 }
