@@ -93,8 +93,8 @@
 <pre>
     $val = 'a value';
     _else( _isfalse($val), 
-        function($condition, $arg){ $var = ucfirst($arg); echo "Value $var was not false!!"; },
-        function($condition, $arg){ $var = ucfirst($arg); echo "Value $var was false!!"; },
+        function($condition, $args=null){ $var = ucfirst($args); echo "Value $var was not false!!"; },
+        function($condition, $args=null){ $var = ucfirst($args); echo "Value $var was false!!"; },
         array( 'my callback argument' )
     );
 </pre>
@@ -102,8 +102,8 @@
 <?php
     $val = 'a value';
     _else( _isfalse($val), 
-        function($condition, $arg){ $var = ucfirst($arg); echo "Value $var was not false!!"; },
-        function($condition, $arg){ $var = ucfirst($arg); echo "Value $var was false!!"; },
+        function($condition, $args=null){ $var = ucfirst($args); echo "Value $var was not false!!"; },
+        function($condition, $args=null){ $var = ucfirst($args); echo "Value $var was false!!"; },
         array( 'my callback argument' )
     );
 ?>
@@ -157,5 +157,31 @@
 <blockquote>
 <?php
     _dump($table, true);
+?>
+</blockquote>
+
+<h3>Function <var>_attribute( $var , $val )</var></h3>
+
+<pre>
+    echo "&lt;a "._attribute('href', 'http://www.google.fr/')."&gt;google.fr link&lt;/a&gt;";
+</pre>
+<blockquote>
+<?php
+    echo "&lt;a "._attribute('href', 'http://www.google.fr/')."&gt;google.fr link&lt;/a&gt;";
+?>
+</blockquote>
+
+<h3>Function <var>_cut( $str , $count=120 , $suffix=' ...' )</var></h3>
+
+<pre>
+    $str = _loremipsum('short', true);
+    _p( _cut($str, 120, ' ...', true) );
+    _p( _cut($str, 60, ' <em>read more</em>', true) );
+</pre>
+<blockquote>
+<?php
+    $str = _loremipsum('short', true);
+    _p( _cut($str, 120, ' ...', true) );
+    _p( _cut($str, 60, ' <em>read more</em>', true) );
 ?>
 </blockquote>
