@@ -3,21 +3,22 @@
 use Library\Helper\Html as HtmlHelper;
 
 // --------------------------------
-// the Boilerplate assets web accessible directory
-if (empty($boilerplate_assets)) {
-    $boilerplate_assets = trim(str_replace($_SERVER['DOCUMENT_ROOT'], '', __DIR__), '/');
-}
-if (strlen($boilerplate_assets)) {
-    $boilerplate_assets = rtrim($boilerplate_assets, '/').'/';
-}
-
-// --------------------------------
 // the "classic" assets web accessible directory
 if (empty($assets)) {
-    $assets = trim(str_replace($_SERVER['DOCUMENT_ROOT'], '', __DIR__.'/../'), '/');
+    $assets = $_template->getAssetsLoader()->getAssetsWebPath();
+    //trim(str_replace($_SERVER['DOCUMENT_ROOT'], '', __DIR__.'/../'), '/');
 }
 if (strlen($assets)) {
     $assets = rtrim($assets, '/').'/';
+}
+
+// --------------------------------
+// the Boilerplate assets web accessible directory
+if (empty($boilerplate_assets)) {
+    $boilerplate_assets = $_template->getAssetsLoader()->findInPath('html5boilerplate', $assets);
+}
+if (strlen($boilerplate_assets)) {
+    $boilerplate_assets = rtrim($boilerplate_assets, '/').'/';
 }
 
 // ------------------

@@ -37,9 +37,10 @@ class ComposerInstaller extends AutoloadGenerator
     public $assetsDbFilename;
     public $vendorDir;
     public $appBasePath;
+    public $documentRoot;
 
     /**
-     * Array filled like 'package_name' => 'assets path' used to write the json AssetsDb file
+     * Array filled like 'package_name' => 'package assets infos' used to write the json AssetsDb file
      */
     protected $assets_db = array();
 
@@ -78,6 +79,7 @@ class ComposerInstaller extends AutoloadGenerator
 
         $extra = $this->package->getExtra();
         $this->assetsDir = isset($extra['assets']) ? $extra['assets'] : AssetsLoader::DEFAULT_ASSETS_DIR;
+        $this->documentRoot = isset($extra['document_root']) ? $extra['document_root'] : AssetsLoader::DEFAULT_DOCUMENT_ROOT;
         $this->assetsDbFilename = AssetsLoader::ASSETS_DB_FILENAME;
     }
 
@@ -140,10 +142,14 @@ class ComposerInstaller extends AutoloadGenerator
             $target = $this->_getInstallPath($package);
             if (file_exists($from)) {
                 $this->filesystem->copy($from, $target);
-                $this->assets_db[$package->getPrettyName()] = array(
+                $infos = array(
                     'path'=>$target,
                     'version'=>$package->getVersion(),
                 );
+                if (isset($extra['views'])) {
+                    $infos['views'] = $this->_getPackageBasePath($package) . '/' . $extra['assets'];
+                }
+                $this->assets_db[$package->getPrettyName()] = $infos;
             } else {
                 throw new \Exception(
                     'Unable to find assets in package "'.$package->getPrettyName().'"'

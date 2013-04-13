@@ -22,7 +22,9 @@
         "Assets": "src"
     } },
     "extra": {
-        "assets": "www"
+        "assets": "www",
+        "document_root": "www",
+        "views": "www/html5boilerplate"
     },
     "scripts": {
         "post-autoload-dump": "Assets\\ComposerInstaller::postAutoloadDump"

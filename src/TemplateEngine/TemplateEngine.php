@@ -17,6 +17,8 @@ use Library\Helper\Html as HtmlHelper;
 use TemplateEngine\Template,
     TemplateEngine\View;
 
+use Assets\Loader as AssetsLoader;
+
 use \ArrayAccess;
 
 /**
@@ -41,6 +43,11 @@ class TemplateEngine extends AbstractSingleton implements ArrayAccess
      * @var Patterns\Commons\Registry
      */
     protected $registry;
+
+    /**
+     * @var Assets\Loader
+     */
+    protected $assets_loader;
 
     /**
      * @var int
@@ -353,6 +360,41 @@ class TemplateEngine extends AbstractSingleton implements ArrayAccess
     public function offsetUnset($offset)
     {
         $this->registry->setEntry($offset, null);
+    }
+
+// ------------------------
+// Assets loader
+// ------------------------
+
+    public function setAssetsLoader(AssetsLoader $loader)
+    {
+        $this->assets_loader = $loader;
+        $assets_db = $this->assets_loader->getAssets();
+        if (!empty($assets_db)) {
+            foreach($assets_db as $package=>$infos) {
+                if (isset($infos['views'])) {
+                    $this->setToView('setIncludePath', $infos['views']);
+                }
+            }
+        }
+        return $this;
+    }
+
+    public function getAssetsLoader()
+    {
+        return $this->assets_loader;
+    }
+
+    public function guessFromAssetsLoader(AssetsLoader $loader)
+    {
+        $this->setAssetsLoader($loader);
+        $this
+            ->setLayoutsDir( $this->assets_loader->getAssetsPath() )
+            ->setToTemplate('setWebRootPath', $this->assets_loader->getAssetsWebPath() )
+            ->setToView('addDefaultViewParam', 'assets', $this->assets_loader->getAssetsWebPath() )
+            ->setToTemplate('setWebRootPath', $this->assets_loader->getDocumentRoot() )
+            ;
+        return $this;
     }
 
 // ------------------------

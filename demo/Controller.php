@@ -4,6 +4,8 @@
 
 use TemplateEngine\TemplateEngine;
 
+use Assets\Loader as AssetsLoader;
+
 use Library\Helper\Html as HtmlHelper;
 use Library\Helper\Url as UrlHelper;
 
@@ -15,14 +17,20 @@ class Controller
 	public function __construct()
 	{
         $this->template_engine = TemplateEngine::getInstance();
+        $loader = new AssetsLoader(__DIR__.'/..', __DIR__.'/../www', __DIR__);
+/*
+echo '<pre>';
+var_export($loader);
+var_export($loader->getAssetsPath());
+var_export($loader->getAssetsWebPath());
+exit('yo');
+*/
         $this->template_engine
+            ->guessFromAssetsLoader($loader)
             ->setLayoutsDir(__DIR__.'/../www/')
-            ->setToTemplate('setWebRootPath', __DIR__ )
             ->setToTemplate('setCachePath', __DIR__.'/tmp' )
             ->setToTemplate('setAssetsCachePath', __DIR__.'/tmp' )
             ->setToView('setIncludePath', __DIR__.'/views' )
-            ->setToView('addDefaultViewParam', 'assets', '../www/' )
-            ->setToView('addDefaultViewParam', 'boilerplate_assets', '../www/html5boilerplate/' )
             ;
 	}
 
