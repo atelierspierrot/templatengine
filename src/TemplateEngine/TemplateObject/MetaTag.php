@@ -9,14 +9,16 @@
 
 namespace TemplateEngine\TemplateObject;
 
-use \TemplateEngine\TemplateObject\Abstracts\AbstractTemplateObject;
-use \TemplateEngine\TemplateObject\Abstracts\TemplateObjectInterface;
-use \Library\Helper\Html;
+use TemplateEngine\TemplateObject\Abstracts\AbstractTemplateObject,
+    TemplateEngine\TemplateObject\Abstracts\TemplateObjectInterface,
+    Library\Helper\Html;
 
 /**
  * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
  */
-class MetaTag extends AbstractTemplateObject implements TemplateObjectInterface
+class MetaTag
+    extends AbstractTemplateObject
+    implements TemplateObjectInterface
 {
 
 // ------------------------
@@ -48,7 +50,7 @@ class MetaTag extends AbstractTemplateObject implements TemplateObjectInterface
 	 * @param bool $http_equiv Is this meta tag written as "http-equiv" (false by default)
 	 * @return self $this for method chaining
 	 */
-	public function add( $name, $content='', $http_equiv=false )
+	public function add($name, $content = '', $http_equiv = false)
 	{
 		$this->__template->registry->addEntry( array(
 			'name'=>$name,
@@ -64,14 +66,11 @@ class MetaTag extends AbstractTemplateObject implements TemplateObjectInterface
 	 * @return self $this for method chaining
 	 * @see self::add()
 	 */
-	public function set( array $tags )
+	public function set(array $tags)
 	{
-		if (!empty($tags))
-		{
-			foreach($tags as $_tag)
-			{
-				if (is_array($_tag) && isset($_tag['name']) && isset($_tag['content']))
-				{
+		if (!empty($tags)) {
+			foreach($tags as $_tag) {
+				if (is_array($_tag) && isset($_tag['name']) && isset($_tag['content'])) {
 					if (isset($_tag['http-equiv']) && true===$_tag['http-equiv'])
 						$this->add( $_tag['name'], $_tag['content'], true );
 					else
@@ -96,11 +95,10 @@ class MetaTag extends AbstractTemplateObject implements TemplateObjectInterface
 	 * @param string $mask A mask to write each line via "sprintf()"
 	 * @return string The string to display fot this template object
 	 */
-	public function write( $mask='%s' )
+	public function write($mask = '%s')
 	{
 		$str='';
-		foreach($this->cleanStack( $this->get(), 'name' ) as $entry)
-		{
+		foreach($this->cleanStack( $this->get(), 'name' ) as $entry) {
 			$tag_attrs = array();
 			if (true===$entry['http-equiv'])
 				$tag_attrs['http-equiv'] = $entry['name'];

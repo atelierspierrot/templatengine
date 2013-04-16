@@ -9,12 +9,13 @@
 
 namespace TemplateEngine\TemplateObject\Abstracts;
 
-use \TemplateEngine\TemplateObject\Abstracts\TemplateObjectInterface;
+use TemplateEngine\TemplateObject\Abstracts\TemplateObjectInterface;
 
 /**
  * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
  */
-interface FileTemplateObjectInterface extends TemplateObjectInterface
+interface FileTemplateObjectInterface
+    extends TemplateObjectInterface
 {
 
 	/**

@@ -9,14 +9,16 @@
 
 namespace TemplateEngine\TemplateObject;
 
-use \TemplateEngine\TemplateObject\Abstracts\AbstractTemplateObject;
-use \TemplateEngine\TemplateObject\Abstracts\TemplateObjectInterface;
-use \Library\Helper\Html;
+use TemplateEngine\TemplateObject\Abstracts\AbstractTemplateObject,
+    TemplateEngine\TemplateObject\Abstracts\TemplateObjectInterface,
+    Library\Helper\Html;
 
 /**
  * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
  */
-class LinkTag extends AbstractTemplateObject implements TemplateObjectInterface
+class LinkTag
+    extends AbstractTemplateObject
+    implements TemplateObjectInterface
 {
 
 // ------------------------
@@ -46,10 +48,9 @@ class LinkTag extends AbstractTemplateObject implements TemplateObjectInterface
 	 * @param array $tag_attributes The link tag attributes
 	 * @return self $this for method chaining
 	 */
-	public function add( $tag_attributes )
+	public function add($tag_attributes)
 	{
-		if (!empty($tag_attributes))
-		{
+		if (!empty($tag_attributes)) {
 			$this->__template->registry->addEntry( $tag_attributes, 'link_tags');
 		}
 		return $this;
@@ -61,12 +62,10 @@ class LinkTag extends AbstractTemplateObject implements TemplateObjectInterface
 	 * @return self $this for method chaining
 	 * @see self::add()
 	 */
-	public function set( array $tags )
+	public function set(array $tags)
 	{
-		if (!empty($tags))
-		{
-			foreach($tags as $_tag)
-			{
+		if (!empty($tags)) {
+			foreach($tags as $_tag) {
 				$this->add( $_tag );
 			}
 		}
@@ -87,11 +86,10 @@ class LinkTag extends AbstractTemplateObject implements TemplateObjectInterface
 	 * @param string $mask A mask to write each line via "sprintf()"
 	 * @return string The string to display fot this template object
 	 */
-	public function write( $mask='%s' )
+	public function write($mask = '%s')
 	{
 		$str='';
-		foreach($this->cleanStack( $this->get(), 'rel' ) as $entry)
-		{
+		foreach($this->cleanStack( $this->get(), 'rel' ) as $entry) {
 			$str .= sprintf($mask, Html::writeHtmlTag( 'link', null, $entry, true ));
 		}
 		return $str;

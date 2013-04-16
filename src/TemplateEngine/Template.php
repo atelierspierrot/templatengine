@@ -11,11 +11,10 @@ namespace TemplateEngine;
 
 use Patterns\Commons\Registry;
 
-use Library\Helper\File;
+use Library\Helper\File as FileHelper,
+    Library\Helper\Filesystem as FilesystemHelper;
 
 /**
- * General template builder
- *
  * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
  */
 class Template
@@ -142,14 +141,14 @@ class Template
 	 * @param string $_type The template object type
 	 * @return object The template object if found
 	 */
-	public function getTemplateObject( $_type )
+	public function getTemplateObject($_type, $_ref = null)
 	{
-		$_cls = $this->getTemplateObjectClassName( $_type );
+        $stack_name = !is_null($_ref) ? $_ref : $this->getTemplateObjectClassName( $_type );
 
-		if (!$this->registry->isEntry( $_cls, 'template_objects' ))
-			$this->createNewTemplateObject( $_type );
+		if (!$this->registry->isEntry( $stack_name, 'template_objects' ))
+			$this->createNewTemplateObject( $_type, $_ref );
 
-		return $this->registry->getEntry( $_cls, 'template_objects' );
+		return $this->registry->getEntry( $stack_name, 'template_objects' );
 	}
 
 	/**
@@ -157,9 +156,10 @@ class Template
 	 * @param string $_type The template object type
 	 * @return void
 	 */
-	public function createNewTemplateObject( $_type )
+	public function createNewTemplateObject($_type, $_ref = null)
 	{
 		$_cls = $this->getTemplateObjectClassName( $_type );
+        $stack_name = !is_null($_ref) ? $_ref : $_cls;
 
 		if (class_exists($_cls)) {
 			try {
@@ -174,7 +174,7 @@ class Template
 					sprintf('A Template Object must extends the "\TemplateEngine\TemplateObject\Abstracts\AbstractTemplateObject" class (got "%s")!', $_cls)
 				);
 			} else {
-				$this->registry->setEntry( $_cls, $_tpl_object, 'template_objects' );
+				$this->registry->setEntry( $stack_name, $_tpl_object, 'template_objects' );
 			}
 		} else {
 			throw new \RuntimeException(
@@ -206,7 +206,8 @@ class Template
 	{
 		$real_path = $this->findRealPath( $file_path );
 		if ($real_path)
-			return str_replace($this->web_root_path, '', $real_path);
+//			return str_replace($this->web_root_path, '', $real_path);
+			return trim(FilesystemHelper::resolveRelatedPath($this->web_root_path, $real_path), '/');
 		return null;
 	}
 

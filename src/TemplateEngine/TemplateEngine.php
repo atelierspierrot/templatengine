@@ -26,7 +26,9 @@ use \ArrayAccess;
  *
  * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
  */
-class TemplateEngine extends AbstractSingleton implements ArrayAccess
+class TemplateEngine
+    extends AbstractSingleton
+    implements ArrayAccess
 {
 
     /**

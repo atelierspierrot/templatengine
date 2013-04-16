@@ -19,13 +19,15 @@ if (empty($content)) $content = 'Test footer';
 if (!is_array($content)) $content = array($content);
 
 ?>
-<div class="credits float-left">
-    This page is <a href="" title="Check now online" id="html_validation">HTML5</a> & <a href="" title="Check now online" id="css_validation">CSS3</a> valid.
-    <br />
-    <?php echo isset($content['left']) ? $content['left'] : $content[0]; ?>
-</div>
-<?php if (isset($content['right'])) : ?>
-<div class="credits float-right">
-    <?php echo $content['right']; ?>
-</div>
-<?php endif; ?>
+<footer id="<?php _getid('footer'); ?>">
+    <div class="credits float-left">
+        This page is <a href="" title="Check now online" id="html_validation">HTML5</a> & <a href="" title="Check now online" id="css_validation">CSS3</a> valid.
+        <br />
+        <?php echo isset($content['left']) ? $content['left'] : $content[0]; ?>
+    </div>
+    <?php if (isset($content['right'])) : ?>
+    <div class="credits float-right">
+        <?php echo $content['right']; ?>
+    </div>
+    <?php endif; ?>
+</footer>

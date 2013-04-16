@@ -36,7 +36,7 @@ class Minifier
 	 * @param null|string $destination_dir The destination directory to force creating a file with the result
 	 * @param null|string $adapter_type The adapter type name (which will be guessed if empty)
 	 */
-	public function __construct( array $files_stack=array(), $destination_file=null, $destination_dir=null, $adapter_type=null )
+	public function __construct(array $files_stack = array(), $destination_file = null, $destination_dir = null, $adapter_type = null)
 	{
 		$this->reset(true);
 		if (!empty($files_stack))
@@ -62,14 +62,10 @@ class Minifier
 		if (empty($this->__adapter_type))
 			$this->_guessAdapterType();
 		
-		if (!empty($this->__adapter_type))
-		{
-			if (class_exists($this->__adapter_type))
-			{
+		if (!empty($this->__adapter_type)) {
+			if (class_exists($this->__adapter_type)) {
 				$this->__adapter = new $this->__adapter_type;
-			}
-			else
-			{
+			} else {
 				throw new \RuntimeException(
 					sprintf('Minifier adapter for type "%s" doesn\'t exist!', $this->__adapter_type)
 				);
@@ -88,7 +84,7 @@ class Minifier
 	 * @param bool $hard Reset all object properties (destination directory and web root included)
 	 * @return self $this for method chaining
 	 */
-	public function reset( $hard=false )
+	public function reset($hard = false)
 	{
 		$this->files_stack 				= array();
 		$this->destination_file 		= '';
@@ -97,8 +93,7 @@ class Minifier
 		$this->direct_output			= false;
 		$this->isCleaned_files_stack	= false;
 		$this->isInited					= false;
-		if (true===$hard)
-		{
+		if (true===$hard) {
 			$this->destination_dir 		= '';
 			$this->web_root_path		= null;
 			$this->__adapter_type		= null;
@@ -112,7 +107,7 @@ class Minifier
 	 * @param bool $silence True to avoid the class throwing exceptions
 	 * @return self $this for method chaining
 	 */
-	public function setSilent( $silence )
+	public function setSilent($silence)
 	{
 		$this->silent = (bool) $silence;
 		return $this;
@@ -123,7 +118,7 @@ class Minifier
 	 * @param bool $direct_output True to avoid writing of the compressed result in a file
 	 * @return self $this for method chaining
 	 */
-	public function setDirectOutput( $direct_output )
+	public function setDirectOutput($direct_output)
 	{
 		$this->direct_output = (bool) $direct_output;
 		return $this;
@@ -134,9 +129,9 @@ class Minifier
 	 * @param string $type The type name
 	 * @return self $this for method chaining
 	 */
-	public function setAdapterType( $type )
+	public function setAdapterType($type)
 	{
-		$this->__adapter_type = '\Templating\MinifierAdapter\\'.strtoupper($type);
+		$this->__adapter_type = '\TemplateEngine\MinifierAdapter\\'.strtoupper($type);
 		return $this;
 	}
 
@@ -145,7 +140,7 @@ class Minifier
 	 * @param string $file A file path to add in stack
 	 * @return self $this for method chaining
 	 */
-	public function addFile( $file )
+	public function addFile($file)
 	{
 		$this->files_stack[] = $file;
 		return $this;
@@ -156,7 +151,7 @@ class Minifier
 	 * @param array $files_stack An array of file paths to treat
 	 * @return self $this for method chaining
 	 */
-	public function setFilesStack( array $files_stack )
+	public function setFilesStack(array $files_stack)
 	{
 		$this->isCleaned_files_stack = false;
 		$this->files_stack = $files_stack;
@@ -187,16 +182,12 @@ class Minifier
 	 * @return self $this for method chaining
 	 * @throw Throws an InvalidArgumentException if the file name is not a string (and if $silent==false)
 	 */
-	public function setDestinationFile( $destination_file )
+	public function setDestinationFile($destination_file)
 	{
-		if (is_string($destination_file))
-		{
+		if (is_string($destination_file)) {
 			$this->destination_file = $destination_file;
-		}
-		else
-		{
-			if (false===$this->silent)
-			{
+		} else {
+			if (false===$this->silent) {
 				throw new \InvalidArgumentException(
 					sprintf('[Minifier] Destination file name must be a string (got "%s")!', gettype($destination_file))
 				);
@@ -221,25 +212,21 @@ class Minifier
 	 */
 	public function guessDestinationFilename()
 	{
-		if (!empty($this->files_stack))
-		{
+		if (!empty($this->files_stack)) {
 			$this->_cleanFilesStack();
 			$this->init();
 
 			$_fs = array();
-			foreach($this->files_stack as $_file)
-			{
+			foreach($this->files_stack as $_file) {
 				$_fs[] = $_file->getFilename();
 			}
-			if (!empty($_fs))
-			{
+			if (!empty($_fs)) {
 				sort($_fs);
 				$this->setDestinationFile( md5( join('', $_fs) ).'.'.$this->__adapter->file_extension );
 				return $this->getDestinationFile();
 			}
 		}
-		if (false===$this->silent)
-		{
+		if (false===$this->silent) {
 			throw new \RuntimeException(
 				'[Minifier] Destination filename can\'t be guessed because files stack is empty!'
 			);
@@ -253,26 +240,19 @@ class Minifier
 	 * @return self $this for method chaining
 	 * @throw Throws an InvalidArgumentException if the directory name is not a string (and if $silent==false)
 	 */
-	public function setDestinationDir( $destination_dir )
+	public function setDestinationDir($destination_dir)
 	{
-		if (is_string($destination_dir))
-		{
+		if (is_string($destination_dir)) {
 			$destination_dir = realpath($destination_dir);
-			if (@file_exists($destination_dir) && @is_dir($destination_dir))
-			{
+			if (@file_exists($destination_dir) && @is_dir($destination_dir)) {
 				$this->destination_dir = rtrim($destination_dir, '/').'/';
-			}
-			elseif (false===$this->silent)
-			{
+			} elseif (false===$this->silent) {
 				throw new \InvalidArgumentException(
 					sprintf('[Minifier] Destination directory "%s" must exist!', $destination_dir)
 				);
 			}
-		}
-		else
-		{
-			if (false===$this->silent)
-			{
+		} else {
+			if (false===$this->silent) {
 				throw new \InvalidArgumentException(
 					sprintf('[Minifier] Destination directory must be a string (got "%s")!', gettype($destination_dir))
 				);
@@ -295,26 +275,19 @@ class Minifier
 	 * @param string $path The realpath of the web root to clear it from DestinationRealPath to build DestinationWebPath
 	 * @return self $this for method chaining
 	 */
-	public function setWebRootPath( $path )
+	public function setWebRootPath($path)
 	{
-		if (is_string($path))
-		{
+		if (is_string($path)) {
 			$path = realpath($path);
-			if (@file_exists($path) && @is_dir($path))
-			{
+			if (@file_exists($path) && @is_dir($path)) {
 				$this->web_root_path = rtrim($path, '/').'/';
-			}
-			elseif (false===$this->silent)
-			{
+			} elseif (false===$this->silent) {
 				throw new \InvalidArgumentException(
 					sprintf('[Minifier] Web root path "%s" must exist!', $path)
 				);
 			}
-		}
-		else
-		{
-			if (false===$this->silent)
-			{
+		} else {
+			if (false===$this->silent) {
 				throw new \InvalidArgumentException(
 					sprintf('[Minifier] Web root path must be a string (got "%s")!', gettype($path))
 				);
@@ -339,12 +312,9 @@ class Minifier
 	 */
 	public function getDestinationWebPath()
 	{
-		if (!empty($this->web_root_path))
-		{
+		if (!empty($this->web_root_path)) {
 			return str_replace($this->web_root_path, '', $this->getDestinationRealPath());
-		}
-		elseif (false===$this->silent)
-		{
+		} elseif (false===$this->silent) {
 			throw new \LogicException(
 				'[Minifier] Can\'t create web path because "web_root_path" is not defined!'
 			);
@@ -378,14 +348,11 @@ class Minifier
 	 */
 	public function mustRefresh()
 	{
-		if ($this->fileExists())
-		{
+		if ($this->fileExists()) {
 			$this->_cleanFilesStack();
 			$_dest = new \SplFileInfo( $this->getDestinationRealPath() );
-			if (!empty($this->files_stack))
-			{
-				foreach($this->files_stack as $_file)
-				{
+			if (!empty($this->files_stack)) {
+				foreach($this->files_stack as $_file) {
 					if ($_file->getMTime() > $_dest->getMTime())
 						return true;
 				}
@@ -411,18 +378,15 @@ class Minifier
 		if (empty($this->destination_file) && false===$this->direct_output)
 			$this->guessDestinationFilename();
 	
-		if (false===$this->direct_output)
-		{
-			if (!$this->mustRefresh())
-			{
+		if (false===$this->direct_output) {
+			if (!$this->mustRefresh()) {
 				$this->minified_content = file_get_contents( $this->getDestinationRealPath() );
 				return $this;
 			}
 		}
 
 		$contents = array();
-		foreach($this->files_stack as $_file)
-		{
+		foreach($this->files_stack as $_file) {
 			$contents[] = '';
 			$contents[] = $this->__adapter->buildComment( $_file->getFilename() );
 			$contents[] = $this->__adapter->minify(
@@ -431,8 +395,7 @@ class Minifier
 		}
 		$this->minified_content = implode("\n", $contents);
 
-		if (!empty($this->minified_content) && false===$this->direct_output)
-		{
+		if (!empty($this->minified_content) && false===$this->direct_output) {
 			$this->_writeDestinationFile();
 		}
 		return $this;
@@ -452,18 +415,12 @@ class Minifier
 		if (true===$this->isCleaned_files_stack) return;
 
 		$new_stack = array();
-		foreach($this->files_stack as $_file)
-		{
-			if (is_object($_file) && ($_file instanceof \SplFileInfo))
-			{
+		foreach($this->files_stack as $_file) {
+			if (is_object($_file) && ($_file instanceof \SplFileInfo)) {
 				$new_stack[] = $_file;
-			}
-			elseif (is_string($_file) && @file_exists($_file))
-			{
+			} elseif (is_string($_file) && @file_exists($_file)) {
 				$new_stack[] = new \SplFileInfo($_file);
-			}
-			elseif (false===$this->silent)
-			{
+			} elseif (false===$this->silent) {
 				throw new \RuntimeException(
 					sprintf('[Minifier] Source to minify "%s" not found!', $_file)
 				);
@@ -481,15 +438,12 @@ class Minifier
 	protected function _guessAdapterType()
 	{
 		$this->_cleanFilesStack();
-		if (!empty($this->files_stack))
-		{
+		if (!empty($this->files_stack)) {
 			$_fs = $this->files_stack;
 			$_file = array_shift($_fs);
 			$this->setAdapterType( $_file->getExtension() );
 			return true;
-		}
-		elseif (false===$this->silent)
-		{
+		} elseif (false===$this->silent) {
 			throw new \RuntimeException(
 				'[Minifier] Trying to guess adapter from an empty files stack!'
 			);
@@ -513,14 +467,10 @@ class Minifier
 	
 		$content = $this->_getHeaderComment()."\n".$this->minified_content;
 		$dest_file = $this->getDestinationRealPath();
-		if (false!==file_put_contents($dest_file, $content))
-		{
+		if (false!==file_put_contents($dest_file, $content)) {
 			return true;
-		}
-		else
-		{
-			if (false===$this->silent)
-			{
+		} else {
+			if (false===$this->silent) {
 				throw new \RuntimeException(
 					sprintf('Destination minified file "%s" can\'t be written on disk!', $dest_file)
 				);

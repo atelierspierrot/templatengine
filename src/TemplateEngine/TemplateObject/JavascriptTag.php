@@ -9,14 +9,16 @@
 
 namespace TemplateEngine\TemplateObject;
 
-use \TemplateEngine\TemplateObject\Abstracts\AbstractTemplateObject;
-use \TemplateEngine\TemplateObject\Abstracts\TemplateObjectInterface;
-use \Library\Helper\Html;
+use TemplateEngine\TemplateObject\Abstracts\AbstractTemplateObject,
+    TemplateEngine\TemplateObject\Abstracts\TemplateObjectInterface,
+    Library\Helper\Html;
 
 /**
  * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
  */
-class JavascriptTag extends AbstractTemplateObject implements TemplateObjectInterface
+class JavascriptTag
+    extends AbstractTemplateObject
+    implements TemplateObjectInterface
 {
 
 // ------------------------
@@ -46,10 +48,9 @@ class JavascriptTag extends AbstractTemplateObject implements TemplateObjectInte
 	 * @param array $tag_attributes The link tag attributes
 	 * @return self $this for method chaining
 	 */
-	public function add( $tag_content )
+	public function add($tag_content)
 	{
-		if (!empty($tag_content))
-		{
+		if (!empty($tag_content)) {
 			$this->__template->registry->addEntry( $tag_content, 'js_entries');
 		}
 		return $this;
@@ -61,12 +62,10 @@ class JavascriptTag extends AbstractTemplateObject implements TemplateObjectInte
 	 * @return self $this for method chaining
 	 * @see self::add()
 	 */
-	public function set( array $tags )
+	public function set(array $tags)
 	{
-		if (!empty($tags))
-		{
-			foreach($tags as $_tag)
-			{
+		if (!empty($tags)) {
+			foreach($tags as $_tag) {
 				$this->add( $_tag );
 			}
 		}
@@ -87,11 +86,10 @@ class JavascriptTag extends AbstractTemplateObject implements TemplateObjectInte
 	 * @param string $mask A mask to write each line via "sprintf()"
 	 * @return string The string to display fot this template object
 	 */
-	public function write( $mask='%s' )
+	public function write($mask = '%s')
 	{
 		$content='';
-		foreach($this->get() as $entry)
-		{
+		foreach($this->get() as $entry) {
 			$content .= $entry."\n";
 		}
 		$str = sprintf($mask, Html::writeHtmlTag( 'script', $content ));

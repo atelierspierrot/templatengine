@@ -9,7 +9,7 @@
 
 namespace TemplateEngine\TemplateObject\Abstracts;
 
-use \TemplateEngine\Template;
+use TemplateEngine\Template;
 
 /**
  * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
@@ -46,18 +46,14 @@ abstract class AbstractTemplateObject
 	 * @param string $clean_by The variable name to check
 	 * @return array Return the stack cleaned with only one instance of $clean_by
 	 */
-	protected function cleanStack( array $stack, $clean_by=null )
+	protected function cleanStack(array $stack, $clean_by = null)
 	{
 		$new_stack = array();
-		foreach($stack as $_entry)
-		{
-			if (is_array($_entry) && !empty($clean_by))
-			{
+		foreach($stack as $_entry) {
+			if (is_array($_entry) && !empty($clean_by)) {
 				if (isset($_entry[$clean_by]) && !array_key_exists($_entry[$clean_by], $new_stack))
 					$new_stack[ $_entry[$clean_by] ] = $_entry;
-			}
-			elseif (is_string($_entry))
-			{
+			} elseif (is_string($_entry)) {
 				$ok = array_search($_entry, $new_stack);
 				if (false===$ok)
 					$new_stack[] = $_entry;
@@ -72,13 +68,11 @@ abstract class AbstractTemplateObject
 	 * @param string $clean_by The variable name to check
 	 * @return array Return the extracted stack
 	 */
-	protected function extractFromStack( array $stack, $clean_by )
+	protected function extractFromStack(array $stack, $clean_by)
 	{
 		$new_stack = array();
-		foreach($stack as $_entry)
-		{
-			if (is_array($_entry) && isset($_entry[$clean_by]))
-			{
+		foreach($stack as $_entry) {
+			if (is_array($_entry) && isset($_entry[$clean_by])) {
 				$new_stack[] = $_entry[$clean_by];
 			}
 		}

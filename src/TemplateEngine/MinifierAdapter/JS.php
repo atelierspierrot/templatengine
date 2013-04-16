@@ -9,12 +9,13 @@
 
 namespace TemplateEngine\MinifierAdapter;
 
-use \TemplateEngine\AbstractMinifierAdapter;
+use TemplateEngine\AbstractMinifierAdapter;
 
 /**
  * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
  */
-class JS extends AbstractMinifierAdapter
+class JS
+    extends AbstractMinifierAdapter
 {
 
 	public $file_extension = 'js';

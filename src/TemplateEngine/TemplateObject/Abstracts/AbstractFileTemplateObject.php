@@ -9,16 +9,24 @@
 
 namespace TemplateEngine\TemplateObject\Abstracts;
 
-use \TemplateEngine\TemplateObject\Abstracts\AbstractTemplateObject;
-use \TemplateEngine\Template;
-use \TemplateEngine\Minifier;
+use Patterns\Commons\Registry;
+
+use TemplateEngine\TemplateObject\Abstracts\AbstractTemplateObject,
+    TemplateEngine\Template,
+    TemplateEngine\Minifier;
 
 /**
  * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
  */
-abstract class AbstractFileTemplateObject extends AbstractTemplateObject
+abstract class AbstractFileTemplateObject
+    extends AbstractTemplateObject
 {
 
+	/**
+	 * The object Registry
+	 */
+	protected $_registry;
+	
 	/**
 	 * The minifier class object
 	 */
@@ -28,8 +36,9 @@ abstract class AbstractFileTemplateObject extends AbstractTemplateObject
 	 * Constructor
 	 * @param Template $_tpl The whole template object
 	 */
-	public function __construct( Template $_tpl )
+	public function __construct(Template $_tpl)
 	{
+		$this->registry = new Registry;
 		$this->__template = $_tpl;
 		$this->__minifier = new Minifier;
 		$this->__minifier
@@ -45,7 +54,7 @@ abstract class AbstractFileTemplateObject extends AbstractTemplateObject
 	 * @param bool $direct_output Set up the Minifier $direct_output flag (default is false)
 	 * @return array Return the extracted stack
 	 */
-	protected function minifyStack( array $stack, $silent=true, $direct_output=false )
+	protected function minifyStack(array $stack, $silent = true, $direct_output = false)
 	{
 		$this->__minifier->reset();
 		if (false===$silent)

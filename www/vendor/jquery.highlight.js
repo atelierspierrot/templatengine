@@ -22,7 +22,7 @@
 			list: 'ol',
 			//name of the "lang" attribute
 			code_lang: 'lang'
-		}
+		};
 		
 		var params = $.extend({}, defaults, element_params);
 

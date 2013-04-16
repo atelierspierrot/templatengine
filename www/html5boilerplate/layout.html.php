@@ -1,6 +1,7 @@
 <?php
 
-use Library\Helper\Html as HtmlHelper;
+if (!isset($minify_css)) $minify_css = false;
+if (!isset($minify_js)) $minify_js = false;
 
 // --------------------------------
 // the "classic" assets web accessible directory
@@ -13,7 +14,22 @@ if (strlen($assets)) {
 }
 
 // --------------------------------
+// the "template engine" assets web accessible directory
+if (empty($tple_assets)) {
+    $tple_assets = $_template->getAssetsLoader()->findInPackage('', 'atelierspierrot/templatengine');
+}
+if (empty($tple_assets)) {
+    $tple_assets = $assets;
+}
+if (strlen($tple_assets)) {
+    $tple_assets = rtrim($tple_assets, '/').'/';
+}
+
+// --------------------------------
 // the Boilerplate assets web accessible directory
+if (empty($boilerplate_assets)) {
+    $boilerplate_assets = $_template->getAssetsLoader()->findInPackage('html5boilerplate', 'atelierspierrot/templatengine');
+}
 if (empty($boilerplate_assets)) {
     $boilerplate_assets = $_template->getAssetsLoader()->findInPath('html5boilerplate', $assets);
 }
@@ -22,7 +38,7 @@ if (strlen($boilerplate_assets)) {
 }
 
 // ------------------
-// metas
+// METAS
 $old_metas = $_template->getTemplateObject('MetaTag')->get();
 $_template->getTemplateObject('MetaTag')->reset();
 
@@ -102,9 +118,50 @@ if (!empty($meta_title))
 		->add( $meta_title );
 }
 
+// ------------------
+// CSS
+$old_css = $_template->getTemplateObject('CssFile')->get();
+$_template->getTemplateObject('CssFile')->reset();
+
+$_template->getTemplateObject('CssFile')
+	->add($boilerplate_assets.'css/normalize.css')
+	->add($boilerplate_assets.'css/main.css')
+	->add($tple_assets.'vendor/blue/style.css')
+	->add($tple_assets.'vendor/jquery.highlight.css')
+	->add($tple_assets.'css/styles.css')
+	// => + old ones
+	->set($old_css);
+
+// ------------------
+// JS in header
+$old_header_js = $_template->getTemplateObject('JavascriptFile', 'jsfiles_header')->get();
+$_template->getTemplateObject('JavascriptFile', 'jsfiles_header')->reset();
+
+$_template->getTemplateObject('JavascriptFile', 'jsfiles_header')
+	->addMinified($tple_assets.'vendor/modernizr-2.6.2.min.js')
+	// => + old ones
+	->set($old_header_js);
+
+// ------------------
+// JS in footer
+$old_footer_js = $_template->getTemplateObject('JavascriptFile', 'jsfiles_footer')->get();
+$_template->getTemplateObject('JavascriptFile', 'jsfiles_footer')->reset();
+
+$_template->getTemplateObject('JavascriptFile', 'jsfiles_footer')
+	->addMinified($tple_assets.'vendor/jquery-1.9.1.min.js')
+	->add($boilerplate_assets.'js/plugins.js')
+	->add($tple_assets.'vendor/jquery.highlight.js')
+	->add($tple_assets.'vendor/jquery.metadata.js')
+	->addMinified($tple_assets.'vendor/jquery.tablesorter.min.js')
+	->add($tple_assets.'js/scripts.js')
+	// => + old ones
+	->set($old_footer_js);
+
 // --------------------------------
 // the content
 if (empty($content)) $content = '<p>Test content</p>';
+
+//echo '<pre>';var_dump($_template);exit('yo');
 
 ?><!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -116,15 +173,20 @@ if (empty($content)) $content = '<p>Test content</p>';
 echo
 	$_template->getTemplateObject('MetaTag')->write("\n\t\t %s "),
 	$_template->getTemplateObject('TitleTag')->write("\n\t\t %s "),
-	$_template->getTemplateObject('LinkTag')->write("\n\t\t %s "),
-	"\n";
+	$_template->getTemplateObject('LinkTag')->write("\n\t\t %s ");
+
+if (true===$minify_css)
+	echo $_template->getTemplateObject('CssFile')->minify()->writeMinified("\n\t\t %s ");
+else
+	echo $_template->getTemplateObject('CssFile')->write("\n\t\t %s ");
+
+if (true===$minify_js)
+	echo $_template->getTemplateObject('JavascriptFile', 'jsfiles_header')->minify()->writeMinified("\n\t\t %s ");
+else
+	echo $_template->getTemplateObject('JavascriptFile', 'jsfiles_header')->write("\n\t\t %s ");
+
+echo "\n";
 ?>
-        <link rel="stylesheet" href="<?php echo $boilerplate_assets; ?>css/normalize.css">
-        <link rel="stylesheet" href="<?php echo $boilerplate_assets; ?>css/main.css">
-        <link rel="stylesheet" href="<?php echo $assets; ?>vendor/blue/style.css">
-        <link rel="stylesheet" href="<?php echo $assets; ?>vendor/jquery.highlight.css">
-        <link rel="stylesheet" href="<?php echo $assets; ?>css/styles.css">
-        <script src="<?php echo $assets; ?>vendor/modernizr-2.6.2.min.js"></script>
     </head>
     <body>
     <div id="page-wrapper">
@@ -148,7 +210,7 @@ echo
                 ));
             else :
         ?>
-        <div id="<?php echo HtmlHelper::getId($item); ?>" class="structure-<?php echo $item; ?>">
+        <div id="<?php _getid($item); ?>" class="structure-<?php echo $item; ?>">
 
             <?php if (is_array($$item)) : ?>
             <ul>
@@ -167,14 +229,12 @@ echo
 
     </div>
 
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="<?php echo $assets; ?>vendor/jquery-1.9.1.min.js"><\/script>')</script>
-        <script src="<?php echo $boilerplate_assets; ?>js/plugins.js"></script>
-        <script src="<?php echo $assets; ?>vendor/jquery.highlight.js"></script>
-        <script src="<?php echo $assets; ?>vendor/jquery.metadata.js"></script>
-        <script src="<?php echo $assets; ?>vendor/jquery.tablesorter.min.js"></script>
-        <script src="<?php echo $assets; ?>js/scripts.js"></script>
 <?php
+if (true===$minify_js)
+	echo $_template->getTemplateObject('JavascriptFile', 'jsfiles_footer')->minify()->writeMinified("\n\t %s ");
+else
+	echo $_template->getTemplateObject('JavascriptFile', 'jsfiles_footer')->write("\n\t %s ");
+
 echo
 	$_template->getTemplateObject('JavascriptTag')->write("%s"),
 	"\n";

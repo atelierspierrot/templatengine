@@ -1,9 +1,15 @@
-/*
-Styles for the demos
-
-Inspired by original design: Basic Reader (v1.0 - Nov 17, 2010) - A free xhtml/css website template by Andreas Viklund.
-For more information, see http://andreasviklund.com/templates/basic-reader/
-*/
+/**
+ * Template Engine - PHP framework package
+ * Copyleft (c) 2013 Pierre Cassat and contributors
+ * <www.ateliers-pierrot.fr> - <contact@ateliers-pierrot.fr>
+ * License GPL-3.0 <http://www.opensource.org/licenses/gpl-3.0.html>
+ * Sources <https://github.com/atelierspierrot/templatengine>
+ *
+ * Default Page Styles
+ *
+ * Inspired by original design: Basic Reader (v1.0 - Nov 17, 2010) - A free xhtml/css website template by Andreas Viklund.
+ * For more information, see http://andreasviklund.com/templates/basic-reader/
+ */
 
 *           {margin:0; padding:0;}
 body        {background: #fff; color:#303030; font:88% "Lucida Sans Unicode","Lucida Grande",Verdana,Arial,Helvetica,sans-serif; line-height:1.5em;

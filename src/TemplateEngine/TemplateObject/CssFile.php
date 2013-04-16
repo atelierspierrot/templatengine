@@ -9,14 +9,16 @@
 
 namespace TemplateEngine\TemplateObject;
 
-use \TemplateEngine\TemplateObject\Abstracts\AbstractFileTemplateObject;
-use \TemplateEngine\TemplateObject\Abstracts\FileTemplateObjectInterface;
-use \Library\Helper\Html;
+use TemplateEngine\TemplateObject\Abstracts\AbstractFileTemplateObject,
+    TemplateEngine\TemplateObject\Abstracts\FileTemplateObjectInterface,
+    Library\Helper\Html;
 
 /**
  * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
  */
-class CssFile extends AbstractFileTemplateObject implements FileTemplateObjectInterface
+class CssFile
+    extends AbstractFileTemplateObject
+    implements FileTemplateObjectInterface
 {
 
 // ------------------------
@@ -37,8 +39,8 @@ class CssFile extends AbstractFileTemplateObject implements FileTemplateObjectIn
 	 */
 	public function reset()
 	{
-		$this->__template->registry->css_files = array();
-		$this->__template->registry->css_minified_files = array();
+		$this->registry->css_files = array();
+		$this->registry->css_minified_files = array();
 		return $this;
 	}
 
@@ -49,17 +51,14 @@ class CssFile extends AbstractFileTemplateObject implements FileTemplateObjectIn
 	 * @return self $this for method chaining
 	 * @throw Throws an InvalidArgumentException if the path doesn't exist
 	 */
-	public function add( $file_path, $media='screen' )
+	public function add($file_path, $media = 'screen')
 	{
 		$_fp = $this->__template->findAsset($file_path);
-		if ($_fp)
-		{
-			$this->__template->registry->addEntry( array(
+		if ($_fp) {
+			$this->registry->addEntry( array(
 				'file'=>$_fp, 'media'=>$media
 			), 'css_files');
-		}
-		else
-		{
+		} else {
 			throw new \InvalidArgumentException(
 				sprintf('CSS file "%s" not found!', $file_path)
 			);
@@ -73,21 +72,18 @@ class CssFile extends AbstractFileTemplateObject implements FileTemplateObjectIn
 	 * @return self $this for method chaining
 	 * @see self::add()
 	 */
-	public function set( array $files )
+	public function set(array $files)
 	{
-		if (!empty($files))
-		{
-			foreach($files as $_file)
-			{
-				if (is_array($_file) && isset($_file['file']))
-				{
+		if (!empty($files)) {
+			foreach($files as $_file) {
+				if (is_array($_file) && isset($_file['file'])) {
 					if (isset($_file['media']))
 						$this->add( $_file['file'], $_file['media'] );
 					else
 						$this->add( $_file['file'] );
-				}
-				elseif (is_string($_file))
+				} elseif (is_string($_file)) {
 					$this->add( $_file );
+				}
 			}
 		}
 		return $this;
@@ -99,7 +95,7 @@ class CssFile extends AbstractFileTemplateObject implements FileTemplateObjectIn
 	 */
 	public function get()
 	{
-		return $this->__template->registry->getEntry( 'css_files', false, array() );
+		return $this->registry->getEntry( 'css_files', false, array() );
 	}
 
 	/**
@@ -107,11 +103,10 @@ class CssFile extends AbstractFileTemplateObject implements FileTemplateObjectIn
 	 * @param string $mask A mask to write each line via "sprintf()"
 	 * @return string The string to display fot this template object
 	 */
-	public function write( $mask='%s' )
+	public function write($mask = '%s' )
 	{
 		$str='';
-		foreach($this->cleanStack( $this->get(), 'file' ) as $entry)
-		{
+		foreach($this->cleanStack( $this->get(), 'file' ) as $entry) {
 			$tag_attrs = array(
 				'rel'=>'stylesheet',
 				'type'=>'text/css',
@@ -174,7 +169,7 @@ class CssFile extends AbstractFileTemplateObject implements FileTemplateObjectIn
 		$_fp = $this->__template->findAsset($file_path);
 		if ($_fp)
 		{
-			$this->__template->registry->addEntry( array(
+			$this->registry->addEntry( array(
 				'file'=>$_fp, 'media'=>$media
 			), 'css_minified_files');
 		}
@@ -219,7 +214,7 @@ class CssFile extends AbstractFileTemplateObject implements FileTemplateObjectIn
 	 */
 	public function getMinified()
 	{
-		return $this->__template->registry->getEntry( 'css_minified_files', false, array() );
+		return $this->registry->getEntry( 'css_minified_files', false, array() );
 	}
 
 	/**

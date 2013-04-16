@@ -9,8 +9,8 @@
 
 namespace TemplateEngine;
 
-use Library\Helper\Directory as DirectoryHelper;
-use Library\Helper\Html as HtmlHelper;
+use Library\Helper\Directory as DirectoryHelper,
+    Library\Helper\Html as HtmlHelper;
 
 use Patterns\Abstracts\AbstractView;
 
@@ -21,7 +21,8 @@ use Patterns\Abstracts\AbstractView;
  *
  * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
  */
-class View extends AbstractView
+class View
+    extends AbstractView
 {
 
 	/**

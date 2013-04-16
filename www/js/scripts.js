@@ -1,4 +1,13 @@
-/* Scripts for demo */
+/**
+ * Template Engine - PHP framework package
+ * Copyleft (c) 2013 Pierre Cassat and contributors
+ * <www.ateliers-pierrot.fr> - <contact@ateliers-pierrot.fr>
+ * License GPL-3.0 <http://www.opensource.org/licenses/gpl-3.0.html>
+ * Sources <https://github.com/atelierspierrot/templatengine>
+ *
+ * Default Page Scripts
+ *
+ */
 
 function initHandler( _name ){
     var elt_handler = $('#'+_name+'_handler'),
@@ -139,7 +148,7 @@ function initBacklinks(){
 
 function addCSSValidatorLink( css_filename ){
     var url = window.location.href,
-        cssfile = url.replace(/(.*)\/.*(\.html$)/i, '$1/'+css_filename);
+        cssfile = url.replace(/(.*)\/.*(\.html$)/i, '$1//'+css_filename);
     $('#footer a#css_validation').attr('href', 'http://jigsaw.w3.org/css-validator/validator?uri='+encodeURIComponent(cssfile));
 }
 
