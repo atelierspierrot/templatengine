@@ -72,6 +72,13 @@ exit('yo');
             ->templateFallback('getTemplateObject', array('TitleTag'))
     		->add( $title );
 
+        $title_block = array(
+            'title'=> isset($params['title']) ? $params['title'] : $title,
+            'subheader'=>isset($params['subheader']) ? $params['subheader'] : "A PHP package to build HTML5 views (based on HTML5 Boilerplate layouts).",
+            'slogan'=>isset($params['slogan']) ? $params['slogan'] : "<p>These pages show and demonstrate the use and functionality of the <a href=\"http://github.com/atelierspierrot/templatengine\">atelierspierrot/templatengine</a> PHP package you just downloaded.</p>"
+        );
+        $params['title'] = $title_block;
+
         if (empty($params['menu'])) {
             $params['menu'] = array(
                 'Home'              => UrlHelper::url(array('page'=>'index')),
@@ -97,7 +104,9 @@ exit('yo');
     {
         return array(
             'content'   =>'YO',
-            'title'     =>'Home'
+            'title'     =>'Home',
+            'subheader' => '',
+            'slogan' => '',
         );        
     }
 
@@ -109,7 +118,9 @@ exit('yo');
 				    'name'=>isset($_GET['name']) ? $_GET['name'] : 'Anonymous'
 				)
 			),
-			'title' => "Hello"
+			'title' => "Hello",
+            'subheader' => '',
+            'slogan' => '',
 		);
     }
 
