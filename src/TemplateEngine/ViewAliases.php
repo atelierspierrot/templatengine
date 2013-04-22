@@ -7,6 +7,16 @@
  * Sources <https://github.com/atelierspierrot/templatengine>
  */
 
+/**
+ * This file defines some default functions to facilitate views writting
+ *
+ * All of these functions are prefixed by an underscore `_`.
+ *
+ * Many of these functions directly echoes their result by default ; in this case, you
+ * can avoid this behavior setting the `$return` parmeter (*the last function parameter
+ * most of the time*) on `true`.
+ *
+ */
 use TemplateEngine\TemplateEngine;
 use Library\Helper\Directory as DirectoryHelper;
 use Library\Helper\File as FileHelper;

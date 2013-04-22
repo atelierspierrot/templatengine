@@ -19,6 +19,36 @@ interface FileTemplateObjectInterface
 {
 
 	/**
+	 * Merge the files if possible and loads them in files_merged stack
+	 * @return self Must return the object itself for method chaining
+	 */
+	public function merge();
+
+	/**
+	 * Add an merged file
+	 * @return self Must return the object itself for method chaining
+	 */
+	public function addMerged( $arg );
+
+	/**
+	 * Set a stack of merged files
+	 * @return self Must return the object itself for method chaining
+	 */
+	public function setMerged( array $arg );
+
+	/**
+	 * Get the stack of merged files
+	 */
+	public function getMerged();
+
+	/**
+	 * Write merged versions of the files stack in the cache directory
+	 * @param string $mask A mask to write each line via "sprintf()"
+	 * @return string Must return a string ready to write
+	 */
+	public function writeMerged( $mask='%s' );
+
+	/**
 	 * Minify the files if possible and loads them in files_minified stack
 	 * @return self Must return the object itself for method chaining
 	 */

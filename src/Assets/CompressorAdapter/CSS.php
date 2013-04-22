@@ -7,25 +7,32 @@
  * Sources <https://github.com/atelierspierrot/templatengine>
  */
 
-namespace TemplateEngine\MinifierAdapter;
+namespace Assets\CompressorAdapter;
 
-use TemplateEngine\AbstractMinifierAdapter;
+use Assets\AbstractCompressorAdapter;
 
 /**
  * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
  */
 class CSS
-    extends AbstractMinifierAdapter
+    extends AbstractCompressorAdapter
 {
 
 	public $file_extension = 'css';
+
+	public static function merge( $input )
+	{
+		$input = preg_replace('!/\*.*?\*/!s', '', $input);
+		$output = trim($input);
+		return $output;
+	}
 
 	/**
 	 * Inspired by <http://code.seebz.net/p/minify-css/>
 	 */
 	public static function minify( $input )
 	{
-		$input = preg_replace('!/\*.*?\*/!s', '', $input);
+		$input = self::merge($input);
 		$input = str_replace(array("\r","\n"), '', $input);
 		$input = preg_replace('`([^*/])\/\*([^*]|[*](?!/)){5,}\*\/([^*/])`Us', '$1$3', $input);
 		$input = preg_replace('`\s*({|}|,|:|;)\s*`', '$1', $input);

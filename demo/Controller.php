@@ -43,23 +43,29 @@ exit('yo');
 		$action_meth = $action.'Action';
 		if (method_exists($this, $action_meth)) {
 		    $return = $this->{$action_meth}();
-		    if (!is_array($return)) {
-                throw new Exception( 
-                    sprintf("Action '%s' must return an array!", $action)
-                );
-		    }
-		    return $this->display($return);
 		} else {
-			throw new Exception( 
-				sprintf("Action '%s' can't be found!", $action)
-			);
+		    $return = $this->commonAction($action);
 		}
+        if (!is_array($return)) {
+            throw new Exception( 
+                sprintf("Action '%s' must return an array!", $action)
+            );
+        }
+        return $this->display($return);
 	}
 
 	/**
 	 */
 	public function display(array $params, $view = null) 
     {
+        // request params settings
+        $params = array_merge(array(
+            'merge_css' => isset($_GET['merge_css']) ? (bool) $_GET['merge_css'] : false,
+            'minify_css' => isset($_GET['minify_css']) ? (bool) $_GET['minify_css'] : false,
+            'merge_js' => isset($_GET['merge_js']) ? (bool) $_GET['merge_js'] : false,
+            'minify_js' => isset($_GET['minify_js']) ? (bool) $_GET['minify_js'] : false,
+        ), $params);
+
         if (!isset($params['content']) && isset($params['output'])) {
             $params['content'] = $params['output'];
         }
@@ -86,10 +92,13 @@ exit('yo');
                 'Functions doc'     => UrlHelper::url(array('page'=>'fcts')),
                 'Plugins test'      => UrlHelper::url(array('page'=>'test')),
                 'Typographic tests' => UrlHelper::url(array('page'=>'loremipsum')),
+                'PHP Assets manager' => UrlHelper::url(array('page'=>'assets')),
             );
         }
 
         $params['footer'] = array('right'=>'A test of footer');
+
+//var_export($params); exit('yo');
 
         // this will display the layout on screen and exit
 		$this->template_engine->renderLayout($view, $params, true, true);
@@ -151,6 +160,16 @@ exit('yo');
 				'loremipsum.htm'
 			),
 			'title' => "Test of HTML(5) tags"
+		);
+    }
+
+    function commonAction($action)
+    {
+        return array(
+			'output'=> $this->template_engine->render(
+				$action.'.htm'
+			),
+			'title' => ucfirst(Library\Helper\Text::getHumanReadable($action))
 		);
     }
 

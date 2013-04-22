@@ -32,6 +32,7 @@ pre code    {border: none; text-indent:0; padding: 0;}
 td, th      {padding: .5em;}
 form, fieldset {padding: 1em; margin: .4em;}
 fieldset    {border: 1px dotted #ddd;}
+blockquote  {border-left: 8px solid #ddd;padding-left:16px}
 
 /* utilities */
 .text-right {text-align: right;}

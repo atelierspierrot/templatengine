@@ -7,18 +7,25 @@
  * Sources <https://github.com/atelierspierrot/templatengine>
  */
 
-namespace TemplateEngine\MinifierAdapter;
+namespace Assets\CompressorAdapter;
 
-use TemplateEngine\AbstractMinifierAdapter;
+use Assets\AbstractCompressorAdapter;
 
 /**
  * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
  */
 class JS
-    extends AbstractMinifierAdapter
+    extends AbstractCompressorAdapter
 {
 
 	public $file_extension = 'js';
+
+	public static function merge( $input )
+	{
+		$input = preg_replace('!/\*.*?\*/!s', '', $input);
+		$output = trim($input);
+		return $output;
+	}
 
 	/**
 	 * Inspired by <http://code.seebz.net/p/minify-js/>
@@ -26,11 +33,11 @@ class JS
 	public static function minify( $input )
 	{
 		$output = '';
+		$input = self::merge($input);
 		
 		$inQuotes        = array();
 		$noSpacesAround  = '{}()[]<>|&!?:;,+-*/="\'';
 		
-		$input = preg_replace('!/\*.*?\*/!s', '', $input);
 		$input = preg_replace("`(\r\n|\r)`", "\n", $input);
 		$inputs = str_split($input);
 		$inputs_count = count($inputs);

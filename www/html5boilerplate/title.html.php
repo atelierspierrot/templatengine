@@ -8,7 +8,7 @@ if (empty($content)) $content = 'Test title';
 if (!is_array($content)) $content = array($content);
 
 ?>
-<header id="top" role="banner">
+<header role="banner">
     <hgroup>
         <h1><?php echo isset($content['title']) ? $content['title'] : $content[0]; ?></h1>
     <?php if (isset($content['subheader'])) : ?>

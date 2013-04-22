@@ -1,0 +1,36 @@
+<?php
+
+$_template->getTemplateObject('JavascriptTag')->add(<<<EOT
+$(function() {
+    $('pre.code').highlight({source:0, indent:'tabs', code_lang: 'data-language'});
+});
+EOT
+);
+
+$_template->getTemplateObject('CssTag')->add(<<<EOT
+.test_bg { background-color: green; }
+EOT
+);
+
+?>
+<h2>Test of the PHP <var>Assets</var> manager</h2>
+
+<h3 id="base">Basic usage</h3>
+
+<p>Instanciation of an assets loader:</p>
+
+<pre class="code" data-language="php">
+<?php
+
+echo '$loader = new Assets\Loader('."\n"
+    ."\t".'__DIR__."/../..",          // this is the package root directory'."\n"
+    ."\t".'__DIR__."/../../www",      // this is the package assets directory'."\n"
+    ."\t".'__DIR__."/../"             // this is this page document root'."\n"
+    .');'."\n";
+$loader = new Assets\Loader(__DIR__.'/../..', __DIR__.'/../../www', __DIR__.'/../');
+var_export($loader);
+
+?>
+</pre>
+
+<p class="test_bg">test</p>

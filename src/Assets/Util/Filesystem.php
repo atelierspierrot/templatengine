@@ -14,18 +14,15 @@ use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 
 /**
+ * This class just completes the default `Composer\Util\Filesystem` with a `copy` method
  */
 class Filesystem extends OriginalFilesystem
 {
 
     /**
-     * Copy is a non-atomic version of {@link rename}.
+     * Exact same code as `copyThenRemove()` method but without removing
      *
-     * Some systems can't rename and also don't have proc_open,
-     * which requires this solution.
-     *
-     * @param string $source
-     * @param string $target
+     * @see Composer\Util\Filesystem::copyThenRemove()
      */
     public function copy($source, $target)
     {
@@ -49,3 +46,5 @@ class Filesystem extends OriginalFilesystem
     }
 
 }
+
+// Endfile

@@ -1,6 +1,8 @@
 <?php
 
+if (!isset($merge_css)) $merge_css = false;
 if (!isset($minify_css)) $minify_css = false;
+if (!isset($merge_js)) $merge_js = false;
 if (!isset($minify_js)) $minify_js = false;
 
 // --------------------------------
@@ -177,11 +179,15 @@ echo
 
 if (true===$minify_css)
 	echo $_template->getTemplateObject('CssFile')->minify()->writeMinified("\n\t\t %s ");
+elseif (true===$merge_css)
+	echo $_template->getTemplateObject('CssFile')->merge()->writeMerged("\n\t\t %s ");
 else
 	echo $_template->getTemplateObject('CssFile')->write("\n\t\t %s ");
 
 if (true===$minify_js)
 	echo $_template->getTemplateObject('JavascriptFile', 'jsfiles_header')->minify()->writeMinified("\n\t\t %s ");
+elseif (true===$merge_js)
+	echo $_template->getTemplateObject('JavascriptFile', 'jsfiles_header')->merge()->writeMerged("\n\t\t %s ");
 else
 	echo $_template->getTemplateObject('JavascriptFile', 'jsfiles_header')->write("\n\t\t %s ");
 
@@ -193,6 +199,7 @@ echo "\n";
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
+        <a id="top"></a>
 
 <?php foreach($_template->getPageStructure() as $item) : ?>
     <?php if (isset($$item)) : ?>
@@ -227,16 +234,20 @@ echo "\n";
     <?php endif; ?>
 <?php endforeach; ?>
 
+        <a id="bottom"></a>
     </div>
 
 <?php
 if (true===$minify_js)
 	echo $_template->getTemplateObject('JavascriptFile', 'jsfiles_footer')->minify()->writeMinified("\n\t %s ");
+elseif (true===$merge_js)
+	echo $_template->getTemplateObject('JavascriptFile', 'jsfiles_footer')->merge()->writeMerged("\n\t\t %s ");
 else
 	echo $_template->getTemplateObject('JavascriptFile', 'jsfiles_footer')->write("\n\t %s ");
 
 echo
 	$_template->getTemplateObject('JavascriptTag')->write("%s"),
+	$_template->getTemplateObject('CssTag')->write("%s"),
 	"\n";
 ?>
 

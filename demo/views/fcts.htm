@@ -1,6 +1,6 @@
 <h2>Test of templates functions</h2>
 
-<h3>Function <var>_render( $view , $params )</var></h3>
+<h3 id="render">Function <var>_render( $view , $params )</var></h3>
 
 <p>Rendering of a view file with arguments:</p>
 <pre>
@@ -15,9 +15,9 @@
 <?php _render('qsdf.htm'); ?>
 </blockquote>
 
-<h3>Test functions</h3>
+<h3 id="test">Test functions</h3>
 
-<h4>
+<h4 id="falsetruenull">
     <var>_isfalse( $val )</var>, <var>_isnotfalse( $val )</var>,
     <var>_istrue( $val )</var>, <var>_isnottrue( $val )</var>,
     <var>_isnull( $val )</var>, <var>_isnotnull( $val )</var>
@@ -49,7 +49,7 @@
 ?>
 </blockquote>
 
-<h4><var>_if( $condition , $if_true , $if_false )</var></h4>
+<h4 id="if"><var>_if( $condition , $if_true , $if_false )</var></h4>
 
 <pre>
     $val = 'a value';
@@ -75,7 +75,7 @@
 ?>
 </blockquote>
 
-<h4><var>_else( $condition , $if_false , $if_true )</var></h4>
+<h4 id="else"><var>_else( $condition , $if_false , $if_true )</var></h4>
 
 <pre>
     $val = 'a value';
@@ -128,7 +128,7 @@
 ?>
 </blockquote>
 
-<h3>Function <var>_dump( $array , $only_string_index , $mask_item , $mask_global , $no_index_mask )</var></h3>
+<h3 id="dump">Function <var>_dump( $array , $only_string_index , $mask_item , $mask_global , $no_index_mask )</var></h3>
 
 <pre>
     $table = array(
@@ -160,7 +160,7 @@
 ?>
 </blockquote>
 
-<h3>Function <var>_attribute( $var , $val )</var></h3>
+<h3 id="attribute">Function <var>_attribute( $var , $val )</var></h3>
 
 <pre>
     echo "&lt;a "._attribute('href', 'http://www.google.fr/')."&gt;google.fr link&lt;/a&gt;";
@@ -171,7 +171,7 @@
 ?>
 </blockquote>
 
-<h3>Function <var>_cut( $str , $count=120 , $suffix=' ...' )</var></h3>
+<h3 id="cut">Function <var>_cut( $str , $count=120 , $suffix=' ...' )</var></h3>
 
 <pre>
     $str = _loremipsum('short', true);

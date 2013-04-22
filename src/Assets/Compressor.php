@@ -7,18 +7,22 @@
  * Sources <https://github.com/atelierspierrot/templatengine>
  */
 
-namespace TemplateEngine;
+namespace Assets;
+
+use Assets\AbstractCompressorAdapter;
 
 /**
+ * Compressor for assets optimization: combination (merge) and minification
+ *
  * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
  */
-class Minifier
+class Compressor
 {
 
+	protected $output;
 	protected $files_stack;
 	protected $destination_dir;
 	protected $destination_file;
-	protected $minified_content;
 	protected $silent;
 	protected $direct_output;
 	protected $web_root_path;
@@ -27,10 +31,12 @@ class Minifier
 	protected $isInited;
 
 	protected $__adapter_type;
+	protected $__adapter_action;
 	protected $__adapter;
 
 	/**
-	 * Construction of a new Minifier object
+	 * Construction of a new Compressor object
+	 *
 	 * @param null|array $files_stack An array of the files stack to treat
 	 * @param null|string $destination_file The destination file name to write in
 	 * @param null|string $destination_dir The destination directory to force creating a file with the result
@@ -51,6 +57,7 @@ class Minifier
 
 	/**
 	 * Initialization : creation of the adapter
+	 *
 	 * @throw Throws a RuntimeException if the adapter doesn't exist
 	 */
 	protected function init()
@@ -65,9 +72,14 @@ class Minifier
 		if (!empty($this->__adapter_type)) {
 			if (class_exists($this->__adapter_type)) {
 				$this->__adapter = new $this->__adapter_type;
+				if (!($this->__adapter instanceof AbstractCompressorAdapter)) {
+                    throw new \LogicException(
+                        sprintf('Compressor adapter must extend class "%s" (having object "%s")!', "Assets\AbstractCompressorAdapter", $this->__adapter_type)
+                    );
+				}
 			} else {
 				throw new \RuntimeException(
-					sprintf('Minifier adapter for type "%s" doesn\'t exist!', $this->__adapter_type)
+					sprintf('Compressor adapter for type "%s" doesn\'t exist!', $this->__adapter_type)
 				);
 			}
 		}
@@ -75,20 +87,15 @@ class Minifier
 		$this->isInited = true;
 	}
 
-// -------------------
-// Getters / Setters
-// -------------------
-
 	/**
 	 * Reset all object properties to default or empty values
+	 *
 	 * @param bool $hard Reset all object properties (destination directory and web root included)
 	 * @return self $this for method chaining
 	 */
 	public function reset($hard = false)
 	{
 		$this->files_stack 				= array();
-		$this->destination_file 		= '';
-		$this->minified_content 		= '';
 		$this->silent 					= true;
 		$this->direct_output			= false;
 		$this->isCleaned_files_stack	= false;
@@ -97,17 +104,36 @@ class Minifier
 			$this->destination_dir 		= '';
 			$this->web_root_path		= null;
 			$this->__adapter_type		= null;
+			$this->__adapter_action		= 'merge';
 			$this->__adapter			= null;
 		}
+		$this->resetOutput();
 		return $this;
 	}
 
 	/**
+	 * Reset all object output properties to default or empty values
+	 *
+	 * @return self $this for method chaining
+	 */
+	public function resetOutput($hard = false)
+	{
+		$this->destination_file 		= '';
+		$this->output                   = '';
+		return $this;
+	}
+	
+// -------------------
+// Getters / Setters
+// -------------------
+
+	/**
 	 * Set the silence object flag
+	 *
 	 * @param bool $silence True to avoid the class throwing exceptions
 	 * @return self $this for method chaining
 	 */
-	public function setSilent($silence)
+	public function setSilent($silence = true)
 	{
 		$this->silent = (bool) $silence;
 		return $this;
@@ -115,10 +141,11 @@ class Minifier
 
 	/**
 	 * Set the direct_output object flag
+	 *
 	 * @param bool $direct_output True to avoid writing of the compressed result in a file
 	 * @return self $this for method chaining
 	 */
-	public function setDirectOutput($direct_output)
+	public function setDirectOutput($direct_output = true)
 	{
 		$this->direct_output = (bool) $direct_output;
 		return $this;
@@ -126,17 +153,32 @@ class Minifier
 
 	/**
 	 * Set the adapter type to use, this type will be guessed if not set
+	 *
 	 * @param string $type The type name
 	 * @return self $this for method chaining
 	 */
 	public function setAdapterType($type)
 	{
-		$this->__adapter_type = '\TemplateEngine\MinifierAdapter\\'.strtoupper($type);
+		$this->__adapter_type = '\Assets\CompressorAdapter\\'.strtoupper($type);
+		return $this;
+	}
+
+	/**
+	 * Set the adapter action to process and reset the output
+	 *
+	 * @param string $type The action name
+	 * @return self $this for method chaining
+	 */
+	public function setAdapterAction($action)
+	{
+		$this->resetOutput();
+		$this->__adapter_action = $action;
 		return $this;
 	}
 
 	/**
 	 * Add a file to treat in the files stack
+	 *
 	 * @param string $file A file path to add in stack
 	 * @return self $this for method chaining
 	 */
@@ -148,6 +190,7 @@ class Minifier
 
 	/**
 	 * Set a full files stack to treat
+	 *
 	 * @param array $files_stack An array of file paths to treat
 	 * @return self $this for method chaining
 	 */
@@ -160,6 +203,7 @@ class Minifier
 
 	/**
 	 * Get the files stack
+	 *
 	 * @return array The current files stack of the object
 	 */
 	public function getFilesStack()
@@ -168,16 +212,18 @@ class Minifier
 	}
 
 	/**
-	 * Get the minified content
-	 * @return array The minified content string
+	 * Get the processed content
+	 *
+	 * @return string The content string
 	 */
-	public function getMinifiedContent()
+	public function getOutput()
 	{
-		return $this->minified_content;
+		return $this->output;
 	}
 
 	/**
 	 * Set the destination file to write the result in
+	 *
 	 * @param string $destination_file The file path or name to create and write in
 	 * @return self $this for method chaining
 	 * @throw Throws an InvalidArgumentException if the file name is not a string (and if $silent==false)
@@ -189,7 +235,7 @@ class Minifier
 		} else {
 			if (false===$this->silent) {
 				throw new \InvalidArgumentException(
-					sprintf('[Minifier] Destination file name must be a string (got "%s")!', gettype($destination_file))
+					sprintf('[Compressor] Destination file name must be a string (got "%s")!', gettype($destination_file))
 				);
 			}
 		}
@@ -198,6 +244,7 @@ class Minifier
 
 	/**
 	 * Get the destination file to write the result in
+	 *
 	 * @return string The file name to write in
 	 */
 	public function getDestinationFile()
@@ -207,6 +254,7 @@ class Minifier
 
 	/**
 	 * Build a destination filename based on the files stack names
+	 *
 	 * @return string The file name built
 	 * @throw Throws a RuntimeException if the files stack is empty (filename can not be guessed)
 	 */
@@ -222,13 +270,17 @@ class Minifier
 			}
 			if (!empty($_fs)) {
 				sort($_fs);
-				$this->setDestinationFile( md5( join('', $_fs) ).'.'.$this->__adapter->file_extension );
+				$this->setDestinationFile(
+				    md5( join('', $_fs) )
+				    .'_'.$this->__adapter_action
+				    .'.'.$this->__adapter->file_extension
+				);
 				return $this->getDestinationFile();
 			}
 		}
 		if (false===$this->silent) {
 			throw new \RuntimeException(
-				'[Minifier] Destination filename can\'t be guessed because files stack is empty!'
+				'[Compressor] Destination filename can\'t be guessed because files stack is empty!'
 			);
 		}
 		return null;
@@ -236,6 +288,7 @@ class Minifier
 
 	/**
 	 * Set the destination directory to write the destination file in
+	 *
 	 * @param string $destination_dir The directory path to create the file in
 	 * @return self $this for method chaining
 	 * @throw Throws an InvalidArgumentException if the directory name is not a string (and if $silent==false)
@@ -248,13 +301,13 @@ class Minifier
 				$this->destination_dir = rtrim($destination_dir, '/').'/';
 			} elseif (false===$this->silent) {
 				throw new \InvalidArgumentException(
-					sprintf('[Minifier] Destination directory "%s" must exist!', $destination_dir)
+					sprintf('[Compressor] Destination directory "%s" must exist!', $destination_dir)
 				);
 			}
 		} else {
 			if (false===$this->silent) {
 				throw new \InvalidArgumentException(
-					sprintf('[Minifier] Destination directory must be a string (got "%s")!', gettype($destination_dir))
+					sprintf('[Compressor] Destination directory must be a string (got "%s")!', gettype($destination_dir))
 				);
 			}
 		}
@@ -263,6 +316,7 @@ class Minifier
 
 	/**
 	 * Get the destination directory to write the file in
+	 *
 	 * @return string The directory name to write in
 	 */
 	public function getDestinationDir()
@@ -272,6 +326,7 @@ class Minifier
 
 	/**
 	 * Set the web root path (the real path to clear in DestinationRealPath) to build web path of destination file
+	 *
 	 * @param string $path The realpath of the web root to clear it from DestinationRealPath to build DestinationWebPath
 	 * @return self $this for method chaining
 	 */
@@ -283,13 +338,13 @@ class Minifier
 				$this->web_root_path = rtrim($path, '/').'/';
 			} elseif (false===$this->silent) {
 				throw new \InvalidArgumentException(
-					sprintf('[Minifier] Web root path "%s" must exist!', $path)
+					sprintf('[Compressor] Web root path "%s" must exist!', $path)
 				);
 			}
 		} else {
 			if (false===$this->silent) {
 				throw new \InvalidArgumentException(
-					sprintf('[Minifier] Web root path must be a string (got "%s")!', gettype($path))
+					sprintf('[Compressor] Web root path must be a string (got "%s")!', gettype($path))
 				);
 			}
 		}
@@ -298,6 +353,7 @@ class Minifier
 
 	/**
 	 * Get the web root path
+	 *
 	 * @return string The current web root path seted
 	 */
 	public function getWebRootPath()
@@ -307,6 +363,7 @@ class Minifier
 
 	/**
 	 * Get the destination file path ready for web inclusion
+	 *
 	 * @return string The file path to write in
 	 * @throw Throws a LogicException if the web root path has not been set (and silent==false)
 	 */
@@ -316,7 +373,7 @@ class Minifier
 			return str_replace($this->web_root_path, '', $this->getDestinationRealPath());
 		} elseif (false===$this->silent) {
 			throw new \LogicException(
-				'[Minifier] Can\'t create web path because "web_root_path" is not defined!'
+				'[Compressor] Can\'t create web path because "web_root_path" is not defined!'
 			);
 		}
 		return null;
@@ -324,6 +381,7 @@ class Minifier
 
 	/**
 	 * Get the destination file absolute path
+	 *
 	 * @return string The file path to write in
 	 */
 	public function getDestinationRealPath()
@@ -333,6 +391,7 @@ class Minifier
 
 	/**
 	 * Check if a destination file already exist for the current object
+	 *
 	 * @return bool True if the minified file exists
 	 */
 	public function fileExists()
@@ -344,6 +403,7 @@ class Minifier
 
 	/**
 	 * Check if a destination file already exist for the current object and if it is fresher than sources
+	 *
 	 * @return bool True if the sources had been modified after minified file creation
 	 */
 	public function mustRefresh()
@@ -368,6 +428,7 @@ class Minifier
 
 	/**
 	 * Process the current files stack
+	 *
 	 * @return self $this for method chaining
 	 */
 	public function process()
@@ -378,9 +439,15 @@ class Minifier
 		if (empty($this->destination_file) && false===$this->direct_output)
 			$this->guessDestinationFilename();
 	
+        if (!method_exists($this->__adapter, $this->__adapter_action)) {
+            throw new \RuntimeException(
+                sprintf('[Compressor] Action "%s" doesn\'t exist in "%s" adapter!', $this->__adapter_action, get_class($this->__adapter))
+            );
+        }
+
 		if (false===$this->direct_output) {
 			if (!$this->mustRefresh()) {
-				$this->minified_content = file_get_contents( $this->getDestinationRealPath() );
+    			$this->output = file_get_contents( $this->getDestinationRealPath() );
 				return $this;
 			}
 		}
@@ -389,16 +456,48 @@ class Minifier
 		foreach($this->files_stack as $_file) {
 			$contents[] = '';
 			$contents[] = $this->__adapter->buildComment( $_file->getFilename() );
-			$contents[] = $this->__adapter->minify(
+			$contents[] = $this->__adapter->{$this->__adapter_action}(
 				file_get_contents( $_file->getRealPath() )
 			);
 		}
-		$this->minified_content = implode("\n", $contents);
+		$this->output = implode("\n", $contents);
 
-		if (!empty($this->minified_content) && false===$this->direct_output) {
+		if (!empty($this->output) && false===$this->direct_output) {
 			$this->_writeDestinationFile();
 		}
 		return $this;
+	}
+
+	/**
+	 * Process a combination of the current files stack (alias of `merge`)
+	 *
+	 * @return self $this for method chaining
+	 */
+	public function combine()
+	{
+	    return $this->merge();
+	}
+
+	/**
+	 * Process a combination of the current files stack
+	 *
+	 * @return self $this for method chaining
+	 */
+	public function merge()
+	{
+	    $this->setAdapterAction('merge');
+	    return $this->process();
+	}
+
+	/**
+	 * Process a minification of the current files stack
+	 *
+	 * @return self $this for method chaining
+	 */
+	public function minify()
+	{
+	    $this->setAdapterAction('minify');
+	    return $this->process();
 	}
 
 // -------------------
@@ -407,6 +506,7 @@ class Minifier
 
 	/**
 	 * Rebuild the current files stack as an array of File objects
+	 *
 	 * @return void
 	 * @throw Throws a RuntimeException if one of the files stack doesn't exist (and if $silent==false)
 	 */
@@ -422,7 +522,7 @@ class Minifier
 				$new_stack[] = new \SplFileInfo($_file);
 			} elseif (false===$this->silent) {
 				throw new \RuntimeException(
-					sprintf('[Minifier] Source to minify "%s" not found!', $_file)
+					sprintf('[Compressor] Source to process "%s" not found!', $_file)
 				);
 			}
 		}
@@ -432,6 +532,7 @@ class Minifier
 	
 	/**
 	 * Guess the adapter type based on extension of the first file in stack
+	 *
 	 * @return bool True if the adapter type had been guessed
 	 * @throw Throws a RuntimeException if no file was found in the stack
 	 */
@@ -445,7 +546,7 @@ class Minifier
 			return true;
 		} elseif (false===$this->silent) {
 			throw new \RuntimeException(
-				'[Minifier] Trying to guess adapter from an empty files stack!'
+				'[Compressor] Trying to guess adapter from an empty files stack!'
 			);
 		}
 		return false;
@@ -457,6 +558,7 @@ class Minifier
 
 	/**
 	 * Writes the compressed content in the destination file
+	 *
 	 * @return bool|string The filename if it has been created, false otherwise
 	 * @throw Throws a RuntimeException if the file can't be written
 	 */
@@ -465,14 +567,14 @@ class Minifier
 		if (empty($this->destination_file))
 			$this->guessDestinationFilename();
 	
-		$content = $this->_getHeaderComment()."\n".$this->minified_content;
+		$content = $this->_getHeaderComment()."\n".$this->output;
 		$dest_file = $this->getDestinationRealPath();
 		if (false!==file_put_contents($dest_file, $content)) {
 			return true;
 		} else {
 			if (false===$this->silent) {
 				throw new \RuntimeException(
-					sprintf('Destination minified file "%s" can\'t be written on disk!', $dest_file)
+					sprintf('[Compressor] Destination compressed file "%s" can\'t be written on disk!', $dest_file)
 				);
 			}
 			return false;
@@ -481,13 +583,14 @@ class Minifier
 
 	/**
 	 * Build the compressed content header comment information
+	 *
 	 * @return string A comment string to write in top of the content
 	 */
 	protected function _getHeaderComment()
 	{
 		$this->init();
 		return $this->__adapter->buildComment(
-			sprintf('Generated by PHP Minifier class on %s at %s', date('Y-m-d'), date('H:i'))
+			sprintf('Generated by %s class on %s at %s', __CLASS__, date('Y-m-d'), date('H:i'))
 		);
 	}
 

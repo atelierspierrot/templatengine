@@ -1,0 +1,121 @@
+<?php
+
+$_template->getTemplateObject('JavascriptTag')->add(<<<EOT
+$(function() {
+    $('pre.code').highlight({source:0, indent:'tabs', code_lang: 'data-language'});
+});
+EOT
+);
+?>
+<h2>Test of the PHP <var>Assets</var> manager</h2>
+
+<h3 id="base">Basic usage</h3>
+
+<p>Instanciation of an assets loader:</p>
+
+<pre class="code" data-language="php">
+<?php
+
+echo '$loader = new Assets\Loader('."\n"
+    ."\t".'__DIR__."/../..",          // this is the package root directory'."\n"
+    ."\t".'__DIR__."/../../www",      // this is the package assets directory'."\n"
+    ."\t".'__DIR__."/../"             // this is this page document root'."\n"
+    .');'."\n";
+$loader = new Assets\Loader(__DIR__.'/../..', __DIR__.'/../../www', __DIR__.'/../');
+var_export($loader);
+
+?>
+</pre>
+
+<p>Usage of the <var>find()</var> assets feature:</p>
+<pre class="code" data-language="php">
+<?php
+
+echo '$js_stack = array('."\n"
+	."\t".'$loader->find("vendor/jquery.highlight.js"),'."\n"
+	."\t".'$loader->find("vendor/jquery.metadata.js")'."\n"
+    .');'."\n";
+$js_stack = array(
+	$loader->find('vendor/jquery.highlight.js'),
+	$loader->find('vendor/jquery.metadata.js')
+);
+var_export($js_stack);
+?>
+</pre>
+
+<h3 id="compressor">Compressor feature</h3>
+
+<h4 id="merge">Merger</h4>
+
+<p>Merge of our stack of javascript files:</p>
+
+<pre class="code" data-language="php">
+<?php
+
+echo '$compressor = new Assets\Compressor('."\n"
+    ."\t".'$js_stack,'."\n"
+    ."\t".'null,'."\n"
+    ."\t".'__DIR__."/../tmp",'."\n"
+    ."\t".'"js"'."\n"
+    .');'."\n";
+
+$compressor = new Assets\Compressor(
+    $js_stack,
+    null,
+    __DIR__.'/../tmp',
+    'js'
+);
+
+echo "\n";
+echo '$compressor->process();'."\n";
+$compressor->process();
+echo '$minified_filename = $compressor->getDestinationRealPath();'."\n";
+$merged_filename = $compressor->getDestinationRealPath();
+echo '// => '.$merged_filename."\n";
+$compressor->setWebRootPath( $loader->getDocumentRoot() );
+echo '$compressor->setWebRootPath( $loader->getDocumentRoot() );'."\n";
+echo '$minified_webpath = $compressor->getDestinationWebPath();'."\n";
+$merged_webpath = $compressor->getDestinationWebPath();
+echo '// => '.$merged_webpath."\n";
+
+//var_export($merger);
+?>
+</pre>
+
+<p>You can test merging javascript or css files of each demo page by setting URI arguments <var>&merge_js=1</var> or <var>&merge_css=1</var>.</p>
+
+<h4 id="minifier">Minifier</h4>
+
+<p>Minification of a stack of javascript files:</p>
+
+<pre class="code" data-language="php">
+<?php
+
+
+echo "\n";
+echo '// asking the minifier to process our files stack:'."\n";
+echo '$compressor->setAdapterAction("minify");'."\n";
+$compressor->setAdapterAction("minify");
+echo '$compressor->process();'."\n";
+$compressor->process();
+
+echo "\n";
+echo '// asking the minifier in which file it generates the minified version of our files:'."\n";
+echo '$minified_filename = $compressor->getDestinationRealPath();'."\n";
+$minified_filename = $compressor->getDestinationRealPath();
+echo '// => '.$minified_filename."\n";
+
+echo "\n";
+echo '// we can get a ready-to-use file path of the generated file defining the web root:'."\n";
+$compressor->setWebRootPath( $loader->getDocumentRoot() );
+echo '$compressor->setWebRootPath( $loader->getDocumentRoot() );'."\n";
+echo '$minified_webpath = $compressor->getDestinationWebPath();'."\n";
+$minified_webpath = $compressor->getDestinationWebPath();
+echo '// => '.$minified_webpath."\n";
+
+//var_export($minifier);
+?>
+</pre>
+
+<p>You can test minifying javascript or css files of each demo page by setting URI arguments <var>&minify_js=1</var> or <var>&minify_css=1</var>.</p>
+

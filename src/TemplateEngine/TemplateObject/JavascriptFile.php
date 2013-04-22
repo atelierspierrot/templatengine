@@ -156,6 +156,76 @@ class JavascriptFile
 // ------------------------
 
 	/**
+	 * Merge the files if possible and loads them in files_merged stack
+	 * @return self Must return the object itself for method chaining
+	 */
+	public function merge()
+	{
+		$cleaned_stack = $this->cleanStack( $this->get(), 'path' );
+		if (!empty($cleaned_stack)) {
+			$this->addMerged( 
+				$this->mergeStack( $this->extractFromStack( $cleaned_stack, 'path' ) )
+			);
+		}
+		return $this;
+	}
+
+	/**
+	 * Add an merged file
+	 * @param string $file_path The new javascript path
+	 * @return self $this for method chaining
+	 * @throw Throws an InvalidArgumentException if the path doesn't exist
+	 */
+	public function addMerged($file_path)
+	{
+        $stack = $this->_getStackEntry($file_path, null, true);
+        $this->registry->addEntry($stack, 'javascript_files');
+        $this->registry->addEntry($stack, 'javascript_merged_files');
+		return $this;
+	}
+
+	/**
+	 * Set a stack of merged files
+	 * @param array $files An array of javascript files paths
+	 * @return self $this for method chaining
+	 * @see self::add()
+	 */
+	public function setMerged(array $files)
+	{
+		if (!empty($files)) {
+			foreach($files as $_file) {
+				$this->addMerged( $_file );
+			}
+		}
+		return $this;
+	}
+
+	/**
+	 * Get the stack of merged files
+	 * @return array The stack of javascripts
+	 */
+	public function getMerged()
+	{
+		return $this->registry->getEntry( 'javascript_merged_files', false, array() );
+	}
+
+	/**
+	 * Write merged versions of the files stack in the cache directory
+	 */
+	public function writeMerged($mask = '%s')
+	{
+		$str='';
+		foreach($this->cleanStack( $this->getMerged(), 'path' ) as $entry) {
+			$tag_attrs = array(
+				'type'=>'text/javascript',
+				'src'=>$entry['path']
+			);
+			$str .= sprintf($mask, Html::writeHtmlTag( 'script', null, $tag_attrs ));
+		}
+		return $str;
+	}
+
+	/**
 	 * Minify the files if possible and loads them in files_minified stack
 	 * @return self Must return the object itself for method chaining
 	 */
