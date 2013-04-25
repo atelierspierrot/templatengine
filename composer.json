@@ -4,7 +4,7 @@
     "description": "A PHP package to build HTML5 views (based on HTML5 Boilerplate layouts).",
     "keywords": [ "php", "template", "boilerplate" ],
     "homepage": "https://github.com/atelierspierrot/templatengine",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "license": "GPL-3.0",
     "authors": [
         {
@@ -19,6 +19,7 @@
     ],
     "require": {
         "php": ">=5.3.0",
+        "psr/log": "dev-master",
         "atelierspierrot/patterns": "dev-master",
         "atelierspierrot/library": "dev-master"
     },
@@ -30,7 +31,17 @@
     "extra": {
         "assets": "www",
         "document_root": "www",
-        "views": "www/html5boilerplate"
+        "views": "www/html5boilerplate",
+        "assets_packages": {
+            "jquery.tablesorter": {
+                "css": "vendor/blue/style.css",
+                "jsfiles_footer": [ "vendor/jquery.metadata.js", "min:vendor/jquery.tablesorter.min.js" ]
+            },
+            "jquery.highlight": {
+                "css": "vendor/jquery.highlight.css",
+                "jsfiles_footer": "vendor/jquery.highlight.js"
+            }
+        }
     },
     "scripts": {
         "post-autoload-dump": "Assets\\ComposerInstaller::postAutoloadDump"

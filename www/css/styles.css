@@ -11,6 +11,7 @@
  * For more information, see http://andreasviklund.com/templates/basic-reader/
  */
 
+/* commons */
 *           {margin:0; padding:0;}
 body        {background: #fff; color:#303030; font:88% "Lucida Sans Unicode","Lucida Grande",Verdana,Arial,Helvetica,sans-serif; line-height:1.5em;
             margin: 40px auto; padding:0; width:90%;}
@@ -51,23 +52,20 @@ blockquote  {border-left: 8px solid #ddd;padding-left:16px}
 .float-right {float: right;}
 .note       {font-size: .9em; color: #737373;font-style: italic;}
 
+/* handlers (for `show_hide` js fct)*/
 a.handler   {color: #737373; background: transparent url(arrow-right.png) no-repeat center left; padding-left: 12px;}
 a.handler.strong {font-weight: bold;}
 a.handler.down {background-image: url(arrow-down.png);}
 a.handler.left {background-image: url(arrow-left.png);}
 a.handler.noimg {background-image: none;}
 
+/* footnotes */
 .footnotes  {font-size: .92em; margin: 2em 10em 0 1em; border-top: 1px solid #ddd;}
 .footnotes .credits  {text-align: left;font-size: .96em;text-indent:0;}
 a.footnote_link {color: #2380A0; font-weight: bold;}
 .footnotes li {margin-left: 1em;}
 
-.jsconsole  {margin-top: 0; margin-bottom: 22px; height: auto; min-height: 40px;}
-.jsconsole h3 { margin-top: 1em; }
-
-td.var      {text-align: right;}
-td.var var  {font-weight: bold; font-style: normal; letter-spacing: .1em;}
-
+/* header */
 header      {float: left; width: 68%;}
 header hgroup {position: relative;margin:0;padding:0;padding-bottom: 1em;}
 header img  {float: left;border: 1px dotted #fff; margin: 0 1em;}
@@ -78,6 +76,7 @@ h1          {padding-top: 1em}
 h2.slogan   {color:#777; font-size:1.2em; font-weight:400; margin:0 0 2em 12px;}
 .hat        {clear: left;font-weight: bold; text-indent: 12px;}
 
+/* nav */
 nav         {float:right; line-height:1.4em; width:28%; padding: 1em; margin: 0.4em 0 0.4em 0;background: #F9F9F9;}
 nav a:hover {text-decoration:none;}
 nav .info   {width: auto; margin: 0; margin-bottom: 1em;}
@@ -87,13 +86,14 @@ nav .info li {font-size:.9em;}
 nav .info li a {font-size:1em;}
 nav h2      {font-size: 1.4em;}
 
-
+/* aside */
 aside           {float:left; line-height:1.4em; width:20%; padding: 8px; padding-bottom: 15px;margin: 0.4em 1em 0.4em 0;background: #F9F9F9;font-size: .9em;}
 aside a:hover   {text-decoration:none;}
 aside h2        {font-size: 1.2em; margin:15px;}
 aside ul.menu   {margin-left:2em;padding:0;}
 aside form      {margin:0;padding:0;margin-left:2em;}
 
+/* menu */
 ul.menu         {font-size:0.86em; list-style:none; margin:0 0 0 1em; padding:0 0 15px 0;}
 ul.menu li      {list-style:none; margin:0 0 5px; padding:0;}
 ul.menu li a    {font-size:1.4em;}
@@ -102,23 +102,18 @@ ul.menu li a:hover {color:#404040;}
 ul.menu ul      {font-size:0.86em;line-height:1.2em; margin:8px 0 8px 20px; padding:0;}
 ul.menu ul li a {font-weight:400;}
 
-#short_menu {margin-top:8px;}
-
-#footer     {clear: both; margin-top: 1em; border-top: 1px solid #ddd; padding: 20px 0; font-size: .9em; color: #999;}
-
-#content    {clear: left; text-align:left; width:100%; font-size: 1.1em; padding: 1em 0;}
-#content .info, #content .info p {text-indent: 0; font-size: .9em;}
+/* article */
 article p  {margin:0 0 12px 12px;text-indent:1em;}
 article p .accesskey-tooltip {text-indent:0;}
 article li {margin:0 0 5px 1.4em; padding:0;}
 
-#source_block {padding:0;}
-#source_block pre {margin: 0; color: #000000;}
-#source_block_content {font-size: .9em }
+/* page blocks */
+#short_menu {margin-top:8px;}
+#footer     {clear: both; margin-top: 1em; border-top: 1px solid #ddd; padding: 20px 0; font-size: .9em; color: #999;}
+#content    {clear: left; text-align:left; width:100%; font-size: 1.1em; padding: 1em 0;}
+#content .info, #content .info p {text-indent: 0; font-size: .9em;}
 
-#content .jsconsole p {margin: 0;}
-#console    {color: green;}
-
+/* back menu */
 .back_menu  {position:fixed;top: 0; right: 5em; width: auto; font-size: .8em; padding: 6px 12px; margin: 0 0.4em; 
     background: #F1F1F1; border: 1px solid #eee; border-top: none;
     border-bottom-right-radius: 8px; border-bottom-left-radius: 8px;}
@@ -128,55 +123,14 @@ article li {margin:0 0 5px 1.4em; padding:0;}
 div.highlight {margin-bottom: 1em;}
 footer li, #content div.highlight li {margin:0; padding:0 0 0 5px;}
 #content div.highlight ul li {list-style-type: none;}
-#content #dev_block, #content #jsconsole  {margin: 1em 0 0 0;}
 iframe { border: 1px dotted #ccc; }
 
-.msg_box  {position:fixed;top: 0; left: 0; width: 40%; height: auto; max-height: 20%; font-size: .92em; padding: 12px; margin: 0; 
-    background: #F1F1F1; border: 1px solid #eee; border-top: none; display: none;
-    border-bottom-right-radius: 8px; text-align:left; overflow-y: auto; opacity: 0.9; filter: alpha(opacity=90); }
-.msg_box span { display: block; font-weight: bold; padding: 6px 0 0 20px; }
-
 /* tablesorter */
-table.tablesorter {
-	font-family:arial; background-color: #CDCDCD; margin:10px 0pt 15px; font-size: 1em; width: 100%; text-align: left;}
-table.tablesorter thead tr th, table.tablesorter tfoot tr th {background-color: #F4F4F4; border: 1px solid #FFF; font-size: .9em; padding: 4px;}
-table.tablesorter thead tr .header {background: #F4F4F4 url(../img/double-arrow.png) no-repeat 100% 50%; cursor: pointer;}
-table.tablesorter tbody td {color: #3D3D3D; padding: 4px; background-color: #FFF; vertical-align: top;}
-table.tablesorter thead tr .headerSortUp {background-image: url(../img/arrow-up.png); background-position: 100% 50%;}
-table.tablesorter thead tr .headerSortDown {background-image: url(../img/arrow-down.png); background-position: 100% 50%;}
-table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {background-color: #F9F9F9;}
-table.tablesorter tbody tr.odd td {background-color:#F9F9F9;}
-
-/* highlight */
-div.highlight {background:#FFFFFF; border:1px solid #D0D0D0; font-family:"Courier New","Andale Mono", Courrier, monospace; overflow: hidden;}
-div.highlight pre{width: 100%; overflow: auto; padding:0; margin:0; font-size:1em; clear: both;}
-/* tabs */
-div.highlight ul.tabs {overflow: hidden; padding: 5px 0 5px 0; margin: 0; list-style: none; border-bottom: 1px solid #E0E0E0; width: 100%;}
-div.highlight ul.tabs li {padding: 0; margin: 0 5px; float: left; background: none; border-bottom: 1px dashed #CCC; line-height:1.0em; color: #CCC; cursor: pointer;}
-div.highlight ul.tabs li.active {border-bottom: none; cursor: default;}
-/* pre */
-div.highlight pre.code ol {margin: 0; padding:0 0 0 45px; background:#e7e5dc;  }
-div.highlight pre.code ul {margin: 0; padding:0;	}
-div.highlight pre.code ol li, div.highlight pre.code ul li {padding:0 0 0 5px; border-left:3px solid #CCC; background:#F9F9F9;}
-div.highlight pre.code ul li {border-left:none;}
-div.highlight pre.code ol li.even, div.highlight pre.code ul li.even {background-color:#F4F4F4;}
-div.highlight pre.source {display: none; padding:0 0 0 5px;}
-/* highligting */
-pre.code .str {color: #080;}
-pre.code .kwd, pre.code .kwd span {color: #070;}
-pre.code .com, pre.code .com span {color:#080; font-style: italic; font-weight: normal;}
-pre.code .typ {color: #606;}
-pre.code .lit {color: #066;}
-pre.code .pun {color: #660;}
-pre.code .pln {color: #000;}
-pre.code .tag {color: #008; font-weight: bold;  } 
-pre.code .atn {color: #606;}
-pre.code .atv {color: #080;}
-pre.code .dec {color: #606;}
-pre.code .fnc, pre.code .fnc span {color: #00b;}
-/* css */
-.css pre.code .kwd, .css pre.code .kwd span {color: #008; font-weight: bold;}
-/* php */
-.php pre.code .str, .php pre.code .str span {color: #d00;}
-.php pre.code .var, .php pre.code .var span {color: #00b;}
-.php pre.code .com, .php pre.code .com span {color:#ff8000; font-style: italic; font-weight: normal;}
+table.tablesorter, table.tablesorter th, table.tablesorter td {border-collapse: separate; border-spacing:1px;}
+table.tablesorter tbody tr:hover td,
+table.tablesorter tbody tr.odd:hover td,
+table.tablesorter tbody tr.even:hover td {background-color:#F5FAFF;}
+table.tablesorter, table.tablesorter thead tr th, table.tablesorter tfoot tr th {font-size: .9em;}
+table.tablesorter thead tr .header {background-color: #F4F4F4;}
+table.tablesorter thead tr .headerSortUp,
+table.tablesorter thead tr .headerSortDown {background-color: #CCCCCC;}

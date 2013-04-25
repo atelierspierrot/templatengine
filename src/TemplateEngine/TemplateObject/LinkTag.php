@@ -89,7 +89,9 @@ class LinkTag
 	public function write($mask = '%s')
 	{
 		$str='';
-		foreach($this->cleanStack( $this->get(), 'rel' ) as $entry) {
+// allow multi same links
+//		foreach($this->cleanStack( $this->get(), 'rel' ) as $entry) {
+		foreach($this->get() as $entry) {
 			$str .= sprintf($mask, Html::writeHtmlTag( 'link', null, $entry, true ));
 		}
 		return $str;

@@ -61,6 +61,12 @@ class Loader
     const ASSETS_DB_FILENAME = 'assets.json';
 
     /**
+     * Composition of a `use` statement in `composer.json`
+     * @static array
+     */
+    public static $use_statements = array( 'css', 'jsfiles_footer', 'jsfiles_header' );
+
+    /**
      * Project root directory (absolute - no trailing slash)
      * @var string
      */

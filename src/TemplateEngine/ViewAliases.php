@@ -658,6 +658,21 @@ if (!function_exists('_url'))
 	}	
 }
 
+if (!function_exists('_use')) 
+{
+    /**
+     * Assets packages automatic inclusion
+     *
+     * @param string $package_name The assets package name to include
+     * @return void
+     */
+	function _use($package_name = null)
+	{
+	    if (empty($package_name)) return;
+	    TemplateEngine::getInstance()->useAssetsPackage($package_name);
+	}	
+}
+
 if (!function_exists('_values')) 
 {
     /**
