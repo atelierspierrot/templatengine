@@ -32,6 +32,7 @@
         "assets": "www",
         "document_root": "www",
         "views": "www/html5boilerplate",
+        "views_aliases": "src/TemplateEngine/ViewAliases.php",
         "assets_packages": {
             "jquery.tablesorter": {
                 "css": "vendor/blue/style.css",
@@ -43,7 +44,5 @@
             }
         }
     },
-    "scripts": {
-        "post-autoload-dump": "Assets\\ComposerInstaller::postAutoloadDump"
-    }
+    "scripts": { "post-autoload-dump": "Assets\\ComposerInstaller::postAutoloadDump" }
 }

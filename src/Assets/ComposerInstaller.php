@@ -281,11 +281,14 @@ class ComposerInstaller
         $extra = $package->getExtra();
         if (!empty($extra) && isset($extra['assets'])) {
             $infos = array(
-                'path'=>$this->_getInstallPath($package),
+                'path'=>$main_package ? rtrim($this->getAssetsRootPath(), '/') . '/' . $extra['assets'] : $this->_getInstallPath($package),
                 'version'=>$package->getVersion(),
             );
             if (isset($extra['views'])) {
-                $infos['views'] = $this->_getPackageBasePath($package) . '/' . $extra['views'];
+                $infos['views'] = ($main_package ? $this->appBasePath . '/' : $this->_getPackageBasePath($package).'/') . $extra['views'];
+            }
+            if (isset($extra['views_aliases'])) {
+                $infos['views_aliases'] = ($main_package ? $this->appBasePath . '/' : $this->_getPackageBasePath($package).'/') . $extra['views_aliases'];
             }
             if (isset($extra['assets_packages'])) {
                 $use = array();

@@ -16,6 +16,8 @@
  * can avoid this behavior setting the `$return` parmeter (*the last function parameter
  * most of the time*) on `true`.
  *
+ * You can use any of the `Library\Helper` namespace classes calling `Helper\Classname`
+ * and any of the `Library\Tool` namespace classes calling `Tool\Classname`.
  */
 use TemplateEngine\TemplateEngine;
 use Library\Helper, Library\Tool;

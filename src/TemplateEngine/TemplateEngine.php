@@ -351,6 +351,20 @@ class TemplateEngine
         }
 	}
 
+	/**
+	 * Automatic loading of assets views aliases
+	 *
+	 * @return void
+	 */
+	public function includePackagesAliases()
+	{
+        foreach ($this->assets_loader->getAssetsDb() as $package=>$config) {
+            if (!empty($config['views_aliases'])) {
+                @include_once $config['views_aliases'];
+            }
+        }
+	}
+
 // ------------------------
 // Views rendering
 // ------------------------
