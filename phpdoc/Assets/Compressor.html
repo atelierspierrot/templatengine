@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>Assets\Compressor | Library</title>
+                    <link rel="stylesheet" type="text/css" href="../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../classes.html">Classes</a></li>
+                            <li><a href="../namespaces.html">Namespaces</a></li>
+                        <li><a href="../interfaces.html">Interfaces</a></li>
+            <li><a href="../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title">Library</div>
+
+            <div class="type">Class</div>
+    <h1><a href="../Assets.html">Assets</a>\Compressor</h1>
+    </div>
+        <div class="content">
+                <p>class    <strong>Compressor</strong></p>
+
+            <div class="description">
+            <p>Compressor for assets optimization: combination (merge) and minification</p>
+            <p></p>
+        </div>
+    
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method___construct">__construct</a>(array $files_stack = array(), null|string $destination_file = null, null|string $destination_dir = null, null|string $adapter_type = null)
+                    <p>Construction of a new Compressor object</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../Assets/Compressor.html"><abbr title="Assets\Compressor">Compressor</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_reset">reset</a>(bool $hard = false)
+                    <p>Reset all object properties to default or empty values</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../Assets/Compressor.html"><abbr title="Assets\Compressor">Compressor</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_resetOutput">resetOutput</a>($hard = false)
+                    <p>Reset all object output properties to default or empty values</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../Assets/Compressor.html"><abbr title="Assets\Compressor">Compressor</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_setSilent">setSilent</a>(bool $silence = true)
+                    <p>Set the silence object flag</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../Assets/Compressor.html"><abbr title="Assets\Compressor">Compressor</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_setDirectOutput">setDirectOutput</a>(bool $direct_output = true)
+                    <p>Set the direct_output object flag</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../Assets/Compressor.html"><abbr title="Assets\Compressor">Compressor</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_setAdapterType">setAdapterType</a>(string $type)
+                    <p>Set the adapter type to use, this type will be guessed if not set</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../Assets/Compressor.html"><abbr title="Assets\Compressor">Compressor</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_setAdapterAction">setAdapterAction</a>($action)
+                    <p>Set the adapter action to process and reset the output</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../Assets/Compressor.html"><abbr title="Assets\Compressor">Compressor</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_addFile">addFile</a>(string $file)
+                    <p>Add a file to treat in the files stack</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../Assets/Compressor.html"><abbr title="Assets\Compressor">Compressor</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_setFilesStack">setFilesStack</a>(array $files_stack)
+                    <p>Set a full files stack to treat</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    array
+                </td>
+                <td class="last">
+                    <a href="#method_getFilesStack">getFilesStack</a>()
+                    <p>Get the files stack</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getOutput">getOutput</a>()
+                    <p>Get the processed content</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../Assets/Compressor.html"><abbr title="Assets\Compressor">Compressor</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_setDestinationFile">setDestinationFile</a>(string $destination_file)
+                    <p>Set the destination file to write the result in</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getDestinationFile">getDestinationFile</a>()
+                    <p>Get the destination file to write the result in</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_guessDestinationFilename">guessDestinationFilename</a>()
+                    <p>Build a destination filename based on the files stack names</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../Assets/Compressor.html"><abbr title="Assets\Compressor">Compressor</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_setDestinationDir">setDestinationDir</a>(string $destination_dir)
+                    <p>Set the destination directory to write the destination file in</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getDestinationDir">getDestinationDir</a>()
+                    <p>Get the destination directory to write the file in</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../Assets/Compressor.html"><abbr title="Assets\Compressor">Compressor</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_setWebRootPath">setWebRootPath</a>(string $path)
+                    <p>Set the web root path (the real path to clear in DestinationRealPath) to build web path of destination file</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getWebRootPath">getWebRootPath</a>()
+                    <p>Get the web root path</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getDestinationWebPath">getDestinationWebPath</a>()
+                    <p>Get the destination file path ready for web inclusion</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getDestinationRealPath">getDestinationRealPath</a>()
+                    <p>Get the destination file absolute path</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    bool
+                </td>
+                <td class="last">
+                    <a href="#method_fileExists">fileExists</a>()
+                    <p>Check if a destination file already exist for the current object</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    bool
+                </td>
+                <td class="last">
+                    <a href="#method_mustRefresh">mustRefresh</a>()
+                    <p>Check if a destination file already exist for the current object and if it is fresher than sources</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../Assets/Compressor.html"><abbr title="Assets\Compressor">Compressor</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_process">process</a>()
+                    <p>Process the current files stack</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../Assets/Compressor.html"><abbr title="Assets\Compressor">Compressor</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_combine">combine</a>()
+                    <p>Process a combination of the current files stack (alias of `merge`)</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../Assets/Compressor.html"><abbr title="Assets\Compressor">Compressor</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_merge">merge</a>()
+                    <p>Process a combination of the current files stack</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../Assets/Compressor.html"><abbr title="Assets\Compressor">Compressor</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_minify">minify</a>()
+                    <p>Process a minification of the current files stack</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method___construct">
+        <div class="location">at line 45</div>
+        <code>            public            
+    <strong>__construct</strong>(array $files_stack = array(), null|string $destination_file = null, null|string $destination_dir = null, null|string $adapter_type = null)</code>
+    </h3>
+    <div class="details">
+        <p>Construction of a new Compressor object</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>array</td>
+                <td>$files_stack</td>
+                <td>An array of the files stack to treat</td>
+            </tr>
+                    <tr>
+                <td>null|string</td>
+                <td>$destination_file</td>
+                <td>The destination file name to write in</td>
+            </tr>
+                    <tr>
+                <td>null|string</td>
+                <td>$destination_dir</td>
+                <td>The destination directory to force creating a file with the result</td>
+            </tr>
+                    <tr>
+                <td>null|string</td>
+                <td>$adapter_type</td>
+                <td>The adapter type name (which will be guessed if empty)</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_reset">
+        <div class="location">at line 96</div>
+        <code>            public            <a href="../Assets/Compressor.html"><abbr title="Assets\Compressor">Compressor</abbr></a>
+    <strong>reset</strong>(bool $hard = false)</code>
+    </h3>
+    <div class="details">
+        <p>Reset all object properties to default or empty values</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>bool</td>
+                <td>$hard</td>
+                <td>Reset all object properties (destination directory and web root included)</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../Assets/Compressor.html"><abbr title="Assets\Compressor">Compressor</abbr></a></td>
+            <td>$this for method chaining</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_resetOutput">
+        <div class="location">at line 119</div>
+        <code>            public            <a href="../Assets/Compressor.html"><abbr title="Assets\Compressor">Compressor</abbr></a>
+    <strong>resetOutput</strong>($hard = false)</code>
+    </h3>
+    <div class="details">
+        <p>Reset all object output properties to default or empty values</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$hard</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../Assets/Compressor.html"><abbr title="Assets\Compressor">Compressor</abbr></a></td>
+            <td>$this for method chaining</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setSilent">
+        <div class="location">at line 136</div>
+        <code>            public            <a href="../Assets/Compressor.html"><abbr title="Assets\Compressor">Compressor</abbr></a>
+    <strong>setSilent</strong>(bool $silence = true)</code>
+    </h3>
+    <div class="details">
+        <p>Set the silence object flag</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>bool</td>
+                <td>$silence</td>
+                <td>True to avoid the class throwing exceptions</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../Assets/Compressor.html"><abbr title="Assets\Compressor">Compressor</abbr></a></td>
+            <td>$this for method chaining</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setDirectOutput">
+        <div class="location">at line 148</div>
+        <code>            public            <a href="../Assets/Compressor.html"><abbr title="Assets\Compressor">Compressor</abbr></a>
+    <strong>setDirectOutput</strong>(bool $direct_output = true)</code>
+    </h3>
+    <div class="details">
+        <p>Set the direct_output object flag</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>bool</td>
+                <td>$direct_output</td>
+                <td>True to avoid writing of the compressed result in a file</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../Assets/Compressor.html"><abbr title="Assets\Compressor">Compressor</abbr></a></td>
+            <td>$this for method chaining</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setAdapterType">
+        <div class="location">at line 160</div>
+        <code>            public            <a href="../Assets/Compressor.html"><abbr title="Assets\Compressor">Compressor</abbr></a>
+    <strong>setAdapterType</strong>(string $type)</code>
+    </h3>
+    <div class="details">
+        <p>Set the adapter type to use, this type will be guessed if not set</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$type</td>
+                <td>The type name</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../Assets/Compressor.html"><abbr title="Assets\Compressor">Compressor</abbr></a></td>
+            <td>$this for method chaining</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setAdapterAction">
+        <div class="location">at line 172</div>
+        <code>            public            <a href="../Assets/Compressor.html"><abbr title="Assets\Compressor">Compressor</abbr></a>
+    <strong>setAdapterAction</strong>($action)</code>
+    </h3>
+    <div class="details">
+        <p>Set the adapter action to process and reset the output</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$action</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../Assets/Compressor.html"><abbr title="Assets\Compressor">Compressor</abbr></a></td>
+            <td>$this for method chaining</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_addFile">
+        <div class="location">at line 185</div>
+        <code>            public            <a href="../Assets/Compressor.html"><abbr title="Assets\Compressor">Compressor</abbr></a>
+    <strong>addFile</strong>(string $file)</code>
+    </h3>
+    <div class="details">
+        <p>Add a file to treat in the files stack</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$file</td>
+                <td>A file path to add in stack</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../Assets/Compressor.html"><abbr title="Assets\Compressor">Compressor</abbr></a></td>
+            <td>$this for method chaining</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setFilesStack">
+        <div class="location">at line 197</div>
+        <code>            public            <a href="../Assets/Compressor.html"><abbr title="Assets\Compressor">Compressor</abbr></a>
+    <strong>setFilesStack</strong>(array $files_stack)</code>
+    </h3>
+    <div class="details">
+        <p>Set a full files stack to treat</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>array</td>
+                <td>$files_stack</td>
+                <td>An array of file paths to treat</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../Assets/Compressor.html"><abbr title="Assets\Compressor">Compressor</abbr></a></td>
+            <td>$this for method chaining</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getFilesStack">
+        <div class="location">at line 209</div>
+        <code>            public            array
+    <strong>getFilesStack</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Get the files stack</p>
+        <p></p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>array</td>
+            <td>The current files stack of the object</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getOutput">
+        <div class="location">at line 219</div>
+        <code>            public            string
+    <strong>getOutput</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Get the processed content</p>
+        <p></p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>The content string</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setDestinationFile">
+        <div class="location">at line 231</div>
+        <code>            public            <a href="../Assets/Compressor.html"><abbr title="Assets\Compressor">Compressor</abbr></a>
+    <strong>setDestinationFile</strong>(string $destination_file)</code>
+    </h3>
+    <div class="details">
+        <p>Set the destination file to write the result in</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$destination_file</td>
+                <td>The file path or name to create and write in</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../Assets/Compressor.html"><abbr title="Assets\Compressor">Compressor</abbr></a></td>
+            <td>$this for method chaining</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getDestinationFile">
+        <div class="location">at line 250</div>
+        <code>            public            string
+    <strong>getDestinationFile</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Get the destination file to write the result in</p>
+        <p></p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>The file name to write in</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_guessDestinationFilename">
+        <div class="location">at line 261</div>
+        <code>            public            string
+    <strong>guessDestinationFilename</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Build a destination filename based on the files stack names</p>
+        <p></p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>The file name built</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setDestinationDir">
+        <div class="location">at line 296</div>
+        <code>            public            <a href="../Assets/Compressor.html"><abbr title="Assets\Compressor">Compressor</abbr></a>
+    <strong>setDestinationDir</strong>(string $destination_dir)</code>
+    </h3>
+    <div class="details">
+        <p>Set the destination directory to write the destination file in</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$destination_dir</td>
+                <td>The directory path to create the file in</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../Assets/Compressor.html"><abbr title="Assets\Compressor">Compressor</abbr></a></td>
+            <td>$this for method chaining</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getDestinationDir">
+        <div class="location">at line 322</div>
+        <code>            public            string
+    <strong>getDestinationDir</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Get the destination directory to write the file in</p>
+        <p></p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>The directory name to write in</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setWebRootPath">
+        <div class="location">at line 333</div>
+        <code>            public            <a href="../Assets/Compressor.html"><abbr title="Assets\Compressor">Compressor</abbr></a>
+    <strong>setWebRootPath</strong>(string $path)</code>
+    </h3>
+    <div class="details">
+        <p>Set the web root path (the real path to clear in DestinationRealPath) to build web path of destination file</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$path</td>
+                <td>The realpath of the web root to clear it from DestinationRealPath to build DestinationWebPath</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../Assets/Compressor.html"><abbr title="Assets\Compressor">Compressor</abbr></a></td>
+            <td>$this for method chaining</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getWebRootPath">
+        <div class="location">at line 359</div>
+        <code>            public            string
+    <strong>getWebRootPath</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Get the web root path</p>
+        <p></p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>The current web root path seted</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getDestinationWebPath">
+        <div class="location">at line 370</div>
+        <code>            public            string
+    <strong>getDestinationWebPath</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Get the destination file path ready for web inclusion</p>
+        <p></p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>The file path to write in</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getDestinationRealPath">
+        <div class="location">at line 387</div>
+        <code>            public            string
+    <strong>getDestinationRealPath</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Get the destination file absolute path</p>
+        <p></p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>The file path to write in</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_fileExists">
+        <div class="location">at line 397</div>
+        <code>            public            bool
+    <strong>fileExists</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Check if a destination file already exist for the current object</p>
+        <p></p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>bool</td>
+            <td>True if the minified file exists</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_mustRefresh">
+        <div class="location">at line 409</div>
+        <code>            public            bool
+    <strong>mustRefresh</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Check if a destination file already exist for the current object and if it is fresher than sources</p>
+        <p></p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>bool</td>
+            <td>True if the sources had been modified after minified file creation</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_process">
+        <div class="location">at line 434</div>
+        <code>            public            <a href="../Assets/Compressor.html"><abbr title="Assets\Compressor">Compressor</abbr></a>
+    <strong>process</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Process the current files stack</p>
+        <p></p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../Assets/Compressor.html"><abbr title="Assets\Compressor">Compressor</abbr></a></td>
+            <td>$this for method chaining</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_combine">
+        <div class="location">at line 476</div>
+        <code>            public            <a href="../Assets/Compressor.html"><abbr title="Assets\Compressor">Compressor</abbr></a>
+    <strong>combine</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Process a combination of the current files stack (alias of `merge`)</p>
+        <p></p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../Assets/Compressor.html"><abbr title="Assets\Compressor">Compressor</abbr></a></td>
+            <td>$this for method chaining</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_merge">
+        <div class="location">at line 486</div>
+        <code>            public            <a href="../Assets/Compressor.html"><abbr title="Assets\Compressor">Compressor</abbr></a>
+    <strong>merge</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Process a combination of the current files stack</p>
+        <p></p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../Assets/Compressor.html"><abbr title="Assets\Compressor">Compressor</abbr></a></td>
+            <td>$this for method chaining</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_minify">
+        <div class="location">at line 497</div>
+        <code>            public            <a href="../Assets/Compressor.html"><abbr title="Assets\Compressor">Compressor</abbr></a>
+    <strong>minify</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Process a minification of the current files stack</p>
+        <p></p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../Assets/Compressor.html"><abbr title="Assets\Compressor">Compressor</abbr></a></td>
+            <td>$this for method chaining</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>

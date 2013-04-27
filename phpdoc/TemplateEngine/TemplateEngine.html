@@ -36,28 +36,28 @@
                     <tr>
                 <td>NO_ERRORS</td>
                 <td class="last">
-                    <p><em></em></p>
+                    <p><em>Using this flag, no error will be thrown during template rendering</em></p>
                     <p></p>
                 </td>
             </tr>
                     <tr>
                 <td>THROW_TEMPLATE_ERRORS</td>
                 <td class="last">
-                    <p><em></em></p>
+                    <p><em>Using this flag, the template engine can throw errors</em></p>
                     <p></p>
                 </td>
             </tr>
                     <tr>
                 <td>THROW_VIEW_ERRORS</td>
                 <td class="last">
-                    <p><em></em></p>
+                    <p><em>Using this flag, the template engine AND the views can throw errors</em></p>
                     <p></p>
                 </td>
             </tr>
                     <tr>
                 <td>THROW_ALL_ERRORS</td>
                 <td class="last">
-                    <p><em></em></p>
+                    <p><em>Using this flag, all errors catched during rendering will be thrown</em></p>
                     <p></p>
                 </td>
             </tr>
@@ -72,14 +72,14 @@
                     static                                        
                 </td>
                 <td>$default_page_structure</td>
-                <td class="last"></td>
+                <td class="last">Stack of the default page blocks</td>
             </tr>
                     <tr>
                 <td class="type" id="property_default_page_layout">
                     static                                        
                 </td>
                 <td>$default_page_layout</td>
-                <td class="last"></td>
+                <td class="last">Path of the default page global layout</td>
             </tr>
             </table>
 
@@ -89,141 +89,161 @@
             <table>
                     <tr>
                 <td class="type">
-                    
+                    <abbr title="TemplateEngine\misc">misc</abbr>
                 </td>
                 <td class="last">
-                    <a href="#method___call">__call</a>($name, array $arguments)
-                    <p></p>
+                    <a href="#method___call">__call</a>(string $name, array $arguments)
+                    <p>Object call dispatcher</p>
                 </td>
                 <td></td>
             </tr>
                     <tr>
                 <td class="type">
-                    
+                    string
                 </td>
                 <td class="last">
                     <a href="#method___toString">__toString</a>()
-                    <p></p>
+                    <p>Object to string</p>
                 </td>
                 <td></td>
             </tr>
                     <tr>
                 <td class="type">
-                    
+                    <a href="../TemplateEngine/TemplateEngine.html"><abbr title="TemplateEngine\TemplateEngine">TemplateEngine</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_setFlags">setFlags</a>($flags)
-                    <p></p>
+                    <a href="#method_setFlags">setFlags</a>(int $flags)
+                    <p>Set the object error flags</p>
                 </td>
                 <td></td>
             </tr>
                     <tr>
                 <td class="type">
-                    
+                    int
                 </td>
                 <td class="last">
                     <a href="#method_getFlags">getFlags</a>()
-                    <p></p>
+                    <p>Get the object error flags</p>
                 </td>
                 <td></td>
             </tr>
                     <tr>
                 <td class="type">
-                    
+                    <a href="../TemplateEngine/TemplateEngine.html"><abbr title="TemplateEngine\TemplateEngine">TemplateEngine</abbr></a>
                 </td>
                 <td class="last">
                     <a href="#method_setPageStructure">setPageStructure</a>(array $structure)
-                    <p></p>
+                    <p>Set the page structure</p>
                 </td>
                 <td></td>
             </tr>
                     <tr>
                 <td class="type">
-                    
+                    array
                 </td>
                 <td class="last">
                     <a href="#method_getPageStructure">getPageStructure</a>()
-                    <p></p>
+                    <p>Get the page structure</p>
                 </td>
                 <td></td>
             </tr>
                     <tr>
                 <td class="type">
-                    
+                    <a href="../TemplateEngine/TemplateEngine.html"><abbr title="TemplateEngine\TemplateEngine">TemplateEngine</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_setLayoutsDir">setLayoutsDir</a>($path)
-                    <p></p>
+                    <a href="#method_setLayoutsDir">setLayoutsDir</a>(string $path)
+                    <p>Set a layouts directory</p>
                 </td>
                 <td></td>
             </tr>
                     <tr>
                 <td class="type">
-                    
+                    <a href="../TemplateEngine/TemplateEngine.html"><abbr title="TemplateEngine\TemplateEngine">TemplateEngine</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_setToTemplate">setToTemplate</a>($var, $val)
-                    <p></p>
+                    <a href="#method_setToTemplate">setToTemplate</a>(string $var, <abbr title="TemplateEngine\misc">misc</abbr> $val)
+                    <p>Set to Template object</p>
                 </td>
                 <td></td>
             </tr>
                     <tr>
                 <td class="type">
-                    
+                    <abbr title="TemplateEngine\misc">misc</abbr>
                 </td>
                 <td class="last">
-                    <a href="#method_getFromTemplate">getFromTemplate</a>($var)
-                    <p></p>
+                    <a href="#method_getFromTemplate">getFromTemplate</a>(string $var)
+                    <p>Get from Template object</p>
                 </td>
                 <td></td>
             </tr>
                     <tr>
                 <td class="type">
-                    
+                    <abbr title="TemplateEngine\misc">misc</abbr>
                 </td>
                 <td class="last">
-                    <a href="#method_templateFallback">templateFallback</a>($name, array $args = array(), $fallback = null)
-                    <p></p>
+                    <a href="#method_templateFallback">templateFallback</a>(string $name, array $args = array(), string $fallback = null)
+                    <p>Fallback system to call a Template object&#039;s method</p>
                 </td>
                 <td></td>
             </tr>
                     <tr>
                 <td class="type">
-                    
+                    <a href="../TemplateEngine/TemplateEngine.html"><abbr title="TemplateEngine\TemplateEngine">TemplateEngine</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_setToView">setToView</a>($var, $val)
-                    <p></p>
+                    <a href="#method_setToView">setToView</a>(string $var, <abbr title="TemplateEngine\misc">misc</abbr> $val)
+                    <p>Set to View object</p>
                 </td>
                 <td></td>
             </tr>
                     <tr>
                 <td class="type">
-                    
+                    <abbr title="TemplateEngine\misc">misc</abbr>
                 </td>
                 <td class="last">
-                    <a href="#method_getFromView">getFromView</a>($var)
-                    <p></p>
+                    <a href="#method_getFromView">getFromView</a>(string $var)
+                    <p>Get from Template object</p>
                 </td>
                 <td></td>
             </tr>
                     <tr>
                 <td class="type">
-                    
+                    <abbr title="TemplateEngine\misc">misc</abbr>
                 </td>
                 <td class="last">
-                    <a href="#method_viewFallback">viewFallback</a>($name, array $args = array(), $fallback = null)
-                    <p></p>
+                    <a href="#method_viewFallback">viewFallback</a>(string $name, array $args = array(), string $fallback = null)
+                    <p>Fallback system to call a View object&#039;s method</p>
                 </td>
                 <td></td>
             </tr>
                     <tr>
                 <td class="type">
-                    
+                    void
                 </td>
                 <td class="last">
-                    <a href="#method_renderLayout">renderLayout</a>($view = null, array $params = array(), $display = false, $exit = false)
-                    <p></p>
+                    <a href="#method_useAssetsPackage">useAssetsPackage</a>(string $package_name = null)
+                    <p>Automatic assets loading from an Assets package declare in a `composer.json`</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    void
+                </td>
+                <td class="last">
+                    <a href="#method_includePackagesViewsFunctions">includePackagesViewsFunctions</a>()
+                    <p>Automatic loading of assets views functions</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_renderLayout">renderLayout</a>(string $view = null, array $params = array(), bool $display = false, bool $exit = false)
+                    <p>Rendering of a layout</p>
                 </td>
                 <td></td>
             </tr>
@@ -249,71 +269,101 @@
             </tr>
                     <tr>
                 <td class="type">
-                    
+                    bool
                 </td>
                 <td class="last">
-                    <a href="#method_offsetExists">offsetExists</a>($offset)
-                    <p></p>
+                    <a href="#method_offsetExists">offsetExists</a>(string $offset)
+                    <p>Check existence of a variable by array access to the TemplateEngine</p>
                 </td>
                 <td></td>
             </tr>
                     <tr>
                 <td class="type">
-                    
+                    bool
                 </td>
                 <td class="last">
-                    <a href="#method_offsetGet">offsetGet</a>($offset)
-                    <p></p>
+                    <a href="#method_offsetGet">offsetGet</a>(string $offset)
+                    <p>Get a variable by array access to the TemplateEngine</p>
                 </td>
                 <td></td>
             </tr>
                     <tr>
                 <td class="type">
-                    
+                    void
                 </td>
                 <td class="last">
-                    <a href="#method_offsetSet">offsetSet</a>($offset, $value)
-                    <p></p>
+                    <a href="#method_offsetSet">offsetSet</a>(string $offset, <abbr title="TemplateEngine\misc">misc</abbr> $value)
+                    <p>Set a variable value by array access to the TemplateEngine</p>
                 </td>
                 <td></td>
             </tr>
                     <tr>
                 <td class="type">
-                    
+                    void
                 </td>
                 <td class="last">
-                    <a href="#method_offsetUnset">offsetUnset</a>($offset)
-                    <p></p>
+                    <a href="#method_offsetUnset">offsetUnset</a>(string $offset)
+                    <p>Unset a variable value by array access to the TemplateEngine</p>
                 </td>
                 <td></td>
             </tr>
                     <tr>
                 <td class="type">
-                    static&nbsp;
+                    <a href="../TemplateEngine/TemplateEngine.html"><abbr title="TemplateEngine\TemplateEngine">TemplateEngine</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method___error">__error</a>($message = &#039;View error&#039;, $file = null, $line = null)
-                    <p></p>
+                    <a href="#method_setAssetsLoader">setAssetsLoader</a>(<a href="../Assets/Loader.html"><abbr title="Assets\Loader">Loader</abbr></a> $loader)
+                    <p>Set the object Assets Loader instance</p>
                 </td>
                 <td></td>
             </tr>
                     <tr>
                 <td class="type">
-                    static&nbsp;
+                    object
                 </td>
                 <td class="last">
-                    <a href="#method___closurable">__closurable</a>($value, array $arguments = array())
-                    <p></p>
+                    <a href="#method_getAssetsLoader">getAssetsLoader</a>()
+                    <p>Get the object Assets Loader instance</p>
                 </td>
                 <td></td>
             </tr>
                     <tr>
                 <td class="type">
-                    static&nbsp;
+                    <a href="../TemplateEngine/TemplateEngine.html"><abbr title="TemplateEngine\TemplateEngine">TemplateEngine</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method___string">__string</a>($value, $glue = &#039;, &#039;)
-                    <p></p>
+                    <a href="#method_guessFromAssetsLoader">guessFromAssetsLoader</a>(<a href="../Assets/Loader.html"><abbr title="Assets\Loader">Loader</abbr></a> $loader)
+                    <p>Set the object Assets Loader instance and dispatch required template envionement</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    static&nbsp;void
+                </td>
+                <td class="last">
+                    <a href="#method___error">__error</a>(string $message = &#039;View error&#039;, string $file = null, int $line = null)
+                    <p>Write a simple error during view rendering</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    static&nbsp;<abbr title="TemplateEngine\misc">misc</abbr>
+                </td>
+                <td class="last">
+                    <a href="#method___closurable">__closurable</a>(<abbr title="TemplateEngine\callable">callable</abbr> $value, array $arguments = array())
+                    <p>Try to execute a closure sending an error if necessary</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    static&nbsp;string
+                </td>
+                <td class="last">
+                    <a href="#method___string">__string</a>(<abbr title="TemplateEngine\misc">misc</abbr> $value, string $glue = &#039;, &#039;)
+                    <p>Get safely a string from any kind of variable</p>
                 </td>
                 <td></td>
             </tr>
@@ -323,98 +373,154 @@
         <h2>Details</h2>
 
                         <h3 id="method___call">
-        <div class="location">at line 80</div>
-        <code>            public            
-    <strong>__call</strong>($name, array $arguments)</code>
+        <div class="location">at line 128</div>
+        <code>            public            <abbr title="TemplateEngine\misc">misc</abbr>
+    <strong>__call</strong>(string $name, array $arguments)</code>
     </h3>
     <div class="details">
-        <p></p>
-        <p></p>
+        <p>Object call dispatcher</p>
+        <p>This will distribute any call of a non-existing method to the template object or<br />
+ the view object.</p>
         <div class="tags">
                             <h4>Parameters</h4>
 
                     <table>
                     <tr>
-                <td></td>
+                <td>string</td>
                 <td>$name</td>
-                <td></td>
+                <td>The called method name</td>
             </tr>
                     <tr>
                 <td>array</td>
                 <td>$arguments</td>
-                <td></td>
+                <td>The arguments passed to the method</td>
             </tr>
             </table>
 
             
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><abbr title="TemplateEngine\misc">misc</abbr></td>
+            <td></td>
+        </tr>
+    </table>
+
             
             
+                            <h4>See also</h4>
+
+                    <table>
+                    <tr>
+                <td>TemplateEngine\TemplateEngine::_getFallbackMethod()</td>
+                <td></td>
+            </tr>
+            </table>
+
                     </div>
     </div>
 
                 <h3 id="method___toString">
-        <div class="location">at line 90</div>
-        <code>            public            
+        <div class="location">at line 144</div>
+        <code>            public            string
     <strong>__toString</strong>()</code>
     </h3>
     <div class="details">
-        <p></p>
+        <p>Object to string</p>
         <p></p>
         <div class="tags">
             
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
             
             
+                            <h4>See also</h4>
+
+                    <table>
+                    <tr>
+                <td>TemplateEngine\TemplateEngine::renderLayout()</td>
+                <td></td>
+            </tr>
+            </table>
+
                     </div>
     </div>
 
                 <h3 id="method_setFlags">
-        <div class="location">at line 99</div>
-        <code>            public            
-    <strong>setFlags</strong>($flags)</code>
+        <div class="location">at line 160</div>
+        <code>            public            <a href="../TemplateEngine/TemplateEngine.html"><abbr title="TemplateEngine\TemplateEngine">TemplateEngine</abbr></a>
+    <strong>setFlags</strong>(int $flags)</code>
     </h3>
     <div class="details">
-        <p></p>
+        <p>Set the object error flags</p>
         <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
 
                     <table>
                     <tr>
-                <td></td>
+                <td>int</td>
                 <td>$flags</td>
-                <td></td>
+                <td>The error flag for the template engine, must be one of the class `_ERRORS` constants</td>
             </tr>
             </table>
 
             
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../TemplateEngine/TemplateEngine.html"><abbr title="TemplateEngine\TemplateEngine">TemplateEngine</abbr></a></td>
+            <td>Returns `$this` for chainability</td>
+        </tr>
+    </table>
+
             
             
                     </div>
     </div>
 
                 <h3 id="method_getFlags">
-        <div class="location">at line 105</div>
-        <code>            public            
+        <div class="location">at line 171</div>
+        <code>            public            int
     <strong>getFlags</strong>()</code>
     </h3>
     <div class="details">
-        <p></p>
+        <p>Get the object error flags</p>
         <p></p>
         <div class="tags">
             
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>int</td>
+            <td></td>
+        </tr>
+    </table>
+
             
             
                     </div>
     </div>
 
                 <h3 id="method_setPageStructure">
-        <div class="location">at line 112</div>
-        <code>            public            
+        <div class="location">at line 185</div>
+        <code>            public            <a href="../TemplateEngine/TemplateEngine.html"><abbr title="TemplateEngine\TemplateEngine">TemplateEngine</abbr></a>
     <strong>setPageStructure</strong>(array $structure)</code>
     </h3>
     <div class="details">
-        <p></p>
-        <p></p>
+        <p>Set the page structure</p>
+        <p>This will store the page structure in the registry and create a DOM unique ID for<br />
+ each one.</p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -422,278 +528,489 @@
                     <tr>
                 <td>array</td>
                 <td>$structure</td>
-                <td></td>
+                <td>The page blocks to set</td>
             </tr>
             </table>
 
             
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../TemplateEngine/TemplateEngine.html"><abbr title="TemplateEngine\TemplateEngine">TemplateEngine</abbr></a></td>
+            <td>Returns `$this` for chainability</td>
+        </tr>
+    </table>
+
             
             
                     </div>
     </div>
 
                 <h3 id="method_getPageStructure">
-        <div class="location">at line 123</div>
-        <code>            public            
+        <div class="location">at line 199</div>
+        <code>            public            array
     <strong>getPageStructure</strong>()</code>
     </h3>
     <div class="details">
-        <p></p>
+        <p>Get the page structure</p>
         <p></p>
         <div class="tags">
             
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>array</td>
+            <td></td>
+        </tr>
+    </table>
+
             
             
                     </div>
     </div>
 
                 <h3 id="method_setLayoutsDir">
-        <div class="location">at line 130</div>
-        <code>            public            
-    <strong>setLayoutsDir</strong>($path)</code>
+        <div class="location">at line 210</div>
+        <code>            public            <a href="../TemplateEngine/TemplateEngine.html"><abbr title="TemplateEngine\TemplateEngine">TemplateEngine</abbr></a>
+    <strong>setLayoutsDir</strong>(string $path)</code>
     </h3>
     <div class="details">
-        <p></p>
+        <p>Set a layouts directory</p>
         <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
 
                     <table>
                     <tr>
-                <td></td>
+                <td>string</td>
                 <td>$path</td>
-                <td></td>
+                <td>The path to add in the template include path</td>
             </tr>
             </table>
 
             
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../TemplateEngine/TemplateEngine.html"><abbr title="TemplateEngine\TemplateEngine">TemplateEngine</abbr></a></td>
+            <td>Returns `$this` for chainability</td>
+        </tr>
+    </table>
+
             
             
                     </div>
     </div>
 
                 <h3 id="method_setToTemplate">
-        <div class="location">at line 142</div>
-        <code>            public            
-    <strong>setToTemplate</strong>($var, $val)</code>
+        <div class="location">at line 228</div>
+        <code>            public            <a href="../TemplateEngine/TemplateEngine.html"><abbr title="TemplateEngine\TemplateEngine">TemplateEngine</abbr></a>
+    <strong>setToTemplate</strong>(string $var, <abbr title="TemplateEngine\misc">misc</abbr> $val)</code>
     </h3>
     <div class="details">
-        <p></p>
+        <p>Set to Template object</p>
         <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
 
                     <table>
                     <tr>
-                <td></td>
+                <td>string</td>
                 <td>$var</td>
-                <td></td>
+                <td>The variable to set</td>
             </tr>
                     <tr>
-                <td></td>
+                <td><abbr title="TemplateEngine\misc">misc</abbr></td>
                 <td>$val</td>
-                <td></td>
+                <td>The value of the variable to set</td>
             </tr>
             </table>
 
             
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../TemplateEngine/TemplateEngine.html"><abbr title="TemplateEngine\TemplateEngine">TemplateEngine</abbr></a></td>
+            <td>Returns `$this` for chainability</td>
+        </tr>
+    </table>
+
             
             
+                            <h4>See also</h4>
+
+                    <table>
+                    <tr>
+                <td>TemplateEngine\TemplateEngine::templateFallback()</td>
+                <td></td>
+            </tr>
+            </table>
+
                     </div>
     </div>
 
                 <h3 id="method_getFromTemplate">
-        <div class="location">at line 152</div>
-        <code>            public            
-    <strong>getFromTemplate</strong>($var)</code>
+        <div class="location">at line 243</div>
+        <code>            public            <abbr title="TemplateEngine\misc">misc</abbr>
+    <strong>getFromTemplate</strong>(string $var)</code>
     </h3>
     <div class="details">
-        <p></p>
+        <p>Get from Template object</p>
         <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
 
                     <table>
                     <tr>
-                <td></td>
+                <td>string</td>
                 <td>$var</td>
-                <td></td>
+                <td>The variable to get</td>
             </tr>
             </table>
 
             
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><abbr title="TemplateEngine\misc">misc</abbr></td>
+            <td></td>
+        </tr>
+    </table>
+
             
             
+                            <h4>See also</h4>
+
+                    <table>
+                    <tr>
+                <td>TemplateEngine\TemplateEngine::templateFallback()</td>
+                <td></td>
+            </tr>
+            </table>
+
                     </div>
     </div>
 
                 <h3 id="method_templateFallback">
-        <div class="location">at line 159</div>
-        <code>            public            
-    <strong>templateFallback</strong>($name, array $args = array(), $fallback = null)</code>
+        <div class="location">at line 259</div>
+        <code>            public            <abbr title="TemplateEngine\misc">misc</abbr>
+    <strong>templateFallback</strong>(string $name, array $args = array(), string $fallback = null)</code>
     </h3>
     <div class="details">
-        <p></p>
+        <p>Fallback system to call a Template object&#039;s method</p>
         <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
 
                     <table>
                     <tr>
-                <td></td>
+                <td>string</td>
                 <td>$name</td>
-                <td></td>
+                <td>The name of the method to call</td>
             </tr>
                     <tr>
                 <td>array</td>
                 <td>$args</td>
-                <td></td>
+                <td>The arguments to pass to the method</td>
             </tr>
                     <tr>
-                <td></td>
+                <td>string</td>
                 <td>$fallback</td>
-                <td></td>
+                <td>A fallback prefix used as the method scope</td>
             </tr>
             </table>
 
             
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><abbr title="TemplateEngine\misc">misc</abbr></td>
+            <td></td>
+        </tr>
+    </table>
+
             
             
+                            <h4>See also</h4>
+
+                    <table>
+                    <tr>
+                <td>TemplateEngine\TemplateEngine::_runFallbackMethod()</td>
+                <td></td>
+            </tr>
+            </table>
+
                     </div>
     </div>
 
                 <h3 id="method_setToView">
-        <div class="location">at line 168</div>
-        <code>            public            
-    <strong>setToView</strong>($var, $val)</code>
+        <div class="location">at line 274</div>
+        <code>            public            <a href="../TemplateEngine/TemplateEngine.html"><abbr title="TemplateEngine\TemplateEngine">TemplateEngine</abbr></a>
+    <strong>setToView</strong>(string $var, <abbr title="TemplateEngine\misc">misc</abbr> $val)</code>
     </h3>
     <div class="details">
-        <p></p>
+        <p>Set to View object</p>
         <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
 
                     <table>
                     <tr>
-                <td></td>
+                <td>string</td>
                 <td>$var</td>
-                <td></td>
+                <td>The variable to set</td>
             </tr>
                     <tr>
-                <td></td>
+                <td><abbr title="TemplateEngine\misc">misc</abbr></td>
                 <td>$val</td>
-                <td></td>
+                <td>The value of the variable to set</td>
             </tr>
             </table>
 
             
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../TemplateEngine/TemplateEngine.html"><abbr title="TemplateEngine\TemplateEngine">TemplateEngine</abbr></a></td>
+            <td>Returns `$this` for chainability</td>
+        </tr>
+    </table>
+
             
             
+                            <h4>See also</h4>
+
+                    <table>
+                    <tr>
+                <td>TemplateEngine\TemplateEngine::viewFallback()</td>
+                <td></td>
+            </tr>
+            </table>
+
                     </div>
     </div>
 
                 <h3 id="method_getFromView">
-        <div class="location">at line 178</div>
-        <code>            public            
-    <strong>getFromView</strong>($var)</code>
+        <div class="location">at line 289</div>
+        <code>            public            <abbr title="TemplateEngine\misc">misc</abbr>
+    <strong>getFromView</strong>(string $var)</code>
     </h3>
     <div class="details">
-        <p></p>
+        <p>Get from Template object</p>
         <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
 
                     <table>
                     <tr>
-                <td></td>
+                <td>string</td>
                 <td>$var</td>
-                <td></td>
+                <td>The variable to get</td>
             </tr>
             </table>
 
             
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><abbr title="TemplateEngine\misc">misc</abbr></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table>
+                    <tr>
+                <td>TemplateEngine\TemplateEngine::viewFallback()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+                <h3 id="method_viewFallback">
+        <div class="location">at line 305</div>
+        <code>            public            <abbr title="TemplateEngine\misc">misc</abbr>
+    <strong>viewFallback</strong>(string $name, array $args = array(), string $fallback = null)</code>
+    </h3>
+    <div class="details">
+        <p>Fallback system to call a View object&#039;s method</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$name</td>
+                <td>The name of the method to call</td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$args</td>
+                <td>The arguments to pass to the method</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$fallback</td>
+                <td>A fallback prefix used as the method scope</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><abbr title="TemplateEngine\misc">misc</abbr></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table>
+                    <tr>
+                <td>TemplateEngine\TemplateEngine::_runFallbackMethod()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+                <h3 id="method_useAssetsPackage">
+        <div class="location">at line 318</div>
+        <code>            public            void
+    <strong>useAssetsPackage</strong>(string $package_name = null)</code>
+    </h3>
+    <div class="details">
+        <p>Automatic assets loading from an Assets package declare in a `composer.json`</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$package_name</td>
+                <td>The name of the package to use</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>void</td>
+            <td></td>
+        </tr>
+    </table>
+
             
             
                     </div>
     </div>
 
-                <h3 id="method_viewFallback">
-        <div class="location">at line 185</div>
-        <code>            public            
-    <strong>viewFallback</strong>($name, array $args = array(), $fallback = null)</code>
+                <h3 id="method_includePackagesViewsFunctions">
+        <div class="location">at line 329</div>
+        <code>            public            void
+    <strong>includePackagesViewsFunctions</strong>()</code>
     </h3>
     <div class="details">
-        <p></p>
+        <p>Automatic loading of assets views functions</p>
         <p></p>
         <div class="tags">
-                            <h4>Parameters</h4>
+            
+                            <h4>Return Value</h4>
 
                     <table>
-                    <tr>
-                <td></td>
-                <td>$name</td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td>array</td>
-                <td>$args</td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td></td>
-                <td>$fallback</td>
-                <td></td>
-            </tr>
-            </table>
+        <tr>
+            <td>void</td>
+            <td></td>
+        </tr>
+    </table>
 
-            
             
             
                     </div>
     </div>
 
                 <h3 id="method_renderLayout">
-        <div class="location">at line 207</div>
-        <code>            public            
-    <strong>renderLayout</strong>($view = null, array $params = array(), $display = false, $exit = false)</code>
+        <div class="location">at line 376</div>
+        <code>            public            string
+    <strong>renderLayout</strong>(string $view = null, array $params = array(), bool $display = false, bool $exit = false)</code>
     </h3>
     <div class="details">
-        <p></p>
+        <p>Rendering of a layout</p>
         <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
 
                     <table>
                     <tr>
-                <td></td>
+                <td>string</td>
                 <td>$view</td>
-                <td></td>
+                <td>The view file name</td>
             </tr>
                     <tr>
                 <td>array</td>
                 <td>$params</td>
-                <td></td>
+                <td>The parameters to pass to the view</td>
             </tr>
                     <tr>
-                <td></td>
+                <td>bool</td>
                 <td>$display</td>
-                <td></td>
+                <td>Set to `true` to echo the result</td>
             </tr>
                     <tr>
-                <td></td>
+                <td>bool</td>
                 <td>$exit</td>
-                <td></td>
+                <td>Set to `true` to exit after display</td>
             </tr>
             </table>
 
             
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>The result of the rendering</td>
+        </tr>
+    </table>
+
             
             
+                            <h4>See also</h4>
+
+                    <table>
+                    <tr>
+                <td>TemplateEngine\TemplateEngine::render()</td>
+                <td></td>
+            </tr>
+            </table>
+
                     </div>
     </div>
 
                 <h3 id="method_render">
-        <div class="location">at line 223</div>
+        <div class="location">at line 392</div>
         <code>            public            string
     <strong>render</strong>(string $view, array $params = array(), bool $display = false, bool $exit = false)</code>
     </h3>
@@ -751,7 +1068,7 @@
     </div>
 
                 <h3 id="method_display">
-        <div class="location">at line 244</div>
+        <div class="location">at line 413</div>
         <code>            public            string
     <strong>display</strong>(string $view, array $params = array(), bool $exit = false)</code>
     </h3>
@@ -804,200 +1121,355 @@
     </div>
 
                 <h3 id="method_offsetExists">
-        <div class="location">at line 330</div>
-        <code>            public            
-    <strong>offsetExists</strong>($offset)</code>
+        <div class="location">at line 530</div>
+        <code>            public            bool
+    <strong>offsetExists</strong>(string $offset)</code>
     </h3>
     <div class="details">
-        <p></p>
+        <p>Check existence of a variable by array access to the TemplateEngine</p>
         <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
 
                     <table>
                     <tr>
-                <td></td>
+                <td>string</td>
                 <td>$offset</td>
-                <td></td>
+                <td>The variable trying to be get</td>
             </tr>
             </table>
 
             
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
             
             
                     </div>
     </div>
 
                 <h3 id="method_offsetGet">
-        <div class="location">at line 339</div>
-        <code>            public            
-    <strong>offsetGet</strong>($offset)</code>
+        <div class="location">at line 545</div>
+        <code>            public            bool
+    <strong>offsetGet</strong>(string $offset)</code>
     </h3>
     <div class="details">
-        <p></p>
+        <p>Get a variable by array access to the TemplateEngine</p>
         <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
 
                     <table>
                     <tr>
-                <td></td>
+                <td>string</td>
                 <td>$offset</td>
-                <td></td>
+                <td>The variable trying to be get</td>
             </tr>
             </table>
 
             
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
             
             
                     </div>
     </div>
 
                 <h3 id="method_offsetSet">
-        <div class="location">at line 348</div>
-        <code>            public            
-    <strong>offsetSet</strong>($offset, $value)</code>
+        <div class="location">at line 561</div>
+        <code>            public            void
+    <strong>offsetSet</strong>(string $offset, <abbr title="TemplateEngine\misc">misc</abbr> $value)</code>
     </h3>
     <div class="details">
-        <p></p>
+        <p>Set a variable value by array access to the TemplateEngine</p>
         <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
 
                     <table>
                     <tr>
-                <td></td>
+                <td>string</td>
                 <td>$offset</td>
-                <td></td>
+                <td>The variable trying to be set</td>
             </tr>
                     <tr>
-                <td></td>
+                <td><abbr title="TemplateEngine\misc">misc</abbr></td>
                 <td>$value</td>
-                <td></td>
+                <td>The variable value</td>
             </tr>
             </table>
 
             
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>void</td>
+            <td></td>
+        </tr>
+    </table>
+
             
             
                     </div>
     </div>
 
                 <h3 id="method_offsetUnset">
-        <div class="location">at line 353</div>
-        <code>            public            
-    <strong>offsetUnset</strong>($offset)</code>
+        <div class="location">at line 572</div>
+        <code>            public            void
+    <strong>offsetUnset</strong>(string $offset)</code>
     </h3>
     <div class="details">
-        <p></p>
+        <p>Unset a variable value by array access to the TemplateEngine</p>
         <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
 
                     <table>
                     <tr>
-                <td></td>
+                <td>string</td>
                 <td>$offset</td>
-                <td></td>
+                <td>The variable to be unset</td>
             </tr>
             </table>
 
             
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>void</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setAssetsLoader">
+        <div class="location">at line 587</div>
+        <code>            public            <a href="../TemplateEngine/TemplateEngine.html"><abbr title="TemplateEngine\TemplateEngine">TemplateEngine</abbr></a>
+    <strong>setAssetsLoader</strong>(<a href="../Assets/Loader.html"><abbr title="Assets\Loader">Loader</abbr></a> $loader)</code>
+    </h3>
+    <div class="details">
+        <p>Set the object Assets Loader instance</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../Assets/Loader.html"><abbr title="Assets\Loader">Loader</abbr></a></td>
+                <td>$loader</td>
+                <td>The instance of Assets\AssetsLoader</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../TemplateEngine/TemplateEngine.html"><abbr title="TemplateEngine\TemplateEngine">TemplateEngine</abbr></a></td>
+            <td>Returns `$this` for chainability</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getAssetsLoader">
+        <div class="location">at line 614</div>
+        <code>            public            object
+    <strong>getAssetsLoader</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Get the object Assets Loader instance</p>
+        <p></p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>object</td>
+            <td>The instance of Assets\AssetsLoader</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_guessFromAssetsLoader">
+        <div class="location">at line 625</div>
+        <code>            public            <a href="../TemplateEngine/TemplateEngine.html"><abbr title="TemplateEngine\TemplateEngine">TemplateEngine</abbr></a>
+    <strong>guessFromAssetsLoader</strong>(<a href="../Assets/Loader.html"><abbr title="Assets\Loader">Loader</abbr></a> $loader)</code>
+    </h3>
+    <div class="details">
+        <p>Set the object Assets Loader instance and dispatch required template envionement</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../Assets/Loader.html"><abbr title="Assets\Loader">Loader</abbr></a></td>
+                <td>$loader</td>
+                <td>The instance of Assets\AssetsLoader</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../TemplateEngine/TemplateEngine.html"><abbr title="TemplateEngine\TemplateEngine">TemplateEngine</abbr></a></td>
+            <td>Returns `$this` for chainability</td>
+        </tr>
+    </table>
+
             
             
                     </div>
     </div>
 
                 <h3 id="method___error">
-        <div class="location">at line 362</div>
-        <code>        static    public            
-    <strong>__error</strong>($message = &#039;View error&#039;, $file = null, $line = null)</code>
+        <div class="location">at line 651</div>
+        <code>        static    public            void
+    <strong>__error</strong>(string $message = &#039;View error&#039;, string $file = null, int $line = null)</code>
     </h3>
     <div class="details">
-        <p></p>
-        <p></p>
+        <p>Write a simple error during view rendering</p>
+        <p>This will trigger a `E_USER_WARNING`.</p>
         <div class="tags">
                             <h4>Parameters</h4>
 
                     <table>
                     <tr>
-                <td></td>
+                <td>string</td>
                 <td>$message</td>
-                <td></td>
+                <td>The error message</td>
             </tr>
                     <tr>
-                <td></td>
+                <td>string</td>
                 <td>$file</td>
-                <td></td>
+                <td>The file throwing the error</td>
             </tr>
                     <tr>
-                <td></td>
+                <td>int</td>
                 <td>$line</td>
-                <td></td>
+                <td>The line of the file throwing the error</td>
             </tr>
             </table>
 
             
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>void</td>
+            <td></td>
+        </tr>
+    </table>
+
             
             
                     </div>
     </div>
 
                 <h3 id="method___closurable">
-        <div class="location">at line 373</div>
-        <code>        static    public            
-    <strong>__closurable</strong>($value, array $arguments = array())</code>
+        <div class="location">at line 669</div>
+        <code>        static    public            <abbr title="TemplateEngine\misc">misc</abbr>
+    <strong>__closurable</strong>(<abbr title="TemplateEngine\callable">callable</abbr> $value, array $arguments = array())</code>
     </h3>
     <div class="details">
-        <p></p>
+        <p>Try to execute a closure sending an error if necessary</p>
         <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
 
                     <table>
                     <tr>
-                <td></td>
+                <td><abbr title="TemplateEngine\callable">callable</abbr></td>
                 <td>$value</td>
-                <td></td>
+                <td>The closure to call</td>
             </tr>
                     <tr>
                 <td>array</td>
                 <td>$arguments</td>
-                <td></td>
+                <td>The arguments to pass to the closure</td>
             </tr>
             </table>
 
             
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><abbr title="TemplateEngine\misc">misc</abbr></td>
+            <td>The result of the execution if so</td>
+        </tr>
+    </table>
+
             
             
                     </div>
     </div>
 
                 <h3 id="method___string">
-        <div class="location">at line 387</div>
-        <code>        static    public            
-    <strong>__string</strong>($value, $glue = &#039;, &#039;)</code>
+        <div class="location">at line 690</div>
+        <code>        static    public            string
+    <strong>__string</strong>(<abbr title="TemplateEngine\misc">misc</abbr> $value, string $glue = &#039;, &#039;)</code>
     </h3>
     <div class="details">
-        <p></p>
+        <p>Get safely a string from any kind of variable</p>
         <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
 
                     <table>
                     <tr>
-                <td></td>
+                <td><abbr title="TemplateEngine\misc">misc</abbr></td>
                 <td>$value</td>
-                <td></td>
+                <td>The value to build the string</td>
             </tr>
                     <tr>
-                <td></td>
+                <td>string</td>
                 <td>$glue</td>
-                <td></td>
+                <td>The glue used for array `join()` if so</td>
             </tr>
             </table>
 
             
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
             
             
                     </div>
