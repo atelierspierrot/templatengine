@@ -328,7 +328,7 @@ class TemplateEngine
 	 */
 	public function includePackagesViewsFunctions()
 	{
-	    $_cluster = Cluster::newClusterFormAssetsLoader($this->assets_loader);
+	    $_cluster = Cluster::newClusterFromAssetsLoader($this->assets_loader);
         foreach ($this->assets_loader->getAssetsDb() as $package=>$config) {
             if (!empty($config['views_functions'])) {
                 $cluster = clone $_cluster;
@@ -589,13 +589,13 @@ class TemplateEngine
         $this->assets_loader = $loader;
         $assets_db = $this->assets_loader->getAssets();
         if (!empty($assets_db)) {
-            $_cluster = Cluster::newClusterFormAssetsLoader($this->assets_loader);
+            $_cluster = Cluster::newClusterFromAssetsLoader($this->assets_loader);
             foreach ($assets_db as $package=>$config) {
                 if (!empty($config['views_path'])) {
                     $cluster = clone $_cluster;
                     $cluster->loadClusterFromArray($config);
                     foreach ($cluster->getViewsPaths() as $path) {
-                        $full_path = $cluster->getFullPath($path, 'vendor');
+                        $full_path = $cluster->getFullPath($path);
                         if (@file_exists($full_path)) {
                             $this->setToView('setIncludePath', $full_path);
                         }
@@ -626,7 +626,7 @@ class TemplateEngine
     {
         $this->setAssetsLoader($loader);
         $this
-            ->setLayoutsDir( $this->assets_loader->getAssetsPath() )
+            ->setLayoutsDir( $this->assets_loader->getAssetsRealPath() )
             ->setToTemplate('setWebRootPath', $this->assets_loader->getAssetsWebPath() )
             ->setToView('addDefaultViewParam', 'assets', $this->assets_loader->getAssetsWebPath() )
             ->setToTemplate('setWebRootPath', $this->assets_loader->getDocumentRoot() )

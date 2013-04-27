@@ -12,6 +12,8 @@ namespace Assets;
 use Library\Helper\Filesystem as FilesystemHelper,
     Library\Helper\Directory as DirectoryHelper;
 
+use Assets\AbstractAssetsPackage;
+
 define('_SERVER_DOCROOT', $_SERVER['DOCUMENT_ROOT']);
 
 /**
@@ -19,8 +21,8 @@ define('_SERVER_DOCROOT', $_SERVER['DOCUMENT_ROOT']);
  *
  * The class is based on three paths:
  * 
- * - `base_dir`: the package root directory (must be the directory containing the `composer.json` file)
- * - `assets_dir`: the package asssets directory related to `base_dir`
+ * - `root_dir`: the package root directory (must be the directory containing the `composer.json` file)
+ * - `assets_dir`: the package asssets directory related to `root_dir`
  * - `document_root`: the path in the filesystem of the web assets root directory ; this is used
  * to build all related assets paths to use in HTTP.
  *
@@ -30,7 +32,7 @@ define('_SERVER_DOCROOT', $_SERVER['DOCUMENT_ROOT']);
  *     |----------- src/
  *     |----------- www/
  *
- *     $loader->base_dir = realpath(package_name)
+ *     $loader->root_dir = realpath(package_name)
  *     $loader->assets_dir = www
  *     $loader->document_root = www or the server DOCUMENT_ROOT
  *
@@ -38,46 +40,8 @@ define('_SERVER_DOCROOT', $_SERVER['DOCUMENT_ROOT']);
  *
  * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
  */
-class Loader
+class Loader extends AbstractAssetsPackage
 {
-
-    /**
-     * The default package vendor directory name (related to package root dir)
-     */
-    const DEFAULT_VENDOR_DIR = 'vendor';
-
-    /**
-     * The default package assets directory name (related to package root dir)
-     */
-    const DEFAULT_ASSETS_DIR = 'www';
-
-    /**
-     * The default package root directory is set on `$_SERVER['DOCUMENT_ROOT']`
-     */
-    const DEFAULT_DOCUMENT_ROOT = _SERVER_DOCROOT;
-
-    /**
-     * The assets database file created on install
-     */
-    const ASSETS_DB_FILENAME = 'assets.json';
-
-    /**
-     * Project root directory (absolute - no trailing slash)
-     * @var string
-     */
-    protected $base_dir;
-
-    /**
-     * Project assets directory (relative to `$base_dir` - no trailing slash)
-     * @var string
-     */
-    protected $assets_dir;
-
-    /**
-     * Project vendor directory (relative to `$base_dir` - no trailing slash)
-     * @var string
-     */
-    protected $vendor_dir;
 
     /**
      * The document root path (absolute - used to build assets web path - no trailing slash)
@@ -100,17 +64,17 @@ class Loader
     /**
      * Loader constructor
      *
-     * @param string $base_dir The project package root directory
-     * @param string $assets_dir The project package assets directory, related from `$base_dir`
+     * @param string $root_dir The project package root directory
+     * @param string $assets_dir The project package assets directory, related from `$root_dir`
      * @param string $document_root The project assets root directory to build web accessible assets paths
      * @throws Throws an Excpetion if the package's `ASSETS_DB_FILENAME` was not found
      */
-    public function __construct($base_dir = null, $assets_dir = null, $document_root = null)
+    public function __construct($root_dir = null, $assets_dir = null, $document_root = null)
     {
-        $this->setBaseDirectory(!is_null($base_dir) ? $base_dir : __DIR__.'/../../../../../');
+        $this->setRootDirectory(!is_null($root_dir) ? $root_dir : __DIR__.'/../../../../../');
 
-        $composer = $this->base_dir . '/composer.json';
-        $vendor_dir = self::DEFAULT_VENDOR_DIR;
+        $composer = $this->getRootDirectory() . '/composer.json';
+        $vendor_dir = AbstractAssetsPackage::DEFAULT_VENDOR_DIR;
         if (file_exists($composer)) {
             $package = json_decode(file_get_contents($composer), true);
             if (isset($package['config']) && isset($package['config']['vendor-dir'])) {
@@ -119,11 +83,18 @@ class Loader
         }
         $this->setVendorDirectory($vendor_dir);
 
-        $db_file = $this->base_dir . '/' . $vendor_dir . '/' . self::ASSETS_DB_FILENAME;
+        $db_file = $this->getRootDirectory() . '/' . $this->getVendorDirectory() . '/' . AbstractAssetsPackage::ASSETS_DB_FILENAME;
         if (file_exists($db_file)) {
             $json_db = json_decode(file_get_contents($db_file), true);
             $this
-                ->setAssetsDirectory(!is_null($assets_dir) ? $assets_dir : $json_db['assets_dir'])
+                ->setAssetsDirectory(
+                    !is_null($assets_dir) ? $assets_dir : (
+                        isset($json_db['assets_dir']) ? $json_db['assets_dir'] : AbstractAssetsPackage::DEFAULT_ASSETS_DIR
+                    )
+                )
+                ->setAssetsVendorDirectory(
+                    isset($json_db['assets_vendor_dir']) ? $json_db['assets_vendor_dir'] : AbstractAssetsPackage::DEFAULT_ASSETS_VENDOR_DIR
+                )
                 ->setDocumentRoot(!is_null($document_root) ? $document_root : $json_db['document_root'])
                 ->setAssetsDb($json_db['packages']);
         } else {
@@ -136,95 +107,6 @@ class Loader
 // ---------------------
 // Setters / Getters
 // ---------------------
-
-    /**
-     * Sets the base directory
-     *
-     * @param string $path The path of the base directory
-     * @return self Returns `$this` for chainability
-     * @throws Throws an InvalidArgumentException if the directory was not found
-     */
-    public function setBaseDirectory($path)
-    {
-        if (file_exists($path)) {
-            $this->base_dir = realpath($path);
-        } else {
-            throw new \InvalidArgumentException(
-                sprintf('Base directory "%s" not found!', $path)
-            );
-        }
-        return $this;
-    }
-    
-    /**
-     * Gets the base directory
-     *
-     * @return string
-     */
-    public function getBaseDirectory()
-    {
-        return $this->base_dir;
-    }
-
-    /**
-     * Sets the assets directory
-     *
-     * @param string $path The path of the assets directory
-     * @return self Returns `$this` for chainability
-     * @throws Throws an InvalidArgumentException if the directory was not found
-     */
-    public function setAssetsDirectory($path)
-    {
-        if (file_exists($path)) {
-            $this->assets_dir = rtrim($this->base_dir, '/')===rtrim($path, '/') ?
-                '' : str_replace($this->base_dir . '/', '', realpath($path));
-        } else {
-            throw new \InvalidArgumentException(
-                sprintf('Assets directory "%s" not found!', $path)
-            );
-        }
-        return $this;
-    }
-    
-    /**
-     * Gets the assets directory
-     *
-     * @return string
-     */
-    public function getAssetsDirectory()
-    {
-        return $this->assets_dir;
-    }
-
-    /**
-     * Sets the vendor directory
-     *
-     * @param string $path The path of the vendor directory
-     * @return self Returns `$this` for chainability
-     * @throws Throws an InvalidArgumentException if the directory was not found
-     */
-    public function setVendorDirectory($path)
-    {
-        $vendor_dir = DirectoryHelper::slashDirname($this->base_dir) . $path;
-        if (file_exists($vendor_dir)) {
-            $this->vendor_dir = rtrim($this->base_dir, '/')===rtrim($vendor_dir, '/') ? '' : $path;
-        } else {
-            throw new \InvalidArgumentException(
-                sprintf('Vendor directory "%s" not found!', $vendor_dir)
-            );
-        }
-        return $this;
-    }
-    
-    /**
-     * Gets the vendor directory
-     *
-     * @return string
-     */
-    public function getVendorDirectory()
-    {
-        return $this->vendor_dir;
-    }
 
     /**
      * Sets the document root directory
@@ -266,7 +148,7 @@ class Loader
         foreach ($db as $package_name=>$package) {
             if (empty($package['path'])) {
                 $db[$package_name]['path'] = DirectoryHelper::slashDirname(
-                    DirectoryHelper::slashDirname($this->getBaseDirectory()) .
+                    DirectoryHelper::slashDirname($this->getRootDirectory()) .
                     DirectoryHelper::slashDirname($this->getAssetsDirectory()) .
                     $package['relative_path']
                 );
@@ -308,16 +190,6 @@ class Loader
     }
     
     /**
-     * Get the assets full path
-     *
-     * @return string
-     */
-    public function getAssetsPath()
-    {
-        return $this->base_dir . '/' . $this->assets_dir;
-    }
-    
-    /**
      * Get the assets full path for a specific package
      *
      * @param string $package_name The name of the package to get assets path from
@@ -347,7 +219,7 @@ class Loader
      */
     public function getAssetsWebPath()
     {
-        return $this->buildWebPath($this->getAssetsPath());
+        return $this->buildWebPath($this->getAssetsRealPath());
     }
     
     /**
@@ -378,7 +250,7 @@ class Loader
         if (!is_null($package)) {
             return $this->findInPackage($filename, $package);
         } else {
-            return $this->findInPath($filename, $this->getAssetsPath());
+            return $this->findInPath($filename, $this->getAssetsRealPath());
         }
     }
 
