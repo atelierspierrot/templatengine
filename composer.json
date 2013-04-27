@@ -4,7 +4,7 @@
     "description": "A PHP package to build HTML5 views (based on HTML5 Boilerplate layouts).",
     "keywords": [ "php", "template", "boilerplate" ],
     "homepage": "https://github.com/atelierspierrot/templatengine",
-    "version": "0.0.6",
+    "version": "0.0.7",
     "license": "GPL-3.0",
     "authors": [
         {
@@ -21,7 +21,8 @@
         "php": ">=5.3.0",
         "psr/log": "dev-master",
         "atelierspierrot/patterns": "dev-master",
-        "atelierspierrot/library": "dev-master"
+        "atelierspierrot/library": "dev-master",
+        "atelierspierrot/test": "dev-master"
     },
     "require-dev": { "sami/sami": "dev-master" },
     "autoload": { "psr-0": {
@@ -30,17 +31,18 @@
     } },
     "extra": {
         "assets": "www",
+        "assets_vendor": "vendor",
         "document_root": "www",
         "views": [ "www", "www/html5boilerplate" ],
         "views_functions": "src/TemplateEngine/ViewAliases.php",
         "assets_presets": {
             "jquery.tablesorter": {
-                "css": "vendor/blue/style.css",
-                "jsfiles_footer": [ "vendor/jquery.metadata.js", "min:vendor/jquery.tablesorter.min.js" ]
+                "css": "vendor_assets/blue/style.css",
+                "jsfiles_footer": [ "vendor_assets/jquery.metadata.js", "min:vendor_assets/jquery.tablesorter.min.js" ]
             },
             "jquery.highlight": {
-                "css": "vendor/jquery.highlight.css",
-                "jsfiles_footer": "vendor/jquery.highlight.js"
+                "css": "vendor_assets/jquery.highlight.css",
+                "jsfiles_footer": "vendor_assets/jquery.highlight.js"
             }
         }
     },

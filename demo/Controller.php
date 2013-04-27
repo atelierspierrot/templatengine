@@ -17,7 +17,7 @@ class Controller
 	public function __construct()
 	{
         $this->template_engine = TemplateEngine::getInstance();
-        $loader = new AssetsLoader(__DIR__.'/..', __DIR__.'/../www', __DIR__);
+        $loader = new AssetsLoader(__DIR__.'/..', 'www', __DIR__);
 /*
 echo '<pre>';
 var_export($loader);

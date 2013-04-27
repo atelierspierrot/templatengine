@@ -75,7 +75,7 @@ class Preset
 
         $data = $this->_findPresetData();
         if (!empty($data)) {
-            $this->cluster = Cluster::newClusterFormAssetsLoader($this->assets_loader);
+            $this->cluster = Cluster::newClusterFromAssetsLoader($this->assets_loader);
             $this->cluster->loadClusterFromArray(
                 $this->_findPresetPackageData()
             );

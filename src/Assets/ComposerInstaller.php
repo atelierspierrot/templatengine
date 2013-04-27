@@ -20,7 +20,7 @@ use Composer\Composer,
 use Library\Helper\Directory as DirectoryHelper;
 
 use Assets\Util\Filesystem,
-    Assets\Loader as AssetsLoader,
+    Assets\AbstractAssetsPackage,
     Assets\Autoload\AssetsAutoloaderGenerator,
     Assets\Package\Cluster;
 
@@ -72,6 +72,12 @@ class ComposerInstaller
      * @var string
      */
     public $assetsDir;
+
+    /**
+     * The assets vendor directory realpath
+     * @var string
+     */
+    public $assetsVendorDir;
 
     /**
      * The assets database file realpath
@@ -150,9 +156,10 @@ class ComposerInstaller
 
         $extra = $this->package->getExtra();
         $this->packageExtra = $extra;
-        $this->assetsDir = isset($extra['assets']) ? $extra['assets'] : AssetsLoader::DEFAULT_ASSETS_DIR;
-        $this->documentRoot = isset($extra['document_root']) ? $extra['document_root'] : AssetsLoader::DEFAULT_DOCUMENT_ROOT;
-        $this->assetsDbFilename = AssetsLoader::ASSETS_DB_FILENAME;
+        $this->assetsDir = isset($extra['assets']) ? $extra['assets'] : AbstractAssetsPackage::DEFAULT_ASSETS_DIR;
+        $this->assetsVendorDir = isset($extra['assets_vendor']) ? $extra['assets_vendor'] : AbstractAssetsPackage::DEFAULT_ASSETS_VENDOR_DIR;
+        $this->documentRoot = isset($extra['document_root']) ? $extra['document_root'] : AbstractAssetsPackage::DEFAULT_DOCUMENT_ROOT;
+        $this->assetsDbFilename = AbstractAssetsPackage::ASSETS_DB_FILENAME;
 
         $this->cluster = new Cluster(
             $this->appBasePath,
@@ -193,7 +200,9 @@ class ComposerInstaller
      */
     public function getAssetsRootPath()
     {
-        $path = $this->appBasePath . '/' . $this->assetsDir;
+        $path = rtrim($this->appBasePath, '/') . '/'
+            . rtrim($this->assetsDir, '/') . '/'
+            . $this->assetsVendorDir;
         $this->filesystem->ensureDirectoryExists($path);
         return $path;
     }
@@ -236,7 +245,10 @@ class ComposerInstaller
             if (!empty($extra) && isset($extra['assets'])) {
                 $must_install = true;
                 $this->io->write( 
-                    sprintf('Installing assets to "%s" for package "%s".', $this->assetsDir, $packageitem->getPrettyName())
+                    sprintf('Installing assets to "%s" for package "%s".', 
+                        rtrim($this->assetsDir, '/') . '/' . $this->assetsVendorDir,
+                        $packageitem->getPrettyName()
+                    )
                 );
                 if ($this->_movePackageAssets($packageitem)) {
                     $ok++;

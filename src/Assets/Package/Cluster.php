@@ -14,6 +14,7 @@ use InvalidArgumentException;
 use Library\Helper\Directory as DirectoryHelper;
 
 use Assets\Loader as AssetsLoader,
+    Assets\AbstractAssetsPackage,
     Assets\Package\Preset;
 
 /**
@@ -23,26 +24,8 @@ use Assets\Loader as AssetsLoader,
  *
  * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
  */
-class Cluster
+class Cluster extends AbstractAssetsPackage
 {
-
-    /**
-     * Global package root directory
-     * @var string
-     */
-    protected $_root_dir;
-
-    /**
-     * Global package assets directory (relative to `$_root_dir`)
-     * @var string
-     */
-    protected $_assets_dir;
-
-    /**
-     * Global package vendor directory (relative to `$_root_dir`)
-     * @var string
-     */
-    protected $_vendor_dir;
 
     /**
      * Current package name
@@ -92,13 +75,19 @@ class Cluster
      * @param string $_root_dir The global package root directory (must exist)
      * @param string $_assets_dir The global package assets directory (must exist in `$_root_dir`)
      * @param string $_vendor_dir The global package vendor directory (must exist in `$_root_dir`)
+     * @param string $_assets_vendor_dir The global package assets vendor directory (must exist in `$_assets_dir`)
      */
-    public function __construct($_root_dir, $_assets_dir = AssetsLoader::DEFAULT_ASSETS_DIR, $_vendor_dir = AssetsLoader::DEFAULT_VENDOR_DIR)
-    {
+    public function __construct(
+        $_root_dir,
+        $_assets_dir = AbstractAssetsPackage::DEFAULT_ASSETS_DIR,
+        $_vendor_dir = AbstractAssetsPackage::DEFAULT_VENDOR_DIR,
+        $_assets_vendor_dir = AbstractAssetsPackage::DEFAULT_VENDOR_DIR
+    ) {
         $this
             ->setRootDirectory($_root_dir)
             ->setAssetsDirectory($_assets_dir)
-            ->setVendorDir($_vendor_dir)
+            ->setVendorDirectory($_vendor_dir)
+            ->setAssetsVendorDirectory($_assets_vendor_dir)
             ->reset()
             ;
     }
@@ -107,10 +96,13 @@ class Cluster
      * Create a new Cluster object from an `Assets\Loader` instance
      * @return object
      */
-    public static function newClusterFormAssetsLoader(AssetsLoader $loader)
+    public static function newClusterFromAssetsLoader(AssetsLoader $loader)
     {
         return new Cluster(
-            $loader->getBaseDirectory(), $loader->getAssetsDirectory(), $loader->getVendorDirectory()
+            $loader->getRootDirectory(),
+            $loader->getAssetsDirectory(),
+            $loader->getVendorDirectory(),
+            $loader->getAssetsVendorDirectory()
         );
     }
 
@@ -143,83 +135,6 @@ class Cluster
 // -------------------------
 // Setters / Getters
 // -------------------------
-
-    /**
-     * @param string $path
-     * @return self
-     * @throws `InvalidArgumentException` if the path doesn't exist
-     */
-    public function setRootDirectory($path)
-    {
-        if (@file_exists($path) && is_dir($path)) {
-            $this->_root_dir = $path;
-        } else {
-            throw new InvalidArgumentException(
-                sprintf('Root package directory "%s" not found !', $path)
-            );
-        }
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getRootDirectory()
-    {
-        return $this->_root_dir;
-    }
-
-    /**
-     * @param string $path
-     * @return self
-     * @throws `InvalidArgumentException` if the path doesn't exist
-     */
-    public function setAssetsDirectory($path)
-    {
-        $realpath = $this->getFullPath($path);
-        if (@file_exists($realpath) && is_dir($realpath)) {
-            $this->_assets_dir = $path;
-        } else {
-            throw new InvalidArgumentException(
-                sprintf('Assets directory "%s" not found !', $realpath)
-            );
-        }
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getAssetsDirectory()
-    {
-        return $this->_assets_dir;
-    }
-
-    /**
-     * @param string $path
-     * @return self
-     * @throws `InvalidArgumentException` if the path doesn't exist
-     */
-    public function setVendorDir($path)
-    {
-        $realpath = $this->getFullPath($path);
-        if (@file_exists($realpath) && is_dir($realpath)) {
-            $this->_vendor_dir = $path;
-        } else {
-            throw new InvalidArgumentException(
-                sprintf('Vendor directory "%s" not found !', $realpath)
-            );
-        }
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getVendorDir()
-    {
-        return $this->_vendor_dir;
-    }
 
     /**
      * @param string $name
@@ -323,12 +238,22 @@ class Cluster
     public function addViewsPath($path, $type = 'vendor')
     {
         $realpath = $this->getFullPath($path, $type);
-        if (@file_exists($realpath) && is_dir($realpath) && !in_array($path, $this->views_paths)) {
-            $this->views_paths[] = $path;
+        if (@file_exists($realpath) && is_dir($realpath)) {
+            if (!in_array($path, $this->views_paths)) {
+                $this->views_paths[] = $path;
+            }
         } else {
-            throw new InvalidArgumentException(
-                sprintf('Views path directory "%s" for cluster "%s" not found !', $realpath, $this->getName())
-            );
+            $relative_path = DirectoryHelper::slashDirname($this->getRelativePath()) . $path;
+            $realpath = $this->getFullPath($relative_path, null);
+            if (@file_exists($realpath) && is_dir($realpath)) {
+                if (!in_array($relative_path, $this->views_paths)) {
+                    $this->views_paths[] = $relative_path;
+                }
+            } else {
+                throw new InvalidArgumentException(
+                    sprintf('Views path directory "%s" for cluster "%s" not found !', $realpath, $this->getName())
+                );
+            }
         }
         return $this;
     }
@@ -363,12 +288,22 @@ class Cluster
     public function addViewsFunctionsPath($path, $type = 'vendor')
     {
         $realpath = $this->getFullPath($path, $type);
-        if (@file_exists($realpath) && is_file($realpath) && !in_array($path, $this->views_functions_paths)) {
-            $this->views_functions_paths[] = $path;
+        if (@file_exists($realpath) && is_file($realpath)) {
+            if (!in_array($path, $this->views_functions_paths)) {
+                $this->views_functions_paths[] = $path;
+            }
         } else {
-            throw new InvalidArgumentException(
-                sprintf('Views functions file "%s" for cluster "%s" not found !', $realpath, $this->getName())
-            );
+            $relative_path = DirectoryHelper::slashDirname($this->getRelativePath()) . $path;
+            $realpath = $this->getFullPath($relative_path, null);
+            if (@file_exists($realpath) && is_file($realpath)) {
+                if (!in_array($relative_path, $this->views_functions_paths)) {
+                    $this->views_functions_paths[] = $relative_path;
+                }
+            } else {
+                throw new InvalidArgumentException(
+                    sprintf('Views functions file "%s" for cluster "%s" not found !', $realpath, $this->getName())
+                );
+            }
         }
         return $this;
     }
@@ -422,47 +357,6 @@ class Cluster
 // -------------------------
 // Utilities
 // -------------------------
-
-    /**
-     * Get the absolute path in the package
-     *
-     * @param string $path The relative path to complete
-     * @param string $type Type of the original relative path (can be `asset` or `vendor` - default is `null`)
-     * @param bool $out Must we search in `assets` and `vendor` (if `false`) or not (if `true`)
-     * @return string
-     */
-    public function getFullPath($path, $type = null, $out = false)
-    {
-        $base = DirectoryHelper::slashDirname($this->getRootDirectory());
-        if ($type==='asset') {
-            $base .= DirectoryHelper::slashDirname($this->getAssetsDirectory());
-        } elseif ($type==='vendor') {
-            $base .= DirectoryHelper::slashDirname($this->getVendorDir());
-        }
-        $f = $base . $path;
-        if (@file_exists($f)) {
-            return $f;
-        }
-        $f = $base . DirectoryHelper::slashDirname($this->getRelativePath()) . $path;
-        if (@file_exists($f)) {
-            return $f;
-        }
-        if ($out) {
-            return null;
-        }
-        if ($type!=='asset') {
-            $f = $this->getFullPath($path, 'asset', true);
-            if (@file_exists($f)) {
-                return $f;
-            }
-        }
-        if ($type!=='vendor') {
-            $f = $this->getFullPath($path, 'vendor', true);
-            if (@file_exists($f)) {
-                return $f;
-            }
-        }
-    }
 
     /**
      * Get the relative path in the package
@@ -537,13 +431,13 @@ class Cluster
         if (!empty($extra) && isset($extra['assets'])) {
             $this->setVersion($package->getVersion());
             $this->setName($package->getPrettyName());
-            $this->setRelativePath( $main_package ? '' : 
+            $package_dir = $main_package ? '' : 
                 str_replace(
                     DirectoryHelper::slashDirname($this->getRootDirectory()) . DirectoryHelper::slashDirname($this->getAssetsDirectory()),
                     '',
                     $installer->getInstallPath($package)
-                )
-            );
+                );
+            $this->setRelativePath($package_dir);
             $this->setAssetsPath($main_package ? '' : $extra['assets']);
             if (isset($extra['views'])) {
                 $this->setViewsPaths(

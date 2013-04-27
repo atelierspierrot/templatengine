@@ -10,17 +10,18 @@ Below is the example of the package itself:
 
     "extra": {
         "assets": "www",
+        "assets_vendor": "vendor",
         "document_root": "www",
         "views": [ "www", "www/html5boilerplate" ],
         "views_functions": "src/TemplateEngine/ViewAliases.php",
         "assets_presets": {
             "jquery.tablesorter": {
-                "css": "vendor/blue/style.css",
-                "jsfiles_footer": [ "vendor/jquery.metadata.js", "min:vendor/jquery.tablesorter.min.js" ]
+                "css": "vendor_assets/blue/style.css",
+                "jsfiles_footer": [ "vendor_assets/jquery.metadata.js", "min:vendor/jquery.tablesorter.min.js" ]
             },
             "jquery.highlight": {
-                "css": "vendor/jquery.highlight.css",
-                "jsfiles_footer": "vendor/jquery.highlight.js"
+                "css": "vendor_assets/jquery.highlight.css",
+                "jsfiles_footer": "vendor_assets/jquery.highlight.js"
             }
         }
     }
@@ -34,6 +35,11 @@ installation directory.
 
 This defines the relative path of your assets in the package. This directory must exist
 and must be unique (*its value must be a string*).
+
+### `assets_vendor`: string
+
+This defines the relative path of your packages'assets in the `assets` directory above.
+This directory will be created if it doesn't exist and must be unique (*its value must be a string*).
 
 ### `document_root`: string - only for **root** package
 

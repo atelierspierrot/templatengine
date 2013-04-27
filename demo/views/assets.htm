@@ -20,10 +20,10 @@ EOT
 
 echo '$loader = new Assets\Loader('."\n"
     ."\t".'__DIR__."/../..",          // this is the package root directory'."\n"
-    ."\t".'__DIR__."/../../www",      // this is the package assets directory'."\n"
+    ."\t".'"www",      // this is the package assets directory'."\n"
     ."\t".'__DIR__."/../"             // this is this page document root'."\n"
     .');'."\n";
-$loader = new Assets\Loader(__DIR__.'/../..', __DIR__.'/../../www', __DIR__.'/../');
+$loader = new Assets\Loader(__DIR__.'/../..', 'www', __DIR__.'/../');
 var_export($loader);
 
 ?>

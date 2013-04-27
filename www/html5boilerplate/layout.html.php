@@ -178,7 +178,7 @@ $old_header_js = $_template->getTemplateObject('JavascriptFile', 'jsfiles_header
 $_template->getTemplateObject('JavascriptFile', 'jsfiles_header')->reset();
 
 $_template->getTemplateObject('JavascriptFile', 'jsfiles_header')
-	->addMinified($tple_assets.'vendor/modernizr-2.6.2.min.js')
+	->addMinified($tple_assets.'vendor_assets/modernizr-2.6.2.min.js')
 	// => + old ones
 	->set($old_header_js);
 
@@ -188,7 +188,7 @@ $old_footer_js = $_template->getTemplateObject('JavascriptFile', 'jsfiles_footer
 $_template->getTemplateObject('JavascriptFile', 'jsfiles_footer')->reset();
 
 $_template->getTemplateObject('JavascriptFile', 'jsfiles_footer')
-	->addMinified($tple_assets.'vendor/jquery-1.9.1.min.js')
+	->addMinified($tple_assets.'vendor_assets/jquery-1.9.1.min.js')
 	->add($boilerplate_assets.'js/plugins.js')
 	->add($tple_assets.'js/scripts.js')
 	// => + old ones
