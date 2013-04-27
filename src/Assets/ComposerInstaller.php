@@ -161,6 +161,9 @@ class ComposerInstaller
         $this->documentRoot = isset($extra['document_root']) ? $extra['document_root'] : AbstractAssetsPackage::DEFAULT_DOCUMENT_ROOT;
         $this->assetsDbFilename = AbstractAssetsPackage::ASSETS_DB_FILENAME;
 
+        // ensure the assets_vendor dir exists
+        $this->getAssetsRootPath();
+
         $this->cluster = new Cluster(
             $this->appBasePath,
             $this->assetsDir,
@@ -237,8 +240,6 @@ class ComposerInstaller
      */
     public function moveAssets()
     {
-        // ensure the assets_vendor dir exists
-        $this->getAssetsRootPath();
         $ok = 0;
         $must_install = false;
 
