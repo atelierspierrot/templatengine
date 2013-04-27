@@ -9,6 +9,8 @@
 
 namespace TemplateEngine;
 
+use \ArrayAccess;
+
 use Patterns\Commons\Registry,
     Patterns\Abstracts\AbstractSingleton;
 
@@ -17,9 +19,9 @@ use Library\Helper\Html as HtmlHelper;
 use TemplateEngine\Template,
     TemplateEngine\View;
 
-use Assets\Loader as AssetsLoader;
-
-use \ArrayAccess;
+use Assets\Loader as AssetsLoader,
+    Assets\Package\Cluster,
+    Assets\Package\Preset;
 
 /**
  * General template builder
@@ -315,52 +317,28 @@ class TemplateEngine
 	 */
 	public function useAssetsPackage($package_name = null)
 	{
-        foreach ($this->assets_loader->getAssetsDb() as $package=>$config) {
-            if (!empty($config['assets_packages']) && array_key_exists($package_name, $config['assets_packages'])) {
-                $package_path = $this->assets_loader->findInPackage('', $package);
-                if (empty($package_path)) {
-                    $package_path = $this->assets_loader->getAssetsWebPath();
-                }
-                $package_path = rtrim($package_path, '/').'/';
-                foreach ($config['assets_packages'][$package_name] as $type=>$data) {
-                    if ('css'===$type) {
-                        foreach ($data as $path) {
-                            $this->getTemplateObject('CssFile')->add($package_path.$path);
-                        }
-                    } elseif ('jsfiles_header'===$type) {
-                        foreach ($data as $path) {
-                            if (substr($path, 0, strlen('min:'))=='min:') {
-                                $this->getTemplateObject('JavascriptFile', 'jsfiles_header')
-                                    ->addMinified($package_path.substr($path, strlen('min:')));
-                            } else {
-                                $this->getTemplateObject('JavascriptFile', 'jsfiles_header')->add($package_path.$path);
-                            }
-                        }
-                    } elseif ('jsfiles_footer'===$type) {
-                        foreach ($data as $path) {
-                            if (substr($path, 0, strlen('min:'))=='min:') {
-                                $this->getTemplateObject('JavascriptFile', 'jsfiles_footer')
-                                    ->addMinified($package_path.substr($path, strlen('min:')));
-                            } else {
-                                $this->getTemplateObject('JavascriptFile', 'jsfiles_footer')->add($package_path.$path);
-                            }
-                        }
-                    }
-                }
-            }
-        }
+	    $preset = new Preset($package_name, $this->assets_loader, $this);
+	    $preset->load();
 	}
 
 	/**
-	 * Automatic loading of assets views aliases
+	 * Automatic loading of assets views functions
 	 *
 	 * @return void
 	 */
-	public function includePackagesAliases()
+	public function includePackagesViewsFunctions()
 	{
+	    $_cluster = Cluster::newClusterFormAssetsLoader($this->assets_loader);
         foreach ($this->assets_loader->getAssetsDb() as $package=>$config) {
-            if (!empty($config['views_aliases'])) {
-                @include_once $config['views_aliases'];
+            if (!empty($config['views_functions'])) {
+                $cluster = clone $_cluster;
+                $cluster->loadClusterFromArray($config);
+                foreach ($cluster->getViewsFunctionsPaths() as $fcts) {
+                    $fct_file = $cluster->getFullPath($fcts);
+                    if (@file_exists($fct_file)) {
+                        @include_once $fct_file;
+                    }
+                }
             }
         }
 	}
@@ -611,9 +589,17 @@ class TemplateEngine
         $this->assets_loader = $loader;
         $assets_db = $this->assets_loader->getAssets();
         if (!empty($assets_db)) {
-            foreach($assets_db as $package=>$infos) {
-                if (isset($infos['views'])) {
-                    $this->setToView('setIncludePath', $infos['views']);
+            $_cluster = Cluster::newClusterFormAssetsLoader($this->assets_loader);
+            foreach ($assets_db as $package=>$config) {
+                if (!empty($config['views_path'])) {
+                    $cluster = clone $_cluster;
+                    $cluster->loadClusterFromArray($config);
+                    foreach ($cluster->getViewsPaths() as $path) {
+                        $full_path = $cluster->getFullPath($path, 'vendor');
+                        if (@file_exists($full_path)) {
+                            $this->setToView('setIncludePath', $full_path);
+                        }
+                    }
                 }
             }
         }

@@ -527,7 +527,7 @@ if (!function_exists('_render'))
 	    if (!empty($known_view)) {
     		$_this->render($view, $args, true, false);
     	} else {
-    	    _error(sprintf('Unknown view file "%s"!', $view));
+    	    _error(sprintf('Unknown view file "%s" (searched in "%s")!', $view, implode('::', $_this->getIncludePath())));
     	}
 	}	
 }

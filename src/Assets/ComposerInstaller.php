@@ -17,9 +17,12 @@ use Composer\Composer,
     Composer\Script\Event,
     Composer\Script\EventDispatcher;
 
+use Library\Helper\Directory as DirectoryHelper;
+
 use Assets\Util\Filesystem,
     Assets\Loader as AssetsLoader,
-    Assets\Autoload\AssetsAutoloaderGenerator;
+    Assets\Autoload\AssetsAutoloaderGenerator,
+    Assets\Package\Cluster;
 
 /**
  * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
@@ -37,6 +40,11 @@ class ComposerInstaller
      * @var object Composer\IO\IOInterface
      */
     protected $io;
+
+    /**
+     * @var object Assets\Package\Cluster
+     */
+    protected $cluster;
 
     /**
      * @var array
@@ -141,13 +149,20 @@ class ComposerInstaller
         $this->appBasePath = rtrim(str_replace($vendor_dir, '', $this->vendorDir), '/');
 
         $extra = $this->package->getExtra();
-        if (!empty($extra)) {
-            $this->_parsePackageExtra($this->package, true);
-        }
         $this->packageExtra = $extra;
         $this->assetsDir = isset($extra['assets']) ? $extra['assets'] : AssetsLoader::DEFAULT_ASSETS_DIR;
         $this->documentRoot = isset($extra['document_root']) ? $extra['document_root'] : AssetsLoader::DEFAULT_DOCUMENT_ROOT;
         $this->assetsDbFilename = AssetsLoader::ASSETS_DB_FILENAME;
+
+        $this->cluster = new Cluster(
+            $this->appBasePath,
+            $this->assetsDir,
+            str_replace(DirectoryHelper::slashDirname($this->appBasePath), '', $this->vendorDir)
+        );
+        if (!empty($this->packageExtra)) {
+            $this->assets_db[$this->package->getPrettyName()] = 
+                $this->cluster->parseComposerExtra($this->package, $this, true);
+        }
     }
 
     /**
@@ -166,7 +181,7 @@ class ComposerInstaller
      * @param object $package Composer\Package\PackageInterface
      * @return string
      */
-    protected function _getInstallPath(PackageInterface $package)
+    public function getInstallPath(PackageInterface $package)
     {
         return $this->getAssetsRootPath() . '/' . $package->getPrettyName();
     }
@@ -189,7 +204,7 @@ class ComposerInstaller
      * @param object $package Composer\Package\PackageInterface
      * @return string
      */
-    protected function _getPackageBasePath(PackageInterface $package)
+    public function getPackageBasePath(PackageInterface $package)
     {
         return ($this->vendorDir ? $this->vendorDir.'/' : '') . $package->getPrettyName();
     }
@@ -200,9 +215,9 @@ class ComposerInstaller
      * @param object $package Composer\Package\PackageInterface
      * @return string
      */
-    protected function _getRelativePath(PackageInterface $package)
+    public function getRelativePath(PackageInterface $package)
     {
-        return str_replace($this->getAssetsRootPath(), '', $this->_getPackageBasePath($package));
+        return str_replace($this->getAssetsRootPath(), '', $this->getPackageBasePath($package));
     }
 
     /**
@@ -254,11 +269,12 @@ class ComposerInstaller
     {
         $extra = $package->getExtra();
         if (!empty($extra) && isset($extra['assets'])) {
-            $from = $this->_getPackageBasePath($package) . '/' . $extra['assets'];
-            $target = $this->_getInstallPath($package);
+            $from = $this->getPackageBasePath($package) . '/' . $extra['assets'];
+            $target = $this->getInstallPath($package);
             if (file_exists($from)) {
                 $this->filesystem->copy($from, $target);
-                $this->_parsePackageExtra($package);
+                $this->assets_db[$package->getPrettyName()] = 
+                    $this->cluster->parseComposerExtra($package, $this);
             } else {
                 throw new \Exception(
                     'Unable to find assets in package "'.$package->getPrettyName().'"'
@@ -267,52 +283,6 @@ class ComposerInstaller
             return true;
         }
         return false;
-    }
-    
-    /**
-     * Parse the `composer.json` "extra" block of a package and set it to the `assets_db`
-     *
-     * @param object $package Composer\Package\PackageInterface
-     * @param bool $main_package Is this the global package
-     * @return void
-     */
-    protected function _parsePackageExtra(PackageInterface $package, $main_package = false)
-    {
-        $extra = $package->getExtra();
-        if (!empty($extra) && isset($extra['assets'])) {
-            $infos = array(
-                'path'=>$main_package ? rtrim($this->getAssetsRootPath(), '/') . '/' . $extra['assets'] : $this->_getInstallPath($package),
-                'version'=>$package->getVersion(),
-            );
-            if (isset($extra['views'])) {
-                $infos['views'] = ($main_package ? $this->appBasePath . '/' : $this->_getPackageBasePath($package).'/') . $extra['views'];
-            }
-            if (isset($extra['views_aliases'])) {
-                $infos['views_aliases'] = ($main_package ? $this->appBasePath . '/' : $this->_getPackageBasePath($package).'/') . $extra['views_aliases'];
-            }
-            if (isset($extra['assets_packages'])) {
-                $use = array();
-                foreach ($extra['assets_packages'] as $index=>$item) {
-                    $use_item = array();
-                    foreach (AssetsLoader::$use_statements as $statement) {
-                        if (isset($item[$statement])) {
-                            $item_statement = is_array($item[$statement]) ?
-                                $item[$statement] : array($item[$statement]);
-                            $use_item[$statement] = array();
-                            foreach ($item_statement as $path) {
-                                $use_item[$statement][] = 
-                                    ($main_package ? '' : $this->_getRelativePath($package).'/') . $path;
-                            }
-                            $use[$index] = $use_item;
-                        }
-                    }
-                }
-                if (!empty($use)) {
-                    $infos['assets_packages'] = $use;
-                }
-            }
-            $this->assets_db[$package->getPrettyName()] = $infos;
-        }
     }
     
 }

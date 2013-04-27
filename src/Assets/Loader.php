@@ -9,7 +9,8 @@
 
 namespace Assets;
 
-use Library\Helper\Filesystem as FilesystemHelper;
+use Library\Helper\Filesystem as FilesystemHelper,
+    Library\Helper\Directory as DirectoryHelper;
 
 define('_SERVER_DOCROOT', $_SERVER['DOCUMENT_ROOT']);
 
@@ -61,12 +62,6 @@ class Loader
     const ASSETS_DB_FILENAME = 'assets.json';
 
     /**
-     * Composition of a `use` statement in `composer.json`
-     * @static array
-     */
-    public static $use_statements = array( 'css', 'jsfiles_footer', 'jsfiles_header' );
-
-    /**
      * Project root directory (absolute - no trailing slash)
      * @var string
      */
@@ -77,6 +72,12 @@ class Loader
      * @var string
      */
     protected $assets_dir;
+
+    /**
+     * Project vendor directory (relative to `$base_dir` - no trailing slash)
+     * @var string
+     */
+    protected $vendor_dir;
 
     /**
      * The document root path (absolute - used to build assets web path - no trailing slash)
@@ -116,6 +117,7 @@ class Loader
                 $vendor_dir = $package['config']['vendor-dir'];
             }
         }
+        $this->setVendorDirectory($vendor_dir);
 
         $db_file = $this->base_dir . '/' . $vendor_dir . '/' . self::ASSETS_DB_FILENAME;
         if (file_exists($db_file)) {
@@ -195,6 +197,36 @@ class Loader
     }
 
     /**
+     * Sets the vendor directory
+     *
+     * @param string $path The path of the vendor directory
+     * @return self Returns `$this` for chainability
+     * @throws Throws an InvalidArgumentException if the directory was not found
+     */
+    public function setVendorDirectory($path)
+    {
+        $vendor_dir = DirectoryHelper::slashDirname($this->base_dir) . $path;
+        if (file_exists($vendor_dir)) {
+            $this->vendor_dir = rtrim($this->base_dir, '/')===rtrim($vendor_dir, '/') ? '' : $path;
+        } else {
+            throw new \InvalidArgumentException(
+                sprintf('Vendor directory "%s" not found!', $vendor_dir)
+            );
+        }
+        return $this;
+    }
+    
+    /**
+     * Gets the vendor directory
+     *
+     * @return string
+     */
+    public function getVendorDirectory()
+    {
+        return $this->vendor_dir;
+    }
+
+    /**
      * Sets the document root directory
      *
      * @param string $path The path of the document root directory
@@ -231,6 +263,15 @@ class Loader
      */
     public function setAssetsDb(array $db)
     {
+        foreach ($db as $package_name=>$package) {
+            if (empty($package['path'])) {
+                $db[$package_name]['path'] = DirectoryHelper::slashDirname(
+                    DirectoryHelper::slashDirname($this->getBaseDirectory()) .
+                    DirectoryHelper::slashDirname($this->getAssetsDirectory()) .
+                    $package['relative_path']
+                );
+            }
+        }
         $this->assets_db = $db;
         return $this;
     }
@@ -350,9 +391,9 @@ class Loader
      */
     public function findInPackage($filename, $package)
     {
-        $package_path = $this->getPackageAssetsPath($package);
+        $package_path = DirectoryHelper::slashDirname($this->getPackageAssetsPath($package));
         if (!is_null($package_path)) {
-            $asset_path = $package_path . '/' . $filename;
+            $asset_path = $package_path . $filename;
             if (file_exists($asset_path)) {
                 return $this->buildWebPath($asset_path);
             }
@@ -369,7 +410,7 @@ class Loader
      */
     public function findInPath($filename, $path)
     {
-        $asset_path = rtrim($path, '/') . '/' . $filename;
+        $asset_path = DirectoryHelper::slashDirname($path) . $filename;
         if (file_exists($asset_path)) {
             return $this->buildWebPath($asset_path);
         }

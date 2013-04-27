@@ -11,6 +11,8 @@ namespace Assets\Autoload;
 
 use Assets\ComposerInstaller;
 
+use Composer\Json\JsonFile;
+
 /**
  * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
  */
@@ -39,10 +41,16 @@ class AssetsAutoloaderGenerator
             'document_root' => $this->assets_installer->documentRoot,
             'packages' => $assets_db
         );
-        
-        if (file_put_contents($assets_file, json_encode($full_db, version_compare(PHP_VERSION, '5.4')>0 ? JSON_PRETTY_PRINT : 0))) {
+
+        try {
+            $json = new JsonFile($assets_file);
+            $json->write($full_db);
             return $assets_file;
-        }
+        } catch(\Exception $e) {
+            if (file_put_contents($assets_file, json_encode($full_db, version_compare(PHP_VERSION, '5.4')>0 ? JSON_PRETTY_PRINT : 0))) {
+                return $assets_file;
+            }
+        }        
         return false;
     }
     

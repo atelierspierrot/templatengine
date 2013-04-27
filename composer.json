@@ -4,7 +4,7 @@
     "description": "A PHP package to build HTML5 views (based on HTML5 Boilerplate layouts).",
     "keywords": [ "php", "template", "boilerplate" ],
     "homepage": "https://github.com/atelierspierrot/templatengine",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "license": "GPL-3.0",
     "authors": [
         {
@@ -31,9 +31,9 @@
     "extra": {
         "assets": "www",
         "document_root": "www",
-        "views": "www/html5boilerplate",
-        "views_aliases": "src/TemplateEngine/ViewAliases.php",
-        "assets_packages": {
+        "views": [ "www", "www/html5boilerplate" ],
+        "views_functions": "src/TemplateEngine/ViewAliases.php",
+        "assets_presets": {
             "jquery.tablesorter": {
                 "css": "vendor/blue/style.css",
                 "jsfiles_footer": [ "vendor/jquery.metadata.js", "min:vendor/jquery.tablesorter.min.js" ]

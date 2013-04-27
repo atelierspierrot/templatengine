@@ -82,7 +82,7 @@ echo '</pre>';
                 extract($_params, EXTR_OVERWRITE);
             }
             ob_start();
-            $_template->includePackagesAliases();
+            $_template->includePackagesViewsFunctions();
             include $_view;
             $this->setOutput( ob_get_contents() );
             ob_end_clean();
