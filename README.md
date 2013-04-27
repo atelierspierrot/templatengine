@@ -28,3 +28,20 @@ For these three paths, their defaults values are defined on a default package st
 
 NOTE - These paths are stored in the object without the trailing slash.
 
+## Author & License
+
+>    Patterns
+
+>    https://github.com/atelierspierrot/patterns
+
+>    Copyleft 2013, Pierre Cassat and contributors
+
+>    Licensed under the GPL Version 3 license.
+
+>    http://opensource.org/licenses/GPL-3.0
+
+>    ----
+
+>    Les Ateliers Pierrot - Paris, France
+
+>    <www.ateliers-pierrot.fr> - <contact@ateliers-pierrot.fr>
