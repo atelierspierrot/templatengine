@@ -236,6 +236,8 @@ class ComposerInstaller
      */
     public function moveAssets()
     {
+        // ensure the assets_vendor dir exists
+        $this->getAssetsRootPath();
         $ok = 0;
         $must_install = false;
 
