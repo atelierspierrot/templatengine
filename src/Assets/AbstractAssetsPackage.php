@@ -14,7 +14,7 @@ use InvalidArgumentException;
 use Library\Helper\Filesystem as FilesystemHelper,
     Library\Helper\Directory as DirectoryHelper;
 
-define('_SERVER_DOCROOT', $_SERVER['DOCUMENT_ROOT']);
+@define('_SERVER_DOCROOT', $_SERVER['DOCUMENT_ROOT']);
 
 /**
  * Class to manage assets paths
