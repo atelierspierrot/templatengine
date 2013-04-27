@@ -164,7 +164,8 @@ class ComposerInstaller
         $this->cluster = new Cluster(
             $this->appBasePath,
             $this->assetsDir,
-            str_replace(DirectoryHelper::slashDirname($this->appBasePath), '', $this->vendorDir)
+            str_replace(DirectoryHelper::slashDirname($this->appBasePath), '', $this->vendorDir),
+            $this->assetsVendorDir
         );
         if (!empty($this->packageExtra)) {
             $this->assets_db[$this->package->getPrettyName()] = 
