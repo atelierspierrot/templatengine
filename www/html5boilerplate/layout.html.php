@@ -97,6 +97,46 @@ if (file_exists($assets.'icons/favicon.ico'))
 			'type'=>'image/x-icon'
 		) );
 }
+// the followings are taken from <http://mathiasbynens.be/notes/touch-icons>
+// => For third-generation iPad with high-resolution Retina display: apple-touch-icon-144x144-precomposed.png
+if (file_exists($assets.'icons/apple-touch-icon-144x144-precomposed.png'))
+{
+	$_template->getTemplateObject('LinkTag')
+		->add( array(
+			'rel'=>'apple-touch-icon-precomposed',
+			'href'=>$assets.'icons/apple-touch-icon-144x144-precomposed.png',
+			'sizes'=>'144x144'
+		) );
+}
+// => For iPhone with high-resolution Retina display: apple-touch-icon-114x114-precomposed.png
+if (file_exists($assets.'icons/apple-touch-icon-114x114-precomposed.png'))
+{
+	$_template->getTemplateObject('LinkTag')
+		->add( array(
+			'rel'=>'apple-touch-icon-precomposed',
+			'href'=>$assets.'icons/apple-touch-icon-114x114-precomposed.png',
+			'sizes'=>'114x114'
+		) );
+}
+// => For first- and second-generation iPad: apple-touch-icon-72x72-precomposed.png
+if (file_exists($assets.'icons/apple-touch-icon-72x72-precomposed.png'))
+{
+	$_template->getTemplateObject('LinkTag')
+		->add( array(
+			'rel'=>'apple-touch-icon-precomposed',
+			'href'=>$assets.'icons/apple-touch-icon-72x72-precomposed.png',
+			'sizes'=>'72x72'
+		) );
+}
+// => For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: apple-touch-icon-precomposed.png
+if (file_exists($assets.'icons/apple-touch-icon-precomposed.png'))
+{
+	$_template->getTemplateObject('LinkTag')
+		->add( array(
+			'rel'=>'apple-touch-icon-precomposed',
+			'href'=>$assets.'icons/apple-touch-icon-precomposed.png'
+		) );
+}
 // => + old ones
 $_template->getTemplateObject('LinkTag')->set($old_links);
 
@@ -128,8 +168,6 @@ $_template->getTemplateObject('CssFile')->reset();
 $_template->getTemplateObject('CssFile')
 	->add($boilerplate_assets.'css/normalize.css')
 	->add($boilerplate_assets.'css/main.css')
-	->add($tple_assets.'vendor/blue/style.css')
-	->add($tple_assets.'vendor/jquery.highlight.css')
 	->add($tple_assets.'css/styles.css')
 	// => + old ones
 	->set($old_css);
@@ -152,9 +190,6 @@ $_template->getTemplateObject('JavascriptFile', 'jsfiles_footer')->reset();
 $_template->getTemplateObject('JavascriptFile', 'jsfiles_footer')
 	->addMinified($tple_assets.'vendor/jquery-1.9.1.min.js')
 	->add($boilerplate_assets.'js/plugins.js')
-	->add($tple_assets.'vendor/jquery.highlight.js')
-	->add($tple_assets.'vendor/jquery.metadata.js')
-	->addMinified($tple_assets.'vendor/jquery.tablesorter.min.js')
 	->add($tple_assets.'js/scripts.js')
 	// => + old ones
 	->set($old_footer_js);

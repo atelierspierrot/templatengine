@@ -70,6 +70,7 @@ class View
 
         $_params = $this->getParams();
         $_view = $this->getTemplate( $this->getView() );
+        $_template = TemplateEngine::getInstance();
         if ($_view && @file_exists($_view)) {
 /*
 echo 'Loading view file "'.$_view.'" passing arguments:';
@@ -81,7 +82,7 @@ echo '</pre>';
                 extract($_params, EXTR_OVERWRITE);
             }
             ob_start();
-            include_once __DIR__.'/ViewAliases.php';
+            $_template->includePackagesViewsFunctions();
             include $_view;
             $this->setOutput( ob_get_contents() );
             ob_end_clean();

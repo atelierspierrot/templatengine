@@ -1,5 +1,7 @@
 <?php
 
+_use('jquery.highlight');
+
 $_template->getTemplateObject('JavascriptTag')->add(<<<EOT
 $(function() {
     $('pre.code').highlight({source:0, indent:'tabs', code_lang: 'data-language'});

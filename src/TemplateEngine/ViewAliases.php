@@ -16,13 +16,11 @@
  * can avoid this behavior setting the `$return` parmeter (*the last function parameter
  * most of the time*) on `true`.
  *
+ * You can use any of the `Library\Helper` namespace classes calling `Helper\Classname`
+ * and any of the `Library\Tool` namespace classes calling `Tool\Classname`.
  */
 use TemplateEngine\TemplateEngine;
-use Library\Helper\Directory as DirectoryHelper;
-use Library\Helper\File as FileHelper;
-use Library\Helper\Html as HtmlHelper;
-use Library\Helper\Text as TextHelper;
-use Library\Helper\Url as UrlHelper;
+use Library\Helper, Library\Tool;
 
 if (!function_exists('_array')) 
 {
@@ -49,7 +47,7 @@ if (!function_exists('_attribute'))
      */
 	function _attribute($var, $val)
 	{
-	    return HtmlHelper::parseAttributes(array($var => $val));
+	    return Helper\Html::parseAttributes(array($var => $val));
 	}	
 }
 
@@ -84,7 +82,7 @@ if (!function_exists('_cut'))
      */
 	function _cut($str, $length = 120, $end_str = ' ...', $return = false)
 	{
-        return _echo(TextHelper::cut($str, $length, $end_str), $return);
+        return _echo(Helper\Text::cut($str, $length, $end_str), $return);
 	}	
 }
 
@@ -260,7 +258,7 @@ if (!function_exists('_filename'))
      */
 	function _filename($filename, $lowercase = false, $delimiter = '-', $return = false)
 	{
-	    return _echo(FileHelper::formatFilename($filename, $lowercase, $delimiter), $return);
+	    return _echo(Helper\File::formatFilename($filename, $lowercase, $delimiter), $return);
 	}	
 }
 
@@ -278,7 +276,7 @@ if (!function_exists('_getid'))
      */
 	function _getid($reference = null, $base_id = null, $return = false)
 	{
-	    return _echo(HtmlHelper::getId($reference, $base_id), $return);
+	    return _echo(Helper\Html::getId($reference, $base_id), $return);
 	}	
 }
 
@@ -406,7 +404,7 @@ if (!function_exists('_javascript'))
      */
 	function _javascript($str, $protect_quotes = false, $return = false)
 	{
-	    return _echo(HtmlHelper::javascriptProtect($str, $protect_quotes), $return);
+	    return _echo(Helper\Html::javascriptProtect($str, $protect_quotes), $return);
 	}	
 }
 
@@ -475,7 +473,7 @@ if (!function_exists('_newid'))
      */
 	function _newid($reference = null, $base_id = null, $return = false)
 	{
-	    return _echo(HtmlHelper::getNewId($reference, $base_id), $return);
+	    return _echo(Helper\Html::getNewId($reference, $base_id), $return);
 	}	
 }
 
@@ -529,7 +527,7 @@ if (!function_exists('_render'))
 	    if (!empty($known_view)) {
     		$_this->render($view, $args, true, false);
     	} else {
-    	    _error(sprintf('Unknown view file "%s"!', $view));
+    	    _error(sprintf('Unknown view file "%s" (searched in "%s")!', $view, implode('::', $_this->getIncludePath())));
     	}
 	}	
 }
@@ -654,7 +652,22 @@ if (!function_exists('_url'))
      */
 	function _url($param = null, $value = null, $url = null, $return = false)
 	{
-	    return _echo(UrlHelper::url($param, $value, $url), $return);
+	    return _echo(Helper\Url::url($param, $value, $url), $return);
+	}	
+}
+
+if (!function_exists('_use')) 
+{
+    /**
+     * Assets packages automatic inclusion
+     *
+     * @param string $package_name The assets package name to include
+     * @return void
+     */
+	function _use($package_name = null)
+	{
+	    if (empty($package_name)) return;
+	    TemplateEngine::getInstance()->useAssetsPackage($package_name);
 	}	
 }
 

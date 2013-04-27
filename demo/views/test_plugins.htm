@@ -1,9 +1,12 @@
 <?php
 
+_use('jquery.tablesorter');
+_use('jquery.highlight');
+
 $_template->getTemplateObject('JavascriptTag')->set(array(
     "
 $(function() {
-    $('table.tablesorter').tablesorter();
+    $('table.tablesorter').tablesorter({widgets: ['zebra']});
     $('pre.code').highlight({source:0, indent:'tabs', code_lang: 'data-language'});
 });
     "
