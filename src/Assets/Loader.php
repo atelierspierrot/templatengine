@@ -14,8 +14,6 @@ use Library\Helper\Filesystem as FilesystemHelper,
 
 use Assets\AbstractAssetsPackage;
 
-define('_SERVER_DOCROOT', $_SERVER['DOCUMENT_ROOT']);
-
 /**
  * Class to manage assets paths
  *
