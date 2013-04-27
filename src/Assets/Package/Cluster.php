@@ -385,7 +385,7 @@ class Cluster
      * @param array $presets
      * @return self
      */
-    public function setAssetsPresets(array $persets)
+    public function setAssetsPresets(array $presets)
     {
         $this->assets_presets = $presets;
         return $this;
