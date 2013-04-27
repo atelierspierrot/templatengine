@@ -159,7 +159,7 @@ abstract class AbstractAssetsPackage
             $this->_assets_dir = $path;
         } else {
             throw new InvalidArgumentException(
-                sprintf('Assets directory "%s" not found !', $realpath)
+                sprintf('Assets directory "%s" not found !', $path)
             );
         }
         return $this;
@@ -189,7 +189,7 @@ abstract class AbstractAssetsPackage
             $this->_vendor_dir = $path;
         } else {
             throw new InvalidArgumentException(
-                sprintf('Vendor directory "%s" not found !', $realpath)
+                sprintf('Vendor directory "%s" not found !', $path)
             );
         }
         return $this;
@@ -219,7 +219,7 @@ abstract class AbstractAssetsPackage
             $this->_assets_vendor_dir = $path;
         } else {
             throw new InvalidArgumentException(
-                sprintf('Assets vendor directory "%s" not found !', $realpath)
+                sprintf('Assets vendor directory "%s" not found !', $path)
             );
         }
         return $this;
