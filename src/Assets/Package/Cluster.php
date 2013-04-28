@@ -439,7 +439,9 @@ class Cluster extends AbstractAssetsPackage
             $this->setName($package->getPrettyName());
             $package_dir = $main_package ? '' : 
                 str_replace(
-                    DirectoryHelper::slashDirname($this->getRootDirectory()) . DirectoryHelper::slashDirname($this->getAssetsDirectory()),
+                    DirectoryHelper::slashDirname($this->getRootDirectory()) .
+                    DirectoryHelper::slashDirname($this->getAssetsDirectory()) .
+                    DirectoryHelper::slashDirname($this->getAssetsVendorDirectory()),
                     '',
                     $installer->getInstallPath($package)
                 );
