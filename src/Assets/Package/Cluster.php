@@ -201,9 +201,15 @@ class Cluster extends AbstractAssetsPackage
         if (@file_exists($realpath) && is_dir($realpath)) {
             $this->assets_path = $path;
         } else {
-            throw new InvalidArgumentException(
-                sprintf('Assets directory "%s" for cluster "%s" not found !', $realpath, $this->getName())
-            );
+            $relative_path = DirectoryHelper::slashDirname($this->getRelativePath()) . $path;
+            $realpath = $this->getFullPath($relative_path);
+            if (@file_exists($realpath) && is_dir($realpath)) {
+                $this->assets_path = $relative_path;
+            } else {
+                throw new InvalidArgumentException(
+                    sprintf('Assets directory "%s" for cluster "%s" not found !', $path, $this->getName())
+                );
+            }
         }
         return $this;
     }
@@ -251,7 +257,7 @@ class Cluster extends AbstractAssetsPackage
                 }
             } else {
                 throw new InvalidArgumentException(
-                    sprintf('Views path directory "%s" for cluster "%s" not found !', $realpath, $this->getName())
+                    sprintf('Views path directory "%s" for cluster "%s" not found !', $path, $this->getName())
                 );
             }
         }
@@ -301,7 +307,7 @@ class Cluster extends AbstractAssetsPackage
                 }
             } else {
                 throw new InvalidArgumentException(
-                    sprintf('Views functions file "%s" for cluster "%s" not found !', $realpath, $this->getName())
+                    sprintf('Views functions file "%s" for cluster "%s" not found !', $path, $this->getName())
                 );
             }
         }
@@ -433,7 +439,9 @@ class Cluster extends AbstractAssetsPackage
             $this->setName($package->getPrettyName());
             $package_dir = $main_package ? '' : 
                 str_replace(
-                    DirectoryHelper::slashDirname($this->getRootDirectory()) . DirectoryHelper::slashDirname($this->getAssetsDirectory()),
+                    DirectoryHelper::slashDirname($this->getRootDirectory()) .
+                    DirectoryHelper::slashDirname($this->getAssetsDirectory()) .
+                    DirectoryHelper::slashDirname($this->getAssetsVendorDirectory()),
                     '',
                     $installer->getInstallPath($package)
                 );

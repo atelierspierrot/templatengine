@@ -14,7 +14,7 @@ use InvalidArgumentException;
 use Library\Helper\Filesystem as FilesystemHelper,
     Library\Helper\Directory as DirectoryHelper;
 
-define('_SERVER_DOCROOT', $_SERVER['DOCUMENT_ROOT']);
+@define('_SERVER_DOCROOT', $_SERVER['DOCUMENT_ROOT']);
 
 /**
  * Class to manage assets paths
@@ -159,7 +159,7 @@ abstract class AbstractAssetsPackage
             $this->_assets_dir = $path;
         } else {
             throw new InvalidArgumentException(
-                sprintf('Assets directory "%s" not found !', $realpath)
+                sprintf('Assets directory "%s" not found !', $path)
             );
         }
         return $this;
@@ -189,7 +189,7 @@ abstract class AbstractAssetsPackage
             $this->_vendor_dir = $path;
         } else {
             throw new InvalidArgumentException(
-                sprintf('Vendor directory "%s" not found !', $realpath)
+                sprintf('Vendor directory "%s" not found !', $path)
             );
         }
         return $this;
@@ -219,7 +219,7 @@ abstract class AbstractAssetsPackage
             $this->_assets_vendor_dir = $path;
         } else {
             throw new InvalidArgumentException(
-                sprintf('Assets vendor directory "%s" not found !', $realpath)
+                sprintf('Assets vendor directory "%s" not found !', $path)
             );
         }
         return $this;
