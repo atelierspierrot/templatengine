@@ -33,7 +33,7 @@
         "assets_vendor": "vendor",
         "document_root": "www",
         "views": [ "www", "www/html5boilerplate" ],
-        "views_functions": "src/TemplateEngine/ViewAliases.php",
+        "views_functions": "src/TemplateEngine/view_functions.php",
         "assets_presets": {
             "jquery.tablesorter": {
                 "css": "vendor_assets/blue/style.css",

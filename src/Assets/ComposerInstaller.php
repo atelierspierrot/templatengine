@@ -248,15 +248,23 @@ class ComposerInstaller
             $extra = $packageitem->getExtra();
             if (!empty($extra) && isset($extra['assets'])) {
                 $must_install = true;
-                $this->io->write( 
-                    sprintf('Installing assets to "%s" for package "%s".', 
-                        rtrim($this->assetsDir, '/') . '/' . $this->assetsVendorDir,
-                        $packageitem->getPrettyName()
-                    )
-                );
-                if ($this->_movePackageAssets($packageitem)) {
+                $this->io->write('');
+                if ($f = $this->_movePackageAssets($packageitem)) {
                     $ok++;
+                    $this->io->write( 
+                        sprintf('  - Installing assets to "%s" for package "%s".', 
+                            $f, $packageitem->getPrettyName()
+                        )
+                    );
+                } else {
+                    $this->io->write( 
+                        sprintf('  !! An error occured trying to install assets to "%s" for package "%s".', 
+                            rtrim($this->assetsDir, '/') . '/' . $this->assetsVendorDir,
+                            $packageitem->getPrettyName()
+                        )
+                    );
                 }
+                $this->io->write('');
             }
         }
 
@@ -296,7 +304,7 @@ class ComposerInstaller
                     'Unable to find assets in package "'.$package->getPrettyName().'"'
                 );
             }
-            return true;
+            return dirname(str_replace(rtrim($this->appBasePath, '/') . '/', '', $target));
         }
         return false;
     }
