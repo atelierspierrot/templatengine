@@ -117,6 +117,8 @@ class Loader extends AbstractAssetsPackage
     {
         if (file_exists($path)) {
             $this->document_root = realpath($path);
+        } elseif (file_exists(DirectoryHelper::slashDirname($this->getRootDirectory()) . $path)) {
+            $this->document_root = DirectoryHelper::slashDirname($this->getRootDirectory()) . $path;
         } else {
             throw new \InvalidArgumentException(
                 sprintf('Document root path "%s" doesn\'t exist!', $path)
