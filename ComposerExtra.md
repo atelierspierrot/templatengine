@@ -9,11 +9,10 @@ to specify some paths and presets used by the engine.
 Below is the example of the package itself:
 
     "extra": {
+        // these entries are used by the classic Composer extension
         "assets": "www",
         "assets_vendor": "vendor",
         "document_root": "www",
-        "views": [ "www", "www/html5boilerplate" ],
-        "views_functions": "src/TemplateEngine/ViewAliases.php",
         "assets_presets": {
             "jquery.tablesorter": {
                 "css": "vendor_assets/blue/style.css",
@@ -23,7 +22,13 @@ Below is the example of the package itself:
                 "css": "vendor_assets/jquery.highlight.css",
                 "jsfiles_footer": "vendor_assets/jquery.highlight.js"
             }
-        }
+        },
+        // these entries are used by the Template Engine
+        "views": [ "www", "www/html5boilerplate" ],
+        "views_functions": "src/TemplateEngine/views_functions.php",
+        "cache-dir": "tmp",
+        "cache-assets-dir": "tmp_assets",
+        "layouts": "www/html5boilerplate"
     }
 
 ## Configuration entries

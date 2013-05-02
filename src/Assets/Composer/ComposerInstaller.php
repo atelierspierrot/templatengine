@@ -7,7 +7,7 @@
  * Sources <https://github.com/atelierspierrot/templatengine>
  */
 
-namespace Assets;
+namespace Assets\Composer;
 
 use Composer\Composer,
     Composer\IO\IOInterface,
@@ -19,16 +19,19 @@ use Composer\Composer,
 
 use Library\Helper\Directory as DirectoryHelper;
 
-use Assets\Util\Filesystem,
-    Assets\AbstractAssetsPackage,
-    Assets\Autoload\AssetsAutoloaderGenerator,
-    Assets\Package\Cluster;
+use AssetsManager\Package\AbstractAssetsPackage,
+    AssetsManager\Config,
+    AssetsManager\Composer\Package\AssetsInstaller,
+    AssetsManager\Composer\Autoload\AssetsAutoloaderGenerator,
+    AssetsManager\Composer\Util\Filesystem as UtilFilesystem;
+
+use Assets\Package\AssetsPackage;
 
 /**
  * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
  */
 class ComposerInstaller
-    extends AutoloadGenerator
+    extends AssetsInstaller
 {
 
     /**
@@ -123,7 +126,8 @@ class ComposerInstaller
             if ($ok_assets>0) {
                 if (false!==$_assetsDbPath = $_this->_generateAssetsDb()) {
                     $_this->io->write( 
-                        sprintf('Assets json DB written in "%s".', str_replace($_this->appBasePath, '', $_assetsDbPath))
+                        sprintf('Writing assets json DB to <info>%s</info>.',
+                        str_replace(rtrim($_this->appBasePath, '/').'/', '', $_assetsDbPath))
                     );
                 } else {
                     $_this->io->write('ERROR while trying to create assets DB file!');
@@ -149,7 +153,7 @@ class ComposerInstaller
         $this->package = $composer->getPackage();
         parent::__construct($this->composer->getEventDispatcher());
 
-        $this->filesystem = new Filesystem();
+        $this->filesystem = new UtilFilesystem();
         $vendor_dir = $this->config->get('vendor-dir');
         $this->vendorDir = strtr(realpath($vendor_dir), '\\', '/');
         $this->appBasePath = rtrim(str_replace($vendor_dir, '', $this->vendorDir), '/');
@@ -248,19 +252,18 @@ class ComposerInstaller
             $extra = $packageitem->getExtra();
             if (!empty($extra) && isset($extra['assets'])) {
                 $must_install = true;
-                $this->io->write('');
                 if ($f = $this->_movePackageAssets($packageitem)) {
                     $ok++;
                     $this->io->write( 
-                        sprintf('  - Installing assets to "%s" for package "%s".', 
-                            $f, $packageitem->getPrettyName()
+                        sprintf('  - Installing assets of package <info>%s</info> to <info>%s</info>.', 
+                            $packageitem->getPrettyName(), $f
                         )
                     );
                 } else {
                     $this->io->write( 
-                        sprintf('  !! An error occured trying to install assets to "%s" for package "%s".', 
-                            rtrim($this->assetsDir, '/') . '/' . $this->assetsVendorDir,
-                            $packageitem->getPrettyName()
+                        sprintf('  !! An error occured trying to install assets of package <info>%s</info> to <info>%s</info>.', 
+                            $packageitem->getPrettyName(),
+                            rtrim($this->assetsDir, '/') . '/' . $this->assetsVendorDir
                         )
                     );
                 }

@@ -8,7 +8,7 @@
  */
 
 /**
- * This file defines some default functions to facilitate views writting
+ * This file defines some default functions to facilitate views writing
  *
  * All of these functions are prefixed by an underscore `_`.
  *
