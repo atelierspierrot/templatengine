@@ -55,5 +55,6 @@
         "layouts": "www/html5boilerplate",
         "views": [ "www", "www/html5boilerplate" ],
         "views-functions": "src/TemplateEngine/view_functions.php"
-    }
+    },
+    "scripts": { "post-autoload-dump": "Assets\\Composer\\ComposerInstaller::postAutoloadDump" }
 }

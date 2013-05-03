@@ -44,21 +44,7 @@ class ComposerInstaller
      */
     public static function postAutoloadDump(Event $event)
     {
-        $_this = new ComposerInstaller($event->getComposer(), $event->getIO());
-        if (false!==$ok_assets = $_this->moveAssets()) {
-            if ($ok_assets>0) {
-                if (false!==$_assetsDbPath = $_this->_generateAssetsDb()) {
-                    $_this->io->write( 
-                        sprintf('Writing assets json DB to <info>%s</info>.',
-                        str_replace(rtrim($_this->app_base_path, '/').'/', '', $_assetsDbPath))
-                    );
-                } else {
-                    $_this->io->write('ERROR while trying to create assets DB file!');
-                }
-            }
-        } else {
-            $_this->io->write('ERROR while trying to move assets!');
-        }
+        $_this = new ComposerInstaller($event->getIO(), $event->getComposer());
     }
 
     /**
