@@ -25,7 +25,8 @@ use AssetsManager\Package\AbstractAssetsPackage,
     AssetsManager\Composer\Autoload\AssetsAutoloaderGenerator,
     AssetsManager\Composer\Util\Filesystem as UtilFilesystem;
 
-use Assets\Package\AssetsPackage;
+use Assets\Package\Package,
+    Assets\Composer\ComposerConfig;
 
 /**
  * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
@@ -67,6 +68,7 @@ class ComposerInstaller
      */
     public function __construct(IOInterface $io, Composer $composer, $type = 'library')
     {
+        Config::load('Assets\Composer\ComposerConfig');
         parent::__construct($io, $composer, $type);
 
         $package = $composer->getPackage();
