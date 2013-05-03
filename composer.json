@@ -1,6 +1,6 @@
 {
     "name": "atelierspierrot/templatengine",
-    "type": "library-assets",
+    "type": "composer-installer",
     "description": "A PHP package to build HTML5 views (based on HTML5 Boilerplate layouts).",
     "keywords": [ "php", "template", "boilerplate" ],
     "homepage": "https://github.com/atelierspierrot/templatengine",
@@ -29,6 +29,7 @@
         "Assets": "src"
     } },
     "extra": {
+        "class": "\\Assets\\Composer\\ComposerInstaller",
         "assets": "www",
         "assets-vendor": "vendor",
         "document-root": "www",
@@ -45,6 +46,7 @@
                 "jsfiles_footer": "vendor_assets/jquery.highlight.js"
             }
         },
+        "package-type": [ "library-assets-template" ],
         "assets-package-installer-class": "\\Assets\\Composer\\ComposerInstaller",
         "assets-package-class": "\\Assets\\Package\\Package",
         "assets-preset-class": "\\Assets\\Package\\Preset",
