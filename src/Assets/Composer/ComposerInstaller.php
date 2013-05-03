@@ -58,7 +58,7 @@ class ComposerInstaller
         parent::__construct($io, $composer, $type);
 
         $package = $composer->getPackage();
-        $extra = $this->package->getExtra();
+        $extra = $package->getExtra();
         if (!empty($extra) && !empty($extra['assets'])) {
             $this->assets_db[$package->getPrettyName()] = 
                 $this->parseComposerExtra($package, $this->app_base_path);
