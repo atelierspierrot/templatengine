@@ -45,11 +45,13 @@
                 "jsfiles_footer": "vendor_assets/jquery.highlight.js"
             }
         },
+        "assets-package-installer-class": "\\Assets\\Composer\\ComposerInstaller",
+        "assets-package-class": "\\Assets\\Package\\Package",
+        "assets-preset-class": "\\Assets\\Package\\Preset",
         "cache-dir": "tmp",
         "cache-assets-dir": "tmp_assets",
         "layouts": "www/html5boilerplate",
         "views": [ "www", "www/html5boilerplate" ],
         "views-functions": "src/TemplateEngine/view_functions.php"
-    },
-    "scripts": { "post-autoload-dump": "Assets\\Composer\\ComposerInstaller::postAutoloadDump" }
+    }
 }

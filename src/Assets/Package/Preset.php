@@ -11,45 +11,20 @@ namespace Assets\Package;
 
 use InvalidArgumentException;
 
-use Library\Helper\Directory as DirectoryHelper;
-
-use Assets\Loader as AssetsLoader,
-    Assets\Package\Cluster;
+use AssetsManager\Config,
+    AssetsManager\Preset as OriginalPreset,
+    AssetsManager\Package\AssetsPackage,
+    AssetsManager\Package\AssetsPackageInterface,
+    AssetsManager\Package\AssetsPresetInterface;
 
 use TemplateEngine\TemplateEngine,
     TemplateEngine\TemplateObject\Abstracts\AbstractTemplateObject;
 
 /**
- * Preset
- *
- * This class is the "presets" manager for predefined assets plugins to use in views with
- * the `_use()` method.
- *
  * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
  */
-class Preset
+class Preset extends OriginalPreset
 {
-
-    /**
-     * Composition of a `assets_presets` statement in `composer.json`
-     * @static array
-     */
-    public static $use_statements = array( 'css', 'jsfiles_footer', 'jsfiles_header' );
-
-    /**
-     * @var string
-     */
-    protected $preset_name;
-
-    /**
-     * @var array
-     */
-    protected $preset_data;
-
-    /**
-     * @var Assets\Package\Cluster
-     */
-    protected $cluster;
 
     /**
      * @var Assets\Loader
@@ -63,28 +38,13 @@ class Preset
 
     /**
      * @param string $package_name
-     * @param object $loader Assets\Loader
+     * @param array $package_data
+     * @param object $package AssetsManager\Package\AssetsPackage
      * @param object $engine TemplateEngine\TemplateEngine
-     * @throws `InvalidArgumentException` if the preset can't be found
      */
-    public function __construct($preset_name, AssetsLoader $loader, TemplateEngine $engine)
+    public function __construct($preset_name, array $preset_data, AssetsPackageInterface $package, TemplateEngine $engine)
     {
-        $this->assets_loader = $loader;
-        $this->template_engine = $engine;
-        $this->preset_name = $preset_name;
-
-        $data = $this->_findPresetData();
-        if (!empty($data)) {
-            $this->cluster = Cluster::newClusterFromAssetsLoader($this->assets_loader);
-            $this->cluster->loadClusterFromArray(
-                $this->_findPresetPackageData()
-            );
-            $this->preset_data = $data;
-        } else {
-            throw new InvalidArgumentException(
-                sprintf('Unknown preset "%s" !', $this->preset_name)
-            );
-        }
+        parent::__construct($preset_name, $preset_data, $package);
     }
 
     /**
@@ -133,51 +93,6 @@ class Preset
             }
         }
 	}
-
-    /**
-     * Find the data array defining a preset from the object `$preset_name`
-     *
-     * @return array|null
-     */
-    protected function _findPresetData()
-    {
-        foreach ($this->assets_loader->getAssetsDb() as $package=>$config) {
-            if (!empty($config['assets_presets']) && array_key_exists($this->preset_name, $config['assets_presets'])) {
-                return $config['assets_presets'][$this->preset_name];
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Find the data array defining the package of a preset from the object `$preset_name`
-     *
-     * @return array|null
-     */
-    protected function _findPresetPackageData()
-    {
-        foreach ($this->assets_loader->getAssetsDb() as $package=>$config) {
-            if (!empty($config['assets_presets']) && array_key_exists($this->preset_name, $config['assets_presets'])) {
-                return $config;
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Find the name of the package of a preset from the object `$preset_name`
-     *
-     * @return string|null
-     */
-    protected function _findPresetPackageName()
-    {
-        foreach ($this->assets_loader->getAssetsDb() as $package=>$config) {
-            if (!empty($config['assets_presets']) && array_key_exists($this->preset_name, $config['assets_presets'])) {
-                return $package;
-            }
-        }
-        return null;
-    }
 
 }
 

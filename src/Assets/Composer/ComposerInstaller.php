@@ -21,7 +21,7 @@ use Library\Helper\Directory as DirectoryHelper;
 
 use AssetsManager\Package\AbstractAssetsPackage,
     AssetsManager\Config,
-    AssetsManager\Composer\Package\AssetsInstaller,
+    AssetsManager\Composer\Installer\AssetsInstaller,
     AssetsManager\Composer\Autoload\AssetsAutoloaderGenerator,
     AssetsManager\Composer\Util\Filesystem as UtilFilesystem;
 
