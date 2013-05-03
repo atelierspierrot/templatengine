@@ -35,84 +35,6 @@ class ComposerInstaller
 {
 
     /**
-     * @var object Composer\Composer
-     */
-    protected $composer;
-
-    /**
-     * @var object Composer\IO\IOInterface
-     */
-    protected $io;
-
-    /**
-     * @var object Assets\Package\Cluster
-     */
-    protected $cluster;
-
-    /**
-     * @var array
-     */
-    protected $config;
-
-    /**
-     * @var object Composer\Package\PackageInterface
-     */
-    protected $package;
-
-    /**
-     * @var object Assets\Util\Filesystem
-     */
-    protected $filesystem;
-
-    /**
-     * The package `composer.json` "extra" block
-     * @var array
-     */
-    public $packageExtra;
-
-    /**
-     * The assets directory realpath
-     * @var string
-     */
-    public $assetsDir;
-
-    /**
-     * The assets vendor directory realpath
-     * @var string
-     */
-    public $assetsVendorDir;
-
-    /**
-     * The assets database file realpath
-     * @var string
-     */
-    public $assetsDbFilename;
-
-    /**
-     * The vendor dir realpath
-     * @var string
-     */
-    public $vendorDir;
-
-    /**
-     * The application base realpath
-     * @var string
-     */
-    public $appBasePath;
-
-    /**
-     * The assets Document Root
-     * @var string
-     */
-    public $documentRoot;
-
-    /**
-     * Array filled like 'package_name' => 'package assets infos' used to write the json AssetsDb file
-     * @var array
-     */
-    protected $assets_db = array();
-
-    /**
      * Method called at the creation of the Composer autoload file
      *
      * @param object Composer\Script\Event
@@ -127,7 +49,7 @@ class ComposerInstaller
                 if (false!==$_assetsDbPath = $_this->_generateAssetsDb()) {
                     $_this->io->write( 
                         sprintf('Writing assets json DB to <info>%s</info>.',
-                        str_replace(rtrim($_this->appBasePath, '/').'/', '', $_assetsDbPath))
+                        str_replace(rtrim($_this->app_base_path, '/').'/', '', $_assetsDbPath))
                     );
                 } else {
                     $_this->io->write('ERROR while trying to create assets DB file!');
@@ -139,179 +61,54 @@ class ComposerInstaller
     }
 
     /**
-     * Construction of a new non-static ComposerInstaller
+     * Initializes installer: creation of "assets-dir" directory if so.
      *
-     * @param object Composer\Composer
-     * @param object Composer\IO\IOInterface
-     * @return void
+     * {@inheritDoc}
      */
-    public function __construct(Composer $composer, IOInterface $io)
+    public function __construct(IOInterface $io, Composer $composer, $type = 'library')
     {
-        $this->composer = $composer;
-        $this->io = $io;
-        $this->config = $composer->getConfig();
-        $this->package = $composer->getPackage();
-        parent::__construct($this->composer->getEventDispatcher());
+        parent::__construct($io, $composer, $type);
 
-        $this->filesystem = new UtilFilesystem();
-        $vendor_dir = $this->config->get('vendor-dir');
-        $this->vendorDir = strtr(realpath($vendor_dir), '\\', '/');
-        $this->appBasePath = rtrim(str_replace($vendor_dir, '', $this->vendorDir), '/');
-
+        $package = $composer->getPackage();
         $extra = $this->package->getExtra();
-        $this->packageExtra = $extra;
-        $this->assetsDir = isset($extra['assets']) ? $extra['assets'] : AbstractAssetsPackage::DEFAULT_ASSETS_DIR;
-        $this->assetsVendorDir = isset($extra['assets_vendor']) ? $extra['assets_vendor'] : AbstractAssetsPackage::DEFAULT_ASSETS_VENDOR_DIR;
-        $this->documentRoot = isset($extra['document_root']) ? $extra['document_root'] : AbstractAssetsPackage::DEFAULT_DOCUMENT_ROOT;
-        $this->assetsDbFilename = AbstractAssetsPackage::ASSETS_DB_FILENAME;
-
-        // ensure the assets_vendor dir exists
-        $this->getAssetsRootPath();
-
-        $this->cluster = new Cluster(
-            $this->appBasePath,
-            $this->assetsDir,
-            str_replace(DirectoryHelper::slashDirname($this->appBasePath), '', $this->vendorDir),
-            $this->assetsVendorDir
-        );
-        if (!empty($this->packageExtra)) {
-            $this->assets_db[$this->package->getPrettyName()] = 
-                $this->cluster->parseComposerExtra($this->package, $this, true);
+        if (!empty($extra) && !empty($extra['assets'])) {
+            $this->assets_db[$package->getPrettyName()] = 
+                $this->parseComposerExtra($package, $this->app_base_path);
         }
     }
 
     /**
-     * Get the assets database
+     * Parse the `composer.json` "extra" block of a package and return its transformed data
      *
-     * @return array
-     */
-    public function getAssetsDb()
-    {
-        return $this->assets_db;
-    }
-
-    /**
-     * Get the install directory realpath of a package
-     *
-     * @param object $package Composer\Package\PackageInterface
-     * @return string
-     */
-    public function getInstallPath(PackageInterface $package)
-    {
-        return $this->getAssetsRootPath() . '/' . $package->getPrettyName();
-    }
-
-    /**
-     * Get the root directory realpath of package's assets
-     *
-     * @return string
-     */
-    public function getAssetsRootPath()
-    {
-        $path = rtrim($this->appBasePath, '/') . '/'
-            . rtrim($this->assetsDir, '/') . '/'
-            . $this->assetsVendorDir;
-        $this->filesystem->ensureDirectoryExists($path);
-        return $path;
-    }
-
-    /**
-     * Get the base directory realpath of a package
-     *
-     * @param object $package Composer\Package\PackageInterface
-     * @return string
-     */
-    public function getPackageBasePath(PackageInterface $package)
-    {
-        return ($this->vendorDir ? $this->vendorDir.'/' : '') . $package->getPrettyName();
-    }
-
-    /**
-     * Get the relative assets directory of a package
-     *
-     * @param object $package Composer\Package\PackageInterface
-     * @return string
-     */
-    public function getRelativePath(PackageInterface $package)
-    {
-        return str_replace($this->getAssetsRootPath(), '', $this->getPackageBasePath($package));
-    }
-
-    /**
-     * Copy the assets of installed packages in the assets directory
-     *
+     * @param array $package The package, Composer\Package\PackageInterface
      * @return void
      */
-    public function moveAssets()
+    public function parseComposerExtra(PackageInterface $package, $package_dir)
     {
-        $ok = 0;
-        $must_install = false;
+        $data = parent::parseComposerExtra($package, $package_dir);
 
-        $localRepo = $this->composer->getRepositoryManager()->getLocalRepository();
-        foreach($localRepo->getPackages() as $packageitem) {
-            $extra = $packageitem->getExtra();
-            if (!empty($extra) && isset($extra['assets'])) {
-                $must_install = true;
-                if ($f = $this->_movePackageAssets($packageitem)) {
-                    $ok++;
-                    $this->io->write( 
-                        sprintf('  - Installing assets of package <info>%s</info> to <info>%s</info>.', 
-                            $packageitem->getPrettyName(), $f
-                        )
-                    );
-                } else {
-                    $this->io->write( 
-                        sprintf('  !! An error occured trying to install assets of package <info>%s</info> to <info>%s</info>.', 
-                            $packageitem->getPrettyName(),
-                            rtrim($this->assetsDir, '/') . '/' . $this->assetsVendorDir
-                        )
-                    );
-                }
-                $this->io->write('');
-            }
-        }
-
-        return true===$must_install ? $ok : true;
-    }
-
-    /**
-     * Build the package installation database file
-     *
-     * @return bool
-     * @see Assets\Autoload\AssetsAutoloaderGenerator
-     */
-    protected function _generateAssetsDb()
-    {
-        $generator = new AssetsAutoloaderGenerator($this);
-        return $generator->generate();
-    }
-
-    /**
-     * Move the assets of a package
-     *
-     * @param object $package Composer\Package\PackageInterface
-     * @return bool
-     */
-    protected function _movePackageAssets(PackageInterface $package)
-    {
+        $package_dir = rtrim($package_dir, '/') . '/';
         $extra = $package->getExtra();
-        if (!empty($extra) && isset($extra['assets'])) {
-            $from = $this->getPackageBasePath($package) . '/' . $extra['assets'];
-            $target = $this->getInstallPath($package);
-            if (file_exists($from)) {
-                $this->filesystem->copy($from, $target);
-                $this->assets_db[$package->getPrettyName()] = 
-                    $this->cluster->parseComposerExtra($package, $this);
-            } else {
-                throw new \Exception(
-                    'Unable to find assets in package "'.$package->getPrettyName().'"'
-                );
+
+        if (isset($extra['views'])) {
+            $views = is_array($extra['views']) ? $extra['views'] : array($extra['views']);
+            $data['view'] = array();
+            foreach ($views as $view_path) {
+                $data['view'][] = $package_dir . $view_path;
             }
-            return dirname(str_replace(rtrim($this->appBasePath, '/') . '/', '', $target));
         }
-        return false;
+
+        if (isset($extra['views-functions'])) {
+            $views_fcts = is_array($extra['views-functions']) ? $extra['views-functions'] : array($extra['views-functions']);
+            $data['views_functions'] = array();
+            foreach ($views_fcts as $view_fct_path) {
+                $data['views_functions'][] = $package_dir . $view_fct_path;
+            }
+        }
+
+        return $data;
     }
-    
+
 }
 
 // Endfile
