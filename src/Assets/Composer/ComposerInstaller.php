@@ -22,8 +22,7 @@ use Library\Helper\Directory as DirectoryHelper;
 use AssetsManager\Package\AbstractAssetsPackage,
     AssetsManager\Config,
     AssetsManager\Composer\Installer\AssetsInstaller,
-    AssetsManager\Composer\Autoload\AssetsAutoloaderGenerator,
-    AssetsManager\Composer\Util\Filesystem as UtilFilesystem;
+    AssetsManager\Composer\Autoload\AssetsAutoloadGenerator;
 
 use Assets\Package\Package,
     Assets\Composer\ComposerConfig;
@@ -45,6 +44,7 @@ class ComposerInstaller
     public static function postAutoloadDump(Event $event)
     {
         $_this = new ComposerInstaller($event->getIO(), $event->getComposer());
+        AssetsAutoloadGenerator::setGenerator(array($_this, 'generate'));
     }
 
     /**
@@ -63,6 +63,37 @@ class ComposerInstaller
             $this->assets_db[$package->getPrettyName()] = 
                 $this->parseComposerExtra($package, $this->app_base_path);
         }
+    }
+
+    public function generate()
+    {
+        $app_base_path = $this->assets_installer->getAppBasePath();
+        $assets_dir = str_replace($app_base_path . '/', '', $this->assets_installer->getAssetsDir());
+        $assets_vendor_dir = str_replace($app_base_path . '/' . $assets_dir . '/', '', $this->assets_installer->getAssetsVendorDir());
+        $full_db = array(
+            'test'=>'YO',
+            'assets-dir' => $assets_dir,
+            'assets-vendor-dir' => $assets_vendor_dir,
+            'document-root' => $this->assets_installer->getDocumentRoot(),
+            'packages' => $this->assets_db
+        );
+
+        $assets_file = $this->assets_installer->getVendorDir() . '/' . $this->assets_installer->getAssetsDbFilename();
+        $this->assets_installer->getIo()->write( 
+            sprintf('Writing assets json DB to <info>%s</info>',
+                str_replace(dirname($this->assets_installer->getVendorDir()).'/', '', $assets_file)
+            )
+        );
+        try {
+            $json = new JsonFile($assets_file);
+            $json->write($full_db);
+            return $assets_file;
+        } catch(\Exception $e) {
+            if (file_put_contents($assets_file, json_encode($full_db, version_compare(PHP_VERSION, '5.4')>0 ? JSON_PRETTY_PRINT : 0))) {
+                return $assets_file;
+            }
+        }        
+        return false;
     }
 
     /**
