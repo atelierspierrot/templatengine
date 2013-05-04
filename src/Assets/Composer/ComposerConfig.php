@@ -46,10 +46,11 @@ class ComposerConfig
                 'jsfiles_header' => 'Javascript',
                 'require' => 'Requirement'
             ),
-            'config-class' => null,
+            'assets-config-class' => null,
             'assets-package-class' => 'Assets\Package\Package',
             'assets-preset-class' => 'Assets\Package\Preset',
             'assets-package-installer-class' => 'Assets\Composer\ComposerInstaller',
+            'assets-autoload-generator-class' => 'Assets\Composer\ComposerInstaller',
         );
     }
 

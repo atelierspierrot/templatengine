@@ -43,14 +43,13 @@ class ComposerInstaller
      */
     public static function postAutoloadDump(Event $event)
     {
-        $_this = new ComposerInstaller($event->getIO(), $event->getComposer());
+        $_cls = __CLASS__;
+        $_this = new $_cls($event->getIO(), $event->getComposer());
         AssetsAutoloadGenerator::setGenerator(array($_this, 'generate'));
     }
 
     /**
-     * Initializes installer: creation of "assets-dir" directory if so.
-     *
-     * {@inheritDoc}
+     * Initializes installer
      */
     public function __construct(IOInterface $io, Composer $composer, $type = 'library')
     {
@@ -59,7 +58,7 @@ class ComposerInstaller
 
         $package = $composer->getPackage();
         $extra = $package->getExtra();
-        if (!empty($extra) && !empty($extra['assets'])) {
+        if (!empty($extra) && !empty($extra['assets-dir'])) {
             $this->assets_db[$package->getPrettyName()] = 
                 $this->parseComposerExtra($package, $this->app_base_path);
         }
