@@ -46,11 +46,32 @@ class TemplateEngineConfig
                 'jsfiles_header' => 'Javascript',
                 'require' => 'Requirement'
             ),
+            // the configuration class (this class, can be null but must be present)
+            // must impelements AssetsManager\Config\ConfiguratorInterface
             'assets-config-class' => null,
+            // the AssetsPackage class
+            // must implements AssetsManager\Package\AssetsPackageInterface
             'assets-package-class' => 'Assets\Package\Package',
+            // the AssetsPreset class
+            // must implements AssetsManager\Package\AssetsPresetInterface
             'assets-preset-class' => 'Assets\Package\Preset',
+            // the AssetsInstaller class
+            // must implements AssetsManager\Composer\Installer\AssetsInstallerInterface
             'assets-package-installer-class' => 'Assets\Composer\TemplateEngineInstaller',
+            // the AssetsAutoloadGenerator class
+            // must extends AssetsManager\Composer\Autoload\AbstractAutoloadGenerator
             'assets-autoload-generator-class' => 'Assets\Composer\TemplateEngineAutoloadGenerator',
+
+            // Template Engine specific: relative cache directory from assets-dir
+            'cache-dir' => 'tmp',
+            // Template Engine specific: relative assets cache directory from assets-dir
+            'cache-assets-dir' => 'tmp_assets',
+            // Template Engine specific: relative layouts from root-dir
+            'layouts' => 'www/html5boilerplate',
+            // Template Engine specific: relative views from root-dir
+            'views' => array('www', 'www/html5boilerplate'),
+            // Template Engine specific: relative views functions from root-dir
+            'views-functions' => 'src/TemplateEngine/view_functions.php',
         );
     }
 

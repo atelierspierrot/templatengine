@@ -4,7 +4,7 @@
     "description": "A PHP package to build HTML5 views (based on HTML5 Boilerplate layouts).",
     "keywords": [ "php", "template", "boilerplate" ],
     "homepage": "https://github.com/atelierspierrot/templatengine",
-    "version": "0.0.7",
+    "version": "0.0.8",
     "license": "GPL-3.0",
     "authors": [
         {
@@ -29,9 +29,8 @@
         "Assets": "src"
     } },
     "extra": {
-        "class": "\\Assets\\Composer\\ComposerInstaller",
-        "assets": "www",
-        "assets-vendor": "vendor",
+        "assets-dir": "www",
+        "assets-vendor-dir": "vendor",
         "document-root": "www",
         "assets-presets": {
             "jquery": {
@@ -46,15 +45,11 @@
                 "jsfiles_footer": "vendor_assets/jquery.highlight.js"
             }
         },
-        "package-type": [ "library-assets-template" ],
-        "assets-package-installer-class": "\\Assets\\Composer\\ComposerInstaller",
-        "assets-package-class": "\\Assets\\Package\\Package",
-        "assets-preset-class": "\\Assets\\Package\\Preset",
         "cache-dir": "tmp",
         "cache-assets-dir": "tmp_assets",
         "layouts": "www/html5boilerplate",
         "views": [ "www", "www/html5boilerplate" ],
         "views-functions": "src/TemplateEngine/view_functions.php"
     },
-    "scripts": { "post-autoload-dump": "Assets\\Composer\\ComposerInstaller::postAutoloadDump" }
+    "scripts": { "post-autoload-dump": "Assets\\Composer\\TemplateEngineInstaller::postAutoloadDump" }
 }

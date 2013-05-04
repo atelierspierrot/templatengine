@@ -62,16 +62,16 @@ class TemplateEngineAutoloadGenerator
         $filesystem = new Filesystem();
         $config = $this->_composer->getConfig();
         $assets_db = $this->_autoloader->getRegistry();
-        $vendor_dir = $this->assets_installer->getVendorDir();
-        $app_base_path = $this->assets_installer->getAppBasePath();
-        $assets_dir = str_replace($app_base_path . '/', '', $this->assets_installer->getAssetsDir());
-        $assets_vendor_dir = str_replace($app_base_path . '/' . $assets_dir . '/', '', $this->assets_installer->getAssetsVendorDir());
-        $document_root = $this->assets_installer->getDocumentRoot();
+        $vendor_dir = $this->_autoloader->getAssetsInstaller()->getVendorDir();
+        $app_base_path = $this->_autoloader->getAssetsInstaller()->getAppBasePath();
+        $assets_dir = str_replace($app_base_path . '/', '', $this->_autoloader->getAssetsInstaller()->getAssetsDir());
+        $assets_vendor_dir = str_replace($app_base_path . '/' . $assets_dir . '/', '', $this->_autoloader->getAssetsInstaller()->getAssetsVendorDir());
+        $document_root = $this->_autoloader->getAssetsInstaller()->getDocumentRoot();
         $extra = $this->_package->getExtra();
 
         if (!empty($extra) && !empty($extra['assets-dir'])) {
-            $assets_db[$package->getPrettyName()] = 
-                $this->parseComposerExtra($this->_package, $app_base_path);
+            $assets_db[$this->_package->getPrettyName()] = 
+                $this->parseComposerExtra($this->_package, $app_base_path, $app_base_path);
         }
 
         $vendor_path = strtr(realpath($vendor_dir), '\\', '/');
@@ -80,85 +80,62 @@ class TemplateEngineAutoloadGenerator
         $local_repo = $this->_composer->getRepositoryManager()->getLocalRepository();
         $package_map = $this->buildPackageMap($this->_composer->getInstallationManager(), $this->_package, $local_repo->getPackages());
 
-var_export($package_map);
-
-/*
-        foreach ($assets_db as $package_name=>$package_data) {
-            $assets_db[$package_name] = 
-                $this->parseComposerExtraData($package_data, $app_base_path);
+        foreach ($package_map as $package) {
+            $package_object = $package[0];
+            $package_install_path = $package[1];
+            if (empty($package_install_path)) {
+                $package_install_path = $app_base_path;
+            }
+            $package_name = $package_object->getPrettyName();
+            $data = $this->parseComposerExtra(
+                $package_object,
+                $this->_autoloader->getAssetsInstaller()->getAssetsInstallPath($package_object),
+                $rel_vendor_path . '/' . $package_object->getPrettyName()
+            );
+            if (!empty($data)) {
+                $assets_db[$package_name] = $data;
+            }
         }
-*/
 
         $full_db = array(
             'assets-dir' => $assets_dir,
             'assets-vendor-dir' => $assets_vendor_dir,
             'document-root' => $document_root,
+            'cache-dir' => isset($extra['cache-dir']) ? $extra['cache-dir'] : Config::getDefault('cache-dir'),
+            'cache-assets-dir' => isset($extra['cache-assets-dir']) ? $extra['cache-assets-dir'] : Config::getDefault('cache-assets-dir'),
             'packages' => $assets_db
         );
-        return $this->writeJsonDatabase($full_db);
-
-/////////////////////////////////
-        $vendor_path = strtr(realpath($vendor_dir), '\\', '/');
-        $rel_vendor_path = $filesystem->findShortestPath(getcwd(), $vendor_path, true);
-
-        $local_repo = $this->_composer->getRepositoryManager()->getLocalRepository();
-        $package_map = $this->buildPackageMap($this->_composer->getInstallationManager(), $this->_package, $local_repo->getPackages());
-        $autoloads = $this->parseAutoloads($package_map, $this->_package);
-
-        foreach ($autoloads['psr-0'] as $namespace => $paths) {
-            $exportedPaths = array();
-            foreach ($paths as $path) {
-                if (strstr($path, 'bundles'))
-                {
-                    $exportedPaths[] = var_export( trim( str_replace(CarteBlancheInstaller::CARTEBLANCHE_BUNDLES_DIR, '', $path), '/'), 1);
-                }
-            }
-            if (count($exportedPaths)>0) {
-                $exportedPrefix = var_export($namespace, true);
-                $bootstrapFile .= "        $exportedPrefix => ";
-                if (count($exportedPaths) > 1) {
-                    $bootstrapFile .= "array(".implode(', ', $exportedPaths)."),\n";
-                } else {
-                    $bootstrapFile .= $exportedPaths[0].",\n";
-                }
-            }
-        }
-
-        return file_put_contents($appBasePath.'/data/bootstrap.php', $bootstrapFile);
-/////////////////////////////////
+        return $this->_autoloader->writeJsonDatabase($full_db);
     }
 
     /**
      * Parse the `composer.json` "extra" block of a package and return its transformed data
      *
      * @param object $package Composer\Package\PackageInterface
-     * @param string $package_dir
+     * @param string $assets_package_dir
+     * @param string $vendor_package_dir
      * @return void
      */
-    public function parseComposerExtra(PackageInterface $package, $package_dir)
+    public function parseComposerExtra(PackageInterface $package, $assets_package_dir, $vendor_package_dir)
     {
-        $data = $this->assets_installer->parseComposerExtra($package, $package_dir);
+        $data = $this->_autoloader->getAssetsInstaller()->parseComposerExtra($package, $assets_package_dir);
         $extra = $package->getExtra();
-        return $this->parseComposerExtraData($data, $extra, $package_dir);
-    }
+        $assets_package_dir = rtrim($assets_package_dir, '/') . '/';
+        $vendor_package_dir = rtrim($vendor_package_dir, '/') . '/';
 
-    /**
-     * Parse the `composer.json` "extra" block of a package and return its transformed data
-     *
-     * @param array $data
-     * @param array $extra
-     * @param string $package_dir
-     * @return void
-     */
-    public function parseComposerExtraData(array $data, array $extra, $package_dir)
-    {
-        $package_dir = rtrim($package_dir, '/') . '/';
+        if (isset($extra['layouts'])) {
+            $layouts = is_array($extra['layouts']) ? $extra['layouts'] : array($extra['layouts']);
+            $data['layouts'] = array();
+            foreach ($layouts as $layout_path) {
+                $data['layouts'][] = $vendor_package_dir . $layout_path;
+            }
+        }
 
         if (isset($extra['views'])) {
             $views = is_array($extra['views']) ? $extra['views'] : array($extra['views']);
-            $data['view'] = array();
+            $data['views'] = array();
             foreach ($views as $view_path) {
-                $data['view'][] = $package_dir . $view_path;
+                $data['views'][] = $vendor_package_dir . $view_path;
             }
         }
 
@@ -166,7 +143,7 @@ var_export($package_map);
             $views_fcts = is_array($extra['views-functions']) ? $extra['views-functions'] : array($extra['views-functions']);
             $data['views_functions'] = array();
             foreach ($views_fcts as $view_fct_path) {
-                $data['views_functions'][] = $package_dir . $view_fct_path;
+                $data['views_functions'][] = $vendor_package_dir . $view_fct_path;
             }
         }
 

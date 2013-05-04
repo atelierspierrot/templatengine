@@ -26,7 +26,10 @@ class TemplateEngineInstaller
      */
     public static function postAutoloadDump(Event $event)
     {
-        $_this = new TemplateEngineAutoloadGenerator($event->getComposer()->getPackage());
+        $_this = new TemplateEngineAutoloadGenerator(
+            $event->getComposer()->getPackage(),
+            $event->getComposer()
+        );
     }
 
 }
