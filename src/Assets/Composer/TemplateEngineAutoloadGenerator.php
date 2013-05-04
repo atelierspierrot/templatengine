@@ -69,7 +69,7 @@ class TemplateEngineAutoloadGenerator
         $document_root = $this->_autoloader->getAssetsInstaller()->getDocumentRoot();
         $extra = $this->_package->getExtra();
 
-        $root_data = $this->parseComposerExtra($this->_package, $app_base_path, $app_base_path);
+        $root_data = $this->parseComposerExtra($this->_package, $app_base_path, '');
         if (!empty($root_data)) {
             $assets_db[$this->_package->getPrettyName()] = $root_data;
         }
@@ -80,7 +80,8 @@ class TemplateEngineAutoloadGenerator
         $local_repo = $this->_composer->getRepositoryManager()->getLocalRepository();
         $package_map = $this->buildPackageMap($this->_composer->getInstallationManager(), $this->_package, $local_repo->getPackages());
 
-        foreach ($package_map as $package) {
+        foreach ($package_map as $i=>$package) {
+            if ($i===0) { continue; }
             $package_object = $package[0];
             $package_install_path = $package[1];
             if (empty($package_install_path)) {
@@ -90,7 +91,7 @@ class TemplateEngineAutoloadGenerator
             $data = $this->parseComposerExtra(
                 $package_object,
                 $this->_autoloader->getAssetsInstaller()->getAssetsInstallPath($package_object),
-                $rel_vendor_path . '/' . $package_object->getPrettyName()
+                str_replace($app_base_path . '/', '', $vendor_path) . '/' . $package_object->getPrettyName()
             );
             if (!empty($data)) {
                 $assets_db[$package_name] = $data;
@@ -121,21 +122,23 @@ class TemplateEngineAutoloadGenerator
         $data = $this->_autoloader->getAssetsInstaller()->parseComposerExtra($package, $assets_package_dir);
         $extra = $package->getExtra();
         $assets_package_dir = rtrim($assets_package_dir, '/') . '/';
-        $vendor_package_dir = rtrim($vendor_package_dir, '/') . '/';
+        if (strlen($vendor_package_dir)) {
+            $vendor_package_dir = rtrim($vendor_package_dir, '/') . '/';
+        }
 
         if (isset($extra['layouts'])) {
             $layouts = is_array($extra['layouts']) ? $extra['layouts'] : array($extra['layouts']);
-            $data['layouts'] = array();
+            $data['layouts_path'] = array();
             foreach ($layouts as $layout_path) {
-                $data['layouts'][] = $vendor_package_dir . $layout_path;
+                $data['layouts_path'][] = $vendor_package_dir . $layout_path;
             }
         }
 
         if (isset($extra['views'])) {
             $views = is_array($extra['views']) ? $extra['views'] : array($extra['views']);
-            $data['views'] = array();
+            $data['views_path'] = array();
             foreach ($views as $view_path) {
-                $data['views'][] = $vendor_package_dir . $view_path;
+                $data['views_path'][] = $vendor_package_dir . $view_path;
             }
         }
 

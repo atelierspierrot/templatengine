@@ -25,6 +25,12 @@ class Package extends AssetsPackage
 {
 
     /**
+     * Current package layouts paths (relative to `$relative_path`)
+     * @var array
+     */
+    protected $layouts_paths;
+
+    /**
      * Current package views paths (relative to `$relative_path`)
      * @var array
      */
@@ -44,6 +50,7 @@ class Package extends AssetsPackage
     public function reset()
     {
         parent::reset();
+        $this->layouts_paths            = array();
         $this->views_paths              = array();
         $this->views_functions_paths    = array();
     }
@@ -51,6 +58,56 @@ class Package extends AssetsPackage
 // -------------------------
 // Setters / Getters
 // -------------------------
+
+    /**
+     * @param array $paths
+     * @param string $type Type of the original relative path (can be `asset` or `vendor` or `null` - default is `vendor`)
+     * @return self
+     */
+    public function setLayoutsPaths(array $paths, $type = 'vendor')
+    {
+        foreach ($paths as $path) {
+            $this->addLayoutsPath($path, $type);
+        }
+        return $this;
+    }
+
+    /**
+     * @param string $path Relative to `vendor`
+     * @param string $type Type of the original relative path (can be `asset` or `vendor` or `null` - default is `vendor`)
+     * @return self
+     * @throws `InvalidArgumentException` if the path doesn't exist
+     */
+    public function addLayoutsPath($path, $type = 'vendor')
+    {
+        $realpath = $this->getFullPath($path, $type);
+        if (@file_exists($realpath) && is_dir($realpath)) {
+            if (!in_array($path, $this->layouts_paths)) {
+                $this->layouts_paths[] = $path;
+            }
+        } else {
+            $relative_path = DirectoryHelper::slashDirname($this->getRelativePath()) . $path;
+            $realpath = $this->getFullPath($relative_path, null);
+            if (@file_exists($realpath) && is_dir($realpath)) {
+                if (!in_array($relative_path, $this->layouts_paths)) {
+                    $this->layouts_paths[] = $relative_path;
+                }
+            } else {
+                throw new InvalidArgumentException(
+                    sprintf('Views path directory "%s" for cluster "%s" not found !', $path, $this->getName())
+                );
+            }
+        }
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getLayoutsPaths()
+    {
+        return $this->layouts_paths;
+    }
 
     /**
      * @param array $paths
@@ -171,6 +228,7 @@ class Package extends AssetsPackage
             'relative_path'=>$this->getRelativePath(),
             'assets_path'=>$this->getAssetsPath(),
             'assets_presets'=>$this->getAssetsPresets(),
+            'layouts_path'=>$this->getLayoutsPaths(),
             'views_path'=>$this->getViewsPaths(),
             'views_functions'=>$this->getViewsFunctionsPaths(),
         );
@@ -194,6 +252,7 @@ class Package extends AssetsPackage
                 case 'path':
                     $this->setAssetsPath($val); break;
                 case 'assets_presets': $this->setAssetsPresets($val); break;
+                case 'layouts_path': $this->setLayoutsPaths(is_array($val) ? $val : array($val), null); break;
                 case 'views_path': $this->setViewsPaths(is_array($val) ? $val : array($val), null); break;
                 case 'views_functions': $this->setViewsFunctionsPaths(is_array($val) ? $val : array($val), null); break;
             }

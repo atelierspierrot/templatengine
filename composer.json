@@ -38,11 +38,13 @@
             },
             "jquery.tablesorter": {
                 "css": "vendor_assets/blue/style.css",
-                "jsfiles_footer": [ "vendor_assets/jquery.metadata.js", "min:vendor_assets/jquery.tablesorter.min.js" ]
+                "jsfiles_footer": [ "vendor_assets/jquery.metadata.js", "min:vendor_assets/jquery.tablesorter.min.js" ],
+                "require": "jquery"
             },
             "jquery.highlight": {
                 "css": "vendor_assets/jquery.highlight.css",
-                "jsfiles_footer": "vendor_assets/jquery.highlight.js"
+                "jsfiles_footer": "vendor_assets/jquery.highlight.js",
+                "require": "jquery"
             }
         },
         "cache-dir": "tmp",
