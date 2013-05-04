@@ -69,9 +69,9 @@ class TemplateEngineAutoloadGenerator
         $document_root = $this->_autoloader->getAssetsInstaller()->getDocumentRoot();
         $extra = $this->_package->getExtra();
 
-        if (!empty($extra) && !empty($extra['assets-dir'])) {
-            $assets_db[$this->_package->getPrettyName()] = 
-                $this->parseComposerExtra($this->_package, $app_base_path, $app_base_path);
+        $root_data = $this->parseComposerExtra($this->_package, $app_base_path, $app_base_path);
+        if (!empty($root_data)) {
+            $assets_db[$this->_package->getPrettyName()] = $root_data;
         }
 
         $vendor_path = strtr(realpath($vendor_dir), '\\', '/');
