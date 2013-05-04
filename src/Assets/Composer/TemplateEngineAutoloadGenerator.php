@@ -19,8 +19,7 @@ use Composer\Composer,
 
 use Library\Helper\Directory as DirectoryHelper;
 
-use AssetsManager\Package\AbstractAssetsPackage,
-    AssetsManager\Config,
+use AssetsManager\Config,
     AssetsManager\Composer\Installer\AssetsInstaller,
     AssetsManager\Composer\Autoload\AssetsAutoloadGenerator;
 
@@ -74,6 +73,15 @@ class TemplateEngineAutoloadGenerator
         );
 
         return $this->writeJsonDatabase($full_db);
+    }
+
+    /**
+     * @param object $package Composer\Package\PackageInterface
+     * @return void
+     */
+    public function setPackage(PackageInterface $package)
+    {
+        $this->_package = $package;
     }
 
     /**
