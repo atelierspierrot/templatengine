@@ -28,11 +28,6 @@ class Preset extends OriginalPreset
 {
 
     /**
-     * @var Assets\Loader
-     */
-    protected $assets_loader;
-
-    /**
      * @param string $package_name
      * @param array $package_data
      * @param object $package AssetsManager\Package\AssetsPackage
@@ -97,28 +92,6 @@ class Preset extends OriginalPreset
             }
         }
 	}
-
-    /**
-     * Parse and load an assets file in a template object
-     *
-     * @param string $path
-     * @param object $object The template object to work on
-     * @return void
-     */
-    public function parse($path, AbstractTemplateObject $object)
-    {
-        $package = $this->_findPresetPackageName();
-        if (substr($path, 0, strlen('min:'))=='min:') {
-            $file_path = $this->assets_loader->findInPackage(substr($path, strlen('min:')), $package);
-            $object->addMinified($file_path);
-        } elseif (substr($path, 0, strlen('pack:'))=='pack:') {
-            $file_path = $this->assets_loader->findInPackage(substr($path, strlen('pack:')), $package);
-            $object->addMinified($file_path);
-        } else {
-            $file_path = $this->assets_loader->findInPackage($path, $package);
-            $object->add($file_path);
-        }
-    }
 
 }
 

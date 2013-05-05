@@ -71,6 +71,7 @@ class TemplateEngineAutoloadGenerator
 
         $root_data = $this->parseComposerExtra($this->_package, $app_base_path, '');
         if (!empty($root_data)) {
+            $root_data['relative_path'] = '../';
             $assets_db[$this->_package->getPrettyName()] = $root_data;
         }
 
