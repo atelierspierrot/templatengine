@@ -11,102 +11,32 @@ namespace Assets\Package;
 
 use InvalidArgumentException;
 
-use Library\Helper\Directory as DirectoryHelper;
+use AssetsManager\Config,
+    AssetsManager\Package\Preset as OriginalPreset,
+    AssetsManager\Package\AssetsPackage,
+    AssetsManager\Package\AssetsPackageInterface;
 
-use Assets\Loader as AssetsLoader,
-    Assets\Package\Cluster;
+use Assets\Package\TemplateEnginePresetInterface;
 
 use TemplateEngine\TemplateEngine,
     TemplateEngine\TemplateObject\Abstracts\AbstractTemplateObject;
 
 /**
- * Preset
- *
- * This class is the "presets" manager for predefined assets plugins to use in views with
- * the `_use()` method.
- *
  * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
  */
-class Preset
+class Preset extends OriginalPreset
 {
 
     /**
-     * Composition of a `assets_presets` statement in `composer.json`
-     * @static array
-     */
-    public static $use_statements = array( 'css', 'jsfiles_footer', 'jsfiles_header' );
-
-    /**
-     * @var string
-     */
-    protected $preset_name;
-
-    /**
-     * @var array
-     */
-    protected $preset_data;
-
-    /**
-     * @var Assets\Package\Cluster
-     */
-    protected $cluster;
-
-    /**
-     * @var Assets\Loader
-     */
-    protected $assets_loader;
-
-    /**
-     * @var TemplateEngine\TemplateEngine
-     */
-    protected $template_engine;
-
-    /**
      * @param string $package_name
-     * @param object $loader Assets\Loader
+     * @param array $package_data
+     * @param object $package AssetsManager\Package\AssetsPackage
      * @param object $engine TemplateEngine\TemplateEngine
-     * @throws `InvalidArgumentException` if the preset can't be found
      */
-    public function __construct($preset_name, AssetsLoader $loader, TemplateEngine $engine)
-    {
-        $this->assets_loader = $loader;
-        $this->template_engine = $engine;
-        $this->preset_name = $preset_name;
-
-        $data = $this->_findPresetData();
-        if (!empty($data)) {
-            $this->cluster = Cluster::newClusterFromAssetsLoader($this->assets_loader);
-            $this->cluster->loadClusterFromArray(
-                $this->_findPresetPackageData()
-            );
-            $this->preset_data = $data;
-        } else {
-            throw new InvalidArgumentException(
-                sprintf('Unknown preset "%s" !', $this->preset_name)
-            );
-        }
-    }
-
-    /**
-     * Parse and load an assets file in a template object
-     *
-     * @param string $path
-     * @param object $object The template object to work on
-     * @return void
-     */
-    public function parse($path, AbstractTemplateObject $object)
-    {
-        $package = $this->_findPresetPackageName();
-        if (substr($path, 0, strlen('min:'))=='min:') {
-            $file_path = $this->assets_loader->findInPackage(substr($path, strlen('min:')), $package);
-            $object->addMinified($file_path);
-        } elseif (substr($path, 0, strlen('pack:'))=='pack:') {
-            $file_path = $this->assets_loader->findInPackage(substr($path, strlen('pack:')), $package);
-            $object->addMinified($file_path);
-        } else {
-            $file_path = $this->assets_loader->findInPackage($path, $package);
-            $object->add($file_path);
-        }
+    public function __construct(
+        $preset_name, array $preset_data, \AssetsManager\Package\AssetsPackageInterface $package
+    ) {
+        parent::__construct($preset_name, $preset_data, $package);
     }
 
 	/**
@@ -117,67 +47,51 @@ class Preset
 	 */
 	public function load()
 	{
-        foreach ($this->preset_data as $type=>$data) {
-            if ('css'===$type) {
-                foreach ($data as $path) {
-                    $this->parse($path, $this->template_engine->getTemplateObject('CssFile'));
+	    if (empty($this->_statements)) parent::load();
+
+        /* @var $template_engine TemplateEngine\TemplateEngine */
+        $template_engine = \TemplateEngine\TemplateEngine::getInstance();
+
+        foreach ($this->getOrganizedStatements() as $type=>$statements) {
+            foreach ($statements as $statement) {
+                if ('css'===$type) {
+                    $template_object = $template_engine->getTemplateObject('CssFile');
+                    $css = $statement->getData();
+                    if (isset($css['minified']) && true===$css['minified']) {
+                        $template_object->addMinified($css['src'], $css['media']);
+                    } else {
+                        $template_object->add($css['src'], $css['media']);
+                    }
                 }
-            } elseif ('jsfiles_header'===$type) {
-                foreach ($data as $path) {
-                    $this->parse($path, $this->template_engine->getTemplateObject('JavascriptFile', 'jsfiles_header'));
+                
+                elseif ('jsfiles_header'===$type) {
+                    $template_object = $template_engine->getTemplateObject('JavascriptFile', 'jsfiles_header');
+                    $js = $statement->getData();
+                    if (
+                        (isset($js['minified']) && true===$js['minified']) ||
+                        (isset($js['packed']) && true===$js['packed'])
+                    ) {
+                        $template_object->addMinified($js['src']);
+                    } else {
+                        $template_object->add($js['src']);
+                    }
                 }
-            } elseif ('jsfiles_footer'===$type) {
-                foreach ($data as $path) {
-                    $this->parse($path, $this->template_engine->getTemplateObject('JavascriptFile', 'jsfiles_footer'));
+                
+                elseif (in_array($type, array('js', 'jsfiles_footer'))) {
+                    $template_object = $template_engine->getTemplateObject('JavascriptFile', 'jsfiles_footer');
+                    $js = $statement->getData();
+                    if (
+                        (isset($js['minified']) && true===$js['minified']) ||
+                        (isset($js['packed']) && true===$js['packed'])
+                    ) {
+                        $template_object->addMinified($js['src']);
+                    } else {
+                        $template_object->add($js['src']);
+                    }
                 }
             }
         }
 	}
-
-    /**
-     * Find the data array defining a preset from the object `$preset_name`
-     *
-     * @return array|null
-     */
-    protected function _findPresetData()
-    {
-        foreach ($this->assets_loader->getAssetsDb() as $package=>$config) {
-            if (!empty($config['assets_presets']) && array_key_exists($this->preset_name, $config['assets_presets'])) {
-                return $config['assets_presets'][$this->preset_name];
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Find the data array defining the package of a preset from the object `$preset_name`
-     *
-     * @return array|null
-     */
-    protected function _findPresetPackageData()
-    {
-        foreach ($this->assets_loader->getAssetsDb() as $package=>$config) {
-            if (!empty($config['assets_presets']) && array_key_exists($this->preset_name, $config['assets_presets'])) {
-                return $config;
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Find the name of the package of a preset from the object `$preset_name`
-     *
-     * @return string|null
-     */
-    protected function _findPresetPackageName()
-    {
-        foreach ($this->assets_loader->getAssetsDb() as $package=>$config) {
-            if (!empty($config['assets_presets']) && array_key_exists($this->preset_name, $config['assets_presets'])) {
-                return $package;
-            }
-        }
-        return null;
-    }
 
 }
 

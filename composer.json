@@ -1,10 +1,10 @@
 {
     "name": "atelierspierrot/templatengine",
-    "type": "framework",
+    "type": "library-assets",
     "description": "A PHP package to build HTML5 views (based on HTML5 Boilerplate layouts).",
     "keywords": [ "php", "template", "boilerplate" ],
     "homepage": "https://github.com/atelierspierrot/templatengine",
-    "version": "0.0.7",
+    "version": "0.0.9",
     "license": "GPL-3.0",
     "authors": [
         {
@@ -19,9 +19,9 @@
     ],
     "require": {
         "php": ">=5.3.0",
-        "psr/log": "dev-master",
         "atelierspierrot/patterns": "dev-master",
-        "atelierspierrot/library": "dev-master"
+        "atelierspierrot/library": "dev-master",
+        "atelierspierrot/assets-manager": "dev-master"
     },
     "require-dev": { "sami/sami": "dev-master" },
     "autoload": { "psr-0": {
@@ -29,21 +29,29 @@
         "Assets": "src"
     } },
     "extra": {
-        "assets": "www",
-        "assets_vendor": "vendor",
-        "document_root": "www",
-        "views": [ "www", "www/html5boilerplate" ],
-        "views_functions": "src/TemplateEngine/ViewAliases.php",
-        "assets_presets": {
+        "assets-dir": "www",
+        "assets-vendor-dir": "vendor",
+        "document-root": "www",
+        "assets-presets": {
+            "jquery": {
+                "js": "top:min:vendor_assets/jquery-last.min.js"
+            },
             "jquery.tablesorter": {
                 "css": "vendor_assets/blue/style.css",
-                "jsfiles_footer": [ "vendor_assets/jquery.metadata.js", "min:vendor_assets/jquery.tablesorter.min.js" ]
+                "jsfiles_footer": [ "vendor_assets/jquery.metadata.js", "min:vendor_assets/jquery.tablesorter.min.js" ],
+                "require": "jquery"
             },
             "jquery.highlight": {
                 "css": "vendor_assets/jquery.highlight.css",
-                "jsfiles_footer": "vendor_assets/jquery.highlight.js"
+                "jsfiles_footer": "vendor_assets/jquery.highlight.js",
+                "require": "jquery"
             }
-        }
+        },
+        "cache-dir": "tmp",
+        "cache-assets-dir": "tmp_assets",
+        "layouts": "www/html5boilerplate",
+        "views": [ "www", "www/html5boilerplate" ],
+        "views-functions": "src/TemplateEngine/view_functions.php"
     },
-    "scripts": { "post-autoload-dump": "Assets\\ComposerInstaller::postAutoloadDump" }
+    "scripts": { "post-autoload-dump": "Assets\\Composer\\TemplateEngineInstaller::postAutoloadDump" }
 }

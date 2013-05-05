@@ -16,11 +16,13 @@ use Patterns\Commons\Registry,
 
 use Library\Helper\Html as HtmlHelper;
 
+use AssetsManager\Config;
+
 use TemplateEngine\Template,
     TemplateEngine\View;
 
 use Assets\Loader as AssetsLoader,
-    Assets\Package\Cluster,
+    Assets\Package\Package,
     Assets\Package\Preset;
 
 /**
@@ -108,6 +110,7 @@ class TemplateEngine
 	 */
 	protected function init($flags = TemplateEngine::NO_ERRORS)
 	{
+        Config::load('Assets\Composer\TemplateEngineConfig');
 	    $this->setFlags($flags);
         $this->template = new Template;
         $this->view = new View;
@@ -310,14 +313,14 @@ class TemplateEngine
     }
 
 	/**
-	 * Automatic assets loading from an Assets package declare in a `composer.json`
+	 * Automatic assets loading from an Assets preset declare in a `composer.json`
 	 *
-	 * @param string $package_name The name of the package to use
+	 * @param string $preset_name The name of the preset to use
 	 * @return void
 	 */
-	public function useAssetsPackage($package_name = null)
+	public function useAssetsPreset($preset_name = null)
 	{
-	    $preset = new Preset($package_name, $this->assets_loader, $this);
+        $preset = $this->assets_loader->getPreset($preset_name);
 	    $preset->load();
 	}
 
@@ -328,13 +331,13 @@ class TemplateEngine
 	 */
 	public function includePackagesViewsFunctions()
 	{
-	    $_cluster = Cluster::newClusterFromAssetsLoader($this->assets_loader);
+	    $_assets_package = Package::createFromAssetsLoader($this->assets_loader);
         foreach ($this->assets_loader->getAssetsDb() as $package=>$config) {
             if (!empty($config['views_functions'])) {
-                $cluster = clone $_cluster;
-                $cluster->loadClusterFromArray($config);
-                foreach ($cluster->getViewsFunctionsPaths() as $fcts) {
-                    $fct_file = $cluster->getFullPath($fcts);
+                $assets_package = clone $_assets_package;
+                $assets_package->loadFromArray($config);
+                foreach ($assets_package->getViewsFunctionsPaths() as $fcts) {
+                    $fct_file = $assets_package->getFullPath($fcts);
                     if (@file_exists($fct_file)) {
                         @include_once $fct_file;
                     }
@@ -589,13 +592,13 @@ class TemplateEngine
         $this->assets_loader = $loader;
         $assets_db = $this->assets_loader->getAssets();
         if (!empty($assets_db)) {
-            $_cluster = Cluster::newClusterFromAssetsLoader($this->assets_loader);
+            $_assets_package = Package::createFromAssetsLoader($this->assets_loader);
             foreach ($assets_db as $package=>$config) {
                 if (!empty($config['views_path'])) {
-                    $cluster = clone $_cluster;
-                    $cluster->loadClusterFromArray($config);
-                    foreach ($cluster->getViewsPaths() as $path) {
-                        $full_path = $cluster->getFullPath($path);
+                    $assets_package = clone $_assets_package;
+                    $assets_package->loadFromArray($config);
+                    foreach ($assets_package->getViewsPaths() as $path) {
+                        $full_path = $assets_package->getFullPath($path);
                         if (@file_exists($full_path)) {
                             $this->setToView('setIncludePath', $full_path);
                         }
