@@ -43,7 +43,7 @@ class Package extends AssetsPackage
     protected $views_functions_paths;
 
     /**
-     * Reset the cluster to empty values (except for global package)
+     * Reset the package to empty values (except for global package)
      *
      * @return void
      */
@@ -94,7 +94,7 @@ class Package extends AssetsPackage
                 }
             } else {
                 throw new InvalidArgumentException(
-                    sprintf('Views path directory "%s" for cluster "%s" not found !', $path, $this->getName())
+                    sprintf('Views path directory "%s" for package "%s" not found !', $path, $this->getName())
                 );
             }
         }
@@ -144,7 +144,7 @@ class Package extends AssetsPackage
                 }
             } else {
                 throw new InvalidArgumentException(
-                    sprintf('Views path directory "%s" for cluster "%s" not found !', $path, $this->getName())
+                    sprintf('Views path directory "%s" for package "%s" not found !', $path, $this->getName())
                 );
             }
         }
@@ -194,7 +194,7 @@ class Package extends AssetsPackage
                 }
             } else {
                 throw new InvalidArgumentException(
-                    sprintf('Views functions file "%s" for cluster "%s" not found !', $path, $this->getName())
+                    sprintf('Views functions file "%s" for package "%s" not found !', $path, $this->getName())
                 );
             }
         }
@@ -214,7 +214,7 @@ class Package extends AssetsPackage
 // -------------------------
 
     /**
-     * Get all necessary arranged cluster infos as an array
+     * Get all necessary arranged package infos as an array
      *
      * This is the data stored in the `Loader\Assets::ASSETS_DB_FILENAME`.
      *
@@ -236,7 +236,7 @@ class Package extends AssetsPackage
     }
 
     /**
-     * Load a new cluster from the `Loader\Assets::ASSETS_DB_FILENAME` entry
+     * Load a new package from the `Loader\Assets::ASSETS_DB_FILENAME` entry
      *
      * @param array
      * @return self
@@ -260,65 +260,6 @@ class Package extends AssetsPackage
         return $this;
      }
 
-    /**
-     * Parse the `composer.json` "extra" block of a package and return its transformed data
-     *
-     * @param array $package The package, Composer\Package\PackageInterface
-     * @param object $installer Assets\ComposerInstaller
-     * @param bool $main_package Is this the global package
-     * @return void
-    public function parseComposerExtra(\Composer\Package\PackageInterface $package, \Assets\ComposerInstaller $installer, $main_package = false)
-    {
-        $this->reset();
-        $extra = $package->getExtra();
-        if (!empty($extra) && isset($extra['assets'])) {
-            $this->setVersion($package->getVersion());
-            $this->setName($package->getPrettyName());
-            $package_dir = $main_package ? '' : 
-                str_replace(
-                    DirectoryHelper::slashDirname($this->getRootDirectory()) .
-                    DirectoryHelper::slashDirname($this->getAssetsDirectory()) .
-                    DirectoryHelper::slashDirname($this->getAssetsVendorDirectory()),
-                    '',
-                    $installer->getInstallPath($package)
-                );
-            $this->setRelativePath($package_dir);
-            $this->setAssetsPath($main_package ? '' : $extra['assets']);
-            if (isset($extra['views'])) {
-                $this->setViewsPaths(
-                    is_array($extra['views']) ? $extra['views'] : array($extra['views']),
-                    $main_package ? null : 'vendor'
-                );
-            }
-            if (isset($extra['views_functions'])) {
-                $this->setViewsFunctionsPaths(
-                    is_array($extra['views_functions']) ? $extra['views_functions'] : array($extra['views_functions']),
-                    $main_package ? null : 'vendor'
-                );
-            }
-            if (isset($extra['assets_presets'])) {
-                foreach ($extra['assets_presets'] as $index=>$item) {
-                    $use_item = array();
-                    foreach (Preset::$use_statements as $statement) {
-                        if (isset($item[$statement])) {
-                            $item_statement = is_array($item[$statement]) ?
-                                $item[$statement] : array($item[$statement]);
-                            $use_item[$statement] = array();
-                            foreach ($item_statement as $path) {
-                                $use_item[$statement][] = $path;
-                            }
-                        }
-                        if (!empty($use_item)) {
-                            $this->addAssetsPreset($index, $use_item);
-                        }
-                    }
-                }
-            }
-        }
-        return $this->getClusterAsArray();
-    }
-     */
-    
 }
 
 // Endfile
