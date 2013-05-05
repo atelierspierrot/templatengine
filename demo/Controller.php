@@ -12,12 +12,12 @@ use Library\Helper\Url as UrlHelper;
 class Controller
 {
 
+    public $loader;
     public $template_engine;
 
 	public function __construct()
 	{
-        $this->template_engine = TemplateEngine::getInstance();
-        $loader = new AssetsLoader(__DIR__.'/..', 'www', __DIR__);
+        $this->loader = AssetsLoader::getInstance(__DIR__.'/..', 'www', __DIR__);
 /*
 echo '<pre>';
 var_export($loader);
@@ -25,8 +25,10 @@ var_export($loader->getAssetsPath());
 var_export($loader->getAssetsWebPath());
 exit('yo');
 */
+
+        $this->template_engine = TemplateEngine::getInstance();
         $this->template_engine
-            ->guessFromAssetsLoader($loader)
+            ->guessFromAssetsLoader($this->loader)
             ->setLayoutsDir(__DIR__.'/../www/')
             ->setToTemplate('setCachePath', __DIR__.'/tmp' )
             ->setToTemplate('setAssetsCachePath', __DIR__.'/tmp' )
