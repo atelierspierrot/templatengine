@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="robots" content="index, follow, all" />
-        <title>TemplateEngine\TemplateEngine | Library</title>
+        <title>TemplateEngine\TemplateEngine | Template Engine</title>
                     <link rel="stylesheet" type="text/css" href="../stylesheet.css">
                             </head>
         <body id="class">
@@ -16,7 +16,7 @@
             
         </ul>
 
-        <div id="title">Library</div>
+        <div id="title">Template Engine</div>
 
             <div class="type">Class</div>
     <h1><a href="../TemplateEngine.html">TemplateEngine</a>\TemplateEngine</h1>
@@ -27,7 +27,8 @@
 
             <div class="description">
             <p>General template builder</p>
-            <p></p>
+            <p>
+</p>
         </div>
     
             <h2>Constants</h2>
@@ -37,28 +38,32 @@
                 <td>NO_ERRORS</td>
                 <td class="last">
                     <p><em>Using this flag, no error will be thrown during template rendering</em></p>
-                    <p></p>
+                    <p>
+</p>
                 </td>
             </tr>
                     <tr>
                 <td>THROW_TEMPLATE_ERRORS</td>
                 <td class="last">
                     <p><em>Using this flag, the template engine can throw errors</em></p>
-                    <p></p>
+                    <p>
+</p>
                 </td>
             </tr>
                     <tr>
                 <td>THROW_VIEW_ERRORS</td>
                 <td class="last">
                     <p><em>Using this flag, the template engine AND the views can throw errors</em></p>
-                    <p></p>
+                    <p>
+</p>
                 </td>
             </tr>
                     <tr>
                 <td>THROW_ALL_ERRORS</td>
                 <td class="last">
                     <p><em>Using this flag, all errors catched during rendering will be thrown</em></p>
-                    <p></p>
+                    <p>
+</p>
                 </td>
             </tr>
             </table>
@@ -183,7 +188,7 @@
                 </td>
                 <td class="last">
                     <a href="#method_templateFallback">templateFallback</a>(string $name, array $args = array(), string $fallback = null)
-                    <p>Fallback system to call a Template object&#039;s method</p>
+                    <p>Fallback system to call a Template object's method</p>
                 </td>
                 <td></td>
             </tr>
@@ -213,7 +218,7 @@
                 </td>
                 <td class="last">
                     <a href="#method_viewFallback">viewFallback</a>(string $name, array $args = array(), string $fallback = null)
-                    <p>Fallback system to call a View object&#039;s method</p>
+                    <p>Fallback system to call a View object's method</p>
                 </td>
                 <td></td>
             </tr>
@@ -222,8 +227,8 @@
                     void
                 </td>
                 <td class="last">
-                    <a href="#method_useAssetsPackage">useAssetsPackage</a>(string $package_name = null)
-                    <p>Automatic assets loading from an Assets package declare in a `composer.json`</p>
+                    <a href="#method_useAssetsPreset">useAssetsPreset</a>(string $preset_name = null)
+                    <p>Automatic assets loading from an Assets preset declare in a <code>composer.json</code></p>
                 </td>
                 <td></td>
             </tr>
@@ -373,14 +378,14 @@
         <h2>Details</h2>
 
                         <h3 id="method___call">
-        <div class="location">at line 128</div>
+        <div class="location">at line 131</div>
         <code>            public            <abbr title="TemplateEngine\misc">misc</abbr>
     <strong>__call</strong>(string $name, array $arguments)</code>
     </h3>
     <div class="details">
         <p>Object call dispatcher</p>
-        <p>This will distribute any call of a non-existing method to the template object or<br />
- the view object.</p>
+        <p>This will distribute any call of a non-existing method to the template object or
+the view object.</p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -403,7 +408,8 @@
                     <table>
         <tr>
             <td><abbr title="TemplateEngine\misc">misc</abbr></td>
-            <td></td>
+            <td>
+</td>
         </tr>
     </table>
 
@@ -422,13 +428,14 @@
     </div>
 
                 <h3 id="method___toString">
-        <div class="location">at line 144</div>
+        <div class="location">at line 147</div>
         <code>            public            string
     <strong>__toString</strong>()</code>
     </h3>
     <div class="details">
         <p>Object to string</p>
-        <p></p>
+        <p>
+</p>
         <div class="tags">
             
                             <h4>Return Value</h4>
@@ -436,7 +443,8 @@
                     <table>
         <tr>
             <td>string</td>
-            <td></td>
+            <td>
+</td>
         </tr>
     </table>
 
@@ -455,13 +463,14 @@
     </div>
 
                 <h3 id="method_setFlags">
-        <div class="location">at line 160</div>
+        <div class="location">at line 163</div>
         <code>            public            <a href="../TemplateEngine/TemplateEngine.html"><abbr title="TemplateEngine\TemplateEngine">TemplateEngine</abbr></a>
     <strong>setFlags</strong>(int $flags)</code>
     </h3>
     <div class="details">
         <p>Set the object error flags</p>
-        <p></p>
+        <p>
+</p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -469,7 +478,7 @@
                     <tr>
                 <td>int</td>
                 <td>$flags</td>
-                <td>The error flag for the template engine, must be one of the class `_ERRORS` constants</td>
+                <td>The error flag for the template engine, must be one of the class <code>_ERRORS</code> constants</td>
             </tr>
             </table>
 
@@ -479,7 +488,7 @@
                     <table>
         <tr>
             <td><a href="../TemplateEngine/TemplateEngine.html"><abbr title="TemplateEngine\TemplateEngine">TemplateEngine</abbr></a></td>
-            <td>Returns `$this` for chainability</td>
+            <td>Returns <code>$this</code> for chainability</td>
         </tr>
     </table>
 
@@ -489,13 +498,14 @@
     </div>
 
                 <h3 id="method_getFlags">
-        <div class="location">at line 171</div>
+        <div class="location">at line 174</div>
         <code>            public            int
     <strong>getFlags</strong>()</code>
     </h3>
     <div class="details">
         <p>Get the object error flags</p>
-        <p></p>
+        <p>
+</p>
         <div class="tags">
             
                             <h4>Return Value</h4>
@@ -503,7 +513,8 @@
                     <table>
         <tr>
             <td>int</td>
-            <td></td>
+            <td>
+</td>
         </tr>
     </table>
 
@@ -513,14 +524,14 @@
     </div>
 
                 <h3 id="method_setPageStructure">
-        <div class="location">at line 185</div>
+        <div class="location">at line 188</div>
         <code>            public            <a href="../TemplateEngine/TemplateEngine.html"><abbr title="TemplateEngine\TemplateEngine">TemplateEngine</abbr></a>
     <strong>setPageStructure</strong>(array $structure)</code>
     </h3>
     <div class="details">
         <p>Set the page structure</p>
-        <p>This will store the page structure in the registry and create a DOM unique ID for<br />
- each one.</p>
+        <p>This will store the page structure in the registry and create a DOM unique ID for
+each one.</p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -538,7 +549,7 @@
                     <table>
         <tr>
             <td><a href="../TemplateEngine/TemplateEngine.html"><abbr title="TemplateEngine\TemplateEngine">TemplateEngine</abbr></a></td>
-            <td>Returns `$this` for chainability</td>
+            <td>Returns <code>$this</code> for chainability</td>
         </tr>
     </table>
 
@@ -548,13 +559,14 @@
     </div>
 
                 <h3 id="method_getPageStructure">
-        <div class="location">at line 199</div>
+        <div class="location">at line 202</div>
         <code>            public            array
     <strong>getPageStructure</strong>()</code>
     </h3>
     <div class="details">
         <p>Get the page structure</p>
-        <p></p>
+        <p>
+</p>
         <div class="tags">
             
                             <h4>Return Value</h4>
@@ -562,7 +574,8 @@
                     <table>
         <tr>
             <td>array</td>
-            <td></td>
+            <td>
+</td>
         </tr>
     </table>
 
@@ -572,13 +585,14 @@
     </div>
 
                 <h3 id="method_setLayoutsDir">
-        <div class="location">at line 210</div>
+        <div class="location">at line 213</div>
         <code>            public            <a href="../TemplateEngine/TemplateEngine.html"><abbr title="TemplateEngine\TemplateEngine">TemplateEngine</abbr></a>
     <strong>setLayoutsDir</strong>(string $path)</code>
     </h3>
     <div class="details">
         <p>Set a layouts directory</p>
-        <p></p>
+        <p>
+</p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -596,7 +610,7 @@
                     <table>
         <tr>
             <td><a href="../TemplateEngine/TemplateEngine.html"><abbr title="TemplateEngine\TemplateEngine">TemplateEngine</abbr></a></td>
-            <td>Returns `$this` for chainability</td>
+            <td>Returns <code>$this</code> for chainability</td>
         </tr>
     </table>
 
@@ -606,13 +620,14 @@
     </div>
 
                 <h3 id="method_setToTemplate">
-        <div class="location">at line 228</div>
+        <div class="location">at line 231</div>
         <code>            public            <a href="../TemplateEngine/TemplateEngine.html"><abbr title="TemplateEngine\TemplateEngine">TemplateEngine</abbr></a>
     <strong>setToTemplate</strong>(string $var, <abbr title="TemplateEngine\misc">misc</abbr> $val)</code>
     </h3>
     <div class="details">
         <p>Set to Template object</p>
-        <p></p>
+        <p>
+</p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -635,7 +650,7 @@
                     <table>
         <tr>
             <td><a href="../TemplateEngine/TemplateEngine.html"><abbr title="TemplateEngine\TemplateEngine">TemplateEngine</abbr></a></td>
-            <td>Returns `$this` for chainability</td>
+            <td>Returns <code>$this</code> for chainability</td>
         </tr>
     </table>
 
@@ -654,13 +669,14 @@
     </div>
 
                 <h3 id="method_getFromTemplate">
-        <div class="location">at line 243</div>
+        <div class="location">at line 246</div>
         <code>            public            <abbr title="TemplateEngine\misc">misc</abbr>
     <strong>getFromTemplate</strong>(string $var)</code>
     </h3>
     <div class="details">
         <p>Get from Template object</p>
-        <p></p>
+        <p>
+</p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -678,7 +694,8 @@
                     <table>
         <tr>
             <td><abbr title="TemplateEngine\misc">misc</abbr></td>
-            <td></td>
+            <td>
+</td>
         </tr>
     </table>
 
@@ -697,13 +714,14 @@
     </div>
 
                 <h3 id="method_templateFallback">
-        <div class="location">at line 259</div>
+        <div class="location">at line 262</div>
         <code>            public            <abbr title="TemplateEngine\misc">misc</abbr>
     <strong>templateFallback</strong>(string $name, array $args = array(), string $fallback = null)</code>
     </h3>
     <div class="details">
-        <p>Fallback system to call a Template object&#039;s method</p>
-        <p></p>
+        <p>Fallback system to call a Template object's method</p>
+        <p>
+</p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -731,7 +749,8 @@
                     <table>
         <tr>
             <td><abbr title="TemplateEngine\misc">misc</abbr></td>
-            <td></td>
+            <td>
+</td>
         </tr>
     </table>
 
@@ -750,13 +769,14 @@
     </div>
 
                 <h3 id="method_setToView">
-        <div class="location">at line 274</div>
+        <div class="location">at line 277</div>
         <code>            public            <a href="../TemplateEngine/TemplateEngine.html"><abbr title="TemplateEngine\TemplateEngine">TemplateEngine</abbr></a>
     <strong>setToView</strong>(string $var, <abbr title="TemplateEngine\misc">misc</abbr> $val)</code>
     </h3>
     <div class="details">
         <p>Set to View object</p>
-        <p></p>
+        <p>
+</p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -779,7 +799,7 @@
                     <table>
         <tr>
             <td><a href="../TemplateEngine/TemplateEngine.html"><abbr title="TemplateEngine\TemplateEngine">TemplateEngine</abbr></a></td>
-            <td>Returns `$this` for chainability</td>
+            <td>Returns <code>$this</code> for chainability</td>
         </tr>
     </table>
 
@@ -798,13 +818,14 @@
     </div>
 
                 <h3 id="method_getFromView">
-        <div class="location">at line 289</div>
+        <div class="location">at line 292</div>
         <code>            public            <abbr title="TemplateEngine\misc">misc</abbr>
     <strong>getFromView</strong>(string $var)</code>
     </h3>
     <div class="details">
         <p>Get from Template object</p>
-        <p></p>
+        <p>
+</p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -822,7 +843,8 @@
                     <table>
         <tr>
             <td><abbr title="TemplateEngine\misc">misc</abbr></td>
-            <td></td>
+            <td>
+</td>
         </tr>
     </table>
 
@@ -841,13 +863,14 @@
     </div>
 
                 <h3 id="method_viewFallback">
-        <div class="location">at line 305</div>
+        <div class="location">at line 308</div>
         <code>            public            <abbr title="TemplateEngine\misc">misc</abbr>
     <strong>viewFallback</strong>(string $name, array $args = array(), string $fallback = null)</code>
     </h3>
     <div class="details">
-        <p>Fallback system to call a View object&#039;s method</p>
-        <p></p>
+        <p>Fallback system to call a View object's method</p>
+        <p>
+</p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -875,7 +898,8 @@
                     <table>
         <tr>
             <td><abbr title="TemplateEngine\misc">misc</abbr></td>
-            <td></td>
+            <td>
+</td>
         </tr>
     </table>
 
@@ -893,22 +917,23 @@
                     </div>
     </div>
 
-                <h3 id="method_useAssetsPackage">
-        <div class="location">at line 318</div>
+                <h3 id="method_useAssetsPreset">
+        <div class="location">at line 321</div>
         <code>            public            void
-    <strong>useAssetsPackage</strong>(string $package_name = null)</code>
+    <strong>useAssetsPreset</strong>(string $preset_name = null)</code>
     </h3>
     <div class="details">
-        <p>Automatic assets loading from an Assets package declare in a `composer.json`</p>
-        <p></p>
+        <p>Automatic assets loading from an Assets preset declare in a <code>composer.json</code></p>
+        <p>
+</p>
         <div class="tags">
                             <h4>Parameters</h4>
 
                     <table>
                     <tr>
                 <td>string</td>
-                <td>$package_name</td>
-                <td>The name of the package to use</td>
+                <td>$preset_name</td>
+                <td>The name of the preset to use</td>
             </tr>
             </table>
 
@@ -918,7 +943,8 @@
                     <table>
         <tr>
             <td>void</td>
-            <td></td>
+            <td>
+</td>
         </tr>
     </table>
 
@@ -928,13 +954,14 @@
     </div>
 
                 <h3 id="method_includePackagesViewsFunctions">
-        <div class="location">at line 329</div>
+        <div class="location">at line 332</div>
         <code>            public            void
     <strong>includePackagesViewsFunctions</strong>()</code>
     </h3>
     <div class="details">
         <p>Automatic loading of assets views functions</p>
-        <p></p>
+        <p>
+</p>
         <div class="tags">
             
                             <h4>Return Value</h4>
@@ -942,7 +969,8 @@
                     <table>
         <tr>
             <td>void</td>
-            <td></td>
+            <td>
+</td>
         </tr>
     </table>
 
@@ -952,13 +980,14 @@
     </div>
 
                 <h3 id="method_renderLayout">
-        <div class="location">at line 376</div>
+        <div class="location">at line 379</div>
         <code>            public            string
     <strong>renderLayout</strong>(string $view = null, array $params = array(), bool $display = false, bool $exit = false)</code>
     </h3>
     <div class="details">
         <p>Rendering of a layout</p>
-        <p></p>
+        <p>
+</p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -976,12 +1005,12 @@
                     <tr>
                 <td>bool</td>
                 <td>$display</td>
-                <td>Set to `true` to echo the result</td>
+                <td>Set to <code>true</code> to echo the result</td>
             </tr>
                     <tr>
                 <td>bool</td>
                 <td>$exit</td>
-                <td>Set to `true` to exit after display</td>
+                <td>Set to <code>true</code> to exit after display</td>
             </tr>
             </table>
 
@@ -1010,13 +1039,14 @@
     </div>
 
                 <h3 id="method_render">
-        <div class="location">at line 392</div>
+        <div class="location">at line 395</div>
         <code>            public            string
     <strong>render</strong>(string $view, array $params = array(), bool $display = false, bool $exit = false)</code>
     </h3>
     <div class="details">
         <p>Building of a view content including a view file passing it parameters</p>
-        <p></p>
+        <p>
+</p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -1034,12 +1064,12 @@
                     <tr>
                 <td>bool</td>
                 <td>$display</td>
-                <td>Must the rendering be displayed directly (default is `false`)</td>
+                <td>Must the rendering be displayed directly (default is <code>false</code>)</td>
             </tr>
                     <tr>
                 <td>bool</td>
                 <td>$exit</td>
-                <td>Must the system exists after the rendering (default is `false`)</td>
+                <td>Must the system exists after the rendering (default is <code>false</code>)</td>
             </tr>
             </table>
 
@@ -1068,13 +1098,14 @@
     </div>
 
                 <h3 id="method_display">
-        <div class="location">at line 413</div>
+        <div class="location">at line 416</div>
         <code>            public            string
     <strong>display</strong>(string $view, array $params = array(), bool $exit = false)</code>
     </h3>
     <div class="details">
         <p>Building of a view content including a view file passing it parameters and display it on screen</p>
-        <p></p>
+        <p>
+</p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -1092,7 +1123,7 @@
                     <tr>
                 <td>bool</td>
                 <td>$exit</td>
-                <td>Must the system exists after the rendering (default is `false`)</td>
+                <td>Must the system exists after the rendering (default is <code>false</code>)</td>
             </tr>
             </table>
 
@@ -1121,13 +1152,14 @@
     </div>
 
                 <h3 id="method_offsetExists">
-        <div class="location">at line 530</div>
+        <div class="location">at line 533</div>
         <code>            public            bool
     <strong>offsetExists</strong>(string $offset)</code>
     </h3>
     <div class="details">
         <p>Check existence of a variable by array access to the TemplateEngine</p>
-        <p></p>
+        <p>
+</p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -1145,7 +1177,8 @@
                     <table>
         <tr>
             <td>bool</td>
-            <td></td>
+            <td>
+</td>
         </tr>
     </table>
 
@@ -1155,13 +1188,14 @@
     </div>
 
                 <h3 id="method_offsetGet">
-        <div class="location">at line 545</div>
+        <div class="location">at line 548</div>
         <code>            public            bool
     <strong>offsetGet</strong>(string $offset)</code>
     </h3>
     <div class="details">
         <p>Get a variable by array access to the TemplateEngine</p>
-        <p></p>
+        <p>
+</p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -1179,7 +1213,8 @@
                     <table>
         <tr>
             <td>bool</td>
-            <td></td>
+            <td>
+</td>
         </tr>
     </table>
 
@@ -1189,13 +1224,14 @@
     </div>
 
                 <h3 id="method_offsetSet">
-        <div class="location">at line 561</div>
+        <div class="location">at line 564</div>
         <code>            public            void
     <strong>offsetSet</strong>(string $offset, <abbr title="TemplateEngine\misc">misc</abbr> $value)</code>
     </h3>
     <div class="details">
         <p>Set a variable value by array access to the TemplateEngine</p>
-        <p></p>
+        <p>
+</p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -1218,7 +1254,8 @@
                     <table>
         <tr>
             <td>void</td>
-            <td></td>
+            <td>
+</td>
         </tr>
     </table>
 
@@ -1228,13 +1265,14 @@
     </div>
 
                 <h3 id="method_offsetUnset">
-        <div class="location">at line 572</div>
+        <div class="location">at line 575</div>
         <code>            public            void
     <strong>offsetUnset</strong>(string $offset)</code>
     </h3>
     <div class="details">
         <p>Unset a variable value by array access to the TemplateEngine</p>
-        <p></p>
+        <p>
+</p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -1252,7 +1290,8 @@
                     <table>
         <tr>
             <td>void</td>
-            <td></td>
+            <td>
+</td>
         </tr>
     </table>
 
@@ -1262,13 +1301,14 @@
     </div>
 
                 <h3 id="method_setAssetsLoader">
-        <div class="location">at line 587</div>
+        <div class="location">at line 590</div>
         <code>            public            <a href="../TemplateEngine/TemplateEngine.html"><abbr title="TemplateEngine\TemplateEngine">TemplateEngine</abbr></a>
     <strong>setAssetsLoader</strong>(<a href="../Assets/Loader.html"><abbr title="Assets\Loader">Loader</abbr></a> $loader)</code>
     </h3>
     <div class="details">
         <p>Set the object Assets Loader instance</p>
-        <p></p>
+        <p>
+</p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -1286,7 +1326,7 @@
                     <table>
         <tr>
             <td><a href="../TemplateEngine/TemplateEngine.html"><abbr title="TemplateEngine\TemplateEngine">TemplateEngine</abbr></a></td>
-            <td>Returns `$this` for chainability</td>
+            <td>Returns <code>$this</code> for chainability</td>
         </tr>
     </table>
 
@@ -1296,13 +1336,14 @@
     </div>
 
                 <h3 id="method_getAssetsLoader">
-        <div class="location">at line 614</div>
+        <div class="location">at line 617</div>
         <code>            public            object
     <strong>getAssetsLoader</strong>()</code>
     </h3>
     <div class="details">
         <p>Get the object Assets Loader instance</p>
-        <p></p>
+        <p>
+</p>
         <div class="tags">
             
                             <h4>Return Value</h4>
@@ -1320,13 +1361,14 @@
     </div>
 
                 <h3 id="method_guessFromAssetsLoader">
-        <div class="location">at line 625</div>
+        <div class="location">at line 628</div>
         <code>            public            <a href="../TemplateEngine/TemplateEngine.html"><abbr title="TemplateEngine\TemplateEngine">TemplateEngine</abbr></a>
     <strong>guessFromAssetsLoader</strong>(<a href="../Assets/Loader.html"><abbr title="Assets\Loader">Loader</abbr></a> $loader)</code>
     </h3>
     <div class="details">
         <p>Set the object Assets Loader instance and dispatch required template envionement</p>
-        <p></p>
+        <p>
+</p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -1344,7 +1386,7 @@
                     <table>
         <tr>
             <td><a href="../TemplateEngine/TemplateEngine.html"><abbr title="TemplateEngine\TemplateEngine">TemplateEngine</abbr></a></td>
-            <td>Returns `$this` for chainability</td>
+            <td>Returns <code>$this</code> for chainability</td>
         </tr>
     </table>
 
@@ -1354,13 +1396,13 @@
     </div>
 
                 <h3 id="method___error">
-        <div class="location">at line 651</div>
+        <div class="location">at line 654</div>
         <code>        static    public            void
     <strong>__error</strong>(string $message = &#039;View error&#039;, string $file = null, int $line = null)</code>
     </h3>
     <div class="details">
         <p>Write a simple error during view rendering</p>
-        <p>This will trigger a `E_USER_WARNING`.</p>
+        <p>This will trigger a <code>E_USER_WARNING</code>.</p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -1388,7 +1430,8 @@
                     <table>
         <tr>
             <td>void</td>
-            <td></td>
+            <td>
+</td>
         </tr>
     </table>
 
@@ -1398,13 +1441,14 @@
     </div>
 
                 <h3 id="method___closurable">
-        <div class="location">at line 669</div>
+        <div class="location">at line 672</div>
         <code>        static    public            <abbr title="TemplateEngine\misc">misc</abbr>
     <strong>__closurable</strong>(<abbr title="TemplateEngine\callable">callable</abbr> $value, array $arguments = array())</code>
     </h3>
     <div class="details">
         <p>Try to execute a closure sending an error if necessary</p>
-        <p></p>
+        <p>
+</p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -1437,13 +1481,14 @@
     </div>
 
                 <h3 id="method___string">
-        <div class="location">at line 690</div>
+        <div class="location">at line 693</div>
         <code>        static    public            string
     <strong>__string</strong>(<abbr title="TemplateEngine\misc">misc</abbr> $value, string $glue = &#039;, &#039;)</code>
     </h3>
     <div class="details">
         <p>Get safely a string from any kind of variable</p>
-        <p></p>
+        <p>
+</p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -1456,7 +1501,7 @@
                     <tr>
                 <td>string</td>
                 <td>$glue</td>
-                <td>The glue used for array `join()` if so</td>
+                <td>The glue used for array <code>join()</code> if so</td>
             </tr>
             </table>
 
@@ -1466,7 +1511,8 @@
                     <table>
         <tr>
             <td>string</td>
-            <td></td>
+            <td>
+</td>
         </tr>
     </table>
 

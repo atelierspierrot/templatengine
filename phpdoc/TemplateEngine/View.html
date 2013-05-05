@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="robots" content="index, follow, all" />
-        <title>TemplateEngine\View | Library</title>
+        <title>TemplateEngine\View | Template Engine</title>
                     <link rel="stylesheet" type="text/css" href="../stylesheet.css">
                             </head>
         <body id="class">
@@ -16,7 +16,7 @@
             
         </ul>
 
-        <div id="title">Library</div>
+        <div id="title">Template Engine</div>
 
             <div class="type">Class</div>
     <h1><a href="../TemplateEngine.html">TemplateEngine</a>\View</h1>
@@ -146,7 +146,8 @@
     </h3>
     <div class="details">
         <p>Constructor</p>
-        <p></p>
+        <p>
+</p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -164,12 +165,12 @@
                     <tr>
                 <td>bool</td>
                 <td>$display</td>
-                <td>Must the rendering be displayed directly (default is `false`)</td>
+                <td>Must the rendering be displayed directly (default is <code>false</code>)</td>
             </tr>
                     <tr>
                 <td>bool</td>
                 <td>$exit</td>
-                <td>Must the system exists after the rendering (default is `false`)</td>
+                <td>Must the system exists after the rendering (default is <code>false</code>)</td>
             </tr>
             </table>
 
@@ -186,20 +187,23 @@
     </h3>
     <div class="details">
         <p>Building of a view content including a view file passing it parameters</p>
-        <p>The view file will be included &quot;as-is&quot; so:<br />
-<br />
- - it may exists,<br />
- - it can be either some full HTML, some CSS, some JS containing PHP scripts<br />
-<br />
- The parameters will be merged with the object `$default_view_params` and exported<br />
- in the global context of the view file. For example, if you define a parameter named<br />
- `param` on a certain value, writing ths following in your view file :<br />
-<br />
-     &lt;?php echo $param; ?&gt;<br />
-<br />
- will render the value.<br />
-<br />
- The best practice is to NOT use the small php tags `&lt;?= ... ?&gt;`.</p>
+        <p>The view file will be included "as-is" so:</p>
+
+<ul>
+<li>it may exists,</li>
+<li>it can be either some full HTML, some CSS, some JS containing PHP scripts</li>
+</ul>
+
+<p>The parameters will be merged with the object <code>$default_view_params</code> and exported
+in the global context of the view file. For example, if you define a parameter named
+<code>param</code> on a certain value, writing ths following in your view file :</p>
+
+<pre><code>&lt;?php echo $param; ?&gt;
+</code></pre>
+
+<p>will render the value.</p>
+
+<p>The best practice is to NOT use the small php tags <code>&lt;?= ... ?&gt;</code>.</p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -232,7 +236,7 @@
                     <table>
                     <tr>
                 <td><abbr title="Throws">Throws</abbr></td>
-                <td>an TemplateEngineException if the file view can&#039;t be found</td>
+                <td>an TemplateEngineException if the file view can't be found</td>
             </tr>
             </table>
 
@@ -247,7 +251,8 @@
     </h3>
     <div class="details">
         <p>Reset the default parameters for all views to an empty array</p>
-        <p></p>
+        <p>
+</p>
         <div class="tags">
             
                             <h4>Return Value</h4>
@@ -255,7 +260,7 @@
                     <table>
         <tr>
             <td><a href="../TemplateEngine/View.html"><abbr title="TemplateEngine\View">View</abbr></a></td>
-            <td>Returns `$this` for method chaining</td>
+            <td>Returns <code>$this</code> for method chaining</td>
         </tr>
     </table>
 
@@ -271,7 +276,8 @@
     </h3>
     <div class="details">
         <p>Set an array of the default parameters for all views</p>
-        <p></p>
+        <p>
+</p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -289,7 +295,7 @@
                     <table>
         <tr>
             <td><a href="../TemplateEngine/View.html"><abbr title="TemplateEngine\View">View</abbr></a></td>
-            <td>Returns `$this` for method chaining</td>
+            <td>Returns <code>$this</code> for method chaining</td>
         </tr>
     </table>
 
@@ -305,7 +311,8 @@
     </h3>
     <div class="details">
         <p>Add an entry of default parameters for all views</p>
-        <p></p>
+        <p>
+</p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -328,7 +335,7 @@
                     <table>
         <tr>
             <td><a href="../TemplateEngine/View.html"><abbr title="TemplateEngine\View">View</abbr></a></td>
-            <td>Returns `$this` for method chaining</td>
+            <td>Returns <code>$this</code> for method chaining</td>
         </tr>
     </table>
 
@@ -344,7 +351,8 @@
     </h3>
     <div class="details">
         <p>Get the default parameters for all views</p>
-        <p></p>
+        <p>
+</p>
         <div class="tags">
             
                             <h4>Return Value</h4>
@@ -368,7 +376,8 @@
     </h3>
     <div class="details">
         <p>Get a value of the default parameters for all views</p>
-        <p></p>
+        <p>
+</p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -376,12 +385,14 @@
                     <tr>
                 <td></td>
                 <td>$name</td>
-                <td></td>
+                <td>
+</td>
             </tr>
                     <tr>
                 <td></td>
                 <td>$default</td>
-                <td></td>
+                <td>
+</td>
             </tr>
             </table>
 
@@ -391,7 +402,7 @@
                     <table>
         <tr>
             <td><abbr title="TemplateEngine\misc">misc</abbr></td>
-            <td>The parameter value if found, `$default` otherwise</td>
+            <td>The parameter value if found, <code>$default</code> otherwise</td>
         </tr>
     </table>
 
@@ -425,7 +436,7 @@
                     <table>
         <tr>
             <td><a href="../TemplateEngine/View.html"><abbr title="TemplateEngine\View">View</abbr></a></td>
-            <td>Returns `$this` for method chaining</td>
+            <td>Returns <code>$this</code> for method chaining</td>
         </tr>
     </table>
 
@@ -441,7 +452,8 @@
     </h3>
     <div class="details">
         <p>Get the view files paths</p>
-        <p></p>
+        <p>
+</p>
         <div class="tags">
             
                             <h4>Return Value</h4>
@@ -465,7 +477,8 @@
     </h3>
     <div class="details">
         <p>Search a view file in the current file system</p>
-        <p></p>
+        <p>
+</p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -473,7 +486,8 @@
                     <tr>
                 <td></td>
                 <td>$path</td>
-                <td></td>
+                <td>
+</td>
             </tr>
             </table>
 
@@ -493,7 +507,7 @@
                     <table>
                     <tr>
                 <td><abbr title="Throws">Throws</abbr></td>
-                <td>a TemplateEngineException if the file can&#039;t be found</td>
+                <td>a TemplateEngineException if the file can't be found</td>
             </tr>
             </table>
 

@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>Assets\Package\Package | Template Engine</title>
+                    <link rel="stylesheet" type="text/css" href="../../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../../classes.html">Classes</a></li>
+                            <li><a href="../../namespaces.html">Namespaces</a></li>
+                        <li><a href="../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title">Template Engine</div>
+
+            <div class="type">Class</div>
+    <h1><a href="../../Assets/Package.html">Assets\Package</a>\Package</h1>
+    </div>
+        <div class="content">
+                <p>class    <strong>Package</strong>        extends <abbr title="AssetsManager\Package\AssetsPackage">AssetsPackage</abbr></p>
+
+    
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    void
+                </td>
+                <td class="last">
+                    <a href="#method_reset">reset</a>()
+                    <p>Reset the package to empty values (except for global package)</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Assets/Package/Package.html"><abbr title="Assets\Package\Package">Package</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_setLayoutsPaths">setLayoutsPaths</a>(array $paths, string $type = &#039;vendor&#039;)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Assets/Package/Package.html"><abbr title="Assets\Package\Package">Package</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_addLayoutsPath">addLayoutsPath</a>(string $path, string $type = &#039;vendor&#039;)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    array
+                </td>
+                <td class="last">
+                    <a href="#method_getLayoutsPaths">getLayoutsPaths</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Assets/Package/Package.html"><abbr title="Assets\Package\Package">Package</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_setViewsPaths">setViewsPaths</a>(array $paths, string $type = &#039;vendor&#039;)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Assets/Package/Package.html"><abbr title="Assets\Package\Package">Package</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_addViewsPath">addViewsPath</a>(string $path, string $type = &#039;vendor&#039;)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    array
+                </td>
+                <td class="last">
+                    <a href="#method_getViewsPaths">getViewsPaths</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Assets/Package/Package.html"><abbr title="Assets\Package\Package">Package</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_setViewsFunctionsPaths">setViewsFunctionsPaths</a>(array $paths, string $type = &#039;vendor&#039;)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Assets/Package/Package.html"><abbr title="Assets\Package\Package">Package</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_addViewsFunctionsPath">addViewsFunctionsPath</a>(string $path, string $type = &#039;vendor&#039;)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    array
+                </td>
+                <td class="last">
+                    <a href="#method_getViewsFunctionsPaths">getViewsFunctionsPaths</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    array
+                </td>
+                <td class="last">
+                    <a href="#method_getArray">getArray</a>()
+                    <p>Get all necessary arranged package infos as an array</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Assets/Package/Package.html"><abbr title="Assets\Package\Package">Package</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_loadFromArray">loadFromArray</a>(array $entries)
+                    <p>Load a new package from the <code>Loader\Assets::ASSETS_DB_FILENAME</code> entry</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method_reset">
+        <div class="location">at line 50</div>
+        <code>            public            void
+    <strong>reset</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Reset the package to empty values (except for global package)</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>void</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setLayoutsPaths">
+        <div class="location">at line 67</div>
+        <code>            public            <a href="../../Assets/Package/Package.html"><abbr title="Assets\Package\Package">Package</abbr></a>
+    <strong>setLayoutsPaths</strong>(array $paths, string $type = &#039;vendor&#039;)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>array</td>
+                <td>$paths</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$type</td>
+                <td>Type of the original relative path (can be <code>asset</code> or <code>vendor</code> or <code>null</code> - default is <code>vendor</code>)</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Assets/Package/Package.html"><abbr title="Assets\Package\Package">Package</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_addLayoutsPath">
+        <div class="location">at line 81</div>
+        <code>            public            <a href="../../Assets/Package/Package.html"><abbr title="Assets\Package\Package">Package</abbr></a>
+    <strong>addLayoutsPath</strong>(string $path, string $type = &#039;vendor&#039;)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$path</td>
+                <td>Relative to <code>vendor</code></td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$type</td>
+                <td>Type of the original relative path (can be <code>asset</code> or <code>vendor</code> or <code>null</code> - default is <code>vendor</code>)</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Assets/Package/Package.html"><abbr title="Assets\Package\Package">Package</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="`InvalidArgumentException`">`InvalidArgumentException`</abbr></td>
+                <td>if the path doesn't exist</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getLayoutsPaths">
+        <div class="location">at line 107</div>
+        <code>            public            array
+    <strong>getLayoutsPaths</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>array</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setViewsPaths">
+        <div class="location">at line 117</div>
+        <code>            public            <a href="../../Assets/Package/Package.html"><abbr title="Assets\Package\Package">Package</abbr></a>
+    <strong>setViewsPaths</strong>(array $paths, string $type = &#039;vendor&#039;)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>array</td>
+                <td>$paths</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$type</td>
+                <td>Type of the original relative path (can be <code>asset</code> or <code>vendor</code> or <code>null</code> - default is <code>vendor</code>)</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Assets/Package/Package.html"><abbr title="Assets\Package\Package">Package</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_addViewsPath">
+        <div class="location">at line 131</div>
+        <code>            public            <a href="../../Assets/Package/Package.html"><abbr title="Assets\Package\Package">Package</abbr></a>
+    <strong>addViewsPath</strong>(string $path, string $type = &#039;vendor&#039;)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$path</td>
+                <td>Relative to <code>vendor</code></td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$type</td>
+                <td>Type of the original relative path (can be <code>asset</code> or <code>vendor</code> or <code>null</code> - default is <code>vendor</code>)</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Assets/Package/Package.html"><abbr title="Assets\Package\Package">Package</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="`InvalidArgumentException`">`InvalidArgumentException`</abbr></td>
+                <td>if the path doesn't exist</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getViewsPaths">
+        <div class="location">at line 157</div>
+        <code>            public            array
+    <strong>getViewsPaths</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>array</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setViewsFunctionsPaths">
+        <div class="location">at line 167</div>
+        <code>            public            <a href="../../Assets/Package/Package.html"><abbr title="Assets\Package\Package">Package</abbr></a>
+    <strong>setViewsFunctionsPaths</strong>(array $paths, string $type = &#039;vendor&#039;)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>array</td>
+                <td>$paths</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$type</td>
+                <td>Type of the original relative path (can be <code>asset</code> or <code>vendor</code> or <code>null</code> - default is <code>vendor</code>)</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Assets/Package/Package.html"><abbr title="Assets\Package\Package">Package</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_addViewsFunctionsPath">
+        <div class="location">at line 181</div>
+        <code>            public            <a href="../../Assets/Package/Package.html"><abbr title="Assets\Package\Package">Package</abbr></a>
+    <strong>addViewsFunctionsPath</strong>(string $path, string $type = &#039;vendor&#039;)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$path</td>
+                <td>Relative to <code>vendor</code></td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$type</td>
+                <td>Type of the original relative path (can be <code>asset</code> or <code>vendor</code> or <code>null</code> - default is <code>vendor</code>)</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Assets/Package/Package.html"><abbr title="Assets\Package\Package">Package</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="`InvalidArgumentException`">`InvalidArgumentException`</abbr></td>
+                <td>if the path doesn't exist</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getViewsFunctionsPaths">
+        <div class="location">at line 207</div>
+        <code>            public            array
+    <strong>getViewsFunctionsPaths</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>array</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getArray">
+        <div class="location">at line 223</div>
+        <code>            public            array
+    <strong>getArray</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Get all necessary arranged package infos as an array</p>
+        <p>This is the data stored in the <code>Loader\Assets::ASSETS_DB_FILENAME</code>.</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>array</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_loadFromArray">
+        <div class="location">at line 244</div>
+        <code>            public            <a href="../../Assets/Package/Package.html"><abbr title="Assets\Package\Package">Package</abbr></a>
+    <strong>loadFromArray</strong>(array $entries)</code>
+    </h3>
+    <div class="details">
+        <p>Load a new package from the <code>Loader\Assets::ASSETS_DB_FILENAME</code> entry</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>array</td>
+                <td>$entries</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Assets/Package/Package.html"><abbr title="Assets\Package\Package">Package</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>

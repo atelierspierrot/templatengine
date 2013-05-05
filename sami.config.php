@@ -22,9 +22,9 @@ $iterator = Finder::create()
 ;
 
 $options = array(
-    'title'                => 'Library',
+    'title'                => 'Template Engine',
     'build_dir'            => __DIR__.'/phpdoc',
-    'cache_dir'            => __DIR__.'/../tmp/cache/library',
+    'cache_dir'            => __DIR__.'/../tmp/cache/templatengine',
     'default_opened_level' => 2,
 );
 

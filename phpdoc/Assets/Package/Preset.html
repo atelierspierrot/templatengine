@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="robots" content="index, follow, all" />
-        <title>Assets\Package\Preset | Library</title>
+        <title>Assets\Package\Preset | Template Engine</title>
                     <link rel="stylesheet" type="text/css" href="../../stylesheet.css">
                             </head>
         <body id="class">
@@ -16,33 +16,16 @@
             
         </ul>
 
-        <div id="title">Library</div>
+        <div id="title">Template Engine</div>
 
             <div class="type">Class</div>
     <h1><a href="../../Assets/Package.html">Assets\Package</a>\Preset</h1>
     </div>
         <div class="content">
-                <p>class    <strong>Preset</strong></p>
+                <p>class    <strong>Preset</strong>        extends <abbr title="AssetsManager\Package\Preset">Preset</abbr></p>
 
-            <div class="description">
-            <p>Preset</p>
-            <p>This class is the &quot;presets&quot; manager for predefined assets plugins to use in views with<br />
- the `_use()` method.</p>
-        </div>
     
     
-            <h2>Properties</h2>
-
-            <table>
-                    <tr>
-                <td class="type" id="property_use_statements">
-                    static                                        
-                </td>
-                <td>$use_statements</td>
-                <td class="last">Composition of a `assets_presets` statement in `composer.json`</td>
-            </tr>
-            </table>
-
     
             <h2>Methods</h2>
 
@@ -52,18 +35,9 @@
                     
                 </td>
                 <td class="last">
-                    <a href="#method___construct">__construct</a>($preset_name, <a href="../../Assets/Loader.html"><abbr title="Assets\Loader">Loader</abbr></a> $loader, <a href="../../TemplateEngine/TemplateEngine.html"><abbr title="TemplateEngine\TemplateEngine">TemplateEngine</abbr></a> $engine)
-                    <p></p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
-                    void
-                </td>
-                <td class="last">
-                    <a href="#method_parse">parse</a>(string $path, <a href="../../TemplateEngine/TemplateObject/Abstracts/AbstractTemplateObject.html"><abbr title="TemplateEngine\TemplateObject\Abstracts\AbstractTemplateObject">AbstractTemplateObject</abbr></a> $object)
-                    <p>Parse and load an assets file in a template object</p>
+                    <a href="#method___construct">__construct</a>($preset_name, array $preset_data, <abbr title="Assets\Package\AssetsManager\Package\AssetsPackageInterface">AssetsPackageInterface</abbr> $package)
+                    <p>
+</p>
                 </td>
                 <td></td>
             </tr>
@@ -73,7 +47,7 @@
                 </td>
                 <td class="last">
                     <a href="#method_load">load</a>()
-                    <p>Automatic assets loading from an Assets package declare in a `composer.json`</p>
+                    <p>Automatic assets loading from an Assets package declare in a <code>composer.json</code></p>
                 </td>
                 <td></td>
             </tr>
@@ -83,13 +57,15 @@
         <h2>Details</h2>
 
                         <h3 id="method___construct">
-        <div class="location">at line 70</div>
+        <div class="location">at line 36</div>
         <code>            public            
-    <strong>__construct</strong>($preset_name, <a href="../../Assets/Loader.html"><abbr title="Assets\Loader">Loader</abbr></a> $loader, <a href="../../TemplateEngine/TemplateEngine.html"><abbr title="TemplateEngine\TemplateEngine">TemplateEngine</abbr></a> $engine)</code>
+    <strong>__construct</strong>($preset_name, array $preset_data, <abbr title="Assets\Package\AssetsManager\Package\AssetsPackageInterface">AssetsPackageInterface</abbr> $package)</code>
     </h3>
     <div class="details">
-        <p></p>
-        <p></p>
+        <p>
+</p>
+        <p>
+</p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -97,82 +73,38 @@
                     <tr>
                 <td></td>
                 <td>$preset_name</td>
-                <td></td>
+                <td>
+</td>
             </tr>
                     <tr>
-                <td><a href="../../Assets/Loader.html"><abbr title="Assets\Loader">Loader</abbr></a></td>
-                <td>$loader</td>
-                <td></td>
+                <td>array</td>
+                <td>$preset_data</td>
+                <td>
+</td>
             </tr>
                     <tr>
-                <td><a href="../../TemplateEngine/TemplateEngine.html"><abbr title="TemplateEngine\TemplateEngine">TemplateEngine</abbr></a></td>
-                <td>$engine</td>
-                <td></td>
+                <td><abbr title="Assets\Package\AssetsManager\Package\AssetsPackageInterface">AssetsPackageInterface</abbr></td>
+                <td>$package</td>
+                <td>
+</td>
             </tr>
             </table>
 
             
-            
-                            <h4>Exceptions</h4>
-
-                    <table>
-                    <tr>
-                <td><abbr title="`InvalidArgumentException`">`InvalidArgumentException`</abbr></td>
-                <td>if the preset can&#039;t be found</td>
-            </tr>
-            </table>
-
-            
-                    </div>
-    </div>
-
-                <h3 id="method_parse">
-        <div class="location">at line 97</div>
-        <code>            public            void
-    <strong>parse</strong>(string $path, <a href="../../TemplateEngine/TemplateObject/Abstracts/AbstractTemplateObject.html"><abbr title="TemplateEngine\TemplateObject\Abstracts\AbstractTemplateObject">AbstractTemplateObject</abbr></a> $object)</code>
-    </h3>
-    <div class="details">
-        <p>Parse and load an assets file in a template object</p>
-        <p></p>
-        <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table>
-                    <tr>
-                <td>string</td>
-                <td>$path</td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td><a href="../../TemplateEngine/TemplateObject/Abstracts/AbstractTemplateObject.html"><abbr title="TemplateEngine\TemplateObject\Abstracts\AbstractTemplateObject">AbstractTemplateObject</abbr></a></td>
-                <td>$object</td>
-                <td>The template object to work on</td>
-            </tr>
-            </table>
-
-            
-                            <h4>Return Value</h4>
-
-                    <table>
-        <tr>
-            <td>void</td>
-            <td></td>
-        </tr>
-    </table>
-
             
             
                     </div>
     </div>
 
                 <h3 id="method_load">
-        <div class="location">at line 118</div>
+        <div class="location">at line 48</div>
         <code>            public            void
     <strong>load</strong>()</code>
     </h3>
     <div class="details">
-        <p>Automatic assets loading from an Assets package declare in a `composer.json`</p>
-        <p></p>
+        <p>Automatic assets loading from an Assets package declare in a <code>composer.json</code></p>
+        <p>
+</p>
         <div class="tags">
             
                             <h4>Return Value</h4>
@@ -180,7 +112,8 @@
                     <table>
         <tr>
             <td>void</td>
-            <td></td>
+            <td>
+</td>
         </tr>
     </table>
 
