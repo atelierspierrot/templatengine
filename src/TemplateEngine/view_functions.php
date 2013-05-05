@@ -493,7 +493,7 @@ if (!function_exists('_onoff'))
 	}	
 }
 
-if (!function_exists('_p')) 
+if (!function_exists('_para')) 
 {
     /**
      * Build an HTML paragraph
@@ -504,7 +504,7 @@ if (!function_exists('_p'))
      * @return misc The result of the `_echo` function (string or bool)
      * @see _tag()
      */
-	function _p($str, array $attrs = array(), $return = false)
+	function _para($str, array $attrs = array(), $return = false)
 	{
 	    return _echo(_tag('p', $str, $attrs, true), $return);
 	}	
