@@ -59,6 +59,16 @@ class TemplateEngineAutoloadGenerator
      */
     public function generate()
     {
+        $full_db = $this->getFullDb();
+        return $this->_autoloader->writeJsonDatabase($full_db);
+    }
+
+    /**
+     * Build the complete database array
+     * @return array
+     */
+    public function getFullDb()
+    {
         $filesystem = new Filesystem();
         $config = $this->_composer->getConfig();
         $assets_db = $this->_autoloader->getRegistry();
@@ -107,7 +117,7 @@ class TemplateEngineAutoloadGenerator
             'cache-assets-dir' => isset($extra['cache-assets-dir']) ? $extra['cache-assets-dir'] : Config::getDefault('cache-assets-dir'),
             'packages' => $assets_db
         );
-        return $this->_autoloader->writeJsonDatabase($full_db);
+        return $full_db;
     }
 
     /**
