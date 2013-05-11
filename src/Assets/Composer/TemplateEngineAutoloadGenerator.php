@@ -131,12 +131,28 @@ class TemplateEngineAutoloadGenerator
     public function parseComposerExtra(PackageInterface $package, $assets_package_dir, $vendor_package_dir)
     {
         $data = $this->_autoloader->getAssetsInstaller()->parseComposerExtra($package, $assets_package_dir);
+        if (is_null($data)) $data = array();
         $extra = $package->getExtra();
         $assets_package_dir = rtrim($assets_package_dir, '/') . '/';
         if (strlen($vendor_package_dir)) {
             $vendor_package_dir = rtrim($vendor_package_dir, '/') . '/';
         }
 
+        $mapping = array(
+            'layouts'=>'layouts_path',
+            'views'=>'views_path',
+            'views-functions'=>'views_functions'
+        );
+        foreach ($mapping as $json_name=>$var_name) {
+            if (isset($extra[$json_name])) {
+                $json_vals = is_array($extra[$json_name]) ? $extra[$json_name] : array($extra[$json_name]);
+                $data[$var_name] = array();
+                foreach ($json_vals as $json_val) {
+                    $data[$var_name][] = $vendor_package_dir . $json_val;
+                }
+            }
+        }
+/*
         if (isset($extra['layouts'])) {
             $layouts = is_array($extra['layouts']) ? $extra['layouts'] : array($extra['layouts']);
             $data['layouts_path'] = array();
@@ -160,8 +176,8 @@ class TemplateEngineAutoloadGenerator
                 $data['views_functions'][] = $vendor_package_dir . $view_fct_path;
             }
         }
-
-        return $data;
+*/
+        return !empty($data) ? $data : null;
     }
 
 }
