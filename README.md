@@ -8,17 +8,18 @@ layouts and the [Composer Assets Extension](https://github.com/atelierspierrot/a
 ## What is this package ?
 
 This package defines a simple Template Engine to manage PHP view files, some HTML files including
-PHP scripts to build views passing them parameters and objects and some manage some global
+PHP scripts to build views passing them parameters and objects and some tools to manage global
 layouts to embed these views. As it is based on the [Composer Assets Extension](https://github.com/atelierspierrot/assets-manager),
 the Template Engine also facilitate assets files usage and URL.
 
 **This package is not yet really documented. Please take a look at the code and the [PHP
-Documentation](http://docs.ateliers-pierrot.fr/templatengine/) for more information.**
+Documentation](http://docs.ateliers-pierrot.fr/templatengine/) for more information. A
+complete demonstration is available in the package itself (PHP server is required).**
 
 ## Assets manager
 
-The `TemplateEngine\Assets` namespace defines some classes to manage a set of assets, views
-and assets presets to use in your template engine views.
+The `TemplateEngine\Assets` namespace defines some classes to manage a set of assets, view
+files and presets to use in your template engine views.
 
 The global `Loader` class is based on three paths:
 
