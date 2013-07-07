@@ -39,10 +39,15 @@ blockquote  {border-left: 8px solid #ddd;padding-left:16px}
 .text-right {text-align: right;}
 .text-left {text-align: left;}
 .text-center {text-align: center;}
+.text-justify {text-align: justify;}
+.small      {font-size: .8em !important;}
+.big        {font-size: 1.2em !important;}
 .ok         {color: green; font-weight: bold;}
 .error      {color: red; font-weight: bold;}
 .info       {background: none repeat scroll 0 0 #F4F4F4; border: 1px solid #E0E0E0; color: #737373;
             padding: 7px; margin: 1em; width: 64%; position: relative; border-radius: 4px;}
+.bubble     {background: none repeat scroll 0 0 #F4F4F4; border: 1px solid #E0E0E0; color: #737373;
+            padding: 7px; margin: 1em 5em; position: relative; border-radius: 4px;}
 .info .handler {color: #404040;}
 .comment    {margin-top: 6px; font-style: italic; font-size: .96em;}
 .credits    {font-size:0.8em; color:#777; margin:0;line-height: 1.1em; padding-bottom: 4px; text-align: right;}
@@ -52,12 +57,62 @@ blockquote  {border-left: 8px solid #ddd;padding-left:16px}
 .float-right {float: right;}
 .note       {font-size: .9em; color: #737373;font-style: italic;}
 
-/* handlers (for `show_hide` js fct)*/
-a.handler   {color: #737373; background: transparent url(arrow-right.png) no-repeat center left; padding-left: 12px;}
+/* boxes */
+[class^="box-"] {background: none repeat scroll 0 0 #F4F4F4; border: 1px solid #E0E0E0; color: #737373;
+            padding: 1em; margin: 1em 2em; position: relative; border-radius: 4px;}
+.box-info   {  }
+.box-help   { background: #F4F4F4 url("../img/icon-help.png") no-repeat 2px 2px; text-indent: 1em; }
+.box-github { background: #F4F4F4 url("../img/gist_32_32.png") no-repeat 4px 4px; padding: 1.6em; text-indent: 1em; }
+
+/* box with icon handler on top left */
+div.infobox-wrapper { margin: 1em; padding: 15px 0 0 15px; position: relative; }
+div.infobox-title   { height: 30px; width: 30px; background-color: #fff; position: absolute; left: 0; top: 0; z-index: 9;
+                    border: 1px solid #fff; border-radius: 50%; margin: 0; padding: 0; }
+div.infobox-content { background: none repeat scroll 0 0 #F4F4F4; border: none; color: #737373;
+                    padding: 32px 32px 16px 32px; margin: 0; position: relative; z-index: 8; }
+
+/* handlers (for `show_hide` js fct) */
+a.handler   {color: #737373; background: transparent url("../img/arrow-right.png") no-repeat center left; padding-left: 12px;}
 a.handler.strong {font-weight: bold;}
-a.handler.down {background-image: url(arrow-down.png);}
-a.handler.left {background-image: url(arrow-left.png);}
+a.handler.down {background-image: url("../img/arrow-down.png");}
+a.handler.left {background-image: url("../img/arrow-left.png");}
 a.handler.noimg {background-image: none;}
+
+/* predefined link classes */
+a.external  {background: url("../img/out.gif") no-repeat center right; padding-right: 14px;}
+a.internal  {background: url("../img/inpage.gif") no-repeat center right; padding-right: 14px;}
+a.mailto    {background: url("../img/mail.gif") no-repeat center right; padding-right: 14px;}
+a.action    {background: url("../img/plus.png") no-repeat center right; padding-right: 14px;}
+
+/* icons */
+.icon   { display:inline-block; vertical-align: text-top; background-position: top left; background-repeat: no-repeat;
+        width: 10px; height: 10px; line-height: 10px; } 
+.icon.external-icon { background-image: url("../img/out.gif");  }
+.icon.internal-icon { background-image: url("../img/inpage.gif");  }
+.icon.contact-icon { background-image: url("../img/mail.gif");  }
+.icon.more-icon { background-image: url("../img/plus.png");  }
+.icon.close-icon { background-image: url("../img/close.png");  width: 19px; height: 18px; line-height: 18px; }
+.icon.sitemap-icon { background-image: url("../img/sitemap.png"); width: 16px; height: 16px; line-height: 16px; }
+.icon.search-icon { background-image: url("../img/search.gif");  width: 16px; height: 12px; line-height: 12px; }
+.icon.question-icon { background-image: url("../img/question.png");  width: 16px; height: 16px; line-height: 16px; }
+.icon.search2-icon { background-image: url("../img/search.png");  width: 18px; height: 18px; line-height: 18px; }
+.icon.private-icon { background-image: url("../img/private.png");  width: 16px; height: 16px; line-height: 16px; }
+.icon.indicator-icon { background-image: url("../img/indicator.gif");  width: 16px; height: 16px; line-height: 16px; }
+.icon.loader-icon { background-image: url("../img/loader.gif");  width: 32px; height: 32px; line-height: 32px; }
+.icon.github-icon, .icon.github18-icon { background-image: url("../img/gist_18_16.png");  width: 18px; height: 16px; line-height: 16px; }
+.icon.github32-icon { background-image: url("../img/gist_32_32.png");  width: 32px; height: 32px; line-height: 32px; }
+.icon.octocat-icon, .icon.octocat24-icon { background-image: url("../img/github-octocat-24.png");  width: 24px; height: 24px; line-height: 24px; }
+.icon.octocat32-icon { background-image: url("../img/github-octocat-32.png");  width: 32px; height: 32px; line-height: 32px; vertical-align: middle; }
+.icon.octocat48-icon { background-image: url("../img/github-octocat-48.png");  width: 48px; height: 48px; line-height: 48px; vertical-align: middle; }
+.icon.octocat64-icon { background-image: url("../img/github-octocat-64.png");  width: 64px; height: 64px; line-height: 64px; vertical-align: middle; }
+
+/* addThis hack */
+.atGitHub { background: url("../img/gist_18_16.png") no-repeat scroll 0 0 transparent;
+    display: block;
+    height: 16px;
+    line-height: 16px !important;
+    overflow: hidden;
+    width: 18px;}
 
 /* footnotes */
 .footnotes  {font-size: .92em; margin: 2em 10em 0 1em; border-top: 1px solid #ddd;}
@@ -115,7 +170,7 @@ article li {margin:0 0 5px 1.4em; padding:0;}
 
 /* back menu */
 .back_menu  {position:fixed;top: 0; right: 5em; width: auto; font-size: .8em; padding: 6px 12px; margin: 0 0.4em; 
-    background: #F1F1F1; border: 1px solid #eee; border-top: none;
+    background: #F1F1F1; border: 1px solid #eee; border-top: none; z-index:10;
     border-bottom-right-radius: 8px; border-bottom-left-radius: 8px;}
 .back_menu div  {display: inline;}
 .back_menu:hover a, .back_menu:hover a .text {color: #972323; text-decoration: none;}
