@@ -280,6 +280,27 @@ if (!function_exists('_getid'))
 	}	
 }
 
+if (!function_exists('_iecc')) 
+{
+    /**
+     * Internet Explorer Conditional Comment
+     *
+     * @param string $content
+     * @param string|array $condition(s)
+     * @param string $operator Can be 'OR' (default) or 'AND'
+     * @param bool $global May the content be also defined globally
+     * @return misc The result of the `_echo` function (string or bool)
+     * @see _echo()
+     * @see Library\Helper\ConditionalComment::buildCondition()
+     */
+	function _iecc($content, $condition = 'if IE', $operator = 'OR', $global = false)
+	{
+	    return _echo(Helper\ConditionalComment::buildCondition(
+	        $content, $condition, $operator, $global
+	    ));
+	}
+}
+
 if (!function_exists('_if')) 
 {
     /**
