@@ -23,7 +23,7 @@ if (!is_array($content)) $content = array($content);
     <div class="credits float-left">
         This page is <a href="" title="Check now online" id="html_validation">HTML5</a> & <a href="" title="Check now online" id="css_validation">CSS3</a> valid.
         <br />
-        <?php echo isset($content['left']) ? $content['left'] : $content[0]; ?>
+        <?php echo isset($content['left']) ? $content['left'] : array_shift($content); ?>
     </div>
     <?php if (isset($content['right'])) : ?>
     <div class="credits float-right">

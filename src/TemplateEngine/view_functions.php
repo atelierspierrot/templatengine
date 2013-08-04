@@ -123,7 +123,7 @@ if (!function_exists('_dump'))
 	    $list = '';
 	    foreach($array as $key=>$value) {
 	        if ($only_string_index && !is_string($key)) {
-    	        $list .= sprintf($no_index_mask, TemplateEngine::__string($value));
+    	        $list .= sprintf($no_index_mask_item, TemplateEngine::__string($value));
 	        } else {
     	        $list .= sprintf($mask_item, $key, TemplateEngine::__string($value));
     	    }
@@ -320,7 +320,7 @@ if (!function_exists('_if'))
      */
 	function _if($condition, $if_true = '', $if_false = '', $args = null, $return = false)
 	{
-	    array_unshift(_array($args), $condition);
+	    @array_unshift(_array($args), $condition);
 	    return _echo(TemplateEngine::__closurable(
 	        (true===$condition ? $if_true : $if_false), _array($args)
 	    ), $return);
