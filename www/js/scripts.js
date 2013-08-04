@@ -9,10 +9,14 @@
  *
  */
 
-function initHandler( _name ){
+function initHandler( _name, opened ){
     var elt_handler = $('#'+_name+'_handler'),
         elt_block = $('#'+_name);
-    elt_block.hide();
+    if (opened==undefined || opened==false) {
+        elt_block.hide();
+    } else {
+        elt_handler.addClass('down');
+    }
     elt_handler.click(function(){ 
         var tltp = elt_handler.accesskey ? elt_handler.accesskey('getTooltip') : false;
         if (tltp && elt_block.is(':visible')) { tltp.hide(); }
@@ -84,6 +88,13 @@ function getGitHubBugs( github, callback ) {
     });
 }
 
+function getUrlFilenameAndQuery( url ){
+    var filename, qm = url.lastIndexOf('#');
+    if (qm!==-1) { filename = url.substr(0,qm); }
+    else { filename = url; }
+    return filename.substring(filename.lastIndexOf('/')+1);
+}
+
 function getUrlFilename( url ){
     var filename, qm = url.lastIndexOf('?');
     if (qm!==-1) { filename = url.substr(0,qm); }
@@ -91,8 +102,53 @@ function getUrlFilename( url ){
     return filename.substring(filename.lastIndexOf('/')+1);
 }
 
-function activateMenuItem() {
-    var page = getUrlFilename( window.location.href );
+var BACKLINK_VISIBLE;
+function initBacklinks(){
+    // top bottom links
+    $('#short_navigation').hide();
+    // global navigation menu
+    $('#short_menu').hide();
+    $('#short_menu_handler').bind('mouseover', function(){
+        var short_menu = $('#short_menu'),
+            short_menu_ln = $('#short_menu').html().length;
+        updateBacklinks();
+        if (BACKLINK_VISIBLE=='short_tableofcontents') {
+            $('#short_tableofcontents').fadeOut();
+        }
+        $('#short_menu').fadeIn('slow', function(){
+            BACKLINK_VISIBLE='short_menu';
+            $('#short_navigation').bind('mouseleave', function(){ $('#short_menu').fadeOut('slow'); });
+        });
+    });
+    // global content menu
+    $('#short_tableofcontents').hide();
+    $('#short_tableofcontents_handler').bind('mouseover', function(){
+        var short_menu = $('#short_tableofcontents'),
+            short_menu_ln = $('#short_tableofcontents').html().length;
+        updateBacklinks();
+        if (BACKLINK_VISIBLE=='short_menu') {
+            $('#short_menu').fadeOut();
+        }
+        $('#short_tableofcontents').fadeIn('slow', function(){
+            BACKLINK_VISIBLE='short_tableofcontents';
+            $('#short_navigation').bind('mouseleave', function(){ $('#short_tableofcontents').fadeOut('slow'); });
+        });
+    });
+    // scroll interaction
+    $(window).scroll(function(){
+        var nav = $('nav'),
+            nav_poz = nav.position();
+        if ((nav_poz.top+$('nav').height()) < $(window).scrollTop()) {
+            $('#short_navigation').fadeIn('slow');
+        } else {
+            $('#short_navigation').fadeOut('slow');
+        }
+    });
+}
+
+function activateNavigationMenu() {
+    var _done = false,
+        query = getUrlFilenameAndQuery( window.location.href );
     $('nav li').each(function(i,o){
         var atag = $(o).find('a').first();
         if (atag) {
@@ -104,9 +160,19 @@ function activateMenuItem() {
                 $(this).addClass('active');
                 updateBacklinks();
             });
-            if (atag.attr('href')===page) { atag.addClass('active'); }
+            if (atag.attr('href')===query) {
+                atag.addClass('active');
+                _done = true;
+            }
         }
     });
+    if (!_done) {
+        var page = getUrlFilename( window.location.href );
+        $('nav li').each(function(i,o){
+            var atag = $(o).find('a').first();
+            if (atag && atag.attr('href')===page) { atag.addClass('active'); }
+        });
+    }
 }
 
 function getToHash(){
@@ -122,28 +188,8 @@ function getToHash(){
 
 function updateBacklinks() {
     $('#short_menu').html( $('#navigation_menu').html() );
-}
-
-function initBacklinks(){
-    $('#short_navigation').hide();
-    $('#short_menu').hide();
-    $('#short_menu_handler').bind('mouseover', function(){
-        var short_menu = $('#short_menu'),
-            short_menu_ln = $('#short_menu').html().length;
-        updateBacklinks();
-        $('#short_menu').fadeIn('slow', function(){
-            $('#short_navigation').bind('mouseleave', function(){ $('#short_menu').fadeOut('slow'); });
-        });
-    });
-    $(window).scroll(function(){
-        var nav = $('nav'),
-            nav_poz = nav.position();
-        if ((nav_poz.top+$('nav').height()) < $(window).scrollTop()) {
-            $('#short_navigation').fadeIn('slow');
-        } else {
-            $('#short_navigation').fadeOut('slow');
-        }
-    });
+    $('#short_tableofcontents').html( $('#page_menu ul').html() );
+//    $('#short_socials').html( $('#menu_socials').html() );
 }
 
 function addCSSValidatorLink( css_filename ){

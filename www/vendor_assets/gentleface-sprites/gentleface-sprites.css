@@ -1,0 +1,1727 @@
+/*!
+    Gentleface Icons Set CSS Sprite Classes
+        <http://www.gentleface.com/free_icon_set.html>
+    Licensed under Creative Commons "Attribution - NON Commercial"
+        <http://creativecommons.org/licenses/by-nc/3.0/>
+    Sources and updates of the sprites on GitHub (not liable for Gentleface)
+        <http://github.com/atelierspierrot/gentleface-sprites>
+*/
+
+/* ---------------------------------------
+
+PRESENTATION
+    The sprites icons are proposed in black and white, 16x16, 24x24, 32x32 and 48x48 pixels
+    Defaults are 'black' and '16x16' pixels
+    This file IS (and MUST BE) CSS3 valid:
+        - classes beginning by a number must be escaped with '\3'
+        - modern selectors are allowed (see <http://www.w3.org/TR/css3-selectors/>)
+    You may find a minified version of this file in "FILENAME.min.css"
+
+USAGE
+    Classic:
+        <span class="gentleface[-16 | 24 | 32 | 48] [reset] [black | white] icon_name"></span>
+    Hover effect:
+        <a ...><span class="... [hover-white | hover-black]"></span></a>
+    Active effect:
+        <TAG [class="active"]><span class="... [active-white | active-black]"></span></a>
+
+--------------------------------------- */
+
+/* ---------------------------------------
+    global reset (optional) 
+--------------------------------------- */
+.gentleface.reset,
+.gentleface-16.reset,
+.gentleface-24.reset,
+.gentleface-32.reset,
+.gentleface-48.reset {
+    border: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1em !important;
+    background-color: transparent !important;
+} 
+
+/* ---------------------------------------
+    sprite 16x16 icons
+--------------------------------------- */
+.gentleface,
+.gentleface-16 {
+    display:inline-block;
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+    vertical-align: text-top;
+} 
+.gentleface,
+.gentleface.black,
+.gentleface-16,
+.gentleface-16.black {
+    background-image: url("gentleface-black-sprite-16.png");
+    background-position: top left;
+    background-repeat: no-repeat;
+}
+.gentleface.white,
+.gentleface-16.white {
+    background-image: url("gentleface-white-sprite-16.png");
+    background-position: top left;
+    background-repeat: no-repeat;
+}
+.active > [class*="gentleface"][class*="active-white"],
+.active > [class*="gentleface"][class*="black"][class*="active-white"],
+a:hover > [class*="gentleface"][class*="hover-white"],
+a:focus > [class*="gentleface"][class*="hover-white"],
+a:hover > [class*="gentleface"][class*="black"][class*="hover-white"],
+a:focus > [class*="gentleface"][class*="black"][class*="hover-white"],
+.active > [class*="gentleface-16"][class*="active-white"],
+.active > [class*="gentleface-16"][class*="black"][class*="active-white"],
+a:hover > [class*="gentleface-16"][class*="hover-white"],
+a:focus > [class*="gentleface-16"][class*="hover-white"],
+a:hover > [class*="gentleface-16"][class*="black"][class*="hover-white"],
+a:focus > [class*="gentleface-16"][class*="black"][class*="hover-white"] {
+    background-image: url("gentleface-white-sprite-16.png");
+}
+.active > [class*="gentleface"][class*="white"][class*="active-black"],
+.active > [class*="gentleface"][class*="white"][class*="active-black"],
+a:hover > [class*="gentleface"][class*="white"][class*="hover-black"],
+a:focus > [class*="gentleface"][class*="white"][class*="hover-black"],
+.active > [class*="gentleface-16"][class*="white"][class*="active-black"],
+.active > [class*="gentleface-16"][class*="white"][class*="active-black"],
+a:hover > [class*="gentleface-16"][class*="white"][class*="hover-black"],
+a:focus > [class*="gentleface-16"][class*="white"][class*="hover-black"] {
+    background-image: url("gentleface-black-sprite-16.png");
+}
+
+.gentleface.\32x2_grid,
+.gentleface-16.\32x2_grid{ background-position: 0 0; } 
+.gentleface.\33x3_grid_2,
+.gentleface-16.\33x3_grid_2{ background-position: 0 -36px; } 
+.gentleface.\33x3_grid,
+.gentleface-16.\33x3_grid{ background-position: 0 -72px; } 
+.gentleface.air_signal,
+.gentleface-16.air_signal{ background-position: 0 -108px; } 
+.gentleface.align_center,
+.gentleface-16.align_center{ background-position: 0 -144px; } 
+.gentleface.align_just,
+.gentleface-16.align_just{ background-position: 0 -180px; } 
+.gentleface.align_left,
+.gentleface-16.align_left{ background-position: 0 -216px; } 
+.gentleface.align_right,
+.gentleface-16.align_right{ background-position: 0 -252px; } 
+.gentleface.app_window,
+.gentleface-16.app_window { background-position: 0 -288px; } 
+.gentleface.app_window_black,
+.gentleface-16.app_window_black { background-position: 0 -324px; } 
+.gentleface.app_window_black_2,
+.gentleface-16.app_window_black_2{ background-position: 0 -360px; } 
+.gentleface.app_window_cross,
+.gentleface-16.app_window_cross{ background-position: 0 -396px; } 
+.gentleface.app_window_cross_2,
+.gentleface-16.app_window_cross_2{ background-position: 0 -432px; } 
+.gentleface.app_window_2,
+.gentleface-16.app_window_2{ background-position: 0 -468px; } 
+.gentleface.app_window_shell,
+.gentleface-16.app_window_shell{ background-position: 0 -504px; } 
+.gentleface.app_window_shell_2,
+.gentleface-16.app_window_shell_2{ background-position: 0 -540px; } 
+.gentleface.arrow_bottom,
+.gentleface-16.arrow_bottom{ background-position: 0 -576px; } 
+.gentleface.arrow_bottom_left,
+.gentleface-16.arrow_bottom_left{ background-position: 0 -612px; } 
+.gentleface.arrow_bottom_rigth,
+.gentleface-16.arrow_bottom_rigth{ background-position: 0 -648px; } 
+.gentleface.arrow_l,
+.gentleface-16.arrow_l{ background-position: 0 -684px; } 
+.gentleface.arrow_left,
+.gentleface-16.arrow_left{ background-position: 0 -720px; } 
+.gentleface.arrow_r,
+.gentleface-16.arrow_r{ background-position: 0 -756px; } 
+.gentleface.arrow_right,
+.gentleface-16.arrow_right{ background-position: 0 -792px; } 
+.gentleface.arrow_top,
+.gentleface-16.arrow_top{ background-position: 0 -828px; } 
+.gentleface.arrow_top_left,
+.gentleface-16.arrow_top_left{ background-position: 0 -864px; } 
+.gentleface.arrow_top_right,
+.gentleface-16.arrow_top_right{ background-position: 0 -900px; } 
+.gentleface.arrow_two_head_2,
+.gentleface-16.arrow_two_head_2{ background-position: 0 -936px; } 
+.gentleface.arrow_two_head,
+.gentleface-16.arrow_two_head{ background-position: 0 -972px; } 
+.gentleface.attention,
+.gentleface-16.attention{ background-position: 0 -1008px; } 
+.gentleface.balance,
+.gentleface-16.balance{ background-position: 0 -1044px; } 
+.gentleface.battery,
+.gentleface-16.battery{ background-position: 0 -1080px; } 
+.gentleface.bell,
+.gentleface-16.bell{ background-position: 0 -1116px; } 
+.gentleface.book,
+.gentleface-16.book{ background-position: 0 -1152px; } 
+.gentleface.book_side,
+.gentleface-16.book_side{ background-position: 0 -1188px; } 
+.gentleface.bookmark,
+.gentleface-16.bookmark{ background-position: 0 -1224px; } 
+.gentleface.bookmark_2,
+.gentleface-16.bookmark_2{ background-position: 0 -1260px; } 
+.gentleface.box,
+.gentleface-16.box{ background-position: 0 -1296px; } 
+.gentleface.br_down,
+.gentleface-16.br_down{ background-position: 0 -1332px; } 
+.gentleface.br_next,
+.gentleface-16.br_next{ background-position: 0 -1368px; } 
+.gentleface.br_prev,
+.gentleface-16.br_prev{ background-position: 0 -1404px; } 
+.gentleface.br_up,
+.gentleface-16.br_up{ background-position: 0 -1440px; } 
+.gentleface.brackets,
+.gentleface-16.brackets{ background-position: 0 -1476px; } 
+.gentleface.browser,
+.gentleface-16.browser{ background-position: 0 -1512px; } 
+.gentleface.brush,
+.gentleface-16.brush{ background-position: 0 -1548px; } 
+.gentleface.bug,
+.gentleface-16.bug{ background-position: 0 -1584px; } 
+.gentleface.burst,
+.gentleface-16.burst{ background-position: 0 -1620px; } 
+.gentleface.calc,
+.gentleface-16.calc{ background-position: 0 -1656px; } 
+.gentleface.calendar,
+.gentleface-16.calendar{ background-position: 0 -1692px; } 
+.gentleface.calendar_2,
+.gentleface-16.calendar_2{ background-position: 0 -1728px; } 
+.gentleface.cancel,
+.gentleface-16.cancel{ background-position: 0 -1764px; } 
+.gentleface.case,
+.gentleface-16.case{ background-position: 0 -1800px; } 
+.gentleface.cassette,
+.gentleface-16.cassette{ background-position: 0 -1836px; } 
+.gentleface.cc,
+.gentleface-16.cc{ background-position: 0 -1872px; } 
+.gentleface.cert,
+.gentleface-16.cert{ background-position: 0 -1908px; } 
+.gentleface.chart_bar,
+.gentleface-16.chart_bar{ background-position: 0 -1944px; } 
+.gentleface.chart_line_2,
+.gentleface-16.chart_line_2{ background-position: -36px 0; } 
+.gentleface.chart_line,
+.gentleface-16.chart_line{ background-position: -36px -36px; } 
+.gentleface.chart_pie,
+.gentleface-16.chart_pie{ background-position: -36px -72px; } 
+.gentleface.chat_bubble_message_square,
+.gentleface-16.chat_bubble_message_square{ background-position: -36px -108px; } 
+.gentleface.checkbox_checked,
+.gentleface-16.checkbox_checked{ background-position: -36px -144px; } 
+.gentleface.checkbox_unchecked,
+.gentleface-16.checkbox_unchecked{ background-position: -36px -180px; } 
+.gentleface.checkmark,
+.gentleface-16.checkmark{ background-position: -36px -216px; } 
+.gentleface.clip,
+.gentleface-16.clip{ background-position: -36px -252px; } 
+.gentleface.clipboard_copy,
+.gentleface-16.clipboard_copy{ background-position: -36px -288px; } 
+.gentleface.clipboard_cut,
+.gentleface-16.clipboard_cut{ background-position: -36px -324px; } 
+.gentleface.clipboard_past,
+.gentleface-16.clipboard_past{ background-position: -36px -360px; } 
+.gentleface.clock,
+.gentleface-16.clock{ background-position: -36px -396px; } 
+.gentleface.cloud,
+.gentleface-16.cloud{ background-position: -36px -432px; } 
+.gentleface.cloud_rain,
+.gentleface-16.cloud_rain{ background-position: -36px -468px; } 
+.gentleface.coffe_cup,
+.gentleface-16.coffe_cup{ background-position: -36px -504px; } 
+.gentleface.cog,
+.gentleface-16.cog{ background-position: -36px -540px; } 
+.gentleface.cogs,
+.gentleface-16.cogs{ background-position: -36px -576px; } 
+.gentleface.comp,
+.gentleface-16.comp{ background-position: -36px -612px; } 
+.gentleface.compass,
+.gentleface-16.compass{ background-position: -36px -648px; } 
+.gentleface.connect,
+.gentleface-16.connect{ background-position: -36px -684px; } 
+.gentleface.contact_card,
+.gentleface-16.contact_card{ background-position: -36px -720px; } 
+.gentleface.contact,
+.gentleface-16.contact{ background-position: -36px -756px; } 
+.gentleface.cube,
+.gentleface-16.cube{ background-position: -36px -792px; } 
+.gentleface.cur_bp,
+.gentleface-16.cur_bp{ background-position: -36px -828px; } 
+.gentleface.cur_dollar,
+.gentleface-16.cur_dollar{ background-position: -36px -864px; } 
+.gentleface.cur_euro,
+.gentleface-16.cur_euro{ background-position: -36px -900px; } 
+.gentleface.cur_yen,
+.gentleface-16.cur_yen{ background-position: -36px -936px; } 
+.gentleface.cursor_H_split,
+.gentleface-16.cursor_H_split{ background-position: -36px -972px; } 
+.gentleface.cursor_V_split,
+.gentleface-16.cursor_V_split{ background-position: -36px -1008px; } 
+.gentleface.cursor_arrow,
+.gentleface-16.cursor_arrow{ background-position: -36px -1044px; } 
+.gentleface.cursor_drag_arrow_2,
+.gentleface-16.cursor_drag_arrow_2{ background-position: -36px -1080px; } 
+.gentleface.cursor_drag_arrow,
+.gentleface-16.cursor_drag_arrow{ background-position: -36px -1116px; } 
+.gentleface.cursor_drag_hand,
+.gentleface-16.cursor_drag_hand{ background-position: -36px -1152px; } 
+.gentleface.cursor_hand,
+.gentleface-16.cursor_hand{ background-position: -36px -1188px; } 
+.gentleface.dashboard,
+.gentleface-16.dashboard{ background-position: -36px -1224px; } 
+.gentleface.db,
+.gentleface-16.db{ background-position: -36px -1260px; } 
+.gentleface.delete,
+.gentleface-16.delete{ background-position: -36px -1296px; } 
+.gentleface.delete_server,
+.gentleface-16.delete_server{ background-position: -36px -1332px; } 
+.gentleface.disconnected,
+.gentleface-16.disconnected{ background-position: -36px -1368px; } 
+.gentleface.doc_delete,
+.gentleface-16.doc_delete{ background-position: -36px -1404px; } 
+.gentleface.doc_edit,
+.gentleface-16.doc_edit{ background-position: -36px -1440px; } 
+.gentleface.doc_empty,
+.gentleface-16.doc_empty{ background-position: -36px -1476px; } 
+.gentleface.doc_export,
+.gentleface-16.doc_export{ background-position: -36px -1512px; } 
+.gentleface.doc_import,
+.gentleface-16.doc_import{ background-position: -36px -1548px; } 
+.gentleface.doc_lines,
+.gentleface-16.doc_lines{ background-position: -36px -1584px; } 
+.gentleface.doc_lines_stright,
+.gentleface-16.doc_lines_stright{ background-position: -36px -1620px; } 
+.gentleface.doc_minus,
+.gentleface-16.doc_minus{ background-position: -36px -1656px; } 
+.gentleface.doc_new,
+.gentleface-16.doc_new{ background-position: -36px -1692px; } 
+.gentleface.doc_plus,
+.gentleface-16.doc_plus{ background-position: -36px -1728px; } 
+.gentleface.document,
+.gentleface-16.document{ background-position: -36px -1764px; } 
+.gentleface.download,
+.gentleface-16.download{ background-position: -36px -1800px; } 
+.gentleface.eject,
+.gentleface-16.eject{ background-position: -36px -1836px; } 
+.gentleface.emotion_sad,
+.gentleface-16.emotion_sad{ background-position: -36px -1872px; } 
+.gentleface.emotion_smile,
+.gentleface-16.emotion_smile{ background-position: -36px -1908px; } 
+.gentleface.expand,
+.gentleface-16.expand{ background-position: -36px -1944px; } 
+.gentleface.export,
+.gentleface-16.export{ background-position: -72px 0; } 
+.gentleface.eye,
+.gentleface-16.eye{ background-position: -72px -36px; } 
+.gentleface.eye_inv,
+.gentleface-16.eye_inv{ background-position: -72px -72px; } 
+.gentleface.facebook,
+.gentleface-16.facebook{ background-position: -72px -108px; } 
+.gentleface.fastforward_next,
+.gentleface-16.fastforward_next{ background-position: -72px -144px; } 
+.gentleface.fill,
+.gentleface-16.fill{ background-position: -72px -180px; } 
+.gentleface.filter,
+.gentleface-16.filter{ background-position: -72px -216px; } 
+.gentleface.fire,
+.gentleface-16.fire{ background-position: -72px -252px; } 
+.gentleface.flag_2,
+.gentleface-16.flag_2{ background-position: -72px -288px; } 
+.gentleface.flag,
+.gentleface-16.flag{ background-position: -72px -324px; } 
+.gentleface.folder_arrow,
+.gentleface-16.folder_arrow{ background-position: -72px -360px; } 
+.gentleface.folder_delete,
+.gentleface-16.folder_delete{ background-position: -72px -396px; } 
+.gentleface.folder,
+.gentleface-16.folder{ background-position: -72px -432px; } 
+.gentleface.folder_minus,
+.gentleface-16.folder_minus{ background-position: -72px -468px; } 
+.gentleface.folder_open,
+.gentleface-16.folder_open{ background-position: -72px -504px; } 
+.gentleface.folder_plus,
+.gentleface-16.folder_plus{ background-position: -72px -540px; } 
+.gentleface.font_bold,
+.gentleface-16.font_bold{ background-position: -72px -576px; } 
+.gentleface.font_italic,
+.gentleface-16.font_italic{ background-position: -72px -612px; } 
+.gentleface.font_size,
+.gentleface-16.font_size{ background-position: -72px -648px; } 
+.gentleface.font_strokethrough,
+.gentleface-16.font_strokethrough{ background-position: -72px -684px; } 
+.gentleface.font_underline,
+.gentleface-16.font_underline{ background-position: -72px -720px; } 
+.gentleface.game_pad,
+.gentleface-16.game_pad{ background-position: -72px -756px; } 
+.gentleface.glasses,
+.gentleface-16.glasses{ background-position: -72px -792px; } 
+.gentleface.globe,
+.gentleface-16.globe{ background-position: -72px -828px; } 
+.gentleface.globe_2,
+.gentleface-16.globe_2{ background-position: -72px -864px; } 
+.gentleface.globe_3,
+.gentleface-16.globe_3{ background-position: -72px -900px; } 
+.gentleface.google,
+.gentleface-16.google{ background-position: -72px -936px; } 
+.gentleface.hand,
+.gentleface-16.hand{ background-position: -72px -972px; } 
+.gentleface.hand_2,
+.gentleface-16.hand_2{ background-position: -72px -1008px; } 
+.gentleface.hand_contra,
+.gentleface-16.hand_contra{ background-position: -72px -1044px; } 
+.gentleface.hand_pro,
+.gentleface-16.hand_pro{ background-position: -72px -1080px; } 
+.gentleface.hanger,
+.gentleface-16.hanger{ background-position: -72px -1116px; } 
+.gentleface.headphones,
+.gentleface-16.headphones{ background-position: -72px -1152px; } 
+.gentleface.heart_empty,
+.gentleface-16.heart_empty{ background-position: -72px -1188px; } 
+.gentleface.heart,
+.gentleface-16.heart{ background-position: -72px -1224px; } 
+.gentleface.home,
+.gentleface-16.home{ background-position: -72px -1260px; } 
+.gentleface.image_text,
+.gentleface-16.image_text{ background-position: -72px -1296px; } 
+.gentleface.import,
+.gentleface-16.import{ background-position: -72px -1332px; } 
+.gentleface.inbox,
+.gentleface-16.inbox{ background-position: -72px -1368px; } 
+.gentleface.indent_decrease,
+.gentleface-16.indent_decrease{ background-position: -72px -1404px; } 
+.gentleface.indent_increase,
+.gentleface-16.indent_increase{ background-position: -72px -1440px; } 
+.gentleface.info,
+.gentleface-16.info{ background-position: -72px -1476px; } 
+.gentleface.inject,
+.gentleface-16.inject{ background-position: -72px -1512px; } 
+.gentleface.invisible_light,
+.gentleface-16.invisible_light{ background-position: -72px -1548px; } 
+.gentleface.invisible_revert,
+.gentleface-16.invisible_revert{ background-position: -72px -1584px; } 
+.gentleface.iphone,
+.gentleface-16.iphone{ background-position: -72px -1620px; } 
+.gentleface.key,
+.gentleface-16.key{ background-position: -72px -1656px; } 
+.gentleface.layers,
+.gentleface-16.layers{ background-position: -72px -1692px; } 
+.gentleface.layers_2,
+.gentleface-16.layers_2{ background-position: -72px -1728px; } 
+.gentleface.lightbulb,
+.gentleface-16.lightbulb{ background-position: -72px -1764px; } 
+.gentleface.lighting,
+.gentleface-16.lighting{ background-position: -72px -1800px; } 
+.gentleface.link,
+.gentleface-16.link{ background-position: -72px -1836px; } 
+.gentleface.list_bullets,
+.gentleface-16.list_bullets{ background-position: -72px -1872px; } 
+.gentleface.list_num,
+.gentleface-16.list_num{ background-position: -72px -1908px; } 
+.gentleface.loading_throbber,
+.gentleface-16.loading_throbber{ background-position: -72px -1944px; } 
+.gentleface.lock_open,
+.gentleface-16.lock_open{ background-position: -108px 0; } 
+.gentleface.magic_wand_2,
+.gentleface-16.magic_wand_2{ background-position: -108px -36px; } 
+.gentleface.magic_wand,
+.gentleface-16.magic_wand{ background-position: -108px -72px; } 
+.gentleface.mail_2,
+.gentleface-16.mail_2{ background-position: -108px -108px; } 
+.gentleface.mail,
+.gentleface-16.mail{ background-position: -108px -144px; } 
+.gentleface.message_attention,
+.gentleface-16.message_attention{ background-position: -108px -180px; } 
+.gentleface.mic,
+.gentleface-16.mic{ background-position: -108px -216px; } 
+.gentleface.microphone,
+.gentleface-16.microphone{ background-position: -108px -252px; } 
+.gentleface.money,
+.gentleface-16.money{ background-position: -108px -288px; } 
+.gentleface.monitor,
+.gentleface-16.monitor{ background-position: -108px -324px; } 
+.gentleface.movie,
+.gentleface-16.movie{ background-position: -108px -360px; } 
+.gentleface.music,
+.gentleface-16.music{ background-position: -108px -396px; } 
+.gentleface.music_square,
+.gentleface-16.music_square{ background-position: -108px -432px; } 
+.gentleface.net_comp,
+.gentleface-16.net_comp{ background-position: -108px -468px; } 
+.gentleface.network,
+.gentleface-16.network{ background-position: -108px -504px; } 
+.gentleface.not_connected,
+.gentleface-16.not_connected{ background-position: -108px -540px; } 
+.gentleface.notepad_2,
+.gentleface-16.notepad_2{ background-position: -108px -576px; } 
+.gentleface.notepad,
+.gentleface-16.notepad{ background-position: -108px -612px; } 
+.gentleface.off,
+.gentleface-16.off{ background-position: -108px -648px; } 
+.gentleface.on-off,
+.gentleface-16.on-off{ background-position: -108px -684px; } 
+.gentleface.on,
+.gentleface-16.on{ background-position: -108px -720px; } 
+.gentleface.openid,
+.gentleface-16.openid{ background-position: -108px -756px; } 
+.gentleface.padlock_closed,
+.gentleface-16.padlock_closed{ background-position: -108px -792px; } 
+.gentleface.padlock_open,
+.gentleface-16.padlock_open{ background-position: -108px -828px; } 
+.gentleface.page_layout,
+.gentleface-16.page_layout{ background-position: -108px -864px; } 
+.gentleface.paper_airplane,
+.gentleface-16.paper_airplane{ background-position: -108px -900px; } 
+.gentleface.paragraph,
+.gentleface-16.paragraph{ background-position: -108px -936px; } 
+.gentleface.pencil,
+.gentleface-16.pencil{ background-position: -108px -972px; } 
+.gentleface.phone_1,
+.gentleface-16.phone_1{ background-position: -108px -1008px; } 
+.gentleface.phone_2,
+.gentleface-16.phone_2{ background-position: -108px -1044px; } 
+.gentleface.phone,
+.gentleface-16.phone{ background-position: -108px -1080px; } 
+.gentleface.phone_touch,
+.gentleface-16.phone_touch{ background-position: -108px -1116px; } 
+.gentleface.photo,
+.gentleface-16.photo{ background-position: -108px -1152px; } 
+.gentleface.picture,
+.gentleface-16.picture{ background-position: -108px -1188px; } 
+.gentleface.pin_2,
+.gentleface-16.pin_2{ background-position: -108px -1224px; } 
+.gentleface.pin,
+.gentleface-16.pin{ background-position: -108px -1260px; } 
+.gentleface.pin_map_down,
+.gentleface-16.pin_map_down{ background-position: -108px -1296px; } 
+.gentleface.pin_map,
+.gentleface-16.pin_map{ background-position: -108px -1332px; } 
+.gentleface.pin_map_left,
+.gentleface-16.pin_map_left{ background-position: -108px -1368px; } 
+.gentleface.pin_map_right,
+.gentleface-16.pin_map_right{ background-position: -108px -1404px; } 
+.gentleface.pin_map_top,
+.gentleface-16.pin_map_top{ background-position: -108px -1440px; } 
+.gentleface.pin_sq_down,
+.gentleface-16.pin_sq_down{ background-position: -108px -1476px; } 
+.gentleface.pin_sq_left,
+.gentleface-16.pin_sq_left{ background-position: -108px -1512px; } 
+.gentleface.pin_sq_right,
+.gentleface-16.pin_sq_right{ background-position: -108px -1548px; } 
+.gentleface.pin_sq_top,
+.gentleface-16.pin_sq_top{ background-position: -108px -1584px; } 
+.gentleface.playback_ff,
+.gentleface-16.playback_ff{ background-position: -108px -1620px; } 
+.gentleface.playback_next,
+.gentleface-16.playback_next{ background-position: -108px -1656px; } 
+.gentleface.playback_pause,
+.gentleface-16.playback_pause{ background-position: -108px -1692px; } 
+.gentleface.playback_play,
+.gentleface-16.playback_play{ background-position: -108px -1728px; } 
+.gentleface.playback_prev,
+.gentleface-16.playback_prev{ background-position: -108px -1764px; } 
+.gentleface.playback_rec,
+.gentleface-16.playback_rec{ background-position: -108px -1800px; } 
+.gentleface.playback_reload,
+.gentleface-16.playback_reload{ background-position: -108px -1836px; } 
+.gentleface.playback_rew,
+.gentleface-16.playback_rew{ background-position: -108px -1872px; } 
+.gentleface.playback_stop,
+.gentleface-16.playback_stop{ background-position: -108px -1908px; } 
+.gentleface.podcast,
+.gentleface-16.podcast{ background-position: -108px -1944px; } 
+.gentleface.preso,
+.gentleface-16.preso{ background-position: -144px 0; } 
+.gentleface.print,
+.gentleface-16.print{ background-position: -144px -36px; } 
+.gentleface.push_pin,
+.gentleface-16.push_pin{ background-position: -144px -72px; } 
+.gentleface.redo,
+.gentleface-16.redo{ background-position: -144px -108px; } 
+.gentleface.refresh,
+.gentleface-16.refresh{ background-position: -144px -144px; } 
+.gentleface.reload,
+.gentleface-16.reload{ background-position: -144px -180px; } 
+.gentleface.rewind_previous,
+.gentleface-16.rewind_previous{ background-position: -144px -216px; } 
+.gentleface.rnd_br_down,
+.gentleface-16.rnd_br_down{ background-position: -144px -252px; } 
+.gentleface.rnd_br_first,
+.gentleface-16.rnd_br_first{ background-position: -144px -288px; } 
+.gentleface.rnd_br_last,
+.gentleface-16.rnd_br_last{ background-position: -144px -324px; } 
+.gentleface.rnd_br_next,
+.gentleface-16.rnd_br_next{ background-position: -144px -360px; } 
+.gentleface.rnd_br_prev,
+.gentleface-16.rnd_br_prev{ background-position: -144px -396px; } 
+.gentleface.rnd_br_up,
+.gentleface-16.rnd_br_up{ background-position: -144px -432px; } 
+.gentleface.round_and_up,
+.gentleface-16.round_and_up{ background-position: -144px -468px; } 
+.gentleface.round_arrow_left,
+.gentleface-16.round_arrow_left{ background-position: -144px -504px; } 
+.gentleface.round_arrow_right,
+.gentleface-16.round_arrow_right{ background-position: -144px -540px; } 
+.gentleface.round_checkmark,
+.gentleface-16.round_checkmark{ background-position: -144px -576px; } 
+.gentleface.round_delete,
+.gentleface-16.round_delete{ background-position: -144px -612px; } 
+.gentleface.round,
+.gentleface-16.round{ background-position: -144px -648px; } 
+.gentleface.round_minus,
+.gentleface-16.round_minus{ background-position: -144px -684px; } 
+.gentleface.round_plus,
+.gentleface-16.round_plus{ background-position: -144px -720px; } 
+.gentleface.rss,
+.gentleface-16.rss{ background-position: -144px -756px; } 
+.gentleface.rss_sq,
+.gentleface-16.rss_sq{ background-position: -144px -792px; } 
+.gentleface.sand,
+.gentleface-16.sand{ background-position: -144px -828px; } 
+.gentleface.sat_dish,
+.gentleface-16.sat_dish{ background-position: -144px -864px; } 
+.gentleface.save,
+.gentleface-16.save{ background-position: -144px -900px; } 
+.gentleface.server,
+.gentleface-16.server{ background-position: -144px -936px; } 
+.gentleface.shapes,
+.gentleface-16.shapes{ background-position: -144px -972px; } 
+.gentleface.share_2,
+.gentleface-16.share_2{ background-position: -144px -1008px; } 
+.gentleface.share,
+.gentleface-16.share{ background-position: -144px -1044px; } 
+.gentleface.shield_2,
+.gentleface-16.shield_2{ background-position: -144px -1080px; } 
+.gentleface.shield,
+.gentleface-16.shield{ background-position: -144px -1116px; } 
+.gentleface.shop_cart,
+.gentleface-16.shop_cart{ background-position: -144px -1152px; } 
+.gentleface.shopping_bag_dollar,
+.gentleface-16.shopping_bag_dollar{ background-position: -144px -1188px; } 
+.gentleface.shopping_bag,
+.gentleface-16.shopping_bag{ background-position: -144px -1224px; } 
+.gentleface.sound_high,
+.gentleface-16.sound_high{ background-position: -144px -1260px; } 
+.gentleface.sound_low,
+.gentleface-16.sound_low{ background-position: -144px -1296px; } 
+.gentleface.sound_mute,
+.gentleface-16.sound_mute{ background-position: -144px -1332px; } 
+.gentleface.spechbubble_2,
+.gentleface-16.spechbubble_2{ background-position: -144px -1368px; } 
+.gentleface.spechbubble,
+.gentleface-16.spechbubble{ background-position: -144px -1404px; } 
+.gentleface.spechbubble_sq,
+.gentleface-16.spechbubble_sq{ background-position: -144px -1440px; } 
+.gentleface.spechbubble_sq_line,
+.gentleface-16.spechbubble_sq_line{ background-position: -144px -1476px; } 
+.gentleface.sq_br_down,
+.gentleface-16.sq_br_down{ background-position: -144px -1512px; } 
+.gentleface.sq_br_first,
+.gentleface-16.sq_br_first{ background-position: -144px -1548px; } 
+.gentleface.sq_br_last,
+.gentleface-16.sq_br_last{ background-position: -144px -1584px; } 
+.gentleface.sq_br_next,
+.gentleface-16.sq_br_next{ background-position: -144px -1620px; } 
+.gentleface.sq_br_prev,
+.gentleface-16.sq_br_prev{ background-position: -144px -1656px; } 
+.gentleface.sq_br_up,
+.gentleface-16.sq_br_up{ background-position: -144px -1692px; } 
+.gentleface.sq_down,
+.gentleface-16.sq_down{ background-position: -144px -1728px; } 
+.gentleface.sq_minus,
+.gentleface-16.sq_minus{ background-position: -144px -1764px; } 
+.gentleface.sq_next,
+.gentleface-16.sq_next{ background-position: -144px -1800px; } 
+.gentleface.sq_plus,
+.gentleface-16.sq_plus{ background-position: -144px -1836px; } 
+.gentleface.sq_prev,
+.gentleface-16.sq_prev{ background-position: -144px -1872px; } 
+.gentleface.sq_up,
+.gentleface-16.sq_up{ background-position: -144px -1908px; } 
+.gentleface.square_shape,
+.gentleface-16.square_shape{ background-position: -144px -1944px; } 
+.gentleface.stairs_down,
+.gentleface-16.stairs_down{ background-position: -180px 0; } 
+.gentleface.stairs_up,
+.gentleface-16.stairs_up{ background-position: -180px -36px; } 
+.gentleface.star_fav_empty,
+.gentleface-16.star_fav_empty{ background-position: -180px -72px; } 
+.gentleface.star_fav,
+.gentleface-16.star_fav{ background-position: -180px -108px; } 
+.gentleface.star,
+.gentleface-16.star{ background-position: -180px -144px; } 
+.gentleface.stop_watch,
+.gentleface-16.stop_watch{ background-position: -180px -180px; } 
+.gentleface.sun,
+.gentleface-16.sun{ background-position: -180px -216px; } 
+.gentleface.tag,
+.gentleface-16.tag{ background-position: -180px -252px; } 
+.gentleface.tape,
+.gentleface-16.tape{ background-position: -180px -288px; } 
+.gentleface.target,
+.gentleface-16.target{ background-position: -180px -324px; } 
+.gentleface.text_curstor,
+.gentleface-16.text_curstor{ background-position: -180px -360px; } 
+.gentleface.text_letter_t,
+.gentleface-16.text_letter_t{ background-position: -180px -396px; } 
+.gentleface.top_right_expand,
+.gentleface-16.top_right_expand{ background-position: -180px -432px; } 
+.gentleface.track,
+.gentleface-16.track{ background-position: -180px -468px; } 
+.gentleface.trash,
+.gentleface-16.trash{ background-position: -180px -504px; } 
+.gentleface.twitter_2,
+.gentleface-16.twitter_2{ background-position: -180px -540px; } 
+.gentleface.twitter,
+.gentleface-16.twitter{ background-position: -180px -576px; } 
+.gentleface.undo,
+.gentleface-16.undo{ background-position: -180px -612px; } 
+.gentleface.user,
+.gentleface-16.user{ background-position: -180px -648px; } 
+.gentleface.users,
+.gentleface-16.users{ background-position: -180px -684px; } 
+.gentleface.vault,
+.gentleface-16.vault{ background-position: -180px -720px; } 
+.gentleface.wallet,
+.gentleface-16.wallet{ background-position: -180px -756px; } 
+.gentleface.wifi_router,
+.gentleface-16.wifi_router{ background-position: -180px -792px; } 
+.gentleface.wireless_signal,
+.gentleface-16.wireless_signal{ background-position: -180px -828px; } 
+.gentleface.wrench,
+.gentleface-16.wrench{ background-position: -180px -864px; } 
+.gentleface.wrench_plus_2,
+.gentleface-16.wrench_plus_2{ background-position: -180px -900px; } 
+.gentleface.wrench_plus,
+.gentleface-16.wrench_plus{ background-position: -180px -936px; } 
+.gentleface.youtube,
+.gentleface-16.youtube{ background-position: -180px -972px; } 
+.gentleface.zoom,
+.gentleface-16.zoom{ background-position: -180px -1008px; } 
+
+/* ---------------------------------------
+    sprite 24x24 icons
+--------------------------------------- */
+.gentleface-24 {
+    display:inline-block;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    vertical-align: text-top;
+} 
+.gentleface-24,
+.gentleface-24.black {
+    background-image: url("gentleface-black-sprite-24.png");
+    background-position: top left;
+    background-repeat: no-repeat;
+}
+.gentleface-24.white {
+    background-image: url("gentleface-white-sprite-24.png");
+    background-position: top left;
+    background-repeat: no-repeat;
+}
+.active > [class*="gentleface-24"][class*="active-white"],
+.active > [class*="gentleface-24"][class*="black"][class*="active-white"],
+a:hover > [class*="gentleface-24"][class*="hover-white"],
+a:focus > [class*="gentleface-24"][class*="hover-white"],
+a:hover > [class*="gentleface-24"][class*="black"][class*="hover-white"],
+a:focus > [class*="gentleface-24"][class*="black"][class*="hover-white"] {
+    background-image: url("gentleface-white-sprite-24.png");
+}
+.active > [class*="gentleface-24"][class*="white"][class*="active-black"],
+.active > [class*="gentleface-24"][class*="white"][class*="active-black"],
+a:hover > [class*="gentleface-24"][class*="white"][class*="hover-black"],
+a:focus > [class*="gentleface-24"][class*="white"][class*="hover-black"] {
+    background-image: url("gentleface-black-sprite-24.png");
+}
+
+.gentleface-24.\32x2_grid{ background-position: 0 0;  } 
+.gentleface-24.\33x3_grid_2{ background-position: 0 -54px;  } 
+.gentleface-24.\33x3_grid{ background-position: 0 -108px;  } 
+.gentleface-24.air_signal{ background-position: 0 -162px;  } 
+.gentleface-24.align_center{ background-position: 0 -216px;  } 
+.gentleface-24.align_just{ background-position: 0 -270px;  } 
+.gentleface-24.align_left{ background-position: 0 -324px;  } 
+.gentleface-24.align_right{ background-position: 0 -378px;  } 
+.gentleface-24.app_window{ background-position: 0 -432px;  } 
+.gentleface-24.app_window_black{ background-position: 0 -486px;  } 
+.gentleface-24.app_window_black_2{ background-position: 0 -540px;  } 
+.gentleface-24.app_window_cross{ background-position: 0 -594px;  } 
+.gentleface-24.app_window_cross_2{ background-position: 0 -648px;  } 
+.gentleface-24.app_window_2{ background-position: 0 -702px;  } 
+.gentleface-24.app_window_shell{ background-position: 0 -756px;  } 
+.gentleface-24.app_window_shell_2{ background-position: 0 -810px;  } 
+.gentleface-24.arrow_bottom{ background-position: 0 -864px;  } 
+.gentleface-24.arrow_bottom_left{ background-position: 0 -918px;  } 
+.gentleface-24.arrow_bottom_rigth{ background-position: 0 -972px;  } 
+.gentleface-24.arrow_l{ background-position: 0 -1026px;  } 
+.gentleface-24.arrow_left{ background-position: 0 -1080px;  } 
+.gentleface-24.arrow_r{ background-position: 0 -1134px;  } 
+.gentleface-24.arrow_right{ background-position: 0 -1188px;  } 
+.gentleface-24.arrow_top{ background-position: 0 -1242px;  } 
+.gentleface-24.arrow_top_left{ background-position: 0 -1296px;  } 
+.gentleface-24.arrow_top_right{ background-position: 0 -1350px;  } 
+.gentleface-24.arrow_two_head_2{ background-position: 0 -1404px;  } 
+.gentleface-24.arrow_two_head{ background-position: 0 -1458px;  } 
+.gentleface-24.attention{ background-position: 0 -1512px;  } 
+.gentleface-24.balance{ background-position: 0 -1566px;  } 
+.gentleface-24.battery{ background-position: 0 -1620px;  } 
+.gentleface-24.bell{ background-position: 0 -1674px;  } 
+.gentleface-24.book{ background-position: 0 -1728px;  } 
+.gentleface-24.book_side{ background-position: 0 -1782px;  } 
+.gentleface-24.bookmark{ background-position: 0 -1836px;  } 
+.gentleface-24.bookmark_2{ background-position: 0 -1890px;  } 
+.gentleface-24.box{ background-position: 0 -1944px;  } 
+.gentleface-24.br_down{ background-position: -54px 0;  } 
+.gentleface-24.br_next{ background-position: -54px -54px;  } 
+.gentleface-24.br_prev{ background-position: -54px -108px;  } 
+.gentleface-24.br_up{ background-position: -54px -162px;  } 
+.gentleface-24.brackets{ background-position: -54px -216px;  } 
+.gentleface-24.browser{ background-position: -54px -270px;  } 
+.gentleface-24.brush{ background-position: -54px -324px;  } 
+.gentleface-24.bug{ background-position: -54px -378px;  } 
+.gentleface-24.burst{ background-position: -54px -432px;  } 
+.gentleface-24.calc{ background-position: -54px -486px;  } 
+.gentleface-24.calendar{ background-position: -54px -540px;  } 
+.gentleface-24.calendar_2{ background-position: -54px -594px;  } 
+.gentleface-24.cancel{ background-position: -54px -648px;  } 
+.gentleface-24.case{ background-position: -54px -702px;  } 
+.gentleface-24.cassette{ background-position: -54px -756px;  } 
+.gentleface-24.cc{ background-position: -54px -810px;  } 
+.gentleface-24.cert{ background-position: -54px -864px;  } 
+.gentleface-24.chart_bar{ background-position: -54px -918px;  } 
+.gentleface-24.chart_line_2{ background-position: -54px -972px;  } 
+.gentleface-24.chart_line{ background-position: -54px -1026px;  } 
+.gentleface-24.chart_pie{ background-position: -54px -1080px;  } 
+.gentleface-24.chat_bubble_message_square{ background-position: -54px -1134px;  } 
+.gentleface-24.checkbox_checked{ background-position: -54px -1188px;  } 
+.gentleface-24.checkbox_unchecked{ background-position: -54px -1242px;  } 
+.gentleface-24.checkmark{ background-position: -54px -1296px;  } 
+.gentleface-24.clip{ background-position: -54px -1350px;  } 
+.gentleface-24.clipboard_copy{ background-position: -54px -1404px;  } 
+.gentleface-24.clipboard_cut{ background-position: -54px -1458px;  } 
+.gentleface-24.clipboard_past{ background-position: -54px -1512px;  } 
+.gentleface-24.clock{ background-position: -54px -1566px;  } 
+.gentleface-24.cloud{ background-position: -54px -1620px;  } 
+.gentleface-24.cloud_rain{ background-position: -54px -1674px;  } 
+.gentleface-24.coffe_cup{ background-position: -54px -1728px;  } 
+.gentleface-24.cog{ background-position: -54px -1782px;  } 
+.gentleface-24.cogs{ background-position: -54px -1836px;  } 
+.gentleface-24.comp{ background-position: -54px -1890px;  } 
+.gentleface-24.compass{ background-position: -54px -1944px;  } 
+.gentleface-24.connect{ background-position: -108px 0;  } 
+.gentleface-24.contact_card{ background-position: -108px -54px;  } 
+.gentleface-24.contact{ background-position: -108px -108px;  } 
+.gentleface-24.cube{ background-position: -108px -162px;  } 
+.gentleface-24.cur_bp{ background-position: -108px -216px;  } 
+.gentleface-24.cur_dollar{ background-position: -108px -270px;  } 
+.gentleface-24.cur_euro{ background-position: -108px -324px;  } 
+.gentleface-24.cur_yen{ background-position: -108px -378px;  } 
+.gentleface-24.cursor_H_split{ background-position: -108px -432px;  } 
+.gentleface-24.cursor_V_split{ background-position: -108px -486px;  } 
+.gentleface-24.cursor_arrow{ background-position: -108px -540px;  } 
+.gentleface-24.cursor_drag_arrow_2{ background-position: -108px -594px;  } 
+.gentleface-24.cursor_drag_arrow{ background-position: -108px -648px;  } 
+.gentleface-24.cursor_drag_hand{ background-position: -108px -702px;  } 
+.gentleface-24.cursor_hand{ background-position: -108px -756px;  } 
+.gentleface-24.dashboard{ background-position: -108px -810px;  } 
+.gentleface-24.db{ background-position: -108px -864px;  } 
+.gentleface-24.delete{ background-position: -108px -918px;  } 
+.gentleface-24.delete_server{ background-position: -108px -972px;  } 
+.gentleface-24.disconnected{ background-position: -108px -1026px;  } 
+.gentleface-24.doc_delete{ background-position: -108px -1080px;  } 
+.gentleface-24.doc_edit{ background-position: -108px -1134px;  } 
+.gentleface-24.doc_empty{ background-position: -108px -1188px;  } 
+.gentleface-24.doc_export{ background-position: -108px -1242px;  } 
+.gentleface-24.doc_import{ background-position: -108px -1296px;  } 
+.gentleface-24.doc_lines{ background-position: -108px -1350px;  } 
+.gentleface-24.doc_lines_stright{ background-position: -108px -1404px;  } 
+.gentleface-24.doc_minus{ background-position: -108px -1458px;  } 
+.gentleface-24.doc_new{ background-position: -108px -1512px;  } 
+.gentleface-24.doc_plus{ background-position: -108px -1566px;  } 
+.gentleface-24.document{ background-position: -108px -1620px;  } 
+.gentleface-24.download{ background-position: -108px -1674px;  } 
+.gentleface-24.eject{ background-position: -108px -1728px;  } 
+.gentleface-24.emotion_sad{ background-position: -108px -1782px;  } 
+.gentleface-24.emotion_smile{ background-position: -108px -1836px;  } 
+.gentleface-24.expand{ background-position: -108px -1890px;  } 
+.gentleface-24.export{ background-position: -108px -1944px;  } 
+.gentleface-24.eye{ background-position: -162px 0;  } 
+.gentleface-24.eye_inv{ background-position: -162px -54px;  } 
+.gentleface-24.facebook{ background-position: -162px -108px;  } 
+.gentleface-24.fastforward_next{ background-position: -162px -162px;  } 
+.gentleface-24.fill{ background-position: -162px -216px;  } 
+.gentleface-24.filter{ background-position: -162px -270px;  } 
+.gentleface-24.fire{ background-position: -162px -324px;  } 
+.gentleface-24.flag_2{ background-position: -162px -378px;  } 
+.gentleface-24.flag{ background-position: -162px -432px;  } 
+.gentleface-24.folder_arrow{ background-position: -162px -486px;  } 
+.gentleface-24.folder_delete{ background-position: -162px -540px;  } 
+.gentleface-24.folder{ background-position: -162px -594px;  } 
+.gentleface-24.folder_minus{ background-position: -162px -648px;  } 
+.gentleface-24.folder_open{ background-position: -162px -702px;  } 
+.gentleface-24.folder_plus{ background-position: -162px -756px;  } 
+.gentleface-24.font_bold{ background-position: -162px -810px;  } 
+.gentleface-24.font_italic{ background-position: -162px -864px;  } 
+.gentleface-24.font_size{ background-position: -162px -918px;  } 
+.gentleface-24.font_strokethrough{ background-position: -162px -972px;  } 
+.gentleface-24.font_underline{ background-position: -162px -1026px;  } 
+.gentleface-24.game_pad{ background-position: -162px -1080px;  } 
+.gentleface-24.glasses{ background-position: -162px -1134px;  } 
+.gentleface-24.globe{ background-position: -162px -1188px;  } 
+.gentleface-24.globe_2{ background-position: -162px -1242px;  } 
+.gentleface-24.globe_3{ background-position: -162px -1296px;  } 
+.gentleface-24.google{ background-position: -162px -1350px;  } 
+.gentleface-24.hand{ background-position: -162px -1404px;  } 
+.gentleface-24.hand_2{ background-position: -162px -1458px;  } 
+.gentleface-24.hand_contra{ background-position: -162px -1512px;  } 
+.gentleface-24.hand_pro{ background-position: -162px -1566px;  } 
+.gentleface-24.hanger{ background-position: -162px -1620px;  } 
+.gentleface-24.headphones{ background-position: -162px -1674px;  } 
+.gentleface-24.heart_empty{ background-position: -162px -1728px;  } 
+.gentleface-24.heart{ background-position: -162px -1782px;  } 
+.gentleface-24.home{ background-position: -162px -1836px;  } 
+.gentleface-24.image_text{ background-position: -162px -1890px;  } 
+.gentleface-24.import{ background-position: -162px -1944px;  } 
+.gentleface-24.inbox{ background-position: -216px 0;  } 
+.gentleface-24.indent_decrease{ background-position: -216px -54px;  } 
+.gentleface-24.indent_increase{ background-position: -216px -108px;  } 
+.gentleface-24.info{ background-position: -216px -162px;  } 
+.gentleface-24.inject{ background-position: -216px -216px;  } 
+.gentleface-24.invisible_light{ background-position: -216px -270px;  } 
+.gentleface-24.invisible_revert{ background-position: -216px -324px;  } 
+.gentleface-24.iphone{ background-position: -216px -378px;  } 
+.gentleface-24.key{ background-position: -216px -432px;  } 
+.gentleface-24.layers{ background-position: -216px -486px;  } 
+.gentleface-24.layers_2{ background-position: -216px -540px;  } 
+.gentleface-24.lightbulb{ background-position: -216px -594px;  } 
+.gentleface-24.lighting{ background-position: -216px -648px;  } 
+.gentleface-24.link{ background-position: -216px -702px;  } 
+.gentleface-24.list_bullets{ background-position: -216px -756px;  } 
+.gentleface-24.list_num{ background-position: -216px -810px;  } 
+.gentleface-24.loading_throbber{ background-position: -216px -864px;  } 
+.gentleface-24.lock_open{ background-position: -216px -918px;  } 
+.gentleface-24.magic_wand_2{ background-position: -216px -972px;  } 
+.gentleface-24.magic_wand{ background-position: -216px -1026px;  } 
+.gentleface-24.mail_2{ background-position: -216px -1080px;  } 
+.gentleface-24.mail{ background-position: -216px -1134px;  } 
+.gentleface-24.message_attention{ background-position: -216px -1188px;  } 
+.gentleface-24.mic{ background-position: -216px -1242px;  } 
+.gentleface-24.microphone{ background-position: -216px -1296px;  } 
+.gentleface-24.money{ background-position: -216px -1350px;  } 
+.gentleface-24.monitor{ background-position: -216px -1404px;  } 
+.gentleface-24.movie{ background-position: -216px -1458px;  } 
+.gentleface-24.music{ background-position: -216px -1512px;  } 
+.gentleface-24.music_square{ background-position: -216px -1566px;  } 
+.gentleface-24.net_comp{ background-position: -216px -1620px;  } 
+.gentleface-24.network{ background-position: -216px -1674px;  } 
+.gentleface-24.not_connected{ background-position: -216px -1728px;  } 
+.gentleface-24.notepad_2{ background-position: -216px -1782px;  } 
+.gentleface-24.notepad{ background-position: -216px -1836px;  } 
+.gentleface-24.off{ background-position: -216px -1890px;  } 
+.gentleface-24.on-off{ background-position: -216px -1944px;  } 
+.gentleface-24.on{ background-position: -270px 0;  } 
+.gentleface-24.openid{ background-position: -270px -54px;  } 
+.gentleface-24.padlock_closed{ background-position: -270px -108px;  } 
+.gentleface-24.padlock_open{ background-position: -270px -162px;  } 
+.gentleface-24.page_layout{ background-position: -270px -216px;  } 
+.gentleface-24.paper_airplane{ background-position: -270px -270px;  } 
+.gentleface-24.paragraph{ background-position: -270px -324px;  } 
+.gentleface-24.pencil{ background-position: -270px -378px;  } 
+.gentleface-24.phone_1{ background-position: -270px -432px;  } 
+.gentleface-24.phone_2{ background-position: -270px -486px;  } 
+.gentleface-24.phone{ background-position: -270px -540px;  } 
+.gentleface-24.phone_touch{ background-position: -270px -594px;  } 
+.gentleface-24.photo{ background-position: -270px -648px;  } 
+.gentleface-24.picture{ background-position: -270px -702px;  } 
+.gentleface-24.pin_2{ background-position: -270px -756px;  } 
+.gentleface-24.pin{ background-position: -270px -810px;  } 
+.gentleface-24.pin_map_down{ background-position: -270px -864px;  } 
+.gentleface-24.pin_map{ background-position: -270px -918px;  } 
+.gentleface-24.pin_map_left{ background-position: -270px -972px;  } 
+.gentleface-24.pin_map_right{ background-position: -270px -1026px;  } 
+.gentleface-24.pin_map_top{ background-position: -270px -1080px;  } 
+.gentleface-24.pin_sq_down{ background-position: -270px -1134px;  } 
+.gentleface-24.pin_sq_left{ background-position: -270px -1188px;  } 
+.gentleface-24.pin_sq_right{ background-position: -270px -1242px;  } 
+.gentleface-24.pin_sq_top{ background-position: -270px -1296px;  } 
+.gentleface-24.playback_ff{ background-position: -270px -1350px;  } 
+.gentleface-24.playback_next{ background-position: -270px -1404px;  } 
+.gentleface-24.playback_pause{ background-position: -270px -1458px;  } 
+.gentleface-24.playback_play{ background-position: -270px -1512px;  } 
+.gentleface-24.playback_prev{ background-position: -270px -1566px;  } 
+.gentleface-24.playback_rec{ background-position: -270px -1620px;  } 
+.gentleface-24.playback_reload{ background-position: -270px -1674px;  } 
+.gentleface-24.playback_rew{ background-position: -270px -1728px;  } 
+.gentleface-24.playback_stop{ background-position: -270px -1782px;  } 
+.gentleface-24.podcast{ background-position: -270px -1836px;  } 
+.gentleface-24.preso{ background-position: -270px -1890px;  } 
+.gentleface-24.print{ background-position: -270px -1944px;  } 
+.gentleface-24.push_pin{ background-position: -324px 0;  } 
+.gentleface-24.redo{ background-position: -324px -54px;  } 
+.gentleface-24.refresh{ background-position: -324px -108px;  } 
+.gentleface-24.reload{ background-position: -324px -162px;  } 
+.gentleface-24.rewind_previous{ background-position: -324px -216px;  } 
+.gentleface-24.rnd_br_down{ background-position: -324px -270px;  } 
+.gentleface-24.rnd_br_first{ background-position: -324px -324px;  } 
+.gentleface-24.rnd_br_last{ background-position: -324px -378px;  } 
+.gentleface-24.rnd_br_next{ background-position: -324px -432px;  } 
+.gentleface-24.rnd_br_prev{ background-position: -324px -486px;  } 
+.gentleface-24.rnd_br_up{ background-position: -324px -540px;  } 
+.gentleface-24.round_and_up{ background-position: -324px -594px;  } 
+.gentleface-24.round_arrow_left{ background-position: -324px -648px;  } 
+.gentleface-24.round_arrow_right{ background-position: -324px -702px;  } 
+.gentleface-24.round_checkmark{ background-position: -324px -756px;  } 
+.gentleface-24.round_delete{ background-position: -324px -810px;  } 
+.gentleface-24.round{ background-position: -324px -864px;  } 
+.gentleface-24.round_minus{ background-position: -324px -918px;  } 
+.gentleface-24.round_plus{ background-position: -324px -972px;  } 
+.gentleface-24.rss{ background-position: -324px -1026px;  } 
+.gentleface-24.rss_sq{ background-position: -324px -1080px;  } 
+.gentleface-24.sand{ background-position: -324px -1134px;  } 
+.gentleface-24.sat_dish{ background-position: -324px -1188px;  } 
+.gentleface-24.save{ background-position: -324px -1242px;  } 
+.gentleface-24.server{ background-position: -324px -1296px;  } 
+.gentleface-24.shapes{ background-position: -324px -1350px;  } 
+.gentleface-24.share_2{ background-position: -324px -1404px;  } 
+.gentleface-24.share{ background-position: -324px -1458px;  } 
+.gentleface-24.shield_2{ background-position: -324px -1512px;  } 
+.gentleface-24.shield{ background-position: -324px -1566px;  } 
+.gentleface-24.shop_cart{ background-position: -324px -1620px;  } 
+.gentleface-24.shopping_bag_dollar{ background-position: -324px -1674px;  } 
+.gentleface-24.shopping_bag{ background-position: -324px -1728px;  } 
+.gentleface-24.sound_high{ background-position: -324px -1782px;  } 
+.gentleface-24.sound_low{ background-position: -324px -1836px;  } 
+.gentleface-24.sound_mute{ background-position: -324px -1890px;  } 
+.gentleface-24.spechbubble_2{ background-position: -324px -1944px;  } 
+.gentleface-24.spechbubble{ background-position: -378px 0;  } 
+.gentleface-24.spechbubble_sq{ background-position: -378px -54px;  } 
+.gentleface-24.spechbubble_sq_line{ background-position: -378px -108px;  } 
+.gentleface-24.sq_br_down{ background-position: -378px -162px;  } 
+.gentleface-24.sq_br_first{ background-position: -378px -216px;  } 
+.gentleface-24.sq_br_last{ background-position: -378px -270px;  } 
+.gentleface-24.sq_br_next{ background-position: -378px -324px;  } 
+.gentleface-24.sq_br_prev{ background-position: -378px -378px;  } 
+.gentleface-24.sq_br_up{ background-position: -378px -432px;  } 
+.gentleface-24.sq_down{ background-position: -378px -486px;  } 
+.gentleface-24.sq_minus{ background-position: -378px -540px;  } 
+.gentleface-24.sq_next{ background-position: -378px -594px;  } 
+.gentleface-24.sq_plus{ background-position: -378px -648px;  } 
+.gentleface-24.sq_prev{ background-position: -378px -702px;  } 
+.gentleface-24.sq_up{ background-position: -378px -756px;  } 
+.gentleface-24.square_shape{ background-position: -378px -810px;  } 
+.gentleface-24.stairs_down{ background-position: -378px -864px;  } 
+.gentleface-24.stairs_up{ background-position: -378px -918px;  } 
+.gentleface-24.star_fav_empty{ background-position: -378px -972px;  } 
+.gentleface-24.star_fav{ background-position: -378px -1026px;  } 
+.gentleface-24.star{ background-position: -378px -1080px;  } 
+.gentleface-24.stop_watch{ background-position: -378px -1134px;  } 
+.gentleface-24.sun{ background-position: -378px -1188px;  } 
+.gentleface-24.tag{ background-position: -378px -1242px;  } 
+.gentleface-24.tape{ background-position: -378px -1296px;  } 
+.gentleface-24.target{ background-position: -378px -1350px;  } 
+.gentleface-24.text_curstor{ background-position: -378px -1404px;  } 
+.gentleface-24.text_letter_t{ background-position: -378px -1458px;  } 
+.gentleface-24.top_right_expand{ background-position: -378px -1512px;  } 
+.gentleface-24.track{ background-position: -378px -1566px;  } 
+.gentleface-24.trash{ background-position: -378px -1620px;  } 
+.gentleface-24.twitter_2{ background-position: -378px -1674px;  } 
+.gentleface-24.twitter{ background-position: -378px -1728px;  } 
+.gentleface-24.undo{ background-position: -378px -1782px;  } 
+.gentleface-24.user{ background-position: -378px -1836px;  } 
+.gentleface-24.users{ background-position: -378px -1890px;  } 
+.gentleface-24.vault{ background-position: -378px -1944px;  } 
+.gentleface-24.wallet{ background-position: -432px 0;  } 
+.gentleface-24.wifi_router{ background-position: -432px -54px;  } 
+.gentleface-24.wireless_signal{ background-position: -432px -108px;  } 
+.gentleface-24.wrench{ background-position: -432px -162px;  } 
+.gentleface-24.wrench_plus_2{ background-position: -432px -216px;  } 
+.gentleface-24.wrench_plus{ background-position: -432px -270px;  } 
+.gentleface-24.youtube{ background-position: -432px -324px;  } 
+.gentleface-24.zoom{ background-position: -432px -378px;  } 
+
+/* ---------------------------------------
+    sprite 32x32 icons 
+--------------------------------------- */
+.gentleface-32 {
+    display:inline-block;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    vertical-align: text-top;
+} 
+.gentleface-32,
+.gentleface-32.black {
+    background-image: url("gentleface-black-sprite-32.png");
+    background-position: top left;
+    background-repeat: no-repeat;
+}
+.gentleface-32.white {
+    background-image: url("gentleface-white-sprite-32.png");
+    background-position: top left;
+    background-repeat: no-repeat;
+}
+.active > [class*="gentleface-32"][class*="active-white"],
+.active > [class*="gentleface-32"][class*="black"][class*="active-white"],
+a:hover > [class*="gentleface-32"][class*="hover-white"],
+a:focus > [class*="gentleface-32"][class*="hover-white"],
+a:hover > [class*="gentleface-32"][class*="black"][class*="hover-white"],
+a:focus > [class*="gentleface-32"][class*="black"][class*="hover-white"] {
+    background-image: url("gentleface-white-sprite-32.png");
+}
+.active > [class*="gentleface-32"][class*="white"][class*="active-black"],
+.active > [class*="gentleface-32"][class*="white"][class*="active-black"],
+a:hover > [class*="gentleface-32"][class*="white"][class*="hover-black"],
+a:focus > [class*="gentleface-32"][class*="white"][class*="hover-black"] {
+    background-image: url("gentleface-black-sprite-32.png");
+}
+
+.gentleface-32.\32x2_grid{ background-position: 0 0;  } 
+.gentleface-32.\33x3_grid_2{ background-position: 0 -72px;  } 
+.gentleface-32.\33x3_grid{ background-position: 0 -144px;  } 
+.gentleface-32.air_signal{ background-position: 0 -216px;  } 
+.gentleface-32.align_center{ background-position: 0 -288px;  } 
+.gentleface-32.align_just{ background-position: 0 -360px;  } 
+.gentleface-32.align_left{ background-position: 0 -432px;  } 
+.gentleface-32.align_right{ background-position: 0 -504px;  } 
+.gentleface-32.app_window{ background-position: 0 -576px;  } 
+.gentleface-32.app_window_black{ background-position: 0 -648px;  } 
+.gentleface-32.app_window_black_2{ background-position: 0 -720px;  } 
+.gentleface-32.app_window_cross{ background-position: 0 -792px;  } 
+.gentleface-32.app_window_cross_2{ background-position: 0 -864px;  } 
+.gentleface-32.app_window_2{ background-position: 0 -936px;  } 
+.gentleface-32.app_window_shell{ background-position: 0 -1008px;  } 
+.gentleface-32.app_window_shell_2{ background-position: 0 -1080px;  } 
+.gentleface-32.arrow_bottom{ background-position: 0 -1152px;  } 
+.gentleface-32.arrow_bottom_left{ background-position: 0 -1224px;  } 
+.gentleface-32.arrow_bottom_rigth{ background-position: 0 -1296px;  } 
+.gentleface-32.arrow_l{ background-position: 0 -1368px;  } 
+.gentleface-32.arrow_left{ background-position: 0 -1440px;  } 
+.gentleface-32.arrow_r{ background-position: 0 -1512px;  } 
+.gentleface-32.arrow_right{ background-position: 0 -1584px;  } 
+.gentleface-32.arrow_top{ background-position: 0 -1656px;  } 
+.gentleface-32.arrow_top_left{ background-position: 0 -1728px;  } 
+.gentleface-32.arrow_top_right{ background-position: 0 -1800px;  } 
+.gentleface-32.arrow_two_head_2{ background-position: 0 -1872px;  } 
+.gentleface-32.arrow_two_head{ background-position: 0 -1944px;  } 
+.gentleface-32.attention{ background-position: -72px 0;  } 
+.gentleface-32.balance{ background-position: -72px -72px;  } 
+.gentleface-32.battery{ background-position: -72px -144px;  } 
+.gentleface-32.bell{ background-position: -72px -216px;  } 
+.gentleface-32.book{ background-position: -72px -288px;  } 
+.gentleface-32.book_side{ background-position: -72px -360px;  } 
+.gentleface-32.bookmark{ background-position: -72px -432px;  } 
+.gentleface-32.bookmark_2{ background-position: -72px -504px;  } 
+.gentleface-32.box{ background-position: -72px -576px;  } 
+.gentleface-32.br_down{ background-position: -72px -648px;  } 
+.gentleface-32.br_next{ background-position: -72px -720px;  } 
+.gentleface-32.br_prev{ background-position: -72px -792px;  } 
+.gentleface-32.br_up{ background-position: -72px -864px;  } 
+.gentleface-32.brackets{ background-position: -72px -936px;  } 
+.gentleface-32.browser{ background-position: -72px -1008px;  } 
+.gentleface-32.brush{ background-position: -72px -1080px;  } 
+.gentleface-32.bug{ background-position: -72px -1152px;  } 
+.gentleface-32.burst{ background-position: -72px -1224px;  } 
+.gentleface-32.calc{ background-position: -72px -1296px;  } 
+.gentleface-32.calendar{ background-position: -72px -1368px;  } 
+.gentleface-32.calendar_2{ background-position: -72px -1440px;  } 
+.gentleface-32.cancel{ background-position: -72px -1512px;  } 
+.gentleface-32.case{ background-position: -72px -1584px;  } 
+.gentleface-32.cassette{ background-position: -72px -1656px;  } 
+.gentleface-32.cc{ background-position: -72px -1728px;  } 
+.gentleface-32.cert{ background-position: -72px -1800px;  } 
+.gentleface-32.chart_bar{ background-position: -72px -1872px;  } 
+.gentleface-32.chart_line_2{ background-position: -72px -1944px;  } 
+.gentleface-32.chart_line{ background-position: -144px 0;  } 
+.gentleface-32.chart_pie{ background-position: -144px -72px;  } 
+.gentleface-32.chat_bubble_message_square{ background-position: -144px -144px;  } 
+.gentleface-32.checkbox_checked{ background-position: -144px -216px;  } 
+.gentleface-32.checkbox_unchecked{ background-position: -144px -288px;  } 
+.gentleface-32.checkmark{ background-position: -144px -360px;  } 
+.gentleface-32.clip{ background-position: -144px -432px;  } 
+.gentleface-32.clipboard_copy{ background-position: -144px -504px;  } 
+.gentleface-32.clipboard_cut{ background-position: -144px -576px;  } 
+.gentleface-32.clipboard_past{ background-position: -144px -648px;  } 
+.gentleface-32.clock{ background-position: -144px -720px;  } 
+.gentleface-32.cloud{ background-position: -144px -792px;  } 
+.gentleface-32.cloud_rain{ background-position: -144px -864px;  } 
+.gentleface-32.coffe_cup{ background-position: -144px -936px;  } 
+.gentleface-32.cog{ background-position: -144px -1008px;  } 
+.gentleface-32.cogs{ background-position: -144px -1080px;  } 
+.gentleface-32.comp{ background-position: -144px -1152px;  } 
+.gentleface-32.compass{ background-position: -144px -1224px;  } 
+.gentleface-32.connect{ background-position: -144px -1296px;  } 
+.gentleface-32.contact_card{ background-position: -144px -1368px;  } 
+.gentleface-32.contact{ background-position: -144px -1440px;  } 
+.gentleface-32.cube{ background-position: -144px -1512px;  } 
+.gentleface-32.cur_bp{ background-position: -144px -1584px;  } 
+.gentleface-32.cur_dollar{ background-position: -144px -1656px;  } 
+.gentleface-32.cur_euro{ background-position: -144px -1728px;  } 
+.gentleface-32.cur_yen{ background-position: -144px -1800px;  } 
+.gentleface-32.cursor_H_split{ background-position: -144px -1872px;  } 
+.gentleface-32.cursor_V_split{ background-position: -144px -1944px;  } 
+.gentleface-32.cursor_arrow{ background-position: -216px 0;  } 
+.gentleface-32.cursor_drag_arrow_2{ background-position: -216px -72px;  } 
+.gentleface-32.cursor_drag_arrow{ background-position: -216px -144px;  } 
+.gentleface-32.cursor_drag_hand{ background-position: -216px -216px;  } 
+.gentleface-32.cursor_hand{ background-position: -216px -288px;  } 
+.gentleface-32.dashboard{ background-position: -216px -360px;  } 
+.gentleface-32.db{ background-position: -216px -432px;  } 
+.gentleface-32.delete{ background-position: -216px -504px;  } 
+.gentleface-32.delete_server{ background-position: -216px -576px;  } 
+.gentleface-32.disconnected{ background-position: -216px -648px;  } 
+.gentleface-32.doc_delete{ background-position: -216px -720px;  } 
+.gentleface-32.doc_edit{ background-position: -216px -792px;  } 
+.gentleface-32.doc_empty{ background-position: -216px -864px;  } 
+.gentleface-32.doc_export{ background-position: -216px -936px;  } 
+.gentleface-32.doc_import{ background-position: -216px -1008px;  } 
+.gentleface-32.doc_lines{ background-position: -216px -1080px;  } 
+.gentleface-32.doc_lines_stright{ background-position: -216px -1152px;  } 
+.gentleface-32.doc_minus{ background-position: -216px -1224px;  } 
+.gentleface-32.doc_new{ background-position: -216px -1296px;  } 
+.gentleface-32.doc_plus{ background-position: -216px -1368px;  } 
+.gentleface-32.document{ background-position: -216px -1440px;  } 
+.gentleface-32.download{ background-position: -216px -1512px;  } 
+.gentleface-32.eject{ background-position: -216px -1584px;  } 
+.gentleface-32.emotion_sad{ background-position: -216px -1656px;  } 
+.gentleface-32.emotion_smile{ background-position: -216px -1728px;  } 
+.gentleface-32.expand{ background-position: -216px -1800px;  } 
+.gentleface-32.export{ background-position: -216px -1872px;  } 
+.gentleface-32.eye{ background-position: -216px -1944px;  } 
+.gentleface-32.eye_inv{ background-position: -288px 0;  } 
+.gentleface-32.facebook{ background-position: -288px -72px;  } 
+.gentleface-32.fastforward_next{ background-position: -288px -144px;  } 
+.gentleface-32.fill{ background-position: -288px -216px;  } 
+.gentleface-32.filter{ background-position: -288px -288px;  } 
+.gentleface-32.fire{ background-position: -288px -360px;  } 
+.gentleface-32.flag_2{ background-position: -288px -432px;  } 
+.gentleface-32.flag{ background-position: -288px -504px;  } 
+.gentleface-32.folder_arrow{ background-position: -288px -576px;  } 
+.gentleface-32.folder_delete{ background-position: -288px -648px;  } 
+.gentleface-32.folder{ background-position: -288px -720px;  } 
+.gentleface-32.folder_minus{ background-position: -288px -792px;  } 
+.gentleface-32.folder_open{ background-position: -288px -864px;  } 
+.gentleface-32.folder_plus{ background-position: -288px -936px;  } 
+.gentleface-32.font_bold{ background-position: -288px -1008px;  } 
+.gentleface-32.font_italic{ background-position: -288px -1080px;  } 
+.gentleface-32.font_size{ background-position: -288px -1152px;  } 
+.gentleface-32.font_strokethrough{ background-position: -288px -1224px;  } 
+.gentleface-32.font_underline{ background-position: -288px -1296px;  } 
+.gentleface-32.game_pad{ background-position: -288px -1368px;  } 
+.gentleface-32.glasses{ background-position: -288px -1440px;  } 
+.gentleface-32.globe{ background-position: -288px -1512px;  } 
+.gentleface-32.globe_2{ background-position: -288px -1584px;  } 
+.gentleface-32.globe_3{ background-position: -288px -1656px;  } 
+.gentleface-32.google{ background-position: -288px -1728px;  } 
+.gentleface-32.hand{ background-position: -288px -1800px;  } 
+.gentleface-32.hand_2{ background-position: -288px -1872px;  } 
+.gentleface-32.hand_contra{ background-position: -288px -1944px;  } 
+.gentleface-32.hand_pro{ background-position: -360px 0;  } 
+.gentleface-32.hanger{ background-position: -360px -72px;  } 
+.gentleface-32.headphones{ background-position: -360px -144px;  } 
+.gentleface-32.heart_empty{ background-position: -360px -216px;  } 
+.gentleface-32.heart{ background-position: -360px -288px;  } 
+.gentleface-32.home{ background-position: -360px -360px;  } 
+.gentleface-32.image_text{ background-position: -360px -432px;  } 
+.gentleface-32.import{ background-position: -360px -504px;  } 
+.gentleface-32.inbox{ background-position: -360px -576px;  } 
+.gentleface-32.indent_decrease{ background-position: -360px -648px;  } 
+.gentleface-32.indent_increase{ background-position: -360px -720px;  } 
+.gentleface-32.info{ background-position: -360px -792px;  } 
+.gentleface-32.inject{ background-position: -360px -864px;  } 
+.gentleface-32.invisible_light{ background-position: -360px -936px;  } 
+.gentleface-32.invisible_revert{ background-position: -360px -1008px;  } 
+.gentleface-32.iphone{ background-position: -360px -1080px;  } 
+.gentleface-32.key{ background-position: -360px -1152px;  } 
+.gentleface-32.layers{ background-position: -360px -1224px;  } 
+.gentleface-32.layers_2{ background-position: -360px -1296px;  } 
+.gentleface-32.lightbulb{ background-position: -360px -1368px;  } 
+.gentleface-32.lighting{ background-position: -360px -1440px;  } 
+.gentleface-32.link{ background-position: -360px -1512px;  } 
+.gentleface-32.list_bullets{ background-position: -360px -1584px;  } 
+.gentleface-32.list_num{ background-position: -360px -1656px;  } 
+.gentleface-32.loading_throbber{ background-position: -360px -1728px;  } 
+.gentleface-32.lock_open{ background-position: -360px -1800px;  } 
+.gentleface-32.magic_wand_2{ background-position: -360px -1872px;  } 
+.gentleface-32.magic_wand{ background-position: -360px -1944px;  } 
+.gentleface-32.mail_2{ background-position: -432px 0;  } 
+.gentleface-32.mail{ background-position: -432px -72px;  } 
+.gentleface-32.message_attention{ background-position: -432px -144px;  } 
+.gentleface-32.mic{ background-position: -432px -216px;  } 
+.gentleface-32.microphone{ background-position: -432px -288px;  } 
+.gentleface-32.money{ background-position: -432px -360px;  } 
+.gentleface-32.monitor{ background-position: -432px -432px;  } 
+.gentleface-32.movie{ background-position: -432px -504px;  } 
+.gentleface-32.music{ background-position: -432px -576px;  } 
+.gentleface-32.music_square{ background-position: -432px -648px;  } 
+.gentleface-32.net_comp{ background-position: -432px -720px;  } 
+.gentleface-32.network{ background-position: -432px -792px;  } 
+.gentleface-32.not_connected{ background-position: -432px -864px;  } 
+.gentleface-32.notepad_2{ background-position: -432px -936px;  } 
+.gentleface-32.notepad{ background-position: -432px -1008px;  } 
+.gentleface-32.off{ background-position: -432px -1080px;  } 
+.gentleface-32.on-off{ background-position: -432px -1152px;  } 
+.gentleface-32.on{ background-position: -432px -1224px;  } 
+.gentleface-32.openid{ background-position: -432px -1296px;  } 
+.gentleface-32.padlock_closed{ background-position: -432px -1368px;  } 
+.gentleface-32.padlock_open{ background-position: -432px -1440px;  } 
+.gentleface-32.page_layout{ background-position: -432px -1512px;  } 
+.gentleface-32.paper_airplane{ background-position: -432px -1584px;  } 
+.gentleface-32.paragraph{ background-position: -432px -1656px;  } 
+.gentleface-32.pencil{ background-position: -432px -1728px;  } 
+.gentleface-32.phone_1{ background-position: -432px -1800px;  } 
+.gentleface-32.phone_2{ background-position: -432px -1872px;  } 
+.gentleface-32.phone{ background-position: -432px -1944px;  } 
+.gentleface-32.phone_touch{ background-position: -504px 0;  } 
+.gentleface-32.photo{ background-position: -504px -72px;  } 
+.gentleface-32.picture{ background-position: -504px -144px;  } 
+.gentleface-32.pin_2{ background-position: -504px -216px;  } 
+.gentleface-32.pin{ background-position: -504px -288px;  } 
+.gentleface-32.pin_map_down{ background-position: -504px -360px;  } 
+.gentleface-32.pin_map{ background-position: -504px -432px;  } 
+.gentleface-32.pin_map_left{ background-position: -504px -504px;  } 
+.gentleface-32.pin_map_right{ background-position: -504px -576px;  } 
+.gentleface-32.pin_map_top{ background-position: -504px -648px;  } 
+.gentleface-32.pin_sq_down{ background-position: -504px -720px;  } 
+.gentleface-32.pin_sq_left{ background-position: -504px -792px;  } 
+.gentleface-32.pin_sq_right{ background-position: -504px -864px;  } 
+.gentleface-32.pin_sq_top{ background-position: -504px -936px;  } 
+.gentleface-32.playback_ff{ background-position: -504px -1008px;  } 
+.gentleface-32.playback_next{ background-position: -504px -1080px;  } 
+.gentleface-32.playback_pause{ background-position: -504px -1152px;  } 
+.gentleface-32.playback_play{ background-position: -504px -1224px;  } 
+.gentleface-32.playback_prev{ background-position: -504px -1296px;  } 
+.gentleface-32.playback_rec{ background-position: -504px -1368px;  } 
+.gentleface-32.playback_reload{ background-position: -504px -1440px;  } 
+.gentleface-32.playback_rew{ background-position: -504px -1512px;  } 
+.gentleface-32.playback_stop{ background-position: -504px -1584px;  } 
+.gentleface-32.podcast{ background-position: -504px -1656px;  } 
+.gentleface-32.preso{ background-position: -504px -1728px;  } 
+.gentleface-32.print{ background-position: -504px -1800px;  } 
+.gentleface-32.push_pin{ background-position: -504px -1872px;  } 
+.gentleface-32.redo{ background-position: -504px -1944px;  } 
+.gentleface-32.refresh{ background-position: -576px 0;  } 
+.gentleface-32.reload{ background-position: -576px -72px;  } 
+.gentleface-32.rewind_previous{ background-position: -576px -144px;  } 
+.gentleface-32.rnd_br_down{ background-position: -576px -216px;  } 
+.gentleface-32.rnd_br_first{ background-position: -576px -288px;  } 
+.gentleface-32.rnd_br_last{ background-position: -576px -360px;  } 
+.gentleface-32.rnd_br_next{ background-position: -576px -432px;  } 
+.gentleface-32.rnd_br_prev{ background-position: -576px -504px;  } 
+.gentleface-32.rnd_br_up{ background-position: -576px -576px;  } 
+.gentleface-32.round_and_up{ background-position: -576px -648px;  } 
+.gentleface-32.round_arrow_left{ background-position: -576px -720px;  } 
+.gentleface-32.round_arrow_right{ background-position: -576px -792px;  } 
+.gentleface-32.round_checkmark{ background-position: -576px -864px;  } 
+.gentleface-32.round_delete{ background-position: -576px -936px;  } 
+.gentleface-32.round{ background-position: -576px -1008px;  } 
+.gentleface-32.round_minus{ background-position: -576px -1080px;  } 
+.gentleface-32.round_plus{ background-position: -576px -1152px;  } 
+.gentleface-32.rss{ background-position: -576px -1224px;  } 
+.gentleface-32.rss_sq{ background-position: -576px -1296px;  } 
+.gentleface-32.sand{ background-position: -576px -1368px;  } 
+.gentleface-32.sat_dish{ background-position: -576px -1440px;  } 
+.gentleface-32.save{ background-position: -576px -1512px;  } 
+.gentleface-32.server{ background-position: -576px -1584px;  } 
+.gentleface-32.shapes{ background-position: -576px -1656px;  } 
+.gentleface-32.share_2{ background-position: -576px -1728px;  } 
+.gentleface-32.share{ background-position: -576px -1800px;  } 
+.gentleface-32.shield_2{ background-position: -576px -1872px;  } 
+.gentleface-32.shield{ background-position: -576px -1944px;  } 
+.gentleface-32.shop_cart{ background-position: -648px 0;  } 
+.gentleface-32.shopping_bag_dollar{ background-position: -648px -72px;  } 
+.gentleface-32.shopping_bag{ background-position: -648px -144px;  } 
+.gentleface-32.sound_high{ background-position: -648px -216px;  } 
+.gentleface-32.sound_low{ background-position: -648px -288px;  } 
+.gentleface-32.sound_mute{ background-position: -648px -360px;  } 
+.gentleface-32.spechbubble_2{ background-position: -648px -432px;  } 
+.gentleface-32.spechbubble{ background-position: -648px -504px;  } 
+.gentleface-32.spechbubble_sq{ background-position: -648px -576px;  } 
+.gentleface-32.spechbubble_sq_line{ background-position: -648px -648px;  } 
+.gentleface-32.sq_br_down{ background-position: -648px -720px;  } 
+.gentleface-32.sq_br_first{ background-position: -648px -792px;  } 
+.gentleface-32.sq_br_last{ background-position: -648px -864px;  } 
+.gentleface-32.sq_br_next{ background-position: -648px -936px;  } 
+.gentleface-32.sq_br_prev{ background-position: -648px -1008px;  } 
+.gentleface-32.sq_br_up{ background-position: -648px -1080px;  } 
+.gentleface-32.sq_down{ background-position: -648px -1152px;  } 
+.gentleface-32.sq_minus{ background-position: -648px -1224px;  } 
+.gentleface-32.sq_next{ background-position: -648px -1296px;  } 
+.gentleface-32.sq_plus{ background-position: -648px -1368px;  } 
+.gentleface-32.sq_prev{ background-position: -648px -1440px;  } 
+.gentleface-32.sq_up{ background-position: -648px -1512px;  } 
+.gentleface-32.square_shape{ background-position: -648px -1584px;  } 
+.gentleface-32.stairs_down{ background-position: -648px -1656px;  } 
+.gentleface-32.stairs_up{ background-position: -648px -1728px;  } 
+.gentleface-32.star_fav_empty{ background-position: -648px -1800px;  } 
+.gentleface-32.star_fav{ background-position: -648px -1872px;  } 
+.gentleface-32.star{ background-position: -648px -1944px;  } 
+.gentleface-32.stop_watch{ background-position: -720px 0;  } 
+.gentleface-32.sun{ background-position: -720px -72px;  } 
+.gentleface-32.tag{ background-position: -720px -144px;  } 
+.gentleface-32.tape{ background-position: -720px -216px;  } 
+.gentleface-32.target{ background-position: -720px -288px;  } 
+.gentleface-32.text_curstor{ background-position: -720px -360px;  } 
+.gentleface-32.text_letter_t{ background-position: -720px -432px;  } 
+.gentleface-32.top_right_expand{ background-position: -720px -504px;  } 
+.gentleface-32.track{ background-position: -720px -576px;  } 
+.gentleface-32.trash{ background-position: -720px -648px;  } 
+.gentleface-32.twitter_2{ background-position: -720px -720px;  } 
+.gentleface-32.twitter{ background-position: -720px -792px;  } 
+.gentleface-32.undo{ background-position: -720px -864px;  } 
+.gentleface-32.user{ background-position: -720px -936px;  } 
+.gentleface-32.users{ background-position: -720px -1008px;  } 
+.gentleface-32.vault{ background-position: -720px -1080px;  } 
+.gentleface-32.wallet{ background-position: -720px -1152px;  } 
+.gentleface-32.wifi_router{ background-position: -720px -1224px;  } 
+.gentleface-32.wireless_signal{ background-position: -720px -1296px;  } 
+.gentleface-32.wrench{ background-position: -720px -1368px;  } 
+.gentleface-32.wrench_plus_2{ background-position: -720px -1440px;  } 
+.gentleface-32.wrench_plus{ background-position: -720px -1512px;  } 
+.gentleface-32.youtube{ background-position: -720px -1584px;  } 
+.gentleface-32.zoom{ background-position: -720px -1656px;  } 
+
+/* ---------------------------------------
+    sprite 48x48 icons
+--------------------------------------- */
+.gentleface-48 {
+    display:inline-block;
+    width: 48px;
+    height: 48px;
+    line-height: 48px;
+    vertical-align: text-top;
+} 
+.gentleface-48,
+.gentleface-48.black {
+    background-image: url("gentleface-black-sprite-48.png");
+    background-position: top left;
+    background-repeat: no-repeat;
+}
+.gentleface-48.white {
+    background-image: url("gentleface-white-sprite-48.png");
+    background-position: top left;
+    background-repeat: no-repeat;
+}
+.active > [class*="gentleface-48"][class*="active-white"],
+.active > [class*="gentleface-48"][class*="black"][class*="active-white"],
+a:hover > [class*="gentleface-48"][class*="hover-white"],
+a:focus > [class*="gentleface-48"][class*="hover-white"],
+a:hover > [class*="gentleface-48"][class*="black"][class*="hover-white"],
+a:focus > [class*="gentleface-48"][class*="black"][class*="hover-white"] {
+    background-image: url("gentleface-white-sprite-48.png");
+}
+.active > [class*="gentleface-48"][class*="white"][class*="active-black"],
+.active > [class*="gentleface-48"][class*="white"][class*="active-black"],
+a:hover > [class*="gentleface-48"][class*="white"][class*="hover-black"],
+a:focus > [class*="gentleface-48"][class*="white"][class*="hover-black"] {
+    background-image: url("gentleface-black-sprite-48.png");
+}
+
+.gentleface-48.\32x2_grid{ background-position: 0 0;  } 
+.gentleface-48.\33x3_grid_2{ background-position: 0 -102px;  } 
+.gentleface-48.\33x3_grid{ background-position: 0 -204px;  } 
+.gentleface-48.air_signal{ background-position: 0 -306px;  } 
+.gentleface-48.align_center{ background-position: 0 -408px;  } 
+.gentleface-48.align_just{ background-position: 0 -510px;  } 
+.gentleface-48.align_left{ background-position: 0 -612px;  } 
+.gentleface-48.align_right{ background-position: 0 -714px;  } 
+.gentleface-48.app_window{ background-position: 0 -816px;  } 
+.gentleface-48.app_window_black{ background-position: 0 -918px;  } 
+.gentleface-48.app_window_black_2{ background-position: 0 -1020px;  } 
+.gentleface-48.app_window_cross{ background-position: 0 -1122px;  } 
+.gentleface-48.app_window_cross_2{ background-position: 0 -1224px;  } 
+.gentleface-48.app_window_2{ background-position: 0 -1326px;  } 
+.gentleface-48.app_window_shell{ background-position: 0 -1428px;  } 
+.gentleface-48.app_window_shell_2{ background-position: 0 -1530px;  } 
+.gentleface-48.arrow_bottom{ background-position: 0 -1632px;  } 
+.gentleface-48.arrow_bottom_left{ background-position: 0 -1734px;  } 
+.gentleface-48.arrow_bottom_rigth{ background-position: 0 -1836px;  } 
+.gentleface-48.arrow_l{ background-position: 0 -1938px;  } 
+.gentleface-48.arrow_left{ background-position: -102px 0;  } 
+.gentleface-48.arrow_r{ background-position: -102px -102px;  } 
+.gentleface-48.arrow_right{ background-position: -102px -204px;  } 
+.gentleface-48.arrow_top{ background-position: -102px -306px;  } 
+.gentleface-48.arrow_top_left{ background-position: -102px -408px;  } 
+.gentleface-48.arrow_top_right{ background-position: -102px -510px;  } 
+.gentleface-48.arrow_two_head_2{ background-position: -102px -612px;  } 
+.gentleface-48.arrow_two_head{ background-position: -102px -714px;  } 
+.gentleface-48.attention{ background-position: -102px -816px;  } 
+.gentleface-48.balance{ background-position: -102px -918px;  } 
+.gentleface-48.battery{ background-position: -102px -1020px;  } 
+.gentleface-48.bell{ background-position: -102px -1122px;  } 
+.gentleface-48.book{ background-position: -102px -1224px;  } 
+.gentleface-48.book_side{ background-position: -102px -1326px;  } 
+.gentleface-48.bookmark{ background-position: -102px -1428px;  } 
+.gentleface-48.bookmark_2{ background-position: -102px -1530px;  } 
+.gentleface-48.box{ background-position: -102px -1632px;  } 
+.gentleface-48.br_down{ background-position: -102px -1734px;  } 
+.gentleface-48.br_next{ background-position: -102px -1836px;  } 
+.gentleface-48.br_prev{ background-position: -102px -1938px;  } 
+.gentleface-48.br_up{ background-position: -204px 0;  } 
+.gentleface-48.brackets{ background-position: -204px -102px;  } 
+.gentleface-48.browser{ background-position: -204px -204px;  } 
+.gentleface-48.brush{ background-position: -204px -306px;  } 
+.gentleface-48.bug{ background-position: -204px -408px;  } 
+.gentleface-48.burst{ background-position: -204px -510px;  } 
+.gentleface-48.calc{ background-position: -204px -612px;  } 
+.gentleface-48.calendar{ background-position: -204px -714px;  } 
+.gentleface-48.calendar_2{ background-position: -204px -816px;  } 
+.gentleface-48.cancel{ background-position: -204px -918px;  } 
+.gentleface-48.case{ background-position: -204px -1020px;  } 
+.gentleface-48.cassette{ background-position: -204px -1122px;  } 
+.gentleface-48.cc{ background-position: -204px -1224px;  } 
+.gentleface-48.cert{ background-position: -204px -1326px;  } 
+.gentleface-48.chart_bar{ background-position: -204px -1428px;  } 
+.gentleface-48.chart_line_2{ background-position: -204px -1530px;  } 
+.gentleface-48.chart_line{ background-position: -204px -1632px;  } 
+.gentleface-48.chart_pie{ background-position: -204px -1734px;  } 
+.gentleface-48.chat_bubble_message_square{ background-position: -204px -1836px;  } 
+.gentleface-48.checkbox_checked{ background-position: -204px -1938px;  } 
+.gentleface-48.checkbox_unchecked{ background-position: -306px 0;  } 
+.gentleface-48.checkmark{ background-position: -306px -102px;  } 
+.gentleface-48.clip{ background-position: -306px -204px;  } 
+.gentleface-48.clipboard_copy{ background-position: -306px -306px;  } 
+.gentleface-48.clipboard_cut{ background-position: -306px -408px;  } 
+.gentleface-48.clipboard_past{ background-position: -306px -510px;  } 
+.gentleface-48.clock{ background-position: -306px -612px;  } 
+.gentleface-48.cloud{ background-position: -306px -714px;  } 
+.gentleface-48.cloud_rain{ background-position: -306px -816px;  } 
+.gentleface-48.coffe_cup{ background-position: -306px -918px;  } 
+.gentleface-48.cog{ background-position: -306px -1020px;  } 
+.gentleface-48.cogs{ background-position: -306px -1122px;  } 
+.gentleface-48.comp{ background-position: -306px -1224px;  } 
+.gentleface-48.compass{ background-position: -306px -1326px;  } 
+.gentleface-48.connect{ background-position: -306px -1428px;  } 
+.gentleface-48.contact_card{ background-position: -306px -1530px;  } 
+.gentleface-48.contact{ background-position: -306px -1632px;  } 
+.gentleface-48.cube{ background-position: -306px -1734px;  } 
+.gentleface-48.cur_bp{ background-position: -306px -1836px;  } 
+.gentleface-48.cur_dollar{ background-position: -306px -1938px;  } 
+.gentleface-48.cur_euro{ background-position: -408px 0;  } 
+.gentleface-48.cur_yen{ background-position: -408px -102px;  } 
+.gentleface-48.cursor_H_split{ background-position: -408px -204px;  } 
+.gentleface-48.cursor_V_split{ background-position: -408px -306px;  } 
+.gentleface-48.cursor_arrow{ background-position: -408px -408px;  } 
+.gentleface-48.cursor_drag_arrow_2{ background-position: -408px -510px;  } 
+.gentleface-48.cursor_drag_arrow{ background-position: -408px -612px;  } 
+.gentleface-48.cursor_drag_hand{ background-position: -408px -714px;  } 
+.gentleface-48.cursor_hand{ background-position: -408px -816px;  } 
+.gentleface-48.dashboard{ background-position: -408px -918px;  } 
+.gentleface-48.db{ background-position: -408px -1020px;  } 
+.gentleface-48.delete{ background-position: -408px -1122px;  } 
+.gentleface-48.delete_server{ background-position: -408px -1224px;  } 
+.gentleface-48.disconnected{ background-position: -408px -1326px;  } 
+.gentleface-48.doc_delete{ background-position: -408px -1428px;  } 
+.gentleface-48.doc_edit{ background-position: -408px -1530px;  } 
+.gentleface-48.doc_empty{ background-position: -408px -1632px;  } 
+.gentleface-48.doc_export{ background-position: -408px -1734px;  } 
+.gentleface-48.doc_import{ background-position: -408px -1836px;  } 
+.gentleface-48.doc_lines{ background-position: -408px -1938px;  } 
+.gentleface-48.doc_lines_stright{ background-position: -510px 0;  } 
+.gentleface-48.doc_minus{ background-position: -510px -102px;  } 
+.gentleface-48.doc_new{ background-position: -510px -204px;  } 
+.gentleface-48.doc_plus{ background-position: -510px -306px;  } 
+.gentleface-48.document{ background-position: -510px -408px;  } 
+.gentleface-48.download{ background-position: -510px -510px;  } 
+.gentleface-48.eject{ background-position: -510px -612px;  } 
+.gentleface-48.emotion_sad{ background-position: -510px -714px;  } 
+.gentleface-48.emotion_smile{ background-position: -510px -816px;  } 
+.gentleface-48.expand{ background-position: -510px -918px;  } 
+.gentleface-48.export{ background-position: -510px -1020px;  } 
+.gentleface-48.eye{ background-position: -510px -1122px;  } 
+.gentleface-48.eye_inv{ background-position: -510px -1224px;  } 
+.gentleface-48.facebook{ background-position: -510px -1326px;  } 
+.gentleface-48.fastforward_next{ background-position: -510px -1428px;  } 
+.gentleface-48.fill{ background-position: -510px -1530px;  } 
+.gentleface-48.filter{ background-position: -510px -1632px;  } 
+.gentleface-48.fire{ background-position: -510px -1734px;  } 
+.gentleface-48.flag_2{ background-position: -510px -1836px;  } 
+.gentleface-48.flag{ background-position: -510px -1938px;  } 
+.gentleface-48.folder_arrow{ background-position: -612px 0;  } 
+.gentleface-48.folder_delete{ background-position: -612px -102px;  } 
+.gentleface-48.folder{ background-position: -612px -204px;  } 
+.gentleface-48.folder_minus{ background-position: -612px -306px;  } 
+.gentleface-48.folder_open{ background-position: -612px -408px;  } 
+.gentleface-48.folder_plus{ background-position: -612px -510px;  } 
+.gentleface-48.font_bold{ background-position: -612px -612px;  } 
+.gentleface-48.font_italic{ background-position: -612px -714px;  } 
+.gentleface-48.font_size{ background-position: -612px -816px;  } 
+.gentleface-48.font_strokethrough{ background-position: -612px -918px;  } 
+.gentleface-48.font_underline{ background-position: -612px -1020px;  } 
+.gentleface-48.game_pad{ background-position: -612px -1122px;  } 
+.gentleface-48.glasses{ background-position: -612px -1224px;  } 
+.gentleface-48.globe{ background-position: -612px -1326px;  } 
+.gentleface-48.globe_2{ background-position: -612px -1428px;  } 
+.gentleface-48.globe_3{ background-position: -612px -1530px;  } 
+.gentleface-48.google{ background-position: -612px -1632px;  } 
+.gentleface-48.hand{ background-position: -612px -1734px;  } 
+.gentleface-48.hand_2{ background-position: -612px -1836px;  } 
+.gentleface-48.hand_contra{ background-position: -612px -1938px;  } 
+.gentleface-48.hand_pro{ background-position: -714px 0;  } 
+.gentleface-48.hanger{ background-position: -714px -102px;  } 
+.gentleface-48.headphones{ background-position: -714px -204px;  } 
+.gentleface-48.heart_empty{ background-position: -714px -306px;  } 
+.gentleface-48.heart{ background-position: -714px -408px;  } 
+.gentleface-48.home{ background-position: -714px -510px;  } 
+.gentleface-48.image_text{ background-position: -714px -612px;  } 
+.gentleface-48.import{ background-position: -714px -714px;  } 
+.gentleface-48.inbox{ background-position: -714px -816px;  } 
+.gentleface-48.indent_decrease{ background-position: -714px -918px;  } 
+.gentleface-48.indent_increase{ background-position: -714px -1020px;  } 
+.gentleface-48.info{ background-position: -714px -1122px;  } 
+.gentleface-48.inject{ background-position: -714px -1224px;  } 
+.gentleface-48.invisible_light{ background-position: -714px -1326px;  } 
+.gentleface-48.invisible_revert{ background-position: -714px -1428px;  } 
+.gentleface-48.iphone{ background-position: -714px -1530px;  } 
+.gentleface-48.key{ background-position: -714px -1632px;  } 
+.gentleface-48.layers{ background-position: -714px -1734px;  } 
+.gentleface-48.layers_2{ background-position: -714px -1836px;  } 
+.gentleface-48.lightbulb{ background-position: -714px -1938px;  } 
+.gentleface-48.lighting{ background-position: -816px 0;  } 
+.gentleface-48.link{ background-position: -816px -102px;  } 
+.gentleface-48.list_bullets{ background-position: -816px -204px;  } 
+.gentleface-48.list_num{ background-position: -816px -306px;  } 
+.gentleface-48.loading_throbber{ background-position: -816px -408px;  } 
+.gentleface-48.lock_open{ background-position: -816px -510px;  } 
+.gentleface-48.magic_wand_2{ background-position: -816px -612px;  } 
+.gentleface-48.magic_wand{ background-position: -816px -714px;  } 
+.gentleface-48.mail_2{ background-position: -816px -816px;  } 
+.gentleface-48.mail{ background-position: -816px -918px;  } 
+.gentleface-48.message_attention{ background-position: -816px -1020px;  } 
+.gentleface-48.mic{ background-position: -816px -1122px;  } 
+.gentleface-48.microphone{ background-position: -816px -1224px;  } 
+.gentleface-48.money{ background-position: -816px -1326px;  } 
+.gentleface-48.monitor{ background-position: -816px -1428px;  } 
+.gentleface-48.movie{ background-position: -816px -1530px;  } 
+.gentleface-48.music{ background-position: -816px -1632px;  } 
+.gentleface-48.music_square{ background-position: -816px -1734px;  } 
+.gentleface-48.net_comp{ background-position: -816px -1836px;  } 
+.gentleface-48.network{ background-position: -816px -1938px;  } 
+.gentleface-48.not_connected{ background-position: -918px 0;  } 
+.gentleface-48.notepad_2{ background-position: -918px -102px;  } 
+.gentleface-48.notepad{ background-position: -918px -204px;  } 
+.gentleface-48.off{ background-position: -918px -306px;  } 
+.gentleface-48.on-off{ background-position: -918px -408px;  } 
+.gentleface-48.on{ background-position: -918px -510px;  } 
+.gentleface-48.openid{ background-position: -918px -612px;  } 
+.gentleface-48.padlock_closed{ background-position: -918px -714px;  } 
+.gentleface-48.padlock_open{ background-position: -918px -816px;  } 
+.gentleface-48.page_layout{ background-position: -918px -918px;  } 
+.gentleface-48.paper_airplane{ background-position: -918px -1020px;  } 
+.gentleface-48.paragraph{ background-position: -918px -1122px;  } 
+.gentleface-48.pencil{ background-position: -918px -1224px;  } 
+.gentleface-48.phone_1{ background-position: -918px -1326px;  } 
+.gentleface-48.phone_2{ background-position: -918px -1428px;  } 
+.gentleface-48.phone{ background-position: -918px -1530px;  } 
+.gentleface-48.phone_touch{ background-position: -918px -1632px;  } 
+.gentleface-48.photo{ background-position: -918px -1734px;  } 
+.gentleface-48.picture{ background-position: -918px -1836px;  } 
+.gentleface-48.pin_2{ background-position: -918px -1938px;  } 
+.gentleface-48.pin{ background-position: -1020px 0;  } 
+.gentleface-48.pin_map_down{ background-position: -1020px -102px;  } 
+.gentleface-48.pin_map{ background-position: -1020px -204px;  } 
+.gentleface-48.pin_map_left{ background-position: -1020px -306px;  } 
+.gentleface-48.pin_map_right{ background-position: -1020px -408px;  } 
+.gentleface-48.pin_map_top{ background-position: -1020px -510px;  } 
+.gentleface-48.pin_sq_down{ background-position: -1020px -612px;  } 
+.gentleface-48.pin_sq_left{ background-position: -1020px -714px;  } 
+.gentleface-48.pin_sq_right{ background-position: -1020px -816px;  } 
+.gentleface-48.pin_sq_top{ background-position: -1020px -918px;  } 
+.gentleface-48.playback_ff{ background-position: -1020px -1020px;  } 
+.gentleface-48.playback_next{ background-position: -1020px -1122px;  } 
+.gentleface-48.playback_pause{ background-position: -1020px -1224px;  } 
+.gentleface-48.playback_play{ background-position: -1020px -1326px;  } 
+.gentleface-48.playback_prev{ background-position: -1020px -1428px;  } 
+.gentleface-48.playback_rec{ background-position: -1020px -1530px;  } 
+.gentleface-48.playback_reload{ background-position: -1020px -1632px;  } 
+.gentleface-48.playback_rew{ background-position: -1020px -1734px;  } 
+.gentleface-48.playback_stop{ background-position: -1020px -1836px;  } 
+.gentleface-48.podcast{ background-position: -1020px -1938px;  } 
+.gentleface-48.preso{ background-position: -1122px 0;  } 
+.gentleface-48.print{ background-position: -1122px -102px;  } 
+.gentleface-48.push_pin{ background-position: -1122px -204px;  } 
+.gentleface-48.redo{ background-position: -1122px -306px;  } 
+.gentleface-48.refresh{ background-position: -1122px -408px;  } 
+.gentleface-48.reload{ background-position: -1122px -510px;  } 
+.gentleface-48.rewind_previous{ background-position: -1122px -612px;  } 
+.gentleface-48.rnd_br_down{ background-position: -1122px -714px;  } 
+.gentleface-48.rnd_br_first{ background-position: -1122px -816px;  } 
+.gentleface-48.rnd_br_last{ background-position: -1122px -918px;  } 
+.gentleface-48.rnd_br_next{ background-position: -1122px -1020px;  } 
+.gentleface-48.rnd_br_prev{ background-position: -1122px -1122px;  } 
+.gentleface-48.rnd_br_up{ background-position: -1122px -1224px;  } 
+.gentleface-48.round_and_up{ background-position: -1122px -1326px;  } 
+.gentleface-48.round_arrow_left{ background-position: -1122px -1428px;  } 
+.gentleface-48.round_arrow_right{ background-position: -1122px -1530px;  } 
+.gentleface-48.round_checkmark{ background-position: -1122px -1632px;  } 
+.gentleface-48.round_delete{ background-position: -1122px -1734px;  } 
+.gentleface-48.round{ background-position: -1122px -1836px;  } 
+.gentleface-48.round_minus{ background-position: -1122px -1938px;  } 
+.gentleface-48.round_plus{ background-position: -1224px 0;  } 
+.gentleface-48.rss{ background-position: -1224px -102px;  } 
+.gentleface-48.rss_sq{ background-position: -1224px -204px;  } 
+.gentleface-48.sand{ background-position: -1224px -306px;  } 
+.gentleface-48.sat_dish{ background-position: -1224px -408px;  } 
+.gentleface-48.save{ background-position: -1224px -510px;  } 
+.gentleface-48.server{ background-position: -1224px -612px;  } 
+.gentleface-48.shapes{ background-position: -1224px -714px;  } 
+.gentleface-48.share_2{ background-position: -1224px -816px;  } 
+.gentleface-48.share{ background-position: -1224px -918px;  } 
+.gentleface-48.shield_2{ background-position: -1224px -1020px;  } 
+.gentleface-48.shield{ background-position: -1224px -1122px;  } 
+.gentleface-48.shop_cart{ background-position: -1224px -1224px;  } 
+.gentleface-48.shopping_bag_dollar{ background-position: -1224px -1326px;  } 
+.gentleface-48.shopping_bag{ background-position: -1224px -1428px;  } 
+.gentleface-48.sound_high{ background-position: -1224px -1530px;  } 
+.gentleface-48.sound_low{ background-position: -1224px -1632px;  } 
+.gentleface-48.sound_mute{ background-position: -1224px -1734px;  } 
+.gentleface-48.spechbubble_2{ background-position: -1224px -1836px;  } 
+.gentleface-48.spechbubble{ background-position: -1224px -1938px;  } 
+.gentleface-48.spechbubble_sq{ background-position: -1326px 0;  } 
+.gentleface-48.spechbubble_sq_line{ background-position: -1326px -102px;  } 
+.gentleface-48.sq_br_down{ background-position: -1326px -204px;  } 
+.gentleface-48.sq_br_first{ background-position: -1326px -306px;  } 
+.gentleface-48.sq_br_last{ background-position: -1326px -408px;  } 
+.gentleface-48.sq_br_next{ background-position: -1326px -510px;  } 
+.gentleface-48.sq_br_prev{ background-position: -1326px -612px;  } 
+.gentleface-48.sq_br_up{ background-position: -1326px -714px;  } 
+.gentleface-48.sq_down{ background-position: -1326px -816px;  } 
+.gentleface-48.sq_minus{ background-position: -1326px -918px;  } 
+.gentleface-48.sq_next{ background-position: -1326px -1020px;  } 
+.gentleface-48.sq_plus{ background-position: -1326px -1122px;  } 
+.gentleface-48.sq_prev{ background-position: -1326px -1224px;  } 
+.gentleface-48.sq_up{ background-position: -1326px -1326px;  } 
+.gentleface-48.square_shape{ background-position: -1326px -1428px;  } 
+.gentleface-48.stairs_down{ background-position: -1326px -1530px;  } 
+.gentleface-48.stairs_up{ background-position: -1326px -1632px;  } 
+.gentleface-48.star_fav_empty{ background-position: -1326px -1734px;  } 
+.gentleface-48.star_fav{ background-position: -1326px -1836px;  } 
+.gentleface-48.star{ background-position: -1326px -1938px;  } 
+.gentleface-48.stop_watch{ background-position: -1428px 0;  } 
+.gentleface-48.sun{ background-position: -1428px -102px;  } 
+.gentleface-48.tag{ background-position: -1428px -204px;  } 
+.gentleface-48.tape{ background-position: -1428px -306px;  } 
+.gentleface-48.target{ background-position: -1428px -408px;  } 
+.gentleface-48.text_curstor{ background-position: -1428px -510px;  } 
+.gentleface-48.text_letter_t{ background-position: -1428px -612px;  } 
+.gentleface-48.top_right_expand{ background-position: -1428px -714px;  } 
+.gentleface-48.track{ background-position: -1428px -816px;  } 
+.gentleface-48.trash{ background-position: -1428px -918px;  } 
+.gentleface-48.twitter_2{ background-position: -1428px -1020px;  } 
+.gentleface-48.twitter{ background-position: -1428px -1122px;  } 
+.gentleface-48.undo{ background-position: -1428px -1224px;  } 
+.gentleface-48.user{ background-position: -1428px -1326px;  } 
+.gentleface-48.users{ background-position: -1428px -1428px;  } 
+.gentleface-48.vault{ background-position: -1428px -1530px;  } 
+.gentleface-48.wallet{ background-position: -1428px -1632px;  } 
+.gentleface-48.wifi_router{ background-position: -1428px -1734px;  } 
+.gentleface-48.wireless_signal{ background-position: -1428px -1836px;  } 
+.gentleface-48.wrench{ background-position: -1428px -1938px;  } 
+.gentleface-48.wrench_plus_2{ background-position: -1530px 0;  } 
+.gentleface-48.wrench_plus{ background-position: -1530px -102px;  } 
+.gentleface-48.youtube{ background-position: -1530px -204px;  } 
+.gentleface-48.zoom{ background-position: -1530px -306px;  } 
+
+/* ------------ end sprites ------------ */

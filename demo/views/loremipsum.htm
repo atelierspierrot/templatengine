@@ -1,16 +1,96 @@
+<?php
+
+_use('jquery');
+_use('gentleface-sprites');
+
+$_template->getTemplateObject('JavascriptTag')->set(array(
+    "
+$(function() {
+    initHandler('loremipsum');
+});
+    "
+));
+
+$fork_link = "http://github.com/atelierspierrot/templatengine/edit/master/demo/views/loremipsum.htm";
+
+?>
 <section>
 
 <h1>H1: Test of HTML(5) tags</h1>
 <p>p: <?php echo _loremipsum(); ?></p>
 
+<div class="infobox-wrapper">
+    <div class="infobox-title"><span class="gentleface-24 reset info"></span></div>
+    <div class="infobox-content">
+        <?php echo _loremipsum(); ?>
+    </div>
+</div>
+
+<div class="infobox-wrapper">
+    <div class="infobox-title"><span class="gentleface-24 reset lightbulb"></span></div>
+    <div class="infobox-content">
+        <?php echo _loremipsum(); ?>
+    </div>
+</div>
+
+<div class="infobox-wrapper">
+    <div class="infobox-title"><span class="gentleface-24 reset attention"></span></div>
+    <div class="infobox-content">
+        <?php echo _loremipsum(); ?>
+    </div>
+</div>
+
+<div class="infobox-wrapper">
+    <div class="infobox-title"><span class="gentleface-24 reset push_pin"></span></div>
+    <div class="infobox-content">
+        <?php echo _loremipsum(); ?>
+    </div>
+</div>
+
+<div class="infobox-wrapper">
+    <div class="infobox-title"><span class="gentleface-24 reset doc_edit"></span></div>
+    <div class="infobox-content">
+        <?php echo _loremipsum(); ?>
+    </div>
+</div>
+
+<div class="infobox-wrapper">
+    <div class="infobox-title"><span class="gentleface-24 reset clock"></span></div>
+    <div class="infobox-content">
+        <?php echo _loremipsum(); ?>
+    </div>
+</div>
+
+<div class="infobox-wrapper">
+    <div class="infobox-title"><a href="javascript:void(0);" title="User comments">
+        <span class="gentleface-24 white hover-black reset spechbubble"></span>
+    </a></div>
+    <div class="infobox-content">
+        <?php echo _loremipsum(); ?>
+    </div>
+</div>
+
 <h2>H2 header</h2>
 <p>p: <?php echo _loremipsum(); ?></p>
+
+<div class="box-info">
+    <p><a id="loremipsum_handler" class="handler" title="Show/hide the info">Info handler</a></p>
+    <div id="loremipsum"><?php echo _loremipsum(); ?></div>
+</div>
 
 <h3>H3 header</h3>
 <p>p: <?php echo _loremipsum(); ?></p>
 
+<div class="box-help">
+    <?php echo _loremipsum(); ?>
+</div>
+
 <h4>H4 header</h4>
 <p>p: <?php echo _loremipsum(); ?></p>
+
+<div class="box-github">
+    <?php echo _loremipsum(); ?>
+</div>
 
 <h5>H5 header</h5>
 <p>p: <?php echo _loremipsum(); ?></p>
@@ -29,6 +109,14 @@
 <hr />
 
 <small>small: <?php echo _loremipsum(); ?></small>
+<p class="small">p class=small: <?php echo _loremipsum(); ?></p>
+
+<hr />
+
+<big>big: <?php echo _loremipsum(); ?></big>
+<p class="big">p class=big: <?php echo _loremipsum(); ?></p>
+
+<hr />
 
 <blockquote>
 blockquote:
@@ -98,7 +186,26 @@ blockquote:
 
 <p>Links</p>
 
-<p>Lorem ipsum dolor sit amet, <a href="http://test.com/">external: consectetur adipisicing elit</a>, sed do eiusmod tempor <a href="/?page=test">internal: consectetur adipisicing elit</a>. Ut enim ad minim veniam, <a href="mailto:test@mail.com">mailto: consectetur adipisicing elit</a> nisi ut aliquip ex ea commodo consequat. <a onclick="alert('test');">onclick: dolor in reprehenderit</a> in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<p>Lorem ipsum dolor sit amet, <a href="http://test.com/" class="external" title="External link">external: consectetur adipisicing elit</a>, sed do eiusmod tempor <a href="/?page=test" class="internal" title="Internal page link">internal: consectetur adipisicing elit</a>. Ut enim ad minim veniam, <a href="mailto:test@mail.com" class="mailto" title="Contact">mailto: consectetur adipisicing elit</a> nisi ut aliquip ex ea commodo consequat. <a onclick="alert('test');" class="action" title="Action link">onclick: dolor in reprehenderit</a> in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+<hr />
+
+<p>Icons</p>
+
+<p>External link icon: <span class="icon external-icon"></span></p>
+<p>Internal link icon: <span class="icon internal-icon"></span></p>
+<p>Contact link icon: <span class="icon contact-icon"></span></p>
+<p>More icon: <span class="icon more-icon"></span></p>
+<p>Sitemap icon: <span class="icon sitemap-icon"></span></p>
+<p>Question icon: <span class="icon question-icon"></span></p>
+<p>Search icon: <span class="icon search-icon"></span></p>
+<p>Search2 icon: <span class="icon search2-icon"></span></p>
+<p>Private icon: <span class="icon private-icon"></span></p>
+<p>Indicator icon: <span class="icon indicator-icon"></span></p>
+<p>Loader icon: <span class="icon loader-icon"></span></p>
+<p>Close icon: <span class="icon close-icon"></span></p>
+<p>Github icon: <span class="icon github-icon"></span> (can be used as "18" and "32")</p>
+<p>Octocat icon: <span class="icon octocat-icon"></span> (can be used as "24", "32", "48" and "64")</p>
 
 </section>
 <hr />
@@ -178,15 +285,27 @@ blockquote:
 	<dd>Quis non odit sordidos, vanos, leves, futtiles?</dd>
 </dl>
 
+<aside id="jq_helpbox">
+  <h2>Useful links on jQuery API documentation</h2>
+  <ul class="menu">
+        <li><a href="http://api.jquery.com/show/">jQuery.show()</a></li>
+        <li><a href="http://api.jquery.com/hide/">jQuery.hide()</a></li>
+        <li><a href="http://api.jquery.com/bind/">jQuery.bind()</a></li>
+        <li><a href="http://api.jquery.com/data/">jQuery.data()</a></li>
+        <li><a href="http://api.jquery.com/category/events/event-object/">jQuery.Event()</a></li>
+  </ul>
+  <h2>Search in jQuery API documentation</h2>
+  <form action="http://api.jquery.com/" method="get">
+    <input type="text" name="s" value="" placeholder="Type your search" title="Type your search and press enter" />
+  </form>
+</aside>  
+
 
 <h3>Eiuro, inquit adridens, iniquum, hac quidem de re;</h3>
 
 <p>Quo minus animus a se ipse dissidens secumque discordans gustare partem ullam liquidae voluptatis et liberae potest. Et si in ipsa gubernatione neglegentia est navis eversa, maius est peccatum in auro quam in palea. Quo invento omnis ab eo quasi capite de summo bono et malo disputatio ducitur. Non autem hoc: igitur ne illud quidem. Equidem etiam Epicurum, in physicis quidem, Democriteum puto. Sin autem ad animum, falsum est, quod negas animi ullum esse gaudium, quod non referatur ad corpus. Aderamus nos quidem adolescentes, sed multi amplissimi viri, quorum nemo censuit plus Fadiae dandum, quam posset ad eam lege Voconia pervenire. <a href='http://loripsum.net/' target='_blank'>Quod iam a me expectare noli.</a> Hoc mihi cum tuo fratre convenit. Respondent extrema primis, media utrisque, omnia omnibus. Non enim, si malum est dolor, carere eo malo satis est ad bene vivendum. Ergo illi intellegunt quid Epicurus dicat, ego non intellego? Reguli reiciendam; <a href='http://loripsum.net/' target='_blank'>Praeclare hoc quidem.</a> Tubulum fuisse, qua illum, cuius is condemnatus est rogatione, P. <a href='http://loripsum.net/' target='_blank'>Sullae consulatum?</a> </p>
 
-<blockquote cite='http://loripsum.net'>
-	E quo efficitur, non ut nos non intellegamus quae vis sit istius verbi, sed ut ille suo more loquatur, nostrum neglegat.
-</blockquote>
-
+<p>Sit ista in Graecorum levitate perversitas, qui maledictis insectantur eos, a quibus de veritate dissentiunt. An tu me de L. Quasi ego id curem, quid ille aiat aut neget. Sunt enim quasi prima elementa naturae, quibus ubertas orationis adhiberi vix potest, nec equidem eam cogito consectari. Sed ad haec, nisi molestum est, habeo quae velim. Ergo infelix una molestia, fellx rursus, cum is ipse anulus in praecordiis piscis inventus est? <mark>Laboro autem non sine causa;</mark> <code>Quonam modo?</code> Nec enim, omnes avaritias si aeque avaritias esse dixerimus, sequetur ut etiam aequas esse dicamus. Octavio fuit, cum illam severitatem in eo filio adhibuit, quem in adoptionem D. </p>
 
 <ol>
 	<li>Plane idem, inquit, et maxima quidem, qua fieri nulla maior potest.</li>
@@ -195,6 +314,9 @@ blockquote:
 	<li>Nonne igitur tibi videntur, inquit, mala?</li>
 </ol>
 
+<blockquote cite='http://loripsum.net'>
+	E quo efficitur, non ut nos non intellegamus quae vis sit istius verbi, sed ut ille suo more loquatur, nostrum neglegat.
+</blockquote>
 
 <ul>
 	<li>Cur id non ita fit?</li>
@@ -205,7 +327,6 @@ blockquote:
 <blockquote cite='http://loripsum.net'>
 	Sin dicit obscurari quaedam nec apparere, quia valde parva sint, nos quoque concedimus;
 </blockquote>
-
 
 <p>Sit ista in Graecorum levitate perversitas, qui maledictis insectantur eos, a quibus de veritate dissentiunt. An tu me de L. Quasi ego id curem, quid ille aiat aut neget. Sunt enim quasi prima elementa naturae, quibus ubertas orationis adhiberi vix potest, nec equidem eam cogito consectari. Sed ad haec, nisi molestum est, habeo quae velim. Ergo infelix una molestia, fellx rursus, cum is ipse anulus in praecordiis piscis inventus est? <mark>Laboro autem non sine causa;</mark> <code>Quonam modo?</code> Nec enim, omnes avaritias si aeque avaritias esse dixerimus, sequetur ut etiam aequas esse dicamus. Octavio fuit, cum illam severitatem in eo filio adhibuit, quem in adoptionem D. </p>
 
@@ -332,5 +453,10 @@ progressionibus usa augentur nec sine causa;
 <h4>Si quae forte-possumus.</h4>
 
 <p>Ergo ita: non posse honeste vivi, nisi honeste vivatur? <mark>Cur iustitia laudatur?</mark> Dolere malum est: in crucem qui agitur, beatus esse non potest. <b>Nihil enim hoc differt.</b> Quodsi vultum tibi, si incessum fingeres, quo gravior viderere, non esses tui similis; Dolor ergo, id est summum malum, metuetur semper, etiamsi non aderit; Numquam hoc ita defendit Epicurus neque Metrodorus aut quisquam eorum, qui aut saperet aliquid aut ista didicisset. <a href='http://loripsum.net/' target='_blank'>Hoc est non dividere, sed frangere.</a> Nihilne te delectat umquam -video, quicum loquar-, te igitur, Torquate, ipsum per se nihil delectat? Qui enim voluptatem ipsam contemnunt, iis licet dicere se acupenserem maenae non anteponere. Saepe ab Aristotele, a Theophrasto mirabiliter est laudata per se ipsa rerum scientia; </p>
+
+<div class="bubble text-center">
+    <span class="icon octocat48-icon"></span>
+    Found a typo ? Want to add an info ? Easy ! Just <a href="<?php echo $fork_link; ?>" title="Fork this page from the public repository, edit it and ask to pull your modifications">fork and edit</a> this page !
+</div>
 
 </section>

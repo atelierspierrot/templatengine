@@ -47,33 +47,33 @@ $_template->getTemplateObject('MetaTag')->reset();
 // => charset and others
 $_template->getTemplateObject('MetaTag')
 	->add('Content-Type', 'text/html; charset=UTF-8', true)
-	->add('X-UA-Compatible', 'IE=edge,chrome=1', true)
+	->add('X-UA-Compatible', 'IE=edge,chrome=1', true, 'IE')
 	->add('viewport', 'width=device-width');
 
 // => description
-if (!empty($meta_description))
-{
+if (!empty($meta_description)) {
 	$_template->getTemplateObject('MetaTag')
 		->add('description', $meta_description);
 }
+
 // => keywords
-if (!empty($meta_keywords))
-{
+if (!empty($meta_keywords)) {
 	$_template->getTemplateObject('MetaTag')
 		->add('keywords', $meta_keywords);
 }
+
 // => author
-if (!empty($author))
-{
+if (!empty($author)) {
 	$_template->getTemplateObject('MetaTag')
 		->add('author', $author);
 }
+
 // => generator
-if (!empty($app_name) && !empty($app_version))
-{
+if (!empty($app_name) && !empty($app_version)) {
 	$_template->getTemplateObject('MetaTag')
 		->add('generator', $app_name.(!empty($app_version) ? ' '.$app_version : ''));
 }
+
 // => + old ones
 $_template->getTemplateObject('MetaTag')->set($old_metas);
 
@@ -83,8 +83,7 @@ $old_links = $_template->getTemplateObject('LinkTag')->get();
 $_template->getTemplateObject('LinkTag')->reset();
 
 // => favicon.ico
-if (file_exists($assets.'icons/favicon.ico'))
-{
+if (file_exists($assets.'icons/favicon.ico')) {
 	$_template->getTemplateObject('LinkTag')
 		->add( array(
 			'rel'=>'icon',
@@ -97,10 +96,10 @@ if (file_exists($assets.'icons/favicon.ico'))
 			'type'=>'image/x-icon'
 		) );
 }
+
 // the followings are taken from <http://mathiasbynens.be/notes/touch-icons>
 // => For third-generation iPad with high-resolution Retina display: apple-touch-icon-144x144-precomposed.png
-if (file_exists($assets.'icons/apple-touch-icon-144x144-precomposed.png'))
-{
+if (file_exists($assets.'icons/apple-touch-icon-144x144-precomposed.png')) {
 	$_template->getTemplateObject('LinkTag')
 		->add( array(
 			'rel'=>'apple-touch-icon-precomposed',
@@ -109,8 +108,7 @@ if (file_exists($assets.'icons/apple-touch-icon-144x144-precomposed.png'))
 		) );
 }
 // => For iPhone with high-resolution Retina display: apple-touch-icon-114x114-precomposed.png
-if (file_exists($assets.'icons/apple-touch-icon-114x114-precomposed.png'))
-{
+if (file_exists($assets.'icons/apple-touch-icon-114x114-precomposed.png')) {
 	$_template->getTemplateObject('LinkTag')
 		->add( array(
 			'rel'=>'apple-touch-icon-precomposed',
@@ -119,8 +117,7 @@ if (file_exists($assets.'icons/apple-touch-icon-114x114-precomposed.png'))
 		) );
 }
 // => For first- and second-generation iPad: apple-touch-icon-72x72-precomposed.png
-if (file_exists($assets.'icons/apple-touch-icon-72x72-precomposed.png'))
-{
+if (file_exists($assets.'icons/apple-touch-icon-72x72-precomposed.png')) {
 	$_template->getTemplateObject('LinkTag')
 		->add( array(
 			'rel'=>'apple-touch-icon-precomposed',
@@ -129,14 +126,14 @@ if (file_exists($assets.'icons/apple-touch-icon-72x72-precomposed.png'))
 		) );
 }
 // => For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: apple-touch-icon-precomposed.png
-if (file_exists($assets.'icons/apple-touch-icon-precomposed.png'))
-{
+if (file_exists($assets.'icons/apple-touch-icon-precomposed.png')) {
 	$_template->getTemplateObject('LinkTag')
 		->add( array(
 			'rel'=>'apple-touch-icon-precomposed',
 			'href'=>$assets.'icons/apple-touch-icon-precomposed.png'
 		) );
 }
+
 // => + old ones
 $_template->getTemplateObject('LinkTag')->set($old_links);
 
@@ -146,16 +143,14 @@ $old_titles = $_template->getTemplateObject('TitleTag')->get();
 $_template->getTemplateObject('TitleTag')->reset();
 
 // => $title
-if (!empty($title))
-{
+if (!empty($title)) {
 	$_template->getTemplateObject('TitleTag')
 		->add( $title );
 }
 // => + old ones
 $_template->getTemplateObject('TitleTag')->set($old_titles);
 // => meta_title last
-if (!empty($meta_title))
-{
+if (!empty($meta_title)) {
 	$_template->getTemplateObject('TitleTag')
 		->add( $meta_title );
 }
@@ -169,6 +164,8 @@ $_template->getTemplateObject('CssFile')
 	->add($boilerplate_assets.'css/normalize.css')
 	->add($boilerplate_assets.'css/main.css')
 	->add($tple_assets.'css/styles.css')
+	->add($tple_assets.'css/styles_ie_gte5.5.css', 'screen', '>=5.5')
+	->add($tple_assets.'css/styles_ie_lt5.5.css', 'screen', '<5.5')
 	// => + old ones
 	->set($old_css);
 
@@ -201,10 +198,24 @@ if (empty($content)) $content = '<p>Test content</p>';
 //echo '<pre>';var_dump($_template);exit('yo');
 
 ?><!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<?php
+_iecc(
+    '<html class="no-js lt-ie9 lt-ie8 lt-ie7">', '<7'
+);
+_echo("\n");
+_iecc(
+    '<html class="no-js lt-ie9 lt-ie8">', '7'
+);
+_echo("\n");
+_iecc(
+    '<html class="no-js lt-ie9">', '8'
+);
+_echo("\n");
+_iecc(
+    '<html class="no-js">', '>8', null, true
+);
+_echo("\n");
+?>
     <head>
 <?php
 echo
@@ -226,14 +237,18 @@ elseif (true===$merge_js)
 else
 	echo $_template->getTemplateObject('JavascriptFile', 'jsfiles_header')->write("\n\t\t %s ");
 
-echo "\n";
+_echo("\n");
 ?>
     </head>
     <body>
     <div id="page-wrapper">
-        <!--[if lt IE 7]>
-            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
-        <![endif]-->
+<?php
+_iecc(
+    "\n".'<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>'."\n",
+    '<7'
+);
+_echo("\n");
+?>
         <a id="top"></a>
 
 <?php foreach($_template->getPageStructure() as $item) : ?>

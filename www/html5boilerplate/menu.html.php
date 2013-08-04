@@ -8,7 +8,7 @@ $_template->getTemplateObject('JavascriptTag')->set(array(
     "
 $(function() {
     initBacklinks();
-    activateMenuItem();
+    activateNavigationMenu();
     $(\"#user_agent\").html( navigator.userAgent );
 });
     "
@@ -18,6 +18,10 @@ $(function() {
 // the content
 if (empty($content)) $content = '<p>Test content</p>';
 
+$public_sources = true;
+$url_sources = "http://github.com/atelierspierrot/templatengine";
+$host_sources_name = "GitHub";
+$host_sources_home = "http://github.com/";
 
 $make_navigation_list_from_content = function(array $ctt, array $attrs)
 {
@@ -43,6 +47,12 @@ $make_navigation_list_from_content = function(array $ctt, array $attrs)
     )); ?>
 <?php else : ?>
     <?php echo $content; ?>
+<?php endif; ?>
+<?php if ($public_sources) : ?>
+    <div class="info">
+        <p><span class="icon github-icon""></span>&nbsp;<a href="<?php echo $url_sources; ?>">See online on <?php echo $host_sources_name; ?></a></p>
+        <p class="comment small">The sources of this package are hosted on <a href="<?php echo $host_sources_home; ?>"><?php echo $host_sources_name; ?></a>. To follow sources updates, report a bug or read opened bug tickets and any other information, please see the link above.</p>
+    </div>
 <?php endif; ?>
     <p class="credits" id="user_agent"></p>
 </nav>
