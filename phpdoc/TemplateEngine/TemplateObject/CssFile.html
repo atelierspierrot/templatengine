@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="robots" content="index, follow, all" />
-        <title>TemplateEngine\TemplateObject\CssFile | Template Engine</title>
+        <title>TemplateEngine\TemplateObject\CssFile | </title>
                     <link rel="stylesheet" type="text/css" href="../../stylesheet.css">
                             </head>
         <body id="class">
@@ -16,7 +16,7 @@
             
         </ul>
 
-        <div id="title">Template Engine</div>
+        <div id="title"></div>
 
             <div class="type">Class</div>
     <h1><a href="../../TemplateEngine/TemplateObject.html">TemplateEngine\TemplateObject</a>\CssFile</h1>
@@ -66,8 +66,8 @@
                     <a href="../../TemplateEngine/TemplateObject/CssFile.html"><abbr title="TemplateEngine\TemplateObject\CssFile">CssFile</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_add">add</a>(string $file_path, string $media = &#039;screen&#039;)
-                    <p>Add an entry</p>
+                    <a href="#method_add">add</a>(string $file_path, string $media = &#039;screen&#039;, string|null $condition = null)
+                    <p>Add a CSS file in CSS stack</p>
                 </td>
                 <td></td>
             </tr>
@@ -77,7 +77,7 @@
                 </td>
                 <td class="last">
                     <a href="#method_set">set</a>(array $files)
-                    <p>Set a stack of entries</p>
+                    <p>Set a full CSS stack</p>
                 </td>
                 <td></td>
             </tr>
@@ -87,7 +87,7 @@
                 </td>
                 <td class="last">
                     <a href="#method_get">get</a>()
-                    <p>Get the stack of entries</p>
+                    <p>Get the CSS files stack</p>
                 </td>
                 <td></td>
             </tr>
@@ -233,7 +233,7 @@
     </div>
 
                 <h3 id="method_init">
-        <div class="location">at line 31</div>
+        <div class="location">at line 32</div>
         <code>            public            
     <strong>init</strong>()</code>
     </h3>
@@ -249,7 +249,7 @@
     </div>
 
                 <h3 id="method_reset">
-        <div class="location">at line 40</div>
+        <div class="location">at line 42</div>
         <code>            public            <a href="../../TemplateEngine/TemplateObject/CssFile.html"><abbr title="TemplateEngine\TemplateObject\CssFile">CssFile</abbr></a>
     <strong>reset</strong>()</code>
     </h3>
@@ -274,12 +274,12 @@
     </div>
 
                 <h3 id="method_add">
-        <div class="location">at line 54</div>
+        <div class="location">at line 59</div>
         <code>            public            <a href="../../TemplateEngine/TemplateObject/CssFile.html"><abbr title="TemplateEngine\TemplateObject\CssFile">CssFile</abbr></a>
-    <strong>add</strong>(string $file_path, string $media = &#039;screen&#039;)</code>
+    <strong>add</strong>(string $file_path, string $media = &#039;screen&#039;, string|null $condition = null)</code>
     </h3>
     <div class="details">
-        <p>Add an entry</p>
+        <p>Add a CSS file in CSS stack</p>
         <p>
 </p>
         <div class="tags">
@@ -295,6 +295,11 @@
                 <td>string</td>
                 <td>$media</td>
                 <td>The media type for the CSS file (default is "screen")</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$condition</td>
+                <td>Define a condition (for IE) for this stylesheet</td>
             </tr>
             </table>
 
@@ -314,12 +319,12 @@
     </div>
 
                 <h3 id="method_set">
-        <div class="location">at line 75</div>
+        <div class="location">at line 82</div>
         <code>            public            <a href="../../TemplateEngine/TemplateObject/CssFile.html"><abbr title="TemplateEngine\TemplateObject\CssFile">CssFile</abbr></a>
     <strong>set</strong>(array $files)</code>
     </h3>
     <div class="details">
-        <p>Set a stack of entries</p>
+        <p>Set a full CSS stack</p>
         <p>
 </p>
         <div class="tags">
@@ -358,12 +363,12 @@
     </div>
 
                 <h3 id="method_get">
-        <div class="location">at line 96</div>
+        <div class="location">at line 105</div>
         <code>            public            array
     <strong>get</strong>()</code>
     </h3>
     <div class="details">
-        <p>Get the stack of entries</p>
+        <p>Get the CSS files stack</p>
         <p>
 </p>
         <div class="tags">
@@ -383,7 +388,7 @@
     </div>
 
                 <h3 id="method_write">
-        <div class="location">at line 106</div>
+        <div class="location">at line 117</div>
         <code>            public            string
     <strong>write</strong>(string $mask = &#039;%s&#039;)</code>
     </h3>
@@ -418,7 +423,7 @@
     </div>
 
                 <h3 id="method_merge">
-        <div class="location">at line 130</div>
+        <div class="location">at line 146</div>
         <code>            public            <a href="../../TemplateEngine/TemplateObject/CssFile.html"><abbr title="TemplateEngine\TemplateObject\CssFile">CssFile</abbr></a>
     <strong>merge</strong>()</code>
     </h3>
@@ -443,7 +448,7 @@
     </div>
 
                 <h3 id="method_addMerged">
-        <div class="location">at line 167</div>
+        <div class="location">at line 181</div>
         <code>            public            <a href="../../TemplateEngine/TemplateObject/CssFile.html"><abbr title="TemplateEngine\TemplateObject\CssFile">CssFile</abbr></a>
     <strong>addMerged</strong>(string $file_path, string $media = &#039;screen&#039;)</code>
     </h3>
@@ -483,7 +488,7 @@
     </div>
 
                 <h3 id="method_setMerged">
-        <div class="location">at line 191</div>
+        <div class="location">at line 204</div>
         <code>            public            <a href="../../TemplateEngine/TemplateObject/CssFile.html"><abbr title="TemplateEngine\TemplateObject\CssFile">CssFile</abbr></a>
     <strong>setMerged</strong>(array $files)</code>
     </h3>
@@ -527,7 +532,7 @@
     </div>
 
                 <h3 id="method_getMerged">
-        <div class="location">at line 215</div>
+        <div class="location">at line 226</div>
         <code>            public            array
     <strong>getMerged</strong>()</code>
     </h3>
@@ -552,7 +557,7 @@
     </div>
 
                 <h3 id="method_writeMerged">
-        <div class="location">at line 225</div>
+        <div class="location">at line 238</div>
         <code>            public            string
     <strong>writeMerged</strong>(string $mask = &#039;%s&#039;)</code>
     </h3>
@@ -587,7 +592,7 @@
     </div>
 
                 <h3 id="method_minify">
-        <div class="location">at line 246</div>
+        <div class="location">at line 259</div>
         <code>            public            <a href="../../TemplateEngine/TemplateObject/CssFile.html"><abbr title="TemplateEngine\TemplateObject\CssFile">CssFile</abbr></a>
     <strong>minify</strong>()</code>
     </h3>
@@ -612,7 +617,7 @@
     </div>
 
                 <h3 id="method_addMinified">
-        <div class="location">at line 283</div>
+        <div class="location">at line 294</div>
         <code>            public            <a href="../../TemplateEngine/TemplateObject/CssFile.html"><abbr title="TemplateEngine\TemplateObject\CssFile">CssFile</abbr></a>
     <strong>addMinified</strong>(string $file_path, string $media = &#039;screen&#039;)</code>
     </h3>
@@ -652,7 +657,7 @@
     </div>
 
                 <h3 id="method_setMinified">
-        <div class="location">at line 307</div>
+        <div class="location">at line 317</div>
         <code>            public            <a href="../../TemplateEngine/TemplateObject/CssFile.html"><abbr title="TemplateEngine\TemplateObject\CssFile">CssFile</abbr></a>
     <strong>setMinified</strong>(array $files)</code>
     </h3>
@@ -696,7 +701,7 @@
     </div>
 
                 <h3 id="method_getMinified">
-        <div class="location">at line 331</div>
+        <div class="location">at line 339</div>
         <code>            public            array
     <strong>getMinified</strong>()</code>
     </h3>
@@ -721,7 +726,7 @@
     </div>
 
                 <h3 id="method_writeMinified">
-        <div class="location">at line 341</div>
+        <div class="location">at line 351</div>
         <code>            public            string
     <strong>writeMinified</strong>(string $mask = &#039;%s&#039;)</code>
     </h3>

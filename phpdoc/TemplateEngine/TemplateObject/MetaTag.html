@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="robots" content="index, follow, all" />
-        <title>TemplateEngine\TemplateObject\MetaTag | Template Engine</title>
+        <title>TemplateEngine\TemplateObject\MetaTag | </title>
                     <link rel="stylesheet" type="text/css" href="../../stylesheet.css">
                             </head>
         <body id="class">
@@ -16,7 +16,7 @@
             
         </ul>
 
-        <div id="title">Template Engine</div>
+        <div id="title"></div>
 
             <div class="type">Class</div>
     <h1><a href="../../TemplateEngine/TemplateObject.html">TemplateEngine\TemplateObject</a>\MetaTag</h1>
@@ -76,8 +76,8 @@
                     <a href="../../TemplateEngine/TemplateObject/MetaTag.html"><abbr title="TemplateEngine\TemplateObject\MetaTag">MetaTag</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_add">add</a>(string $name, string|array $content = &#039;&#039;, bool $http_equiv = false)
-                    <p>Add an entry</p>
+                    <a href="#method_add">add</a>(string $name, string|array $content = &#039;&#039;, bool $http_equiv = false, string|null $condition = null)
+                    <p>Add a meta tag in metas stack</p>
                 </td>
                 <td></td>
             </tr>
@@ -87,7 +87,7 @@
                 </td>
                 <td class="last">
                     <a href="#method_set">set</a>(array $tags)
-                    <p>Set a stack of entries</p>
+                    <p>Set a full array of tags</p>
                 </td>
                 <td></td>
             </tr>
@@ -97,7 +97,7 @@
                 </td>
                 <td class="last">
                     <a href="#method_get">get</a>()
-                    <p>Get the stack of entries</p>
+                    <p>Get the meta tags stack</p>
                 </td>
                 <td></td>
             </tr>
@@ -159,7 +159,7 @@
     </div>
 
                 <h3 id="method_init">
-        <div class="location">at line 31</div>
+        <div class="location">at line 32</div>
         <code>            public            
     <strong>init</strong>()</code>
     </h3>
@@ -175,7 +175,7 @@
     </div>
 
                 <h3 id="method_reset">
-        <div class="location">at line 40</div>
+        <div class="location">at line 42</div>
         <code>            public            <a href="../../TemplateEngine/TemplateObject/MetaTag.html"><abbr title="TemplateEngine\TemplateObject\MetaTag">MetaTag</abbr></a>
     <strong>reset</strong>()</code>
     </h3>
@@ -200,12 +200,12 @@
     </div>
 
                 <h3 id="method_add">
-        <div class="location">at line 53</div>
+        <div class="location">at line 58</div>
         <code>            public            <a href="../../TemplateEngine/TemplateObject/MetaTag.html"><abbr title="TemplateEngine\TemplateObject\MetaTag">MetaTag</abbr></a>
-    <strong>add</strong>(string $name, string|array $content = &#039;&#039;, bool $http_equiv = false)</code>
+    <strong>add</strong>(string $name, string|array $content = &#039;&#039;, bool $http_equiv = false, string|null $condition = null)</code>
     </h3>
     <div class="details">
-        <p>Add an entry</p>
+        <p>Add a meta tag in metas stack</p>
         <p>
 </p>
         <div class="tags">
@@ -227,6 +227,11 @@
                 <td>$http_equiv</td>
                 <td>Is this meta tag written as "http-equiv" (false by default)</td>
             </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$condition</td>
+                <td>Define a condition (for IE) for this stylesheet</td>
+            </tr>
             </table>
 
             
@@ -245,12 +250,12 @@
     </div>
 
                 <h3 id="method_set">
-        <div class="location">at line 69</div>
+        <div class="location">at line 78</div>
         <code>            public            <a href="../../TemplateEngine/TemplateObject/MetaTag.html"><abbr title="TemplateEngine\TemplateObject\MetaTag">MetaTag</abbr></a>
     <strong>set</strong>(array $tags)</code>
     </h3>
     <div class="details">
-        <p>Set a stack of entries</p>
+        <p>Set a full array of tags</p>
         <p>
 </p>
         <div class="tags">
@@ -289,12 +294,12 @@
     </div>
 
                 <h3 id="method_get">
-        <div class="location">at line 88</div>
+        <div class="location">at line 100</div>
         <code>            public            array
     <strong>get</strong>()</code>
     </h3>
     <div class="details">
-        <p>Get the stack of entries</p>
+        <p>Get the meta tags stack</p>
         <p>
 </p>
         <div class="tags">
@@ -314,7 +319,7 @@
     </div>
 
                 <h3 id="method_write">
-        <div class="location">at line 98</div>
+        <div class="location">at line 112</div>
         <code>            public            string
     <strong>write</strong>(string $mask = &#039;%s&#039;)</code>
     </h3>
