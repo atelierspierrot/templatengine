@@ -59,6 +59,16 @@ class TemplateEngineAutoloadGenerator
      */
     public function generate()
     {
+        $full_db = $this->getFullDb();
+        return $this->_autoloader->writeJsonDatabase($full_db);
+    }
+
+    /**
+     * Build the complete database array
+     * @return array
+     */
+    public function getFullDb()
+    {
         $filesystem = new Filesystem();
         $config = $this->_composer->getConfig();
         $assets_db = $this->_autoloader->getRegistry();
@@ -107,7 +117,7 @@ class TemplateEngineAutoloadGenerator
             'cache-assets-dir' => isset($extra['cache-assets-dir']) ? $extra['cache-assets-dir'] : Config::getDefault('cache-assets-dir'),
             'packages' => $assets_db
         );
-        return $this->_autoloader->writeJsonDatabase($full_db);
+        return $full_db;
     }
 
     /**
@@ -121,12 +131,28 @@ class TemplateEngineAutoloadGenerator
     public function parseComposerExtra(PackageInterface $package, $assets_package_dir, $vendor_package_dir)
     {
         $data = $this->_autoloader->getAssetsInstaller()->parseComposerExtra($package, $assets_package_dir);
+        if (is_null($data)) $data = array();
         $extra = $package->getExtra();
         $assets_package_dir = rtrim($assets_package_dir, '/') . '/';
         if (strlen($vendor_package_dir)) {
             $vendor_package_dir = rtrim($vendor_package_dir, '/') . '/';
         }
 
+        $mapping = array(
+            'layouts'=>'layouts_path',
+            'views'=>'views_path',
+            'views-functions'=>'views_functions'
+        );
+        foreach ($mapping as $json_name=>$var_name) {
+            if (isset($extra[$json_name])) {
+                $json_vals = is_array($extra[$json_name]) ? $extra[$json_name] : array($extra[$json_name]);
+                $data[$var_name] = array();
+                foreach ($json_vals as $json_val) {
+                    $data[$var_name][] = $vendor_package_dir . $json_val;
+                }
+            }
+        }
+/*
         if (isset($extra['layouts'])) {
             $layouts = is_array($extra['layouts']) ? $extra['layouts'] : array($extra['layouts']);
             $data['layouts_path'] = array();
@@ -150,8 +176,8 @@ class TemplateEngineAutoloadGenerator
                 $data['views_functions'][] = $vendor_package_dir . $view_fct_path;
             }
         }
-
-        return $data;
+*/
+        return !empty($data) ? $data : null;
     }
 
 }

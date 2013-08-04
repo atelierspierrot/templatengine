@@ -55,10 +55,10 @@ var_export($js_stack);
 <?php
 
 echo '$compressor = new Assets\Compressor('."\n"
-    ."\t".'$js_stack,'."\n"
-    ."\t".'null,'."\n"
-    ."\t".'__DIR__."/../tmp",'."\n"
-    ."\t".'"js"'."\n"
+    ."\t".'$js_stack,            // the files to treat'."\n"
+    ."\t".'null,                 // the result filename - null will cause automatic generation'."\n"
+    ."\t".'__DIR__."/../tmp",    // the result file path'."\n"
+    ."\t".'"js"                  // the file type - will be guessed if null'."\n"
     .');'."\n";
 
 $compressor = new Assets\Compressor(
@@ -71,9 +71,15 @@ $compressor = new Assets\Compressor(
 echo "\n";
 echo '$compressor->process();'."\n";
 $compressor->process();
+
+echo "\n";
+echo '// asking the minifier in which file it generates the minified version of our files:'."\n";
 echo '$minified_filename = $compressor->getDestinationRealPath();'."\n";
 $merged_filename = $compressor->getDestinationRealPath();
 echo '// => '.$merged_filename."\n";
+
+echo "\n";
+echo '// we can get a ready-to-use file path of the generated file defining the web root:'."\n";
 $compressor->setWebRootPath( $loader->getDocumentRoot() );
 echo '$compressor->setWebRootPath( $loader->getDocumentRoot() );'."\n";
 echo '$minified_webpath = $compressor->getDestinationWebPath();'."\n";
