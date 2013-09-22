@@ -1,6 +1,4 @@
-var tree = [["[Global Namespace]",,"",
-                [["SplClassLoader","SplClassLoader.html","",
-                [        ]]        ]],["Assets","Assets.html","",
+var tree = [["Assets","Assets.html","",
                 [["Composer","Assets\/Composer.html","",
                 [["TemplateEngineAutoloadGenerator","Assets\/Composer\/TemplateEngineAutoloadGenerator.html"," < AutoloadGenerator",
                 [        ]],["TemplateEngineConfig","Assets\/Composer\/TemplateEngineConfig.html"," < DefaultConfig",
