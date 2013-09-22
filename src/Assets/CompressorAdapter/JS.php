@@ -30,7 +30,7 @@ class JS
 	/**
 	 * Inspired by <http://code.seebz.net/p/minify-js/>
 	 */
-	public static function minify( $input )
+	public static function minify($input)
 	{
 		$output = '';
 		$input = self::merge($input);
@@ -42,33 +42,30 @@ class JS
 		$inputs = str_split($input);
 		$inputs_count = count($inputs);
 		$prevChr = null;
-		for ($i=0; $i<$inputs_count; $i++)
-		{
+		for ($i=0; $i<$inputs_count; $i++) {
 			$chr = $inputs[$i];
 			$nextChr = $i+1 < $inputs_count ? $inputs[$i+1] : null;
 			
-			switch($chr) {
+			switch ($chr) {
 				case '/':
 					if (!count($inQuotes) && $nextChr == '*' && $inputs[$i+2] != '@') {
 						$i = 1 + strpos($input, '*/', $i);
 						continue 2;
 					} elseif (!count($inQuotes) && $nextChr == '/') {
-						if(strpos($input, "\n", $i))
+						if (strpos($input, "\n", $i))
 							$i = strpos($input, "\n", $i);
 						else
 							$i = strlen($input);
 						continue 2;
 					} elseif (!count($inQuotes)) {
 						$eolPos = strpos($input, "\n", $i);
-						if($eolPos===false) $eolPos = $inputs_count;
+						if ($eolPos===false) $eolPos = $inputs_count;
 						$eol = substr($input, $i, $eolPos-$i);
-						if (!preg_match('`^(/.+(?<=\\\/)/(?!/)[gim]*)[^gim]`U', $eol, $m))
-						{
+						if (!preg_match('`^(/.+(?<=\\\/)/(?!/)[gim]*)[^gim]`U', $eol, $m)) {
 							preg_match('`^(/.+(?<!/)/(?!/)[gim]*)[^gim]`U', $eol, $m);
 						}
 						// it's a RegExp
-						if (isset($m[1]))
-						{
+						if (isset($m[1])) {
 							$output .= $m[1];
 							$i += strlen($m[1])-1;
 							continue 2;
@@ -113,7 +110,7 @@ class JS
 		return $output;
 	}
 
-	public static function buildComment( $str )
+	public static function buildComment($str)
 	{
 		return sprintf('/* %s */', $str);
 	}
