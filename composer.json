@@ -4,7 +4,7 @@
     "description": "A PHP package to build HTML5 views (based on HTML5 Boilerplate layouts).",
     "keywords": [ "php", "template", "boilerplate" ],
     "homepage": "https://github.com/atelierspierrot/templatengine",
-    "version": "0.0.11",
+    "version": "0.0.12-dev",
     "license": "GPL-3.0",
     "authors": [{
         "name": "Les Ateliers Pierrot & contributors",
@@ -21,7 +21,10 @@
         "atelierspierrot/library": "dev-master",
         "atelierspierrot/assets-manager": "dev-master"
     },
-    "require-dev": { "sami/sami": "dev-master" },
+    "require-dev": {
+        "sami/sami": "dev-master",
+        "phpmd/phpmd" : "1.4.*"
+    },
     "autoload": { "psr-0": {
         "TemplateEngine": "src",
         "Assets": "src"
