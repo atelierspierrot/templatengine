@@ -21,7 +21,10 @@
         "atelierspierrot/library": "dev-master",
         "atelierspierrot/assets-manager": "dev-master"
     },
-    "require-dev": { "sami/sami": "dev-master" },
+    "require-dev": {
+        "sami/sami": "dev-master",
+        "phpmd/phpmd" : "1.4.*"
+    },
     "autoload": { "psr-0": {
         "TemplateEngine": "src",
         "Assets": "src"
