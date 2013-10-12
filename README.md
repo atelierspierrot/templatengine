@@ -17,6 +17,25 @@ Documentation](http://docs.ateliers-pierrot.fr/templatengine/) for more informat
 complete demonstration is available in the package itself (PHP server is required).**
 
 
+## Installation
+
+To use the package, you need to add it to your requirements in your `composer.json` AND to
+call its `TemplateEngineInstaller::postAutoloadDump` for the `post-autoload-dump` Composer's event:
+
+    "require": {
+        ...
+        "atelierspierrot/templatengine": "~1.0"
+    },
+    ...
+    "scripts": {
+        ...
+        "post-autoload-dump": "Assets\\Composer\\TemplateEngineInstaller::postAutoloadDump"
+    }
+
+The `Assets` and `TemplateEngine` namespaces will be automatically added to the project
+Composer autoloader.
+
+
 ## Composer Extra settings
 
 Using the `Template Engine`, you can define some extra features in your package's `composer.json`
