@@ -19,6 +19,8 @@ complete demonstration is available in the package itself (PHP server is require
 
 ## Installation
 
+This package requires that you use [Composer](http://getcomposer.org/) to manage your dependencies.
+
 To use the package, you need to add it to your requirements in your `composer.json` AND to
 call its `TemplateEngineInstaller::postAutoloadDump` for the `post-autoload-dump` Composer's event:
 
