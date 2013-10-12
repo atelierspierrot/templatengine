@@ -51,6 +51,10 @@
         "cache-assets-dir": "tmp_assets",
         "layouts": "www/html5boilerplate",
         "views": [ "www", "www/html5boilerplate" ],
-        "views-functions": "src/TemplateEngine/view_functions.php"
+        "views-functions": "src/TemplateEngine/view_functions.php",
+        "assets-config-class": "\\Assets\\Composer\\TemplateEngineConfig",
+        "assets-package-class": "\\Assets\\Package\\Package",
+        "assets-preset-class": "\\Assets\\Package\\Preset",
+        "assets-package-installer-class": "\\Assets\\Composer\\ComposerInstaller"
     }
 }
