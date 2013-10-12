@@ -2,43 +2,19 @@ Template Engine
 ===============
 
 A PHP package to build HTML5 views (based on [HTML5 Boilerplate](http://html5boilerplate.com/)
-layouts and the [Composer Assets Extension](https://github.com/atelierspierrot/assets-manager)).
+layouts and the [Composer Assets Plugin](https://github.com/atelierspierrot/assets-manager)).
 
 
 ## What is this package ?
 
 This package defines a simple Template Engine to manage PHP view files, some HTML files including
 PHP scripts to build views passing them parameters and objects and some tools to manage global
-layouts to embed these views. As it is based on the [Composer Assets Extension](https://github.com/atelierspierrot/assets-manager),
+layouts to embed these views. As it is based on the [Composer Assets Plugin](https://github.com/atelierspierrot/assets-manager),
 the Template Engine also facilitate assets files usage and URL.
 
 **This package is not yet really documented. Please take a look at the code and the [PHP
 Documentation](http://docs.ateliers-pierrot.fr/templatengine/) for more information. A
 complete demonstration is available in the package itself (PHP server is required).**
-
-## Assets manager
-
-The `TemplateEngine\Assets` namespace defines some classes to manage a set of assets, view
-files and presets to use in your template engine views.
-
-The global `Loader` class is based on three paths:
-
-- `base_dir`: the package root directory (must be the directory containing the `composer.json` file)
-- `assets_dir`: the package asssets directory related to `base_dir`
-- `document_root`: the path in the filesystem of the web assets root directory ; this is used
-to build all related assets paths to use in HTTP.
-
-For these three paths, their defaults values are defined on a default package structure:
-
-    package_name/
-    |----------- src/
-    |----------- www/
-
-    $loader->base_dir = realpath(package_name)
-    $loader->assets_dir = www
-    $loader->document_root = www or the server DOCUMENT_ROOT
-
-NOTE - These paths are stored in the object without the trailing slash.
 
 
 ## Composer Extra settings
@@ -49,7 +25,7 @@ to specify some paths and presets used by the engine.
 ### Example
 
 Below is the example of the package default configuration values added to the default
-[Composer Assets Extension](https://github.com/atelierspierrot/assets-manager) configuration
+[Composer Assets Plugin](https://github.com/atelierspierrot/assets-manager) configuration
 values:
 
     "extra": {
@@ -94,8 +70,8 @@ must exist.
 
 ## Views functions
 
-Any package can defining the extra `views-functions` setting can define a set of standalone
-methods to use in view files ; all functions files of the declared views-functions are loaded
+Any package defining the extra `views-functions` setting can define a set of standalone
+methods to use in view files ; all functions files of the declared `views-functions` are loaded
 for all views, so all of these methods may be accessible in any view file.
 
 
