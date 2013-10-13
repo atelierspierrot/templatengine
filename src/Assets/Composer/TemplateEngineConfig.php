@@ -25,8 +25,13 @@ class TemplateEngineConfig
     public static function getDefaults()
     {
         return array(
+
+// Assets Manager
             // The default package type handles by the installer
-            'package-type' => array( 'library-assets-template' ),
+            'package-type' => array(
+                '^(.*)-assets$',
+                '^(.*)-assets-template$'
+            ),
             // The default package vendor directory name (related to package root dir)
             'vendor-dir' => 'vendor',
             // The default package assets directory name (related to package root dir)
@@ -62,6 +67,7 @@ class TemplateEngineConfig
             // must extends AssetsManager\Composer\Autoload\AbstractAutoloadGenerator
             'assets-autoload-generator-class' => 'Assets\Composer\TemplateEngineAutoloadGenerator',
 
+// Template Engine
             // Template Engine specific: relative cache directory from assets-dir
             'cache-dir' => 'tmp',
             // Template Engine specific: relative assets cache directory from assets-dir
