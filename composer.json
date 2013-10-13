@@ -21,6 +21,7 @@
         "atelierspierrot/assets-manager": "1.*"
     },
     "require-dev": {
+        "atelierspierrot/gentleface-sprites": "1.*",
         "sami/sami": "dev-master",
         "phpmd/phpmd" : "1.4.*"
     },
