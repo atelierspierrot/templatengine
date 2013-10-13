@@ -1,7 +1,6 @@
 <?php
 
 _use('jquery');
-_use('gentleface-sprites');
 
 $_template->getTemplateObject('JavascriptTag')->set(array(
     "
@@ -13,7 +12,13 @@ $(function() {
 
 $fork_link = "http://github.com/atelierspierrot/templatengine/edit/master/demo/views/loremipsum.htm";
 
-?>
+if ($_template->getAssetsLoader()->hasPreset('gentleface-sprites')) :
+    _use('gentleface-sprites');
+else : ?>
+<div class="bubble text-center">
+    <p style="color:red; font-weight: bold">This page uses the <a href="https://github.com/atelierspierrot/gentleface-sprites">gentleface-sprites</a> package for image rendering. Install composer dependencies using the <var>--dev</var> option to install it.</p>
+</div>
+<?php endif; ?>
 <section>
 
 <h1>H1: Test of HTML(5) tags</h1>
