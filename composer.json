@@ -2,7 +2,7 @@
     "name": "atelierspierrot/templatengine",
     "type": "library-assets",
     "description": "A PHP package to build HTML5 views (based on HTML5 Boilerplate layouts).",
-    "keywords": [ "template", "boilerplate" ],
+    "keywords": [ "template engine", "boilerplate" ],
     "homepage": "http://github.com/atelierspierrot/templatengine",
     "license": "GPL-3.0",
     "authors": [{
@@ -12,13 +12,13 @@
     },{
         "name": "Pierre Cassat",
         "email": "piero.wbmstr@gmail.com",
-        "homepage": "https://github.com/PieroWbmstr"
+        "homepage": "http://github.com/PieroWbmstr"
     }],
     "require": {
         "php": ">=5.3.0",
         "atelierspierrot/patterns": "1.*",
         "atelierspierrot/library": "1.*",
-        "atelierspierrot/assets-manager": "0.*"
+        "atelierspierrot/assets-manager": "1.*"
     },
     "require-dev": {
         "sami/sami": "dev-master",
@@ -45,9 +45,6 @@
                 "css": "vendor_assets/jquery.highlight.css",
                 "jsfiles_footer": "vendor_assets/jquery.highlight.js",
                 "require": "jquery"
-            },
-            "gentleface-sprites": {
-                "css": "vendor_assets/gentleface-sprites/gentleface-sprites.min.css"
             }
         },
         "cache-dir": "tmp",
@@ -56,7 +53,7 @@
         "views": [ "www", "www/html5boilerplate" ],
         "views-functions": "src/TemplateEngine/view_functions.php",
         "branch-alias": {
-            "dev-master": "0.1-dev"
+            "dev-master": "1.0-dev"
         }
     },
     "scripts": { "post-autoload-dump": "Assets\\Composer\\TemplateEngineInstaller::postAutoloadDump" }
