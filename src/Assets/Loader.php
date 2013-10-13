@@ -20,7 +20,6 @@ use AssetsManager\Loader as AssetsLoader;
 class Loader extends AssetsLoader
 {
 
-
 }
 
 // Endfile

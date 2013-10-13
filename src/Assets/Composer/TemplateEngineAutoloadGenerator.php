@@ -152,7 +152,31 @@ class TemplateEngineAutoloadGenerator
                 }
             }
         }
+/*
+        if (isset($extra['layouts'])) {
+            $layouts = is_array($extra['layouts']) ? $extra['layouts'] : array($extra['layouts']);
+            $data['layouts_path'] = array();
+            foreach ($layouts as $layout_path) {
+                $data['layouts_path'][] = $vendor_package_dir . $layout_path;
+            }
+        }
 
+        if (isset($extra['views'])) {
+            $views = is_array($extra['views']) ? $extra['views'] : array($extra['views']);
+            $data['views_path'] = array();
+            foreach ($views as $view_path) {
+                $data['views_path'][] = $vendor_package_dir . $view_path;
+            }
+        }
+
+        if (isset($extra['views-functions'])) {
+            $views_fcts = is_array($extra['views-functions']) ? $extra['views-functions'] : array($extra['views-functions']);
+            $data['views_functions'] = array();
+            foreach ($views_fcts as $view_fct_path) {
+                $data['views_functions'][] = $vendor_package_dir . $view_fct_path;
+            }
+        }
+*/
         return !empty($data) ? $data : null;
     }
 
