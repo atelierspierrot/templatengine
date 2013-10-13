@@ -17,7 +17,11 @@ $dtmz = @date_default_timezone_get();
 date_default_timezone_set($dtmz?:'Europe/Paris');
 
 // the Composer autoloader
-require __DIR__.'/../vendor/autoload.php';
+if (file_exists($_f = __DIR__.'/../vendor/autoload.php')) {
+    require __DIR__.'/../vendor/autoload.php';
+} else {
+    die('You need to run Composer on the project to install dependencies!');
+}
 
 // the controller
 require 'Controller.php';
