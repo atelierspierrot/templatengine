@@ -18,7 +18,7 @@
         "php": ">=5.3.0",
         "atelierspierrot/patterns": "1.*",
         "atelierspierrot/library": "1.*",
-        "atelierspierrot/assets-manager": "0.*"
+        "atelierspierrot/assets-manager": "1.*"
     },
     "require-dev": {
         "sami/sami": "dev-master",
