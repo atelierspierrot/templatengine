@@ -185,7 +185,7 @@ $old_footer_js = $_template->getTemplateObject('JavascriptFile', 'jsfiles_footer
 $_template->getTemplateObject('JavascriptFile', 'jsfiles_footer')->reset();
 
 $_template->getTemplateObject('JavascriptFile', 'jsfiles_footer')
-	->addMinified($tple_assets.'vendor_assets/jquery-1.9.1.min.js')
+	->addMinified($tple_assets.'vendor_assets/jquery-last.min.js')
 	->add($boilerplate_assets.'js/plugins.js')
 	->add($tple_assets.'js/scripts.js')
 	// => + old ones
