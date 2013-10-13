@@ -26,7 +26,7 @@ call its `TemplateEngineInstaller::postAutoloadDump` for the `post-autoload-dump
 
     "require": {
         ...
-        "atelierspierrot/templatengine": "~1.0"
+        "atelierspierrot/templatengine": "1.*"
     },
     ...
     "scripts": {
