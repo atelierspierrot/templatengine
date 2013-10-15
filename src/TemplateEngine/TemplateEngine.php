@@ -81,6 +81,11 @@ class TemplateEngine
     const THROW_ALL_ERRORS      = 8;
 
     /**
+     * @var string
+     */
+    protected $page_layout;
+
+    /**
      * Stack of the default page blocks
      * @static array
      */
@@ -115,6 +120,7 @@ class TemplateEngine
         $this->template = new Template;
         $this->view = new View;
         $this->registry = new Registry;
+        $this->setPageLayout(self::$default_page_layout);
 	}
 
 	/**
@@ -152,6 +158,28 @@ class TemplateEngine
 // ------------------------
 // Getters/Setters
 // ------------------------
+
+	/**
+	 * Set the current page layout
+	 *
+	 * @param string $layout
+	 * @return self Returns `$this` for chainability
+	 */
+    public function setPageLayout($layout)
+    {
+        $this->page_layout = $layout;
+        return $this;
+    }
+
+	/**
+	 * Get the current page layout
+	 *
+	 * @return string
+	 */
+    public function getPageLayout()
+    {
+        return $this->page_layout;
+    }
 
 	/**
 	 * Set the object error flags
@@ -378,7 +406,7 @@ class TemplateEngine
 	 */
     public function renderLayout($view = null, array $params = array(), $display = false, $exit = false)
     {
-        if (is_null($view)) $view = self::$default_page_layout;
+        if (is_null($view)) $view = $this->getPageLayout();
         return $this->render($view, $params, $display, $exit);
     }
 
