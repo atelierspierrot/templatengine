@@ -3,17 +3,31 @@
 _use('jquery.tablesorter');
 _use('jquery.highlight');
 
-$_template->getTemplateObject('JavascriptTag')->set(array(
-    "
+$_template->getTemplateObject('JavascriptTag')->add(<<<EOT
 $(function() {
     $('table.tablesorter').tablesorter({widgets: ['zebra']});
     $('pre.code').highlight({source:0, indent:'tabs', code_lang: 'data-language'});
 });
-    "
-));
+EOT
+);
 
 ?>
+
 <h2>Test of all default template engine plugins</h2>
+
+<p>This is a demonstration of the <var>_use(preset name)</var> feature:</p>
+<pre>
+_use('jquery.tablesorter');
+_use('jquery.highlight');
+
+$_template->getTemplateObject('JavascriptTag')->add(<<<\EOT
+    $(function() {
+        $('table.tablesorter').tablesorter({widgets: ['zebra']});
+        $('pre.code').highlight({source:0, indent:'tabs', code_lang: 'data-language'});
+    });
+EOT
+);
+</pre>
 
 <h3>jQuery highlight</h3>
 
@@ -85,3 +99,13 @@ $(function() {
     </tr>
 </tbody>
 </table>
+
+<h2>Test of layout feature</h2>
+
+<p>This is a demonstration of the <var>_use_layout(layout name)</var> feature:</p>
+<pre>
+_use_layout('html5boilerplate/raw_layout.html.php');
+</pre>
+<p>Test in a new window: <a href="<?php
+    echo _url(array('page'=>'popup'));
+?>" target="_blank">test "raw_layout"</a>.</p>

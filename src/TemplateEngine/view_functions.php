@@ -692,6 +692,21 @@ if (!function_exists('_use'))
 	}	
 }
 
+if (!function_exists('_use_layout')) 
+{
+    /**
+     * Change or set the global page layout
+     *
+     * @param string $layout The layout name to use
+     * @return void
+     */
+	function _use_layout($layout = null)
+	{
+	    if (empty($layout)) return;
+	    TemplateEngine::getInstance()->setPageLayout($layout);
+	}	
+}
+
 if (!function_exists('_values')) 
 {
     /**
