@@ -145,8 +145,9 @@ class Template
 	{
         $stack_name = !is_null($_ref) ? $_ref : $this->getTemplateObjectClassName( $_type );
 
-		if (!$this->registry->isEntry( $stack_name, 'template_objects' ))
+		if (!$this->registry->isEntry( $stack_name, 'template_objects' )) {
 			$this->createNewTemplateObject( $_type, $_ref );
+		}
 
 		return $this->registry->getEntry( $stack_name, 'template_objects' );
 	}
@@ -205,9 +206,9 @@ class Template
 	public function findAsset( $file_path )
 	{
 		$real_path = $this->findRealPath( $file_path );
-		if ($real_path)
-//			return str_replace($this->web_root_path, '', $real_path);
+		if ($real_path) {
 			return trim(FilesystemHelper::resolveRelatedPath($this->web_root_path, $real_path), '/');
+		}
 		return null;
 	}
 
@@ -218,10 +219,12 @@ class Template
 	 */
 	public function findRealPath( $file_path )
 	{
-		if (@file_exists($file_path))
+		if (@file_exists($file_path)) {
 			return realpath($file_path);
-		if (@file_exists($this->web_root_path.$file_path))
+		}
+		if (@file_exists($this->web_root_path.$file_path)) {
 			return $this->web_root_path.$file_path;
+		}
 		return null;
 	}
 
