@@ -47,6 +47,25 @@ class CssFile
 	}
 
 	/**
+	 * Add a CSS file in CSS stack if it exists
+	 *
+	 * @param string $file_path The new CSS path
+	 * @param string $media The media type for the CSS file (default is "screen")
+	 * @param string|null $condition Define a condition (for IE) for this stylesheet
+	 *
+	 * @return self $this for method chaining
+	 * @throw Throws an InvalidArgumentException if the path doesn't exist
+	 */
+	public function addIfExists($file_path, $media = 'screen', $condition = null)
+	{
+		$_fp = $this->__template->findAsset($file_path);
+		if ($_fp) {
+			return $this->add($file_path, $media, $condition);
+		}
+		return $this;
+	}
+
+	/**
 	 * Add a CSS file in CSS stack
 	 *
 	 * @param string $file_path The new CSS path
