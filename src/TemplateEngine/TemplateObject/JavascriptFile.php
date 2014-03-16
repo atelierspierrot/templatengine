@@ -102,6 +102,21 @@ class JavascriptFile
 	 * @return self $this for method chaining
 	 * @throw Throws an InvalidArgumentException if the path doesn't exist
 	 */
+	public function addIfExists($file_path)
+	{
+		$_fp = $this->__template->findAsset($file_path);
+		if ($_fp) {
+			return $this->add($file_path);
+		}
+		return $this;
+	}
+
+	/**
+	 * Add a javascript file in javascripts stack
+	 * @param string|array $file_path The new javascript path or an array like the `$_default_stack_entry`
+	 * @return self $this for method chaining
+	 * @throw Throws an InvalidArgumentException if the path doesn't exist
+	 */
 	public function add($file_path)
 	{
         $this->registry->addEntry($this->_getStackEntry($file_path), 'javascript_files');

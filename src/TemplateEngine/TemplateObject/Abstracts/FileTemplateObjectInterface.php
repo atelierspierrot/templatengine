@@ -19,6 +19,12 @@ interface FileTemplateObjectInterface
 {
 
 	/**
+	 * Add an entry if file exists
+	 * @return self Must return the object itself for method chaining
+	 */
+	public function addIfExists( $arg );
+
+	/**
 	 * Merge the files if possible and loads them in files_merged stack
 	 * @return self Must return the object itself for method chaining
 	 */
