@@ -19,15 +19,59 @@ use Assets\AbstractCompressorAdapter;
 class Compressor
 {
 
+    /**
+     * @var string  the final output
+     */
 	protected $output;
+
+    /**
+     * @var string  a raw header to include to final output
+     */
+	protected $raw_header;
+
+    /**
+     * @var array
+     */
+	protected $contents = array();
+
+    /**
+     * @var array   table of files to merge/minify
+     */
 	protected $files_stack;
+
+    /**
+     * @var string
+     */
 	protected $destination_dir;
+
+    /**
+     * @var string
+     */
 	protected $destination_file;
-	protected $silent;
-	protected $direct_output;
+
+    /**
+     * @var string
+     */
 	protected $web_root_path;
 
+    /**
+     * @var bool
+     */
+	protected $silent;
+
+    /**
+     * @var bool
+     */
+	protected $direct_output;
+
+    /**
+     * @var bool
+     */
 	protected $isCleaned_files_stack;
+
+    /**
+     * @var bool
+     */
 	protected $isInited;
 
 	protected $__adapter_type;
@@ -91,16 +135,18 @@ class Compressor
 	 * Reset all object properties to default or empty values
 	 *
 	 * @param bool $hard Reset all object properties (destination directory and web root included)
-	 * @return self $this for method chaining
+	 * @return self
 	 */
 	public function reset($hard = false)
 	{
 		$this->files_stack 				= array();
+		$this->contents 				= array();
 		$this->silent 					= true;
 		$this->direct_output			= false;
 		$this->isCleaned_files_stack	= false;
 		$this->isInited					= false;
 		if (true===$hard) {
+			$this->raw_header 		    = '';
 			$this->destination_dir 		= '';
 			$this->web_root_path		= null;
 			$this->__adapter_type		= null;
@@ -114,7 +160,7 @@ class Compressor
 	/**
 	 * Reset all object output properties to default or empty values
 	 *
-	 * @return self $this for method chaining
+	 * @return self
 	 */
 	public function resetOutput($hard = false)
 	{
@@ -131,7 +177,7 @@ class Compressor
 	 * Set the silence object flag
 	 *
 	 * @param bool $silence True to avoid the class throwing exceptions
-	 * @return self $this for method chaining
+	 * @return self
 	 */
 	public function setSilent($silence = true)
 	{
@@ -143,7 +189,7 @@ class Compressor
 	 * Set the direct_output object flag
 	 *
 	 * @param bool $direct_output True to avoid writing of the compressed result in a file
-	 * @return self $this for method chaining
+	 * @return self
 	 */
 	public function setDirectOutput($direct_output = true)
 	{
@@ -155,7 +201,7 @@ class Compressor
 	 * Set the adapter type to use, this type will be guessed if not set
 	 *
 	 * @param string $type The type name
-	 * @return self $this for method chaining
+	 * @return self
 	 */
 	public function setAdapterType($type)
 	{
@@ -167,20 +213,73 @@ class Compressor
 	 * Set the adapter action to process and reset the output
 	 *
 	 * @param string $type The action name
-	 * @return self $this for method chaining
+	 * @return self
 	 */
 	public function setAdapterAction($action)
 	{
-		$this->resetOutput();
+		if (true===$this->isInited) {
+    		$this->resetOutput();
+    	}
 		$this->__adapter_action = $action;
 		return $this;
+	}
+
+	/**
+	 * Add a raw string output header
+	 *
+	 * @param   string  $str
+	 * @return  self
+	 */
+	public function setRawHeader($str)
+	{
+		$this->raw_header = $str;
+		return $this;
+	}
+
+	/**
+	 * Add raw contents to treat
+	 *
+	 * @param array $strs the contents to add
+	 * @return self
+	 */
+	public function setContents(array $strs)
+	{
+		$this->contents[] = $strs;
+		return $this;
+	}
+
+	/**
+	 * Add a raw content to treat
+	 *
+	 * @param   string      $str    the content to add
+	 * @param   null/string $index  the content index
+	 * @return self
+	 */
+	public function addContent($str, $index = null)
+	{
+	    if (!is_null($index)) {
+    		$this->contents[$index] = $str;
+	    } else {
+    		$this->contents[] = $str;
+	    }
+		return $this;
+	}
+
+	/**
+	 * Get the contents to treat
+	 *
+	 * @return array
+	 */
+	public function getContents()
+	{
+		return $this->contents;
 	}
 
 	/**
 	 * Add a file to treat in the files stack
 	 *
 	 * @param string $file A file path to add in stack
-	 * @return self $this for method chaining
+	 * @return self
 	 */
 	public function addFile($file)
 	{
@@ -192,7 +291,7 @@ class Compressor
 	 * Set a full files stack to treat
 	 *
 	 * @param array $files_stack An array of file paths to treat
-	 * @return self $this for method chaining
+	 * @return self
 	 */
 	public function setFilesStack(array $files_stack)
 	{
@@ -225,7 +324,7 @@ class Compressor
 	 * Set the destination file to write the result in
 	 *
 	 * @param string $destination_file The file path or name to create and write in
-	 * @return self $this for method chaining
+	 * @return self
 	 * @throw Throws an InvalidArgumentException if the file name is not a string (and if $silent==false)
 	 */
 	public function setDestinationFile($destination_file)
@@ -290,7 +389,7 @@ class Compressor
 	 * Set the destination directory to write the destination file in
 	 *
 	 * @param string $destination_dir The directory path to create the file in
-	 * @return self $this for method chaining
+	 * @return self
 	 * @throw Throws an InvalidArgumentException if the directory name is not a string (and if $silent==false)
 	 */
 	public function setDestinationDir($destination_dir)
@@ -328,7 +427,7 @@ class Compressor
 	 * Set the web root path (the real path to clear in DestinationRealPath) to build web path of destination file
 	 *
 	 * @param string $path The realpath of the web root to clear it from DestinationRealPath to build DestinationWebPath
-	 * @return self $this for method chaining
+	 * @return self
 	 */
 	public function setWebRootPath($path)
 	{
@@ -427,9 +526,27 @@ class Compressor
 // -------------------
 
 	/**
+	 * Prepare the current files/contents stack by populating the contents if needed
+	 *
+	 * @return self
+	 */
+	public function prepare()
+	{
+	    $files = $this->getFilesStack();
+		if (!empty($files)) {
+            foreach($files as $_file) {
+                $this->addContent(
+                    file_get_contents( $_file->getRealPath() ),
+                    $_file->getPathname()
+                );
+            }
+		}
+	}
+	
+	/**
 	 * Process the current files stack
 	 *
-	 * @return self $this for method chaining
+	 * @return self
 	 */
 	public function process()
 	{
@@ -452,26 +569,30 @@ class Compressor
 			}
 		}
 
+        $this->prepare();
+        $stack = $this->getContents();
 		$contents = array();
-		foreach($this->files_stack as $_file) {
+		foreach($stack as $_name=>$_content) {
 			$contents[] = '';
-			$contents[] = $this->__adapter->buildComment( $_file->getFilename() );
-			$contents[] = $this->__adapter->{$this->__adapter_action}(
-				file_get_contents( $_file->getRealPath() )
-			);
+			$contents[] = $this->__adapter->buildComment($_name);
+			$contents[] = $this->__adapter->{$this->__adapter_action}($_content);
 		}
-		$this->output = implode("\n", $contents);
+		if (!empty($this->raw_header)) {
+    		$this->output = $this->raw_header."\n";
+		}
+		$this->output .= implode("\n", $contents);
 
 		if (!empty($this->output) && false===$this->direct_output) {
 			$this->_writeDestinationFile();
 		}
-		return $this;
+//		return $this;
+		return strlen($this->output);
 	}
 
 	/**
 	 * Process a combination of the current files stack (alias of `merge`)
 	 *
-	 * @return self $this for method chaining
+	 * @return self
 	 */
 	public function combine()
 	{
@@ -481,7 +602,7 @@ class Compressor
 	/**
 	 * Process a combination of the current files stack
 	 *
-	 * @return self $this for method chaining
+	 * @return self
 	 */
 	public function merge()
 	{
@@ -492,7 +613,7 @@ class Compressor
 	/**
 	 * Process a minification of the current files stack
 	 *
-	 * @return self $this for method chaining
+	 * @return self
 	 */
 	public function minify()
 	{
