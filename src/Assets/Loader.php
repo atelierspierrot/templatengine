@@ -9,15 +9,16 @@
 
 namespace Assets;
 
-use Library\Helper\Filesystem as FilesystemHelper,
-    Library\Helper\Directory as DirectoryHelper;
+use \Library\Helper\Filesystem as FilesystemHelper;
+use \Library\Helper\Directory as DirectoryHelper;
 
 use AssetsManager\Loader as AssetsLoader;
 
 /**
- * @author 		Piero Wbmstr <me@e-piwi.fr>
+ * @author  Piero Wbmstr <me@e-piwi.fr>
  */
-class Loader extends AssetsLoader
+class Loader
+    extends AssetsLoader
 {
 
 }

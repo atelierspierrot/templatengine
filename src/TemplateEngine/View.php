@@ -9,36 +9,35 @@
 
 namespace TemplateEngine;
 
-use Library\Helper\Directory as DirectoryHelper,
-    Library\Helper\Html as HtmlHelper;
-
-use Patterns\Abstracts\AbstractView;
+use \Library\Helper\Directory as DirectoryHelper;
+use \Library\Helper\Html as HtmlHelper;
+use \Patterns\Abstracts\AbstractView;
 
 /**
  * The global view builder class
  *
  * Construct the views passing them arguments
  *
- * @author 		Piero Wbmstr <me@e-piwi.fr>
+ * @author  Piero Wbmstr <me@e-piwi.fr>
  */
 class View
     extends AbstractView
 {
 
-	/**
-	 * Constructor
-	 *
-	 * @param string $view The view filename
-	 * @param array $params An array of the parameters passed for the view parsing
-	 * @param bool $display Must the rendering be displayed directly (default is `false`)
-	 * @param bool $exit Must the system exists after the rendering (default is `false`)
-	 */
-	public function __construct($view = null, $params = null, $display = false, $exit = false)
-	{
-		if (!empty($view)) {
-			$this->render($view, $params, $display, $exit);
-		}
-	}
+    /**
+     * Constructor
+     *
+     * @param string $view The view filename
+     * @param array $params An array of the parameters passed for the view parsing
+     * @param bool $display Must the rendering be displayed directly (default is `false`)
+     * @param bool $exit Must the system exists after the rendering (default is `false`)
+     */
+    public function __construct($view = null, $params = null, $display = false, $exit = false)
+    {
+        if (!empty($view)) {
+            $this->render($view, $params, $display, $exit);
+        }
+    }
 
     /**
      * Building of a view content including a view file passing it parameters
@@ -60,7 +59,7 @@ class View
      *
      * @param string $view The view filename (which must exist)
      * @param array $params An array of the parameters passed for the view parsing
-     * @throws Throws an TemplateEngineException if the file view can't be found
+     * @throws \TemplateEngine\TemplateEngineException if the file view can't be found
      * @return string Returns the view file content rendering
      */
     public function render($view, array $params = array())
@@ -87,9 +86,9 @@ echo '</pre>';
             $this->setOutput( ob_get_contents() );
             ob_end_clean();
         } else {
-      		throw new TemplateEngineException(
-      			sprintf('View "%s" can\'t be found (searched in "%s")!', $view, implode(', ', $this->getIncludePath()))
-      		);
+            throw new TemplateEngineException(
+                sprintf('View "%s" can\'t be found (searched in "%s")!', $view, implode(', ', $this->getIncludePath()))
+            );
         }
 
         return $this->getOutput();
@@ -107,7 +106,7 @@ echo '</pre>';
     /**
      * Reset the default parameters for all views to an empty array
      *
-     * @return self Returns `$this` for method chaining
+     * @return self 
      */
     public function resetDefaultViewParams()
     {
@@ -119,7 +118,7 @@ echo '</pre>';
      * Set an array of the default parameters for all views
      *
      * @param array $params The array of default parameters
-     * @return self Returns `$this` for method chaining
+     * @return self
      */
     public function setDefaultViewParams(array $params)
     {
@@ -130,9 +129,9 @@ echo '</pre>';
     /**
      * Add an entry of default parameters for all views
      *
-     * @param str $name The name of the parameter
-     * @param misc $val The value to set for the parameter
-     * @return self Returns `$this` for method chaining
+     * @param string $name The name of the parameter
+     * @param mixed $val The value to set for the parameter
+     * @return self 
      */
     public function addDefaultViewParam($name, $val)
     {
@@ -153,9 +152,9 @@ echo '</pre>';
     /**
      * Get a value of the default parameters for all views
      *
-     * @parameter string $name The name of the parameter to get
-     * @parameter misc $default The default value returns if no parameter is defined for `$name`
-     * @return misc The parameter value if found, `$default` otherwise
+     * @param   string $name The name of the parameter to get
+     * @param   mixed $default The default value returns if no parameter is defined for `$name`
+     * @return  mixed The parameter value if found, `$default` otherwise
      */
     public function getDefaultViewParam($name, $default = null)
     {
@@ -176,8 +175,9 @@ echo '</pre>';
      *
      * The new path will be added to the existing paths.
      *
-     * @param str $path The path to add
-     * @return self Returns `$this` for method chaining
+     * @param   string $path The path to add
+     * @return  self
+     * @throws \TemplateEngine\TemplateEngineException
      */
     public function setIncludePath($path)
     {
@@ -185,9 +185,9 @@ echo '</pre>';
             array_push($this->include_paths, $path);
             return $this;
         } else {
-      		throw new TemplateEngineException(
-      			sprintf('Directory "%s" defined as views path can\'t be found!', $path)
-      		);
+            throw new TemplateEngineException(
+                sprintf('Directory "%s" defined as views path can\'t be found!', $path)
+            );
         }
     }
 
@@ -204,9 +204,8 @@ echo '</pre>';
     /**
      * Search a view file in the current file system
      *
-     * @parameter string $path The file path to search
-     * @return str The path of the file found
-     * @throws Throws a TemplateEngineException if the file can't be found
+     * @parame  string $path The file path to search
+     * @return  string The path of the file found
      */
     public function getTemplate($path)
     {

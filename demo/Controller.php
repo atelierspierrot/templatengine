@@ -15,8 +15,8 @@ class Controller
     public $loader;
     public $template_engine;
 
-	public function __construct()
-	{
+    public function __construct()
+    {
         $this->loader = AssetsLoader::getInstance(__DIR__.'/..', 'www', __DIR__);
 /*
 echo '<pre>';
@@ -34,31 +34,31 @@ exit('yo');
             ->setToTemplate('setAssetsCachePath', __DIR__.'/tmp' )
             ->setToView('setIncludePath', __DIR__.'/views' )
             ;
-	}
+    }
 
-	/**
-	 * Distributes the application actions
-	 */
-	public function distribute()
-	{
-	    $action = isset($_GET['page']) ? $_GET['page'] : 'index';
-		$action_meth = $action.'Action';
-		if (method_exists($this, $action_meth)) {
-		    $return = $this->{$action_meth}();
-		} else {
-		    $return = $this->commonAction($action);
-		}
+    /**
+     * Distributes the application actions
+     */
+    public function distribute()
+    {
+        $action = isset($_GET['page']) ? $_GET['page'] : 'index';
+        $action_meth = $action.'Action';
+        if (method_exists($this, $action_meth)) {
+            $return = $this->{$action_meth}();
+        } else {
+            $return = $this->commonAction($action);
+        }
         if (!is_array($return)) {
-            throw new Exception( 
+            throw new Exception(
                 sprintf("Action '%s' must return an array!", $action)
             );
         }
         return $this->display($return);
-	}
+    }
 
-	/**
-	 */
-	public function display(array $params, $view = null) 
+    /**
+     */
+    public function display(array $params, $view = null)
     {
         // request params settings
         $params = array_merge(array(
@@ -78,7 +78,7 @@ exit('yo');
         }
         $this->template_engine
             ->templateFallback('getTemplateObject', array('TitleTag'))
-    		->add( $title );
+            ->add( $title );
 
         $title_block = array(
             'title'=> isset($params['title']) ? $params['title'] : $title,
@@ -100,10 +100,10 @@ exit('yo');
 
         $params['footer'] = array('right'=>'A test of footer');
 
-//var_export($params); exit('yo');
+    //var_export($params); exit('yo');
 
         // this will display the layout on screen and exit
-		$this->template_engine->renderLayout($view, $params, true, true);
+        $this->template_engine->renderLayout($view, $params, true, true);
     }
 
 // ------------------------
@@ -118,61 +118,61 @@ exit('yo');
             'title'     =>'Home',
             'subheader' => '',
             'slogan' => '',
-        );        
+        );
     }
 
     function helloAction()
     {
         return array(
-			'output'=> $this->template_engine->render(
-				'hello.htm', array(
-				    'name'=>isset($_GET['name']) ? $_GET['name'] : 'Anonymous'
-				)
-			),
-			'title' => "Hello",
+            'output'=> $this->template_engine->render(
+                'hello.htm', array(
+                    'name'=>isset($_GET['name']) ? $_GET['name'] : 'Anonymous'
+                )
+            ),
+            'title' => "Hello",
             'subheader' => '',
             'slogan' => '',
-		);
+        );
     }
 
     function fctsAction()
     {
         return array(
-			'output'=> $this->template_engine->render(
-				'fcts.htm'
-			),
-			'title' => "Functions"
-		);
+            'output'=> $this->template_engine->render(
+                'fcts.htm'
+            ),
+            'title' => "Functions"
+        );
     }
 
     function testAction()
     {
         return array(
-			'output'=> $this->template_engine->render(
-				'test_plugins.htm'
-			),
-			'title' => "Test of all plugins"
-		);
+            'output'=> $this->template_engine->render(
+                'test_plugins.htm'
+            ),
+            'title' => "Test of all plugins"
+        );
     }
 
     function loremipsumAction()
     {
         return array(
-			'output'=> $this->template_engine->render(
-				'loremipsum.htm'
-			),
-			'title' => "Test of HTML(5) tags"
-		);
+            'output'=> $this->template_engine->render(
+                'loremipsum.htm'
+            ),
+            'title' => "Test of HTML(5) tags"
+        );
     }
 
     function commonAction($action)
     {
         return array(
-			'output'=> $this->template_engine->render(
-				$action.'.htm'
-			),
-			'title' => ucfirst(Library\Helper\Text::getHumanReadable($action))
-		);
+            'output'=> $this->template_engine->render(
+                $action.'.htm'
+            ),
+            'title' => ucfirst(Library\Helper\Text::getHumanReadable($action))
+        );
     }
 
 }
