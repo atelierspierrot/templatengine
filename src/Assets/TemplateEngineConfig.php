@@ -9,12 +9,13 @@
 
 namespace Assets;
 
-use AssetsManager\Config\ConfiguratorInterface;
+use \AssetsManager\Config\ConfiguratorInterface;
 
 /**
- * @author 		Piero Wbmstr <me@e-piwi.fr>
+ * @author  Piero Wbmstr <me@e-piwi.fr>
  */
-class TemplateEngineConfig implements ConfiguratorInterface
+class TemplateEngineConfig
+    implements ConfiguratorInterface
 {
 
     /**

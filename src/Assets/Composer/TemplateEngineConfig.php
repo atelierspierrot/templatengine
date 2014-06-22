@@ -9,10 +9,10 @@
 
 namespace Assets\Composer;
 
-use AssetsManager\Config\DefaultConfig;
+use \AssetsManager\Config\DefaultConfig;
 
 /**
- * @author 		Piero Wbmstr <me@e-piwi.fr>
+ * @author  Piero Wbmstr <me@e-piwi.fr>
  */
 class TemplateEngineConfig
     extends DefaultConfig
