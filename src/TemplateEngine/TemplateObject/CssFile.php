@@ -57,7 +57,7 @@ class CssFile
     public function addIfExists($file_path, $media = 'screen', $condition = null)
     {
         $_fp = $this->__template->findAsset($file_path);
-        if ($_fp) {
+        if ($_fp || \AssetsManager\Loader::isUrl($file_path)) {
             return $this->add($file_path, $media, $condition);
         }
         return $this;
@@ -75,7 +75,7 @@ class CssFile
     public function add($file_path, $media = 'screen', $condition = null)
     {
         $_fp = $this->__template->findAsset($file_path);
-        if ($_fp) {
+        if ($_fp || \AssetsManager\Loader::isUrl($file_path)) {
             $this->registry->addEntry( array(
                 'file'=>$_fp, 'media'=>$media, 'condition'=>$condition
             ), 'css_files');
@@ -194,7 +194,7 @@ class CssFile
     public function addMerged($file_path, $media = 'screen')
     {
         $_fp = $this->__template->findAsset($file_path);
-        if ($_fp) {
+        if ($_fp || \AssetsManager\Loader::isUrl($file_path)) {
             $this->registry->addEntry( array(
                 'file'=>$_fp, 'media'=>$media
             ), 'css_merged_files');
@@ -304,7 +304,7 @@ class CssFile
     public function addMinified($file_path, $media = 'screen')
     {
         $_fp = $this->__template->findAsset($file_path);
-        if ($_fp) {
+        if ($_fp || \AssetsManager\Loader::isUrl($file_path)) {
             $this->registry->addEntry( array(
                 'file'=>$_fp, 'media'=>$media
             ), 'css_minified_files');
