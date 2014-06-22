@@ -9,48 +9,43 @@
 
 namespace Assets\Package;
 
-use InvalidArgumentException;
-
-use AssetsManager\Config,
-    AssetsManager\Package\Preset as OriginalPreset,
-    AssetsManager\Package\AssetsPackage,
-    AssetsManager\Package\AssetsPackageInterface;
-
-use Assets\Package\TemplateEnginePresetInterface;
-
-use TemplateEngine\TemplateEngine,
-    TemplateEngine\TemplateObject\Abstracts\AbstractTemplateObject;
+use \InvalidArgumentException;
+use \AssetsManager\Config;
+use \AssetsManager\Package\Preset as OriginalPreset;
+use \AssetsManager\Package\AssetsPackage;
+use \AssetsManager\Package\AssetsPackageInterface;
+use \Assets\Package\TemplateEnginePresetInterface;
+use \TemplateEngine\TemplateEngine;
+use \TemplateEngine\TemplateObject\Abstracts\AbstractTemplateObject;
 
 /**
- * @author 		Piero Wbmstr <me@e-piwi.fr>
+ * @author  Piero Wbmstr <me@e-piwi.fr>
  */
 class Preset extends OriginalPreset
 {
 
     /**
-     * @param string $package_name
-     * @param array $package_data
-     * @param object $package AssetsManager\Package\AssetsPackage
-     * @param object $engine TemplateEngine\TemplateEngine
+     * @param string $preset_name
+     * @param array $preset_data
+     * @param \AssetsManager\Package\AssetsPackageInterface $package
      */
     public function __construct(
-        $preset_name, array $preset_data, \AssetsManager\Package\AssetsPackageInterface $package
+        $preset_name, array $preset_data, AssetsPackageInterface $package
     ) {
         parent::__construct($preset_name, $preset_data, $package);
     }
 
-	/**
-	 * Automatic assets loading from an Assets package declare in a `composer.json`
-	 *
-	 * @param string $package_name The name of the package to use
-	 * @return void
-	 */
-	public function load()
-	{
-	    if (empty($this->_statements)) parent::load();
+    /**
+     * Automatic assets loading from an Assets package declare in a `composer.json`
+     *
+     * @return void
+     */
+    public function load()
+    {
+        if (empty($this->_statements)) parent::load();
 
-        /* @var $template_engine TemplateEngine\TemplateEngine */
-        $template_engine = \TemplateEngine\TemplateEngine::getInstance();
+        /* @var $template_engine \TemplateEngine\TemplateEngine */
+        $template_engine = TemplateEngine::getInstance();
 
         foreach ($this->getOrganizedStatements() as $type=>$statements) {
             foreach ($statements as $statement) {
@@ -91,7 +86,7 @@ class Preset extends OriginalPreset
                 }
             }
         }
-	}
+    }
 
 }
 

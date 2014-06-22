@@ -9,43 +9,43 @@
 
 namespace Assets\CompressorAdapter;
 
-use Assets\AbstractCompressorAdapter;
+use \Assets\AbstractCompressorAdapter;
 
 /**
- * @author 		Piero Wbmstr <me@e-piwi.fr>
+ * @author  Piero Wbmstr <me@e-piwi.fr>
  */
 class CSS
     extends AbstractCompressorAdapter
 {
 
-	public $file_extension = 'css';
+    public $file_extension = 'css';
 
-	public static function merge( $input )
-	{
-		$input = preg_replace('!/\*.*?\*/!s', '', $input);
-		$output = trim($input);
-		return $output;
-	}
+    public static function merge( $input )
+    {
+        $input = preg_replace('!/\*.*?\*/!s', '', $input);
+        $output = trim($input);
+        return $output;
+    }
 
-	/**
-	 * Inspired by <http://code.seebz.net/p/minify-css/>
-	 */
-	public static function minify( $input )
-	{
-		$input = self::merge($input);
-		$input = str_replace(array("\r","\n"), '', $input);
-		$input = preg_replace('`([^*/])\/\*([^*]|[*](?!/)){5,}\*\/([^*/])`Us', '$1$3', $input);
-		$input = preg_replace('`\s*({|}|,|:|;)\s*`', '$1', $input);
-		$input = str_replace(';}', '}', $input);
-		$input = preg_replace('`(?=|})[^{}]+{}`', '', $input);
-		$input = preg_replace('`[\s]+`', ' ', $input);
-		return $input;
-	}
+    /**
+     * Inspired by <http://code.seebz.net/p/minify-css/>
+     */
+    public static function minify( $input )
+    {
+        $input = self::merge($input);
+        $input = str_replace(array("\r","\n"), '', $input);
+        $input = preg_replace('`([^*/])\/\*([^*]|[*](?!/)){5,}\*\/([^*/])`Us', '$1$3', $input);
+        $input = preg_replace('`\s*({|}|,|:|;)\s*`', '$1', $input);
+        $input = str_replace(';}', '}', $input);
+        $input = preg_replace('`(?=|})[^{}]+{}`', '', $input);
+        $input = preg_replace('`[\s]+`', ' ', $input);
+        return $input;
+    }
 
-	public static function buildComment( $str )
-	{
-		return sprintf('/* %s */', $str);
-	}
+    public static function buildComment( $str )
+    {
+        return sprintf('/* %s */', $str);
+    }
 
 }
 

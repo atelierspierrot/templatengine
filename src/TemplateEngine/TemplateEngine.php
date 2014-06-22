@@ -10,25 +10,20 @@
 namespace TemplateEngine;
 
 use \ArrayAccess;
-
-use Patterns\Commons\Registry,
-    Patterns\Abstracts\AbstractSingleton;
-
-use Library\Helper\Html as HtmlHelper;
-
-use AssetsManager\Config;
-
-use TemplateEngine\Template,
-    TemplateEngine\View;
-
-use Assets\Loader as AssetsLoader,
-    Assets\Package\Package,
-    Assets\Package\Preset;
+use \Patterns\Commons\Registry;
+use \Patterns\Abstracts\AbstractSingleton;
+use \Library\Helper\Html as HtmlHelper;
+use \AssetsManager\Config;
+use \TemplateEngine\Template;
+use \TemplateEngine\View;
+use \Assets\Loader as AssetsLoader;
+use \Assets\Package\Package;
+use \Assets\Package\Preset;
 
 /**
  * General template builder
  *
- * @author 		Piero Wbmstr <me@e-piwi.fr>
+ * @author  Piero Wbmstr <me@e-piwi.fr>
  */
 class TemplateEngine
     extends AbstractSingleton
@@ -36,22 +31,22 @@ class TemplateEngine
 {
 
     /**
-     * @var TemplateEngine\Template
+     * @var \TemplateEngine\Template
      */
     protected $template;
 
     /**
-     * @var TemplateEngine\View
+     * @var \TemplateEngine\View
      */
     protected $view;
 
     /**
-     * @var Patterns\Commons\Registry
+     * @var \Patterns\Commons\Registry
      */
     protected $registry;
 
     /**
-     * @var Assets\Loader
+     * @var \Assets\Loader
      */
     protected $assets_loader;
 
@@ -86,8 +81,7 @@ class TemplateEngine
     protected $page_layout;
 
     /**
-     * Stack of the default page blocks
-     * @static array
+     * @static array Stack of the default page blocks
      */
     public static $default_page_structure = array(
         0=>'header',
@@ -98,8 +92,7 @@ class TemplateEngine
     );
 
     /**
-     * Path of the default page global layout
-     * @static string
+     * @static string Path of the default page global layout
      */
     public static $default_page_layout = 'html5boilerplate/layout.html.php';
 
@@ -107,33 +100,33 @@ class TemplateEngine
 // Magic methods
 // ------------------------
 
-	/**
-	 * Constructor
-	 *
-	 * @param int $flags The error flag for the template engine, must be one of the
-	 *                   class `_ERRORS` constants
-	 */
-	protected function init($flags = TemplateEngine::NO_ERRORS)
-	{
+    /**
+     * Constructor
+     *
+     * @param int $flags The error flag for the template engine, must be one of the
+     *                   class `_ERRORS` constants
+     */
+    protected function init($flags = TemplateEngine::NO_ERRORS)
+    {
         Config::load('Assets\Composer\TemplateEngineConfig');
-	    $this->setFlags($flags);
+        $this->setFlags($flags);
         $this->template = new Template;
         $this->view = new View;
         $this->registry = new Registry;
         $this->setPageLayout(self::$default_page_layout);
-	}
+    }
 
-	/**
-	 * Object call dispatcher
-	 *
-	 * This will distribute any call of a non-existing method to the template object or
-	 * the view object.
-	 *
-	 * @param string $name The called method name
-	 * @param array $arguments The arguments passed to the method
-	 * @return misc
-	 * @see TemplateEngine\TemplateEngine::_getFallbackMethod()
-	 */
+    /**
+     * Object call dispatcher
+     *
+     * This will distribute any call of a non-existing method to the template object or
+     * the view object.
+     *
+     * @param   string $name The called method name
+     * @param   array $arguments The arguments passed to the method
+     * @return  mixed
+     * @see     \TemplateEngine\TemplateEngine::_getFallbackMethod()
+     */
     public function __call($name, array $arguments)
     {
         return (
@@ -143,150 +136,150 @@ class TemplateEngine
                 $this->_getFallbackMethod($name, $arguments, false)
         );
     }
-    
-	/**
-	 * Object to string
-	 *
-	 * @return string
-	 * @see TemplateEngine\TemplateEngine::renderLayout()
-	 */
+
+    /**
+     * Object to string
+     *
+     * @return  string
+     * @see     \TemplateEngine\TemplateEngine::renderLayout()
+     */
     public function __toString()
     {
         return $this->renderLayout();
     }
-    
+
 // ------------------------
 // Getters/Setters
 // ------------------------
 
-	/**
-	 * Set the current page layout
-	 *
-	 * @param string $layout
-	 * @return self Returns `$this` for chainability
-	 */
+    /**
+     * Set the current page layout
+     *
+     * @param   string $layout
+     * @return  self
+     */
     public function setPageLayout($layout)
     {
         $this->page_layout = $layout;
         return $this;
     }
 
-	/**
-	 * Get the current page layout
-	 *
-	 * @return string
-	 */
+    /**
+     * Get the current page layout
+     *
+     * @return  string
+     */
     public function getPageLayout()
     {
         return $this->page_layout;
     }
 
-	/**
-	 * Set the object error flags
-	 *
-	 * @param int $flags The error flag for the template engine, must be one of the
-	 *                   class `_ERRORS` constants
-	 * @return self Returns `$this` for chainability
-	 */
+    /**
+     * Set the object error flags
+     *
+     * @param   int $flags The error flag for the template engine, must be one of the
+     *                   class `_ERRORS` constants
+     * @return  self
+     */
     public function setFlags($flags)
     {
         $this->flags = $flags;
         return $this;
     }
 
-	/**
-	 * Get the object error flags
-	 *
-	 * @return int
-	 */
+    /**
+     * Get the object error flags
+     *
+     * @return  int
+     */
     public function getFlags()
     {
         return $this->flags;
     }
 
-	/**
-	 * Set the page structure
-	 *
-	 * This will store the page structure in the registry and create a DOM unique ID for
-	 * each one.
-	 *
-	 * @param array $structure The page blocks to set
-	 * @return self Returns `$this` for chainability
-	 */
-	public function setPageStructure(array $structure)
-	{
-		foreach($structure as $_ref) {
-			HtmlHelper::getNewId($_ref, true);
-		}
+    /**
+     * Set the page structure
+     *
+     * This will store the page structure in the registry and create a DOM unique ID for
+     * each one.
+     *
+     * @param   array $structure The page blocks to set
+     * @return  self
+     */
+    public function setPageStructure(array $structure)
+    {
+        foreach($structure as $_ref) {
+            HtmlHelper::getNewId($_ref, true);
+        }
         $this->registry->setEntry('page_structure', $structure);
         return $this;
-	}
+    }
 
-	/**
-	 * Get the page structure
-	 *
-	 * @return array
-	 */
-	public function getPageStructure()
-	{
+    /**
+     * Get the page structure
+     *
+     * @return  array
+     */
+    public function getPageStructure()
+    {
         return $this->registry->getEntry('page_structure', array());
-	}
+    }
 
-	/**
-	 * Set a layouts directory
-	 *
-	 * @param string $path The path to add in the template include path
-	 * @return self Returns `$this` for chainability
-	 */
-	public function setLayoutsDir($path)
-	{
+    /**
+     * Set a layouts directory
+     *
+     * @param   string $path The path to add in the template include path
+     * @return  self
+     */
+    public function setLayoutsDir($path)
+    {
         $this->view->setIncludePath($path);
         return $this;
-	}
+    }
 
 // ------------------------
 // Template and View objects Getters/Setters
 // ------------------------
 
-	/**
-	 * Set to Template object
-	 *
-	 * @param string $var The variable to set
-	 * @param misc $val The value of the variable to set
-	 * @return self Returns `$this` for chainability
-	 * @see TemplateEngine\TemplateEngine::templateFallback()
-	 */
-	public function setToTemplate($var, $val)
-	{
-	    $args = func_get_args();
-	    array_shift($args);
-	    $this->templateFallback($var, $args, 'set');
-	    return $this;
-	}
+    /**
+     * Set to Template object
+     *
+     * @param   string $var The variable to set
+     * @param   mixed $val The value of the variable to set
+     * @return  self
+     * @see     \TemplateEngine\TemplateEngine::templateFallback()
+     */
+    public function setToTemplate($var, $val)
+    {
+        $args = func_get_args();
+        array_shift($args);
+        $this->templateFallback($var, $args, 'set');
+        return $this;
+    }
 
-	/**
-	 * Get from Template object
-	 *
-	 * @param string $var The variable to get
-	 * @return misc
-	 * @see TemplateEngine\TemplateEngine::templateFallback()
-	 */
-	public function getFromTemplate($var)
-	{
-	    $args = func_get_args();
-	    array_shift($args);
-	    return $this->templateFallback($var, $args, 'get');
-	}
+    /**
+     * Get from Template object
+     *
+     * @param   string $var The variable to get
+     * @return  mixed
+     * @see     \TemplateEngine\TemplateEngine::templateFallback()
+     */
+    public function getFromTemplate($var)
+    {
+        $args = func_get_args();
+        array_shift($args);
+        return $this->templateFallback($var, $args, 'get');
+    }
 
-	/**
-	 * Fallback system to call a Template object's method
-	 *
-	 * @param string $name The name of the method to call
-	 * @param array $args The arguments to pass to the method
-	 * @param string $fallback A fallback prefix used as the method scope
-	 * @return misc
-	 * @see TemplateEngine\TemplateEngine::_runFallbackMethod()
-	 */
+    /**
+     * Fallback system to call a Template object's method
+     *
+     * @param   string $name The name of the method to call
+     * @param   array $args The arguments to pass to the method
+     * @param   string $fallback A fallback prefix used as the method scope
+     * @return  mixed
+     * @see     \TemplateEngine\TemplateEngine::_runFallbackMethod()
+     */
     public function templateFallback($name, array $args = array(), $fallback = null)
     {
         return $this->_runFallbackMethod(
@@ -294,45 +287,45 @@ class TemplateEngine
         );
     }
 
-	/**
-	 * Set to View object
-	 *
-	 * @param string $var The variable to set
-	 * @param misc $val The value of the variable to set
-	 * @return self Returns `$this` for chainability
-	 * @see TemplateEngine\TemplateEngine::viewFallback()
-	 */
-	public function setToView($var, $val)
-	{
-	    $args = func_get_args();
-	    array_shift($args);
-	    $this->viewFallback($var, $args, 'set');
-	    return $this;
-	}
+    /**
+     * Set to View object
+     *
+     * @param   string $var The variable to set
+     * @param   mixed $val The value of the variable to set
+     * @return  self
+     * @see     \TemplateEngine\TemplateEngine::viewFallback()
+     */
+    public function setToView($var, $val)
+    {
+        $args = func_get_args();
+        array_shift($args);
+        $this->viewFallback($var, $args, 'set');
+        return $this;
+    }
 
-	/**
-	 * Get from Template object
-	 *
-	 * @param string $var The variable to get
-	 * @return misc
-	 * @see TemplateEngine\TemplateEngine::viewFallback()
-	 */
-	public function getFromView($var)
-	{
-	    $args = func_get_args();
-	    array_shift($args);
-	    return $this->viewFallback($var, $args, 'get');
-	}
+    /**
+     * Get from Template object
+     *
+     * @param   string $var The variable to get
+     * @return  mixed
+     * @see     \TemplateEngine\TemplateEngine::viewFallback()
+     */
+    public function getFromView($var)
+    {
+        $args = func_get_args();
+        array_shift($args);
+        return $this->viewFallback($var, $args, 'get');
+    }
 
-	/**
-	 * Fallback system to call a View object's method
-	 *
-	 * @param string $name The name of the method to call
-	 * @param array $args The arguments to pass to the method
-	 * @param string $fallback A fallback prefix used as the method scope
-	 * @return misc
-	 * @see TemplateEngine\TemplateEngine::_runFallbackMethod()
-	 */
+    /**
+     * Fallback system to call a View object's method
+     *
+     * @param   string $name The name of the method to call
+     * @param   array $args The arguments to pass to the method
+     * @param   string $fallback A fallback prefix used as the method scope
+     * @return  mixed
+     * @see     \TemplateEngine\TemplateEngine::_runFallbackMethod()
+     */
     public function viewFallback($name, array $args = array(), $fallback = null)
     {
         return $this->_runFallbackMethod(
@@ -340,26 +333,26 @@ class TemplateEngine
         );
     }
 
-	/**
-	 * Automatic assets loading from an Assets preset declare in a `composer.json`
-	 *
-	 * @param string $preset_name The name of the preset to use
-	 * @return void
-	 */
-	public function useAssetsPreset($preset_name = null)
-	{
+    /**
+     * Automatic assets loading from an Assets preset declare in a `composer.json`
+     *
+     * @param   string $preset_name The name of the preset to use
+     * @return  void
+     */
+    public function useAssetsPreset($preset_name = null)
+    {
         $preset = $this->assets_loader->getPreset($preset_name);
-	    $preset->load();
-	}
+        $preset->load();
+    }
 
-	/**
-	 * Automatic loading of assets views functions
-	 *
-	 * @return void
-	 */
-	public function includePackagesViewsFunctions()
-	{
-	    $_assets_package = Package::createFromAssetsLoader($this->assets_loader);
+    /**
+     * Automatic loading of assets views functions
+     *
+     * @return  void
+     */
+    public function includePackagesViewsFunctions()
+    {
+        $_assets_package = Package::createFromAssetsLoader($this->assets_loader);
         foreach ($this->assets_loader->getAssetsDb() as $package=>$config) {
             if (!empty($config['views_functions'])) {
                 $assets_package = clone $_assets_package;
@@ -372,38 +365,38 @@ class TemplateEngine
                 }
             }
         }
-	}
+    }
 
 // ------------------------
 // Views rendering
 // ------------------------
 
-	/**
-	 * Required settings before rendering
-	 *
-	 * @return void
-	 */
+    /**
+     * Required settings before rendering
+     *
+     * @return void
+     */
     protected function _prepareRendering()
     {
-		$this->view->addDefaultViewParam('_template', $this);
+        $this->view->addDefaultViewParam('_template', $this);
 
-		$structure = $this->getPageStructure();
-		if (empty($structure)) {
-		    $this->setPageStructure(self::$default_page_structure);
-		}
-		
+        $structure = $this->getPageStructure();
+        if (empty($structure)) {
+            $this->setPageStructure(self::$default_page_structure);
+        }
+
     }
 
-	/**
-	 * Rendering of a layout
-	 *
-	 * @param string $view The view file name
-	 * @param array $params The parameters to pass to the view
-	 * @param bool $display Set to `true` to echo the result
-	 * @param bool $exit Set to `true` to exit after display
-	 * @return string The result of the rendering
-	 * @see TemplateEngine\TemplateEngine::render()
-	 */
+    /**
+     * Rendering of a layout
+     *
+     * @param   string $view The view file name
+     * @param   array $params The parameters to pass to the view
+     * @param   bool $display Set to `true` to echo the result
+     * @param   bool $exit Set to `true` to exit after display
+     * @return  string The result of the rendering
+     * @see     \TemplateEngine\TemplateEngine::render()
+     */
     public function renderLayout($view = null, array $params = array(), $display = false, $exit = false)
     {
         if (is_null($view)) $view = $this->getPageLayout();
@@ -413,12 +406,12 @@ class TemplateEngine
     /**
      * Building of a view content including a view file passing it parameters
      *
-     * @param string $view The view filename (which must exist)
-     * @param array $params An array of the parameters passed for the view parsing
-	 * @param bool $display Must the rendering be displayed directly (default is `false`)
-	 * @param bool $exit Must the system exists after the rendering (default is `false`)
-     * @return string Returns the view file content rendering
-     * @see TemplateEngine\View::render()
+     * @param   string $view The view filename (which must exist)
+     * @param   array $params An array of the parameters passed for the view parsing
+     * @param   bool $display Must the rendering be displayed directly (default is `false`)
+     * @param   bool $exit Must the system exists after the rendering (default is `false`)
+     * @return  string Returns the view file content rendering
+     * @see     \TemplateEngine\View::render()
      */
     public function render($view, array $params = array(), $display = false, $exit = false)
     {
@@ -435,11 +428,11 @@ class TemplateEngine
     /**
      * Building of a view content including a view file passing it parameters and display it on screen
      *
-     * @param string $view The view filename (which must exist)
-     * @param array $params An array of the parameters passed for the view parsing
-	 * @param bool $exit Must the system exists after the rendering (default is `false`)
-     * @return string Returns the view file content rendering
-     * @see TemplateEngine\View::render()
+     * @param   string $view The view filename (which must exist)
+     * @param   array $params An array of the parameters passed for the view parsing
+     * @param   bool $exit Must the system exists after the rendering (default is `false`)
+     * @return  string Returns the view file content rendering
+     * @see     \TemplateEngine\View::render()
      */
     public function display($view, array $params = array(), $exit = false)
     {
@@ -449,7 +442,6 @@ class TemplateEngine
         if ($exit) exit(0);
     }
 
-
 // ------------------------
 // Fallback system
 // ------------------------
@@ -457,11 +449,11 @@ class TemplateEngine
     /**
      * Process a fallback method on Template and View and returns the result
      *
-     * @param string $varname The variable name to search
-     * @param array $arguments The arguments to pass to the method
-	 * @param bool $throw_errors Throw errors during process ?
-	 * @param string $fallback A fallback prefix used as the method scope
-     * @return misc Returns the result of the processed method if so
+     * @param   string $varname The variable name to search
+     * @param   array $arguments The arguments to pass to the method
+     * @param   bool $throw_errors Throw errors during process ?
+     * @param   string $fallback A fallback prefix used as the method scope
+     * @return  mixed Returns the result of the processed method if so
      */
     protected function _getFallbackMethod(
         $varname, array $arguments = array(), $throw_errors = false, $fallback = null
@@ -480,12 +472,12 @@ class TemplateEngine
 
         return null;
     }
-    
+
     /**
      * Get a variable name in CamelCase
      *
-     * @param string $name The variable name to search
-     * @return string
+     * @param   string $name The variable name to search
+     * @return  string
      */
     protected function _getFallbackVarname($name)
     {
@@ -501,28 +493,28 @@ class TemplateEngine
     /**
      * Process a fallback method on an object
      *
-     * @param string $varname The variable name to search
-     * @param array $arguments The arguments to pass to the method
-	 * @param bool $throw_errors Throw errors during process ?
-	 * @param string $fallback A fallback prefix used as the method scope
-     * @return misc Returns the result of the processed method if so
-     * @throws Throws a `TemplateEngineException` if `$throw_errors` is `true` and the method was not found
+     * @param   string  $varname The variable name to search
+     * @param   array   $arguments The arguments to pass to the method
+     * @param   bool    $throw_errors Throw errors during process ?
+     * @param   string  $fallback A fallback prefix used as the method scope
+     * @return  mixed   Returns the result of the processed method if so
+     * @throws  \TemplateEngine\TemplateEngineException if `$throw_errors` is `true` and the method was not found
      */
     protected function _runFallbackMethod(
         $object, $varname, array $arguments = array(), $throw_errors = false, $fallback = null
     ) {
-	    if (property_exists($object, $varname)) {
-	        try {
-	            $object->{$varname} = $args;
+        if (property_exists($object, $varname)) {
+            try {
+                $object->{$varname} = $args;
                 return $object;
-	        } catch(\Exception $e) {}
-	    }
+            } catch(\Exception $e) {}
+        }
 
-	    if (method_exists($object, $varname)) {
-	        try {
+        if (method_exists($object, $varname)) {
+            try {
                 $val = call_user_func_array(array($object, $varname), $arguments);
                 return $val;
-	        } catch(\Exception $e) {}
+            } catch(\Exception $e) {}
         }
 
         if (!empty($fallback)) {
@@ -534,7 +526,7 @@ class TemplateEngine
                 } catch(\Exception $e) {}
             }
         }
-	    
+
         if ($throw_errors) {
             if (!empty($_meth)) {
                 $msg = sprintf('Neither variable "%s" nor method "%s" or "%s" were found in object "%s"!',
@@ -555,8 +547,8 @@ class TemplateEngine
     /**
      * Check existence of a variable by array access to the TemplateEngine
      *
-     * @param string $offset The variable trying to be get
-     * @return bool
+     * @param   string  $offset The variable trying to be get
+     * @return  bool
      */
     public function offsetExists($offset)
     {
@@ -570,8 +562,8 @@ class TemplateEngine
     /**
      * Get a variable by array access to the TemplateEngine
      *
-     * @param string $offset The variable trying to be get
-     * @return bool
+     * @param   string  $offset The variable trying to be get
+     * @return  bool
      */
     public function offsetGet($offset)
     {
@@ -585,9 +577,9 @@ class TemplateEngine
     /**
      * Set a variable value by array access to the TemplateEngine
      *
-     * @param string $offset The variable trying to be set
-     * @param misc $value The variable value
-     * @return void
+     * @param   string $offset The variable trying to be set
+     * @param   mixed $value The variable value
+     * @return  void
      */
     public function offsetSet($offset, $value)
     {
@@ -597,8 +589,8 @@ class TemplateEngine
     /**
      * Unset a variable value by array access to the TemplateEngine
      *
-     * @param string $offset The variable to be unset
-     * @return void
+     * @param   string $offset The variable to be unset
+     * @return  void
      */
     public function offsetUnset($offset)
     {
@@ -609,12 +601,12 @@ class TemplateEngine
 // Assets loader
 // ------------------------
 
-	/**
-	 * Set the object Assets Loader instance
-	 *
-	 * @param object $loader The instance of Assets\AssetsLoader
-	 * @return self Returns `$this` for chainability
-	 */
+    /**
+     * Set the object Assets Loader instance
+     *
+     * @param   \Assets\Loader $loader
+     * @return  self
+     */
     public function setAssetsLoader(AssetsLoader $loader)
     {
         $this->assets_loader = $loader;
@@ -637,22 +629,22 @@ class TemplateEngine
         return $this;
     }
 
-	/**
-	 * Get the object Assets Loader instance
-	 *
-	 * @return object The instance of Assets\AssetsLoader
-	 */
+    /**
+     * Get the object Assets Loader instance
+     *
+     * @return \Assets\Loader
+     */
     public function getAssetsLoader()
     {
         return $this->assets_loader;
     }
 
-	/**
-	 * Set the object Assets Loader instance and dispatch required template envionement
-	 *
-	 * @param object $loader The instance of Assets\AssetsLoader
-	 * @return self Returns `$this` for chainability
-	 */
+    /**
+     * Set the object Assets Loader instance and dispatch required template envionement
+     *
+     * @param   \Assets\Loader $loader
+     * @return  self
+     */
     public function guessFromAssetsLoader(AssetsLoader $loader)
     {
         $this->setAssetsLoader($loader);
@@ -669,16 +661,16 @@ class TemplateEngine
 // Special view methods
 // ------------------------
 
-	/**
-	 * Write a simple error during view rendering
-	 *
-	 * This will trigger a `E_USER_WARNING`.
-	 *
-	 * @param string $message The error message
-	 * @param string $file The file throwing the error
-	 * @param int $line The line of the file throwing the error
-	 * @return void
-	 */
+    /**
+     * Write a simple error during view rendering
+     *
+     * This will trigger a `E_USER_WARNING`.
+     *
+     * @param   string $message The error message
+     * @param   string $file The file throwing the error
+     * @param   int $line The line of the file throwing the error
+     * @return  void
+     */
     public static function __error($message = 'View error', $file = null, $line = null)
     {
         if (!is_null($file)) {
@@ -690,13 +682,13 @@ class TemplateEngine
         trigger_error($message, E_USER_WARNING);
     }
 
-	/**
-	 * Try to execute a closure sending an error if necessary
-	 *
-	 * @param callable $value The closure to call
-	 * @param array $arguments The arguments to pass to the closure
-	 * @return misc The result of the execution if so
-	 */
+    /**
+     * Try to execute a closure sending an error if necessary
+     *
+     * @param   callable $value The closure to call
+     * @param   array $arguments The arguments to pass to the closure
+     * @return  mixed The result of the execution if so
+     */
     public static function __closurable($value, array $arguments = array())
     {
         if (is_callable($value)) {
@@ -711,13 +703,13 @@ class TemplateEngine
         }
     }
 
-	/**
-	 * Get safely a string from any kind of variable
-	 *
-	 * @param misc $value The value to build the string
-	 * @param string $glue The glue used for array `join()` if so
-	 * @return string
-	 */
+    /**
+     * Get safely a string from any kind of variable
+     *
+     * @param   mixed $value The value to build the string
+     * @param   string $glue The glue used for array `join()` if so
+     * @return  string
+     */
     public static function __string($value, $glue = ', ')
     {
         if (is_object($value)) {

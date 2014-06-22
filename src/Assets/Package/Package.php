@@ -9,36 +9,31 @@
 
 namespace Assets\Package;
 
-use InvalidArgumentException;
-
-use Library\Helper\Directory as DirectoryHelper;
-
-use AssetsManager\Loader as AssetsLoader,
-    AssetsManager\Package\AssetsPackage,
-    AssetsManager\Package\AbstractAssetsPackage,
-    AssetsManager\Package\Preset;
+use \InvalidArgumentException;
+use \Library\Helper\Directory as DirectoryHelper;
+use \AssetsManager\Loader as AssetsLoader;
+use \AssetsManager\Package\AssetsPackage;
+use \AssetsManager\Package\AbstractAssetsPackage;
+use \AssetsManager\Package\Preset;
 
 /**
- * @author 		Piero Wbmstr <me@e-piwi.fr>
+ * @author  Piero Wbmstr <me@e-piwi.fr>
  */
 class Package extends AssetsPackage
 {
 
     /**
-     * Current package layouts paths (relative to `$relative_path`)
-     * @var array
+     * @var array Current package layouts paths (relative to `$relative_path`)
      */
     protected $layouts_paths;
 
     /**
-     * Current package views paths (relative to `$relative_path`)
-     * @var array
+     * @var array Current package views paths (relative to `$relative_path`)
      */
     protected $views_paths;
 
     /**
-     * Current package views aliases files (relative to `$relative_path`)
-     * @var array
+     * @var array Current package views aliases files (relative to `$relative_path`)
      */
     protected $views_functions_paths;
 
@@ -76,7 +71,7 @@ class Package extends AssetsPackage
      * @param string $path Relative to `vendor`
      * @param string $type Type of the original relative path (can be `asset` or `vendor` or `null` - default is `vendor`)
      * @return self
-     * @throws `InvalidArgumentException` if the path doesn't exist
+     * @throws \InvalidArgumentException if the path doesn't exist
      */
     public function addLayoutsPath($path, $type = 'vendor')
     {
@@ -126,7 +121,7 @@ class Package extends AssetsPackage
      * @param string $path Relative to `vendor`
      * @param string $type Type of the original relative path (can be `asset` or `vendor` or `null` - default is `vendor`)
      * @return self
-     * @throws `InvalidArgumentException` if the path doesn't exist
+     * @throws \InvalidArgumentException if the path doesn't exist
      */
     public function addViewsPath($path, $type = 'vendor')
     {
@@ -176,7 +171,7 @@ class Package extends AssetsPackage
      * @param string $path Relative to `vendor`
      * @param string $type Type of the original relative path (can be `asset` or `vendor` or `null` - default is `vendor`)
      * @return self
-     * @throws `InvalidArgumentException` if the path doesn't exist
+     * @throws \InvalidArgumentException if the path doesn't exist
      */
     public function addViewsFunctionsPath($path, $type = 'vendor')
     {

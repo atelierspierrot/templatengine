@@ -9,27 +9,24 @@
 
 namespace Assets\Composer;
 
-use Composer\Composer,
-    Composer\IO\IOInterface,
-    Composer\Autoload\AutoloadGenerator,
-    Composer\Package\PackageInterface,
-    Composer\Repository\RepositoryInterface,
-    Composer\Script\Event,
-    Composer\Script\EventDispatcher;
-
-use Library\Helper\Directory as DirectoryHelper;
-
-use AssetsManager\Config,
-    AssetsManager\Composer\Util\Filesystem,
-    AssetsManager\Composer\Installer\AssetsInstaller,
-    AssetsManager\Composer\Autoload\AssetsAutoloadGenerator;
-
-use Assets\Package\Package,
-    Assets\Composer\TemplateEngineConfig,
-    Assets\Composer\TemplateEngineInstaller;
+use \Composer\Composer;
+use \Composer\IO\IOInterface;
+use \Composer\Autoload\AutoloadGenerator;
+use \Composer\Package\PackageInterface;
+use \Composer\Repository\RepositoryInterface;
+use \Composer\Script\Event;
+use \Composer\Script\EventDispatcher;
+use \Library\Helper\Directory as DirectoryHelper;
+use \AssetsManager\Config;
+use \AssetsManager\Composer\Util\Filesystem;
+use \AssetsManager\Composer\Installer\AssetsInstaller;
+use \AssetsManager\Composer\Autoload\AssetsAutoloadGenerator;
+use \Assets\Package\Package;
+use \Assets\Composer\TemplateEngineConfig;
+use \Assets\Composer\TemplateEngineInstaller;
 
 /**
- * @author 		Piero Wbmstr <me@e-piwi.fr>
+ * @author  Piero Wbmstr <me@e-piwi.fr>
  */
 class TemplateEngineAutoloadGenerator
     extends AutoloadGenerator
@@ -40,9 +37,8 @@ class TemplateEngineAutoloadGenerator
     protected $_package;
 
     /**
-     * @param object $package Composer\Package\PackageInterface
-     * @param object $composer Composer\Composer
-     * @return void
+     * @param \Composer\Package\PackageInterface $package
+     * @param \Composer\Composer $composer
      */
     public function __construct(PackageInterface $package, Composer $composer)
     {
@@ -65,6 +61,7 @@ class TemplateEngineAutoloadGenerator
 
     /**
      * Build the complete database array
+     *
      * @return array
      */
     public function getFullDb()
@@ -123,7 +120,7 @@ class TemplateEngineAutoloadGenerator
     /**
      * Parse the `composer.json` "extra" block of a package and return its transformed data
      *
-     * @param object $package Composer\Package\PackageInterface
+     * @param \Composer\Package\PackageInterface $package
      * @param string $assets_package_dir
      * @param string $vendor_package_dir
      * @return void

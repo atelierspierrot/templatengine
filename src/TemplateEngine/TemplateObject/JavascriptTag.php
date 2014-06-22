@@ -9,12 +9,12 @@
 
 namespace TemplateEngine\TemplateObject;
 
-use TemplateEngine\TemplateObject\Abstracts\AbstractTemplateObject,
-    TemplateEngine\TemplateObject\Abstracts\TemplateObjectInterface,
-    Library\Helper\Html;
+use \TemplateEngine\TemplateObject\Abstracts\AbstractTemplateObject;
+use \TemplateEngine\TemplateObject\Abstracts\TemplateObjectInterface;
+use \Library\Helper\Html;
 
 /**
- * @author 		Piero Wbmstr <me@e-piwi.fr>
+ * @author  Piero Wbmstr <me@e-piwi.fr>
  */
 class JavascriptTag
     extends AbstractTemplateObject
@@ -25,76 +25,81 @@ class JavascriptTag
 // TemplateObjectInterface
 // ------------------------
 
-	/**
-	 * Init the object
-	 */
-	public function init()
-	{
-		$this->reset();
-	}
-
-	/**
-	 * Reset the object
-	 * @return self $this for method chaining
-	 */
-	public function reset()
-	{
-		$this->__template->registry->js_entries = array();
-		return $this;
-	}
-
-	/**
-	 * Add a link header attribute
-	 * @param array $tag_attributes The link tag attributes
-	 * @return self $this for method chaining
-	 */
-	public function add($tag_content)
-	{
-		if (!empty($tag_content)) {
-			$this->__template->registry->addEntry( $tag_content, 'js_entries');
-		}
-		return $this;
-	}
-
-	/**
-	 * Set a full links header stack
-	 * @param array $tags An array of tags definitions
-	 * @return self $this for method chaining
-	 * @see self::add()
-	 */
-	public function set(array $tags)
-	{
-		if (!empty($tags)) {
-			foreach($tags as $_tag) {
-				$this->add( $_tag );
-			}
-		}
-		return $this;
-	}
-
-	/**
-	 * Get the header link tags stack
-	 * @return array The stack of header link tags
-	 */
-	public function get()
-	{
-		return $this->__template->registry->getEntry( 'js_entries', false, array() );
-	}
-
-	/**
-	 * Write the Template Object strings ready for template display
-	 * @param string $mask A mask to write each line via "sprintf()"
-	 * @return string The string to display fot this template object
-	 */
-	public function write($mask = '%s')
-	{
-		$content='';
-		foreach($this->get() as $entry) {
-			$content .= $entry."\n";
-		}
-		$str = sprintf($mask, Html::writeHtmlTag( 'script', $content ));
-		return $str;
-	}
+    /**
+     * Init the object
+     */
+    public function init()
+    {
+        $this->reset();
+    }
+    
+    /**
+     * Reset the object
+     *
+     * @return self 
+     */
+    public function reset()
+    {
+        $this->__template->registry->js_entries = array();
+        return $this;
+    }
+    
+    /**
+     * Add a link header attribute
+     *
+     * @param array $tag_content The link tag attributes
+     * @return self 
+     */
+    public function add($tag_content)
+    {
+        if (!empty($tag_content)) {
+            $this->__template->registry->addEntry( $tag_content, 'js_entries');
+        }
+        return $this;
+    }
+    
+    /**
+     * Set a full links header stack
+     *
+     * @param array $tags An array of tags definitions
+     * @return self 
+     * @see self::add()
+     */
+    public function set(array $tags)
+    {
+        if (!empty($tags)) {
+            foreach($tags as $_tag) {
+                $this->add( $_tag );
+            }
+        }
+        return $this;
+    }
+    
+    /**
+     * Get the header link tags stack
+     *
+     * @return array The stack of header link tags
+     */
+    public function get()
+    {
+        return $this->__template->registry->getEntry( 'js_entries', false, array() );
+    }
+    
+    /**
+     * Write the Template Object strings ready for template display
+     *
+     * @param string $mask A mask to write each line via "sprintf()"
+     * @return string The string to display fot this template object
+     */
+    public function write($mask = '%s')
+    {
+        $content='';
+        foreach($this->get() as $entry) {
+            $content .= $entry."\n";
+        }
+        $str = sprintf($mask, Html::writeHtmlTag( 'script', $content ));
+        return $str;
+    }
 
 }
 

@@ -9,15 +9,14 @@
 
 namespace Assets\Composer;
 
-use Composer\Composer,
-    Composer\IO\IOInterface,
-    Composer\Package\PackageInterface,
-    Composer\Script\Event;
-
-use Assets\Composer\TemplateEngineAutoloadGenerator;
+use \Composer\Composer;
+use \Composer\IO\IOInterface;
+use \Composer\Package\PackageInterface;
+use \Composer\Script\Event;
+use \Assets\Composer\TemplateEngineAutoloadGenerator;
 
 /**
- * @author 		Piero Wbmstr <me@e-piwi.fr>
+ * @author  Piero Wbmstr <me@e-piwi.fr>
  */
 class TemplateEngineInstaller
 {
