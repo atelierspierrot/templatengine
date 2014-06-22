@@ -60,7 +60,12 @@ class JavascriptFile
         if (!is_null($is_minified)) {
             $stack_entry['minified'] = $is_minified;
         }
-                
+
+        if (\AssetsManager\Loader::isUrl($stack_entry['file'])) {
+            $stack_entry['path'] = $stack_entry['file'];
+            return $stack_entry;
+        }
+
         $_fp = $this->__template->findAsset($stack_entry['file']);
         if ($_fp) {
             $stack_entry['path'] = $_fp;
@@ -106,7 +111,7 @@ class JavascriptFile
     public function addIfExists($file_path)
     {
         $_fp = $this->__template->findAsset($file_path);
-        if ($_fp) {
+        if ($_fp || \AssetsManager\Loader::isUrl($file_path)) {
             return $this->add($file_path);
         }
         return $this;
