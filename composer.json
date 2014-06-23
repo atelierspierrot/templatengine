@@ -35,11 +35,14 @@
         "document-root": "www",
         "assets-presets": {
             "jquery": {
-                "js": "top:min:vendor_assets/jquery-last.min.js"
+                "js": "first:min:vendor_assets/jquery-last.min.js"
             },
             "jquery.tablesorter": {
                 "css": "vendor_assets/blue/style.css",
-                "jsfiles_footer": [ "vendor_assets/jquery.metadata.js", "min:vendor_assets/jquery.tablesorter.min.js" ],
+                "jsfiles_footer": [
+                    "vendor_assets/jquery.metadata.js",
+                    "min:vendor_assets/jquery.tablesorter.min.js"
+                ],
                 "require": "jquery"
             },
             "jquery.highlight": {
