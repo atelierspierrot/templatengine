@@ -52,9 +52,10 @@ class CssFile
      * @param string $file_path The new CSS path
      * @param string $media The media type for the CSS file (default is "screen")
      * @param string|null $condition Define a condition (for IE) for this stylesheet
+     * @param int $priority The priority for the file in the global files stack
      * @return self
      */
-    public function addIfExists($file_path, $media = 'screen', $condition = null)
+    public function addIfExists($file_path, $media = 'screen', $condition = null, $priority = null)
     {
         $_fp = $this->__template->findAsset($file_path);
         if ($_fp || \AssetsManager\Loader::isUrl($file_path)) {
@@ -69,10 +70,11 @@ class CssFile
      * @param string $file_path The new CSS path
      * @param string $media The media type for the CSS file (default is "screen")
      * @param string|null $condition Define a condition (for IE) for this stylesheet
+     * @param int $priority The priority for the file in the global files stack
      * @return self
      * @throws \InvalidArgumentException if the path doesn't exist
      */
-    public function add($file_path, $media = 'screen', $condition = null)
+    public function add($file_path, $media = 'screen', $condition = null, $priority = null)
     {
         $_fp = $this->__template->findAsset($file_path);
         if ($_fp || \AssetsManager\Loader::isUrl($file_path)) {
@@ -130,11 +132,6 @@ class CssFile
      */
     public function write($mask = '%s')
     {
-
-
-var_export($this->_cleanStack($this->get(), 'file'));
-
-
         $str='';
         foreach($this->_cleanStack($this->get(), 'file') as $entry) {
             $tag_attrs = array(
@@ -193,10 +190,12 @@ var_export($this->_cleanStack($this->get(), 'file'));
      *
      * @param string $file_path The new CSS path
      * @param string $media The media type for the CSS file (default is "screen")
+     * @param string|null $condition Define a condition (for IE) for this stylesheet
+     * @param int $priority The priority for the file in the global files stack
      * @return self
      * @throws \InvalidArgumentException if the path doesn't exist
      */
-    public function addMerged($file_path, $media = 'screen')
+    public function addMerged($file_path, $media = 'screen', $condition = null, $priority = null)
     {
         $_fp = $this->__template->findAsset($file_path);
         if ($_fp || \AssetsManager\Loader::isUrl($file_path)) {
@@ -303,10 +302,12 @@ var_export($this->_cleanStack($this->get(), 'file'));
      *
      * @param string $file_path The new CSS path
      * @param string $media The media type for the CSS file (default is "screen")
+     * @param string|null $condition Define a condition (for IE) for this stylesheet
+     * @param int $priority The priority for the file in the global files stack
      * @return self
      * @throws \InvalidArgumentException if the path doesn't exist
      */
-    public function addMinified($file_path, $media = 'screen')
+    public function addMinified($file_path, $media = 'screen', $condition = null, $priority = null)
     {
         $_fp = $this->__template->findAsset($file_path);
         if ($_fp || \AssetsManager\Loader::isUrl($file_path)) {

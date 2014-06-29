@@ -105,14 +105,15 @@ class JavascriptFile
      * Add a javascript file in javascript stack
      * 
      * @param string|array $file_path The new javascript path or an array like the `$_default_stack_entry`
-     * @return self 
+     * @param int $priority The priority for the file in the global files stack
+     * @return self
      * @throw Throws an InvalidArgumentException if the path doesn't exist
      */
-    public function addIfExists($file_path)
+    public function addIfExists($file_path, $priority = null)
     {
         $_fp = $this->__template->findAsset($file_path);
         if ($_fp || \AssetsManager\Loader::isUrl($file_path)) {
-            return $this->add($file_path);
+            return $this->add($file_path, $priority);
         }
         return $this;
     }
@@ -121,12 +122,13 @@ class JavascriptFile
      * Add a javascript file in javascript stack
      * 
      * @param string|array $file_path The new javascript path or an array like the `$_default_stack_entry`
-     * @return self 
+     * @param int $priority The priority for the file in the global files stack
+     * @return self
      * @throw Throws an InvalidArgumentException if the path doesn't exist
      */
-    public function add($file_path)
+    public function add($file_path, $priority = null)
     {
-        $this->registry->addEntry($this->_getStackEntry($file_path), 'javascript_files');
+        $this->registry->addEntry($this->_getStackEntry($file_path, $priority), 'javascript_files');
         return $this;
     }
     
@@ -200,12 +202,13 @@ class JavascriptFile
      * Add an merged file
      * 
      * @param string $file_path The new javascript path
-     * @return self 
+     * @param int $priority The priority for the file in the global files stack
+     * @return self
      * @throw Throws an InvalidArgumentException if the path doesn't exist
      */
-    public function addMerged($file_path)
+    public function addMerged($file_path, $priority = null)
     {
-        $stack = $this->_getStackEntry($file_path, null, true);
+        $stack = $this->_getStackEntry($file_path, $priority, true);
         $this->registry->addEntry($stack, 'javascript_files');
         $this->registry->addEntry($stack, 'javascript_merged_files');
         return $this;
@@ -281,12 +284,13 @@ class JavascriptFile
      * Add an minified file
      *
      * @param string $file_path The new javascript path
-     * @return self 
+     * @param int $priority The priority for the file in the global files stack
+     * @return self
      * @throw Throws an InvalidArgumentException if the path doesn't exist
      */
-    public function addMinified($file_path)
+    public function addMinified($file_path, $priority = null)
     {
-        $stack = $this->_getStackEntry($file_path, null, true);
+        $stack = $this->_getStackEntry($file_path, $priority, true);
         $this->registry->addEntry($stack, 'javascript_files');
         $this->registry->addEntry($stack, 'javascript_minified_files');
         return $this;

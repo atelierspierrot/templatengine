@@ -66,9 +66,15 @@ class Preset
                         (isset($js['minified']) && true===$js['minified']) ||
                         (isset($js['packed']) && true===$js['packed'])
                     ) {
-                        $template_object->addMinified($js['src']);
+                        $template_object->addMinified(
+                            $js['src'],
+                            (isset($js['position']) ? $js['position'] : null)
+                        );
                     } else {
-                        $template_object->add($js['src']);
+                        $template_object->add(
+                            $js['src'],
+                            (isset($js['position']) ? $js['position'] : null)
+                        );
                     }
                 }
                 
@@ -79,9 +85,15 @@ class Preset
                         (isset($js['minified']) && true===$js['minified']) ||
                         (isset($js['packed']) && true===$js['packed'])
                     ) {
-                        $template_object->addMinified($js['src']);
+                        $template_object->addMinified(
+                            $js['src'],
+                            (isset($js['position']) ? $js['position'] : null)
+                        );
                     } else {
-                        $template_object->add($js['src']);
+                        $template_object->add(
+                            $js['src'],
+                            (isset($js['position']) ? $js['position'] : null)
+                        );
                     }
                 }
             }
