@@ -653,8 +653,8 @@ class TemplateEngine
         $this->setAssetsLoader($loader);
         $this
             ->setLayoutsDir( $this->assets_loader->getAssetsRealPath() )
-            ->setToTemplate('setWebRootPath', $this->assets_loader->getAssetsWebPath() )
-            ->setToView('addDefaultViewParam', 'assets', $this->assets_loader->getAssetsWebPath() )
+            ->setToTemplate('setWebRootPath', $this->assets_loader->getDocumentRoot() )
+            ->setToView('addDefaultViewParam', 'assets', $this->assets_loader->getAssetsDirectory() )
             ->setToTemplate('setWebRootPath', $this->assets_loader->getDocumentRoot() )
             ;
         return $this;
