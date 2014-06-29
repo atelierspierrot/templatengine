@@ -41,50 +41,50 @@ if (strlen($boilerplate_assets)) {
 
 // ------------------
 // METAS
-$old_metas = $_template->getTemplateObject('MetaTag')->get();
-$_template->getTemplateObject('MetaTag')->reset();
+$old_metas = $_template->getAssetObject('MetaTag')->get();
+$_template->getAssetObject('MetaTag')->reset();
 
 // => charset and others
-$_template->getTemplateObject('MetaTag')
+$_template->getAssetObject('MetaTag')
     ->add('Content-Type', 'text/html; charset=UTF-8', true)
     ->add('X-UA-Compatible', 'IE=edge,chrome=1', true, 'IE')
     ->add('viewport', 'width=device-width');
 
 // => description
 if (!empty($meta_description)) {
-    $_template->getTemplateObject('MetaTag')
+    $_template->getAssetObject('MetaTag')
         ->add('description', $meta_description);
 }
 
 // => keywords
 if (!empty($meta_keywords)) {
-    $_template->getTemplateObject('MetaTag')
+    $_template->getAssetObject('MetaTag')
         ->add('keywords', $meta_keywords);
 }
 
 // => author
 if (!empty($author)) {
-    $_template->getTemplateObject('MetaTag')
+    $_template->getAssetObject('MetaTag')
         ->add('author', $author);
 }
 
 // => generator
 if (!empty($app_name) && !empty($app_version)) {
-    $_template->getTemplateObject('MetaTag')
+    $_template->getAssetObject('MetaTag')
         ->add('generator', $app_name.(!empty($app_version) ? ' '.$app_version : ''));
 }
 
 // => + old ones
-$_template->getTemplateObject('MetaTag')->set($old_metas);
+$_template->getAssetObject('MetaTag')->set($old_metas);
 
 // ------------------
 // LINKS
-$old_links = $_template->getTemplateObject('LinkTag')->get();
-$_template->getTemplateObject('LinkTag')->reset();
+$old_links = $_template->getAssetObject('LinkTag')->get();
+$_template->getAssetObject('LinkTag')->reset();
 
 // => favicon.ico
 if (file_exists($assets.'icons/favicon.ico')) {
-    $_template->getTemplateObject('LinkTag')
+    $_template->getAssetObject('LinkTag')
         ->add( array(
             'rel'=>'icon',
             'href'=>$assets.'icons/favicon.ico',
@@ -100,7 +100,7 @@ if (file_exists($assets.'icons/favicon.ico')) {
 // the followings are taken from <http://mathiasbynens.be/notes/touch-icons>
 // => For third-generation iPad with high-resolution Retina display: apple-touch-icon-144x144-precomposed.png
 if (file_exists($assets.'icons/apple-touch-icon-144x144-precomposed.png')) {
-    $_template->getTemplateObject('LinkTag')
+    $_template->getAssetObject('LinkTag')
         ->add( array(
             'rel'=>'apple-touch-icon-precomposed',
             'href'=>$assets.'icons/apple-touch-icon-144x144-precomposed.png',
@@ -109,7 +109,7 @@ if (file_exists($assets.'icons/apple-touch-icon-144x144-precomposed.png')) {
 }
 // => For iPhone with high-resolution Retina display: apple-touch-icon-114x114-precomposed.png
 if (file_exists($assets.'icons/apple-touch-icon-114x114-precomposed.png')) {
-    $_template->getTemplateObject('LinkTag')
+    $_template->getAssetObject('LinkTag')
         ->add( array(
             'rel'=>'apple-touch-icon-precomposed',
             'href'=>$assets.'icons/apple-touch-icon-114x114-precomposed.png',
@@ -118,7 +118,7 @@ if (file_exists($assets.'icons/apple-touch-icon-114x114-precomposed.png')) {
 }
 // => For first- and second-generation iPad: apple-touch-icon-72x72-precomposed.png
 if (file_exists($assets.'icons/apple-touch-icon-72x72-precomposed.png')) {
-    $_template->getTemplateObject('LinkTag')
+    $_template->getAssetObject('LinkTag')
         ->add( array(
             'rel'=>'apple-touch-icon-precomposed',
             'href'=>$assets.'icons/apple-touch-icon-72x72-precomposed.png',
@@ -127,7 +127,7 @@ if (file_exists($assets.'icons/apple-touch-icon-72x72-precomposed.png')) {
 }
 // => For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: apple-touch-icon-precomposed.png
 if (file_exists($assets.'icons/apple-touch-icon-precomposed.png')) {
-    $_template->getTemplateObject('LinkTag')
+    $_template->getAssetObject('LinkTag')
         ->add( array(
             'rel'=>'apple-touch-icon-precomposed',
             'href'=>$assets.'icons/apple-touch-icon-precomposed.png'
@@ -135,32 +135,32 @@ if (file_exists($assets.'icons/apple-touch-icon-precomposed.png')) {
 }
 
 // => + old ones
-$_template->getTemplateObject('LinkTag')->set($old_links);
+$_template->getAssetObject('LinkTag')->set($old_links);
 
 // ------------------
 // TITLE
-$old_titles = $_template->getTemplateObject('TitleTag')->get();
-$_template->getTemplateObject('TitleTag')->reset();
+$old_titles = $_template->getAssetObject('TitleTag')->get();
+$_template->getAssetObject('TitleTag')->reset();
 
 // => $title
 if (!empty($title)) {
-    $_template->getTemplateObject('TitleTag')
+    $_template->getAssetObject('TitleTag')
         ->add( $title );
 }
 // => + old ones
-$_template->getTemplateObject('TitleTag')->set($old_titles);
+$_template->getAssetObject('TitleTag')->set($old_titles);
 // => meta_title last
 if (!empty($meta_title)) {
-    $_template->getTemplateObject('TitleTag')
+    $_template->getAssetObject('TitleTag')
         ->add( $meta_title );
 }
 
 // ------------------
 // CSS
-$old_css = $_template->getTemplateObject('CssFile')->get();
-$_template->getTemplateObject('CssFile')->reset();
+$old_css = $_template->getAssetObject('CssFile')->get();
+$_template->getAssetObject('CssFile')->reset();
 
-$_template->getTemplateObject('CssFile')
+$_template->getAssetObject('CssFile')
     ->add($boilerplate_assets.'css/normalize.css')
     ->add($boilerplate_assets.'css/main.css')
     ->add($tple_assets.'css/styles.css')
@@ -171,20 +171,20 @@ $_template->getTemplateObject('CssFile')
 
 // ------------------
 // JS in header
-$old_header_js = $_template->getTemplateObject('JavascriptFile', 'jsfiles_header')->get();
-$_template->getTemplateObject('JavascriptFile', 'jsfiles_header')->reset();
+$old_header_js = $_template->getAssetObject('JavascriptFile', 'jsfiles_header')->get();
+$_template->getAssetObject('JavascriptFile', 'jsfiles_header')->reset();
 
-$_template->getTemplateObject('JavascriptFile', 'jsfiles_header')
+$_template->getAssetObject('JavascriptFile', 'jsfiles_header')
     ->addMinified($tple_assets.'vendor_assets/modernizr-2.6.2.min.js')
     // => + old ones
     ->set($old_header_js);
 
 // ------------------
 // JS in footer
-$old_footer_js = $_template->getTemplateObject('JavascriptFile', 'jsfiles_footer')->get();
-$_template->getTemplateObject('JavascriptFile', 'jsfiles_footer')->reset();
+$old_footer_js = $_template->getAssetObject('JavascriptFile', 'jsfiles_footer')->get();
+$_template->getAssetObject('JavascriptFile', 'jsfiles_footer')->reset();
 
-$_template->getTemplateObject('JavascriptFile', 'jsfiles_footer')
+$_template->getAssetObject('JavascriptFile', 'jsfiles_footer')
     ->addMinified($tple_assets.'vendor_assets/jquery-last.min.js')
     ->add($boilerplate_assets.'js/plugins.js')
     ->add($tple_assets.'js/scripts.js')
@@ -219,23 +219,23 @@ _echo("\n");
     <head>
 <?php
 echo
-    $_template->getTemplateObject('MetaTag')->write("\n\t\t %s "),
-    $_template->getTemplateObject('TitleTag')->write("\n\t\t %s "),
-    $_template->getTemplateObject('LinkTag')->write("\n\t\t %s ");
+    $_template->getAssetObject('MetaTag')->write("\n\t\t %s "),
+    $_template->getAssetObject('TitleTag')->write("\n\t\t %s "),
+    $_template->getAssetObject('LinkTag')->write("\n\t\t %s ");
 
 if (true===$minify_css)
-    echo $_template->getTemplateObject('CssFile')->minify()->writeMinified("\n\t\t %s ");
+    echo $_template->getAssetObject('CssFile')->minify()->writeMinified("\n\t\t %s ");
 elseif (true===$merge_css)
-    echo $_template->getTemplateObject('CssFile')->merge()->writeMerged("\n\t\t %s ");
+    echo $_template->getAssetObject('CssFile')->merge()->writeMerged("\n\t\t %s ");
 else
-    echo $_template->getTemplateObject('CssFile')->write("\n\t\t %s ");
+    echo $_template->getAssetObject('CssFile')->write("\n\t\t %s ");
 
 if (true===$minify_js)
-    echo $_template->getTemplateObject('JavascriptFile', 'jsfiles_header')->minify()->writeMinified("\n\t\t %s ");
+    echo $_template->getAssetObject('JavascriptFile', 'jsfiles_header')->minify()->writeMinified("\n\t\t %s ");
 elseif (true===$merge_js)
-    echo $_template->getTemplateObject('JavascriptFile', 'jsfiles_header')->merge()->writeMerged("\n\t\t %s ");
+    echo $_template->getAssetObject('JavascriptFile', 'jsfiles_header')->merge()->writeMerged("\n\t\t %s ");
 else
-    echo $_template->getTemplateObject('JavascriptFile', 'jsfiles_header')->write("\n\t\t %s ");
+    echo $_template->getAssetObject('JavascriptFile', 'jsfiles_header')->write("\n\t\t %s ");
 
 _echo("\n");
 ?>
@@ -289,15 +289,15 @@ _echo("\n");
 
 <?php
 if (true===$minify_js)
-    echo $_template->getTemplateObject('JavascriptFile', 'jsfiles_footer')->minify()->writeMinified("\n\t %s ");
+    echo $_template->getAssetObject('JavascriptFile', 'jsfiles_footer')->minify()->writeMinified("\n\t %s ");
 elseif (true===$merge_js)
-    echo $_template->getTemplateObject('JavascriptFile', 'jsfiles_footer')->merge()->writeMerged("\n\t\t %s ");
+    echo $_template->getAssetObject('JavascriptFile', 'jsfiles_footer')->merge()->writeMerged("\n\t\t %s ");
 else
-    echo $_template->getTemplateObject('JavascriptFile', 'jsfiles_footer')->write("\n\t %s ");
+    echo $_template->getAssetObject('JavascriptFile', 'jsfiles_footer')->write("\n\t %s ");
 
 echo
-    $_template->getTemplateObject('JavascriptTag')->write("%s"),
-    $_template->getTemplateObject('CssTag')->write("%s"),
+    $_template->getAssetObject('JavascriptTag')->write("%s"),
+    $_template->getAssetObject('CssTag')->write("%s"),
     "\n";
 ?>
 

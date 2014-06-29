@@ -148,12 +148,12 @@ class Template
      * @param   string $_ref
      * @return  object The template object if found
      */
-    public function getTemplateObject($_type, $_ref = null)
+    public function getAssetObject($_type, $_ref = null)
     {
-        $stack_name = !is_null($_ref) ? $_ref : $this->getTemplateObjectClassName( $_type );
+        $stack_name = !is_null($_ref) ? $_ref : $this->getAssetObjectClassName( $_type );
 
         if (!$this->registry->isEntry( $stack_name, 'template_objects' )) {
-            $this->createNewTemplateObject( $_type, $_ref );
+            $this->createNewAssetObject( $_type, $_ref );
         }
 
         return $this->registry->getEntry( $stack_name, 'template_objects' );
@@ -168,22 +168,22 @@ class Template
      * @throws  \RuntimeException if the template object doesn't exist
      * @throws  \DomainException if the template object doesn't implement required interface
      */
-    public function createNewTemplateObject($_type, $_ref = null)
+    public function createNewAssetObject($_type, $_ref = null)
     {
-        $_cls = $this->getTemplateObjectClassName( $_type );
+        $_cls = $this->getAssetObjectClassName( $_type );
         $stack_name = !is_null($_ref) ? $_ref : $_cls;
 
         if (class_exists($_cls)) {
             try {
-                $_tpl_object = new $_cls( $this );
+                $_tpl_object = new $_cls( \AssetsManager\Loader::getInstance() );
             } catch ( \Exception $e ) {
                 throw new \RuntimeException(
                     sprintf('An error occurred while trying to create Template Object "%s"!', $_cls)
                 );
             }
-            if (!($_tpl_object instanceof \TemplateEngine\TemplateObject\Abstracts\AbstractTemplateObject)) {
+            if (!($_tpl_object instanceof \AssetsManager\AssetObject\AbstractAssetObject)) {
                 throw new \DomainException(
-                    sprintf('A Template Object must extends the "\TemplateEngine\TemplateObject\Abstracts\AbstractTemplateObject" class (got "%s")!', $_cls)
+                    sprintf('A Template Object must extends the "\AssetsManager\AssetObject\AbstractAssetObject" class (got "%s")!', $_cls)
                 );
             } else {
                 $this->registry->setEntry( $stack_name, $_tpl_object, 'template_objects' );
@@ -201,9 +201,13 @@ class Template
      * @param   string $_type The template object type
      * @return  string The template object class name
      */
-    public function getTemplateObjectClassName( $_type )
+    public function getAssetObjectClassName( $_type )
     {
-        return '\TemplateEngine\TemplateObject\\'.ucfirst($_type);
+        $parent = '\AssetsManager\AssetObject\\'.ucfirst($_type);
+        if (@class_exists($parent)) {
+            return $parent;
+        }
+        return '\Assets\AssetObject\\'.ucfirst($_type);
     }
 
 // --------------------------

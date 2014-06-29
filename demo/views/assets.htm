@@ -2,7 +2,7 @@
 
 _use('jquery.highlight');
 
-$_template->getTemplateObject('JavascriptTag')->add(<<<EOT
+$_template->getAssetObject('JavascriptTag')->add(<<<EOT
 $(function() {
     $('pre.code').highlight({source:0, indent:'tabs', code_lang: 'data-language'});
 });
@@ -34,12 +34,12 @@ var_export($loader);
 <?php
 
 echo '$js_stack = array('."\n"
-	."\t".'$loader->find("vendor/jquery.highlight.js"),'."\n"
-	."\t".'$loader->find("vendor/jquery.metadata.js")'."\n"
+	."\t".'$loader->find("vendor_assets/jquery.highlight.js"),'."\n"
+	."\t".'$loader->find("vendor_assets/jquery.metadata.js")'."\n"
     .');'."\n";
 $js_stack = array(
-	$loader->find('vendor/jquery.highlight.js'),
-	$loader->find('vendor/jquery.metadata.js')
+	$loader->find('vendor_assets/jquery.highlight.js'),
+	$loader->find('vendor_assets/jquery.metadata.js')
 );
 var_export($js_stack);
 ?>
@@ -54,14 +54,14 @@ var_export($js_stack);
 <pre class="code" data-language="php">
 <?php
 
-echo '$compressor = new Assets\Compressor('."\n"
+echo '$compressor = new AssetsManager\Compressor\Compressor('."\n"
     ."\t".'$js_stack,            // the files to treat'."\n"
     ."\t".'null,                 // the result filename - null will cause automatic generation'."\n"
     ."\t".'__DIR__."/../tmp",    // the result file path'."\n"
     ."\t".'"js"                  // the file type - will be guessed if null'."\n"
     .');'."\n";
 
-$compressor = new Assets\Compressor(
+$compressor = new AssetsManager\Compressor\Compressor(
     $js_stack,
     null,
     __DIR__.'/../tmp',

@@ -1,13 +1,13 @@
 <?php
 
-$_template->getTemplateObject('JavascriptTag')->add(<<<EOT
+$_template->getAssetObject('JavascriptTag')->add(<<<EOT
 $(function() {
     $('pre.code').highlight({source:0, indent:'tabs', code_lang: 'data-language'});
 });
 EOT
 );
 
-$_template->getTemplateObject('CssTag')->add(<<<EOT
+$_template->getAssetObject('CssTag')->add(<<<EOT
 .test_bg { background-color: green; }
 EOT
 );

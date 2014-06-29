@@ -7,22 +7,22 @@
  * Sources <http://github.com/atelierspierrot/templatengine>
  */
 
-namespace TemplateEngine\TemplateObject;
+namespace Assets\AssetObject;
 
-use \TemplateEngine\TemplateObject\Abstracts\AbstractTemplateObject;
-use \TemplateEngine\TemplateObject\Abstracts\TemplateObjectInterface;
+use \AssetsManager\AssetObject\AbstractAssetObject;
+use \AssetsManager\AssetObject\AssetObjectInterface;
 use \Library\Helper\Html;
 
 /**
  * @author  Piero Wbmstr <me@e-piwi.fr>
  */
-class JavascriptTag
-    extends AbstractTemplateObject
-    implements TemplateObjectInterface
+class LinkTag
+    extends AbstractAssetObject
+    implements AssetObjectInterface
 {
 
 // ------------------------
-// TemplateObjectInterface
+// AssetObjectInterface
 // ------------------------
 
     /**
@@ -32,37 +32,37 @@ class JavascriptTag
     {
         $this->reset();
     }
-    
+
     /**
      * Reset the object
      *
-     * @return self 
+     * @return self
      */
     public function reset()
     {
-        $this->__template->registry->js_entries = array();
+        $this->__registry->link_tags = array();
         return $this;
     }
-    
+
     /**
      * Add a link header attribute
      *
-     * @param array $tag_content The link tag attributes
-     * @return self 
+     * @param array $tag_attributes The link tag attributes
+     * @return self
      */
-    public function add($tag_content)
+    public function add($tag_attributes)
     {
-        if (!empty($tag_content)) {
-            $this->__template->registry->addEntry( $tag_content, 'js_entries');
+        if (!empty($tag_attributes)) {
+            $this->__registry->addEntry( $tag_attributes, 'link_tags');
         }
         return $this;
     }
-    
+
     /**
      * Set a full links header stack
      *
      * @param array $tags An array of tags definitions
-     * @return self 
+     * @return self
      * @see self::add()
      */
     public function set(array $tags)
@@ -74,7 +74,7 @@ class JavascriptTag
         }
         return $this;
     }
-    
+
     /**
      * Get the header link tags stack
      *
@@ -82,9 +82,9 @@ class JavascriptTag
      */
     public function get()
     {
-        return $this->__template->registry->getEntry( 'js_entries', false, array() );
+        return $this->__registry->getEntry( 'link_tags', false, array() );
     }
-    
+
     /**
      * Write the Template Object strings ready for template display
      *
@@ -93,11 +93,12 @@ class JavascriptTag
      */
     public function write($mask = '%s')
     {
-        $content='';
+        $str='';
+// allow multi same links
+//        foreach($this->_cleanStack( $this->get(), 'rel' ) as $entry) {
         foreach($this->get() as $entry) {
-            $content .= $entry."\n";
+            $str .= sprintf($mask, Html::writeHtmlTag( 'link', null, $entry, true ));
         }
-        $str = sprintf($mask, Html::writeHtmlTag( 'script', $content ));
         return $str;
     }
 

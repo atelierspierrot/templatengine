@@ -3,7 +3,7 @@
 _use('jquery.tablesorter');
 _use('jquery.highlight');
 
-$_template->getTemplateObject('JavascriptTag')->add(<<<EOT
+$_template->getAssetObject('JavascriptTag')->add(<<<EOT
 $(function() {
     $('table.tablesorter').tablesorter({widgets: ['zebra']});
     $('pre.code').highlight({source:0, indent:'tabs', code_lang: 'data-language'});
@@ -20,7 +20,7 @@ EOT
 _use('jquery.tablesorter');
 _use('jquery.highlight');
 
-$_template->getTemplateObject('JavascriptTag')->add(<<<\EOT
+$_template->getAssetObject('JavascriptTag')->add(<<<\EOT
     $(function() {
         $('table.tablesorter').tablesorter({widgets: ['zebra']});
         $('pre.code').highlight({source:0, indent:'tabs', code_lang: 'data-language'});

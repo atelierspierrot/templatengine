@@ -7,10 +7,10 @@
  * Sources <http://github.com/atelierspierrot/templatengine>
  */
 
-namespace TemplateEngine\TemplateObject;
+namespace Assets\AssetObject;
 
-use \TemplateEngine\TemplateObject\Abstracts\AbstractTemplateObject;
-use \TemplateEngine\TemplateObject\Abstracts\TemplateObjectInterface;
+use \AssetsManager\AssetObject\AbstractAssetObject;
+use \AssetsManager\AssetObject\AssetObjectInterface;
 use \Library\Helper\Html;
 use \Library\Helper\ConditionalComment;
 
@@ -18,12 +18,12 @@ use \Library\Helper\ConditionalComment;
  * @author  Piero Wbmstr <me@e-piwi.fr>
  */
 class MetaTag
-    extends AbstractTemplateObject
-    implements TemplateObjectInterface
+    extends AbstractAssetObject
+    implements AssetObjectInterface
 {
 
 // ------------------------
-// TemplateObjectInterface
+// AssetObjectInterface
 // ------------------------
 
     /**
@@ -41,7 +41,7 @@ class MetaTag
      */
     public function reset()
     {
-        $this->__template->registry->meta_tags = array();
+        $this->__registry->meta_tags = array();
         return $this;
     }
 
@@ -56,7 +56,7 @@ class MetaTag
      */
     public function add($name, $content = '', $http_equiv = false, $condition = null)
     {
-        $this->__template->registry->addEntry( array(
+        $this->__registry->addEntry( array(
             'name'=>$name,
             'content'=>$content,
             'http-equiv'=>$http_equiv,
@@ -96,7 +96,7 @@ class MetaTag
      */
     public function get()
     {
-        return $this->__template->registry->getEntry( 'meta_tags', false, array() );
+        return $this->__registry->getEntry( 'meta_tags', false, array() );
     }
 
     /**

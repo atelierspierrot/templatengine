@@ -110,9 +110,9 @@ class TemplateEngine
     {
         Config::load('Assets\Composer\TemplateEngineConfig');
         $this->setFlags($flags);
-        $this->template = new Template;
-        $this->view = new View;
-        $this->registry = new Registry;
+        $this->template     = new Template;
+        $this->view         = new View;
+        $this->registry     = new Registry;
         $this->setPageLayout(self::$default_page_layout);
     }
 
@@ -493,6 +493,7 @@ class TemplateEngine
     /**
      * Process a fallback method on an object
      *
+     * @param   mixed  $object
      * @param   string  $varname The variable name to search
      * @param   array   $arguments The arguments to pass to the method
      * @param   bool    $throw_errors Throw errors during process ?
@@ -514,7 +515,9 @@ class TemplateEngine
             try {
                 $val = call_user_func_array(array($object, $varname), $arguments);
                 return $val;
-            } catch(\Exception $e) {}
+            } catch(\Exception $e) {
+                throw $e;
+            }
         }
 
         if (!empty($fallback)) {

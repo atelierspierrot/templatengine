@@ -15,7 +15,7 @@ use \AssetsManager\Package\Preset as OriginalPreset;
 use \AssetsManager\Package\Package as AssetsPackage;
 use \AssetsManager\Package\PackageInterface;
 use \TemplateEngine\TemplateEngine;
-use \TemplateEngine\TemplateObject\Abstracts\AbstractTemplateObject;
+use \AssetsManager\AssetObject\AbstractAssetObject;
 
 /**
  * @author  Piero Wbmstr <me@e-piwi.fr>
@@ -50,7 +50,7 @@ class Preset
         foreach ($this->getOrganizedStatements() as $type=>$statements) {
             foreach ($statements as $statement) {
                 if ('css'===$type) {
-                    $template_object = $template_engine->getTemplateObject('CssFile');
+                    $template_object = $template_engine->getAssetObject('CssFile');
                     $css = $statement->getData();
                     if (isset($css['minified']) && true===$css['minified']) {
                         $template_object->addMinified($css['src'], $css['media']);
@@ -60,7 +60,7 @@ class Preset
                 }
                 
                 elseif ('jsfiles_header'===$type) {
-                    $template_object = $template_engine->getTemplateObject('JavascriptFile', 'jsfiles_header');
+                    $template_object = $template_engine->getAssetObject('JavascriptFile', 'jsfiles_header');
                     $js = $statement->getData();
                     if (
                         (isset($js['minified']) && true===$js['minified']) ||
@@ -79,7 +79,7 @@ class Preset
                 }
                 
                 elseif (in_array($type, array('js', 'jsfiles_footer'))) {
-                    $template_object = $template_engine->getTemplateObject('JavascriptFile', 'jsfiles_footer');
+                    $template_object = $template_engine->getAssetObject('JavascriptFile', 'jsfiles_footer');
                     $js = $statement->getData();
                     if (
                         (isset($js['minified']) && true===$js['minified']) ||

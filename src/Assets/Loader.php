@@ -11,8 +11,7 @@ namespace Assets;
 
 use \Library\Helper\Filesystem as FilesystemHelper;
 use \Library\Helper\Directory as DirectoryHelper;
-
-use AssetsManager\Loader as AssetsLoader;
+use \AssetsManager\Loader as AssetsLoader;
 
 /**
  * @author  Piero Wbmstr <me@e-piwi.fr>

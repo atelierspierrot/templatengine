@@ -7,22 +7,22 @@
  * Sources <http://github.com/atelierspierrot/templatengine>
  */
 
-namespace TemplateEngine\TemplateObject;
+namespace Assets\AssetObject;
 
-use \TemplateEngine\TemplateObject\Abstracts\AbstractTemplateObject;
-use \TemplateEngine\TemplateObject\Abstracts\TemplateObjectInterface;
+use \AssetsManager\AssetObject\AbstractAssetObject;
+use \AssetsManager\AssetObject\AssetObjectInterface;
 use \Library\Helper\Html;
 
 /**
  * @author  Piero Wbmstr <me@e-piwi.fr>
  */
 class TitleTag
-    extends AbstractTemplateObject
-    implements TemplateObjectInterface
+    extends AbstractAssetObject
+    implements AssetObjectInterface
 {
 
 // ------------------------
-// TemplateObjectInterface
+// AssetObjectInterface
 // ------------------------
 
     /**
@@ -40,7 +40,7 @@ class TitleTag
      */
     public function reset()
     {
-        $this->__template->registry->header_title = array();
+        $this->__registry->header_title = array();
         return $this;
     }
 
@@ -52,7 +52,7 @@ class TitleTag
      */
     public function add($title)
     {
-        $this->__template->registry->addEntry( $title, 'header_title');
+        $this->__registry->addEntry( $title, 'header_title');
         return $this;
     }
 
@@ -80,7 +80,7 @@ class TitleTag
      */
     public function get()
     {
-        return $this->__template->registry->getEntry( 'header_title', false, array() );
+        return $this->__registry->getEntry( 'header_title', false, array() );
     }
 
     /**

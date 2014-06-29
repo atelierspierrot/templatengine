@@ -2,21 +2,30 @@
 /**
  */
 
-use TemplateEngine\TemplateEngine;
-
-use Assets\Loader as AssetsLoader;
-
-use Library\Helper\Html as HtmlHelper;
-use Library\Helper\Url as UrlHelper;
+use \TemplateEngine\TemplateEngine;
+use \Assets\Loader as AssetsLoader;
+use \Library\Helper\Directory as DirectoryHelper;
+use \Library\Helper\Html as HtmlHelper;
+use \Library\Helper\Url as UrlHelper;
 
 class Controller
 {
 
     public $loader;
     public $template_engine;
+    public $tmp_dir;
 
     public function __construct()
     {
+        $this->tmp_dir = __DIR__.'/tmp';
+        if (!file_exists($this->tmp_dir)) {
+            if (!DirectoryHelper::ensureExists($this->tmp_dir)) {
+                throw new Exception(
+                    sprintf("Can not create required temporary directory '%s'!", $this->tmp_dir)
+                );
+            }
+        }
+
         $this->loader = AssetsLoader::getInstance(__DIR__.'/..', 'www', __DIR__);
 /*
 echo '<pre>';
@@ -30,8 +39,8 @@ exit('yo');
         $this->template_engine
             ->guessFromAssetsLoader($this->loader)
             ->setLayoutsDir(__DIR__.'/../www/')
-            ->setToTemplate('setCachePath', __DIR__.'/tmp' )
-            ->setToTemplate('setAssetsCachePath', __DIR__.'/tmp' )
+            ->setToTemplate('setCachePath', $this->tmp_dir )
+            ->setToTemplate('setAssetsCachePath', $this->tmp_dir )
             ->setToView('setIncludePath', __DIR__.'/views' )
             ;
     }
@@ -77,7 +86,7 @@ exit('yo');
             $title = $params['title'];
         }
         $this->template_engine
-            ->templateFallback('getTemplateObject', array('TitleTag'))
+            ->templateFallback('getAssetObject', array('TitleTag'))
             ->add( $title );
 
         $title_block = array(

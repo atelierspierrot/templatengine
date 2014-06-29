@@ -4,7 +4,7 @@ use Library\Helper\Html as HtmlHelper;
 
 // --------------------------------
 // the javascript
-$_template->getTemplateObject('JavascriptTag')->set(array(
+$_template->getAssetObject('JavascriptTag')->set(array(
     "
 $(function() {
     initBacklinks();
