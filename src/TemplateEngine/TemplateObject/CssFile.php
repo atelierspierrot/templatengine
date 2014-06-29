@@ -130,8 +130,13 @@ class CssFile
      */
     public function write($mask = '%s')
     {
+
+
+var_export($this->_cleanStack($this->get(), 'file'));
+
+
         $str='';
-        foreach($this->cleanStack($this->get(), 'file') as $entry) {
+        foreach($this->_cleanStack($this->get(), 'file') as $entry) {
             $tag_attrs = array(
                 'rel'=>'stylesheet',
                 'type'=>'text/css',
@@ -159,7 +164,7 @@ class CssFile
      */
     public function merge()
     {
-        $css_files = $this->cleanStack($this->get(), 'file');
+        $css_files = $this->_cleanStack($this->get(), 'file');
 
         $organized_css = array( 'rest'=>array() );
         foreach($css_files as $_file) {
@@ -173,7 +178,7 @@ class CssFile
         }
 
         foreach($organized_css as $media=>$stack) {
-            $cleaned_stack = $this->extractFromStack( $stack, 'file' );
+            $cleaned_stack = $this->_extractFromStack( $stack, 'file' );
             if (!empty($cleaned_stack))
                 $this->addMerged(
                     $this->mergeStack($cleaned_stack), $media=='rest' ? 'screen' : $media
@@ -249,7 +254,7 @@ class CssFile
     public function writeMerged($mask = '%s')
     {
         $str='';
-        foreach($this->cleanStack( $this->getMerged(), 'file' ) as $entry) {
+        foreach($this->_cleanStack( $this->getMerged(), 'file' ) as $entry) {
             $tag_attrs = array(
                 'rel'=>'stylesheet',
                 'type'=>'text/css',
@@ -269,7 +274,7 @@ class CssFile
      */
     public function minify()
     {
-        $css_files = $this->cleanStack($this->get(), 'file');
+        $css_files = $this->_cleanStack($this->get(), 'file');
 
         $organized_css = array('rest'=>array());
         foreach($css_files as $_file) {
@@ -283,7 +288,7 @@ class CssFile
         }
 
         foreach($organized_css as $media=>$stack) {
-            $cleaned_stack = $this->extractFromStack( $stack, 'file' );
+            $cleaned_stack = $this->_extractFromStack( $stack, 'file' );
             if (!empty($cleaned_stack))
                 $this->addMinified(
                     $this->minifyStack( $cleaned_stack ), $media=='rest' ? 'screen' : $media
@@ -359,7 +364,7 @@ class CssFile
     public function writeMinified($mask = '%s')
     {
         $str='';
-        foreach($this->cleanStack( $this->getMinified(), 'file' ) as $entry) {
+        foreach($this->_cleanStack( $this->getMinified(), 'file' ) as $entry) {
             $tag_attrs = array(
                 'rel'=>'stylesheet',
                 'type'=>'text/css',

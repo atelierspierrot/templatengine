@@ -55,10 +55,10 @@ class TemplateEngineConfig
             // must impelements AssetsManager\Config\ConfiguratorInterface
             'assets-config-class' => null,
             // the AssetsPackage class
-            // must implements AssetsManager\Package\AssetsPackageInterface
+            // must implements AssetsManager\Package\PackageInterface
             'assets-package-class' => 'Assets\Package\Package',
             // the AssetsPreset class
-            // must implements AssetsManager\Package\AssetsPresetInterface
+            // must implements AssetsManager\Package\PresetInterface
             'assets-preset-class' => 'Assets\Package\Preset',
             // the AssetsInstaller class
             // must implements AssetsManager\Composer\Installer\AssetsInstallerInterface

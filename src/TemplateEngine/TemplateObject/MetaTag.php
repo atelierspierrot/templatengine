@@ -108,7 +108,7 @@ class MetaTag
     public function write($mask = '%s')
     {
         $str='';
-        foreach ($this->cleanStack( $this->get(), 'name' ) as $entry) {
+        foreach ($this->_cleanStack( $this->get(), 'name' ) as $entry) {
             $tag_attrs = array();
             if (true===$entry['http-equiv'])
                 $tag_attrs['http-equiv'] = $entry['name'];

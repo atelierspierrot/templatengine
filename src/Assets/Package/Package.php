@@ -12,14 +12,15 @@ namespace Assets\Package;
 use \InvalidArgumentException;
 use \Library\Helper\Directory as DirectoryHelper;
 use \AssetsManager\Loader as AssetsLoader;
-use \AssetsManager\Package\AssetsPackage;
-use \AssetsManager\Package\AbstractAssetsPackage;
+use \AssetsManager\Package\Package as OriginalPackage;
+use \AssetsManager\Package\AbstractPackage;
 use \AssetsManager\Package\Preset;
 
 /**
  * @author  Piero Wbmstr <me@e-piwi.fr>
  */
-class Package extends AssetsPackage
+class Package
+    extends OriginalPackage
 {
 
     /**

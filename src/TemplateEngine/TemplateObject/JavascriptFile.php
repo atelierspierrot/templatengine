@@ -166,7 +166,7 @@ class JavascriptFile
     public function write($mask = '%s')
     {
         $str='';
-        foreach($this->cleanStack( $this->get(), 'path' ) as $entry) {
+        foreach($this->_cleanStack( $this->get(), 'path' ) as $entry) {
             $tag_attrs = array(
                 'type'=>'text/javascript',
                 'src'=>$entry['path']
@@ -187,10 +187,10 @@ class JavascriptFile
      */
     public function merge()
     {
-        $cleaned_stack = $this->cleanStack( $this->get(), 'path' );
+        $cleaned_stack = $this->_cleanStack( $this->get(), 'path' );
         if (!empty($cleaned_stack)) {
             $this->addMerged( 
-                $this->mergeStack( $this->extractFromStack( $cleaned_stack, 'path' ) )
+                $this->mergeStack( $this->_extractFromStack( $cleaned_stack, 'path' ) )
             );
         }
         return $this;
@@ -244,7 +244,7 @@ class JavascriptFile
     public function writeMerged($mask = '%s')
     {
         $str='';
-        foreach($this->cleanStack( $this->getMerged(), 'path' ) as $entry) {
+        foreach($this->_cleanStack( $this->getMerged(), 'path' ) as $entry) {
             $tag_attrs = array(
                 'type'=>'text/javascript',
                 'src'=>$entry['path']
@@ -261,7 +261,7 @@ class JavascriptFile
      */
     public function minify()
     {
-        $cleaned_stack = $this->cleanStack( $this->get(), 'path' );
+        $cleaned_stack = $this->_cleanStack( $this->get(), 'path' );
         if (!empty($cleaned_stack)) {
             foreach($cleaned_stack as $i=>$item) {
                 if (isset($item['minified']) && true===$item['minified']) {
@@ -271,7 +271,7 @@ class JavascriptFile
         }
         if (!empty($cleaned_stack)) {
             $this->addMinified( 
-                $this->minifyStack( $this->extractFromStack( $cleaned_stack, 'path' ) )
+                $this->minifyStack( $this->_extractFromStack( $cleaned_stack, 'path' ) )
             );
         }
         return $this;
@@ -325,7 +325,7 @@ class JavascriptFile
     public function writeMinified($mask = '%s')
     {
         $str='';
-        foreach($this->cleanStack( $this->getMinified(), 'path' ) as $entry) {
+        foreach($this->_cleanStack( $this->getMinified(), 'path' ) as $entry) {
             $tag_attrs = array(
                 'type'=>'text/javascript',
                 'src'=>$entry['path']

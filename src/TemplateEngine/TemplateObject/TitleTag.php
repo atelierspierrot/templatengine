@@ -92,7 +92,7 @@ class TitleTag
     public function write($mask = '%s')
     {
         $str='';
-        foreach($this->cleanStack( $this->get() ) as $entry) {
+        foreach($this->_cleanStack( $this->get() ) as $entry) {
             $str .= (strlen($str)>0 ? $this->separator : '').$entry;
         }
         $title_str = Html::writeHtmlTag( 'title', strip_tags($str) );

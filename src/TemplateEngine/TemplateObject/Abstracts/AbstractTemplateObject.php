@@ -48,7 +48,7 @@ abstract class AbstractTemplateObject
      * @param string $clean_by The variable name to check
      * @return array Return the stack cleaned with only one instance of $clean_by
      */
-    protected function cleanStack(array $stack, $clean_by = null)
+    protected function _cleanStack(array $stack, $clean_by = null)
     {
         $new_stack = array();
         foreach($stack as $_entry) {
@@ -71,7 +71,7 @@ abstract class AbstractTemplateObject
      * @param string $clean_by The variable name to check
      * @return array Return the extracted stack
      */
-    protected function extractFromStack(array $stack, $clean_by)
+    protected function _extractFromStack(array $stack, $clean_by)
     {
         $new_stack = array();
         foreach($stack as $_entry) {
@@ -81,6 +81,19 @@ abstract class AbstractTemplateObject
         }
         return $new_stack;
     }
+
+    /**
+     * Write the Template Object strings ready for template display
+     *
+     * @param string $mask A mask to write each line via "sprintf()"
+     * @return string The string to display fot this template object
+     */
+    abstract public function write($mask = '%s');
+
+    /**
+     * Init the object
+     */
+    abstract public function init();
 
 }
 

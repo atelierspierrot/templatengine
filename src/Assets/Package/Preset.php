@@ -12,25 +12,25 @@ namespace Assets\Package;
 use \InvalidArgumentException;
 use \AssetsManager\Config;
 use \AssetsManager\Package\Preset as OriginalPreset;
-use \AssetsManager\Package\AssetsPackage;
-use \AssetsManager\Package\AssetsPackageInterface;
-use \Assets\Package\TemplateEnginePresetInterface;
+use \AssetsManager\Package\Package as AssetsPackage;
+use \AssetsManager\Package\PackageInterface;
 use \TemplateEngine\TemplateEngine;
 use \TemplateEngine\TemplateObject\Abstracts\AbstractTemplateObject;
 
 /**
  * @author  Piero Wbmstr <me@e-piwi.fr>
  */
-class Preset extends OriginalPreset
+class Preset
+    extends OriginalPreset
 {
 
     /**
      * @param string $preset_name
      * @param array $preset_data
-     * @param \AssetsManager\Package\AssetsPackageInterface $package
+     * @param \AssetsManager\Package\PackageInterface $package
      */
     public function __construct(
-        $preset_name, array $preset_data, AssetsPackageInterface $package
+        $preset_name, array $preset_data, PackageInterface $package
     ) {
         parent::__construct($preset_name, $preset_data, $package);
     }
