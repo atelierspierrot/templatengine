@@ -665,6 +665,15 @@ if (!function_exists('_url'))
     /**
      * URL manager
      *
+     * Warning - Keep in mind that, if `$return` is `false` (this is the default case), the method
+     * will `_echo()` its result. Knowing that:
+     *
+     *      // the following will render a wrong URL:
+     *      echo _url(...)
+     *
+     *      // you'd rather use just:
+     *      _url(...)
+     *
      * @param string/array/null $param A parameter to set, or an array like `param => value` to set in URL
      * @param string/null $value The value of the `$param` argument (if it is a string)
      * @param string/null $url The URL to work on (`self::getRequestUrl()` by default)
