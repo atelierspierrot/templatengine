@@ -39,8 +39,8 @@ exit('yo');
         $this->template_engine
             ->guessFromAssetsLoader($this->loader)
             ->setLayoutsDir(__DIR__.'/../www/')
-            ->setToTemplate('setCachePath', $this->tmp_dir )
-            ->setToTemplate('setAssetsCachePath', $this->tmp_dir )
+            ->setToAssetsLoader('setCachePath', $this->tmp_dir )
+            ->setToAssetsLoader('setAssetsCachePath', $this->tmp_dir )
             ->setToView('setIncludePath', __DIR__.'/views' )
             ;
     }
@@ -86,7 +86,7 @@ exit('yo');
             $title = $params['title'];
         }
         $this->template_engine
-            ->templateFallback('getAssetObject', array('TitleTag'))
+            ->assetsLoaderFallback('getAssetObject', array('TitleTag'))
             ->add( $title );
 
         $title_block = array(

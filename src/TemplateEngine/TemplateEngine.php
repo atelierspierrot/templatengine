@@ -14,7 +14,6 @@ use \Patterns\Commons\Registry;
 use \Patterns\Abstracts\AbstractSingleton;
 use \Library\Helper\Html as HtmlHelper;
 use \AssetsManager\Config;
-use \TemplateEngine\Template;
 use \TemplateEngine\View;
 use \Assets\Loader as AssetsLoader;
 use \Assets\Package\Package;
@@ -31,24 +30,19 @@ class TemplateEngine
 {
 
     /**
-     * @var \TemplateEngine\Template
-     */
-    protected $template;
-
-    /**
      * @var \TemplateEngine\View
      */
-    protected $view;
+    protected $__view;
 
     /**
      * @var \Patterns\Commons\Registry
      */
-    protected $registry;
+    protected $__registry;
 
     /**
      * @var \Assets\Loader
      */
-    protected $assets_loader;
+    protected $__assets_loader;
 
     /**
      * @var int
@@ -110,9 +104,8 @@ class TemplateEngine
     {
         Config::load('Assets\Composer\TemplateEngineConfig');
         $this->setFlags($flags);
-        $this->template     = new Template;
-        $this->view         = new View;
-        $this->registry     = new Registry;
+        $this->__view           = new View;
+        $this->__registry       = new Registry;
         $this->setPageLayout(self::$default_page_layout);
     }
 
@@ -211,7 +204,7 @@ class TemplateEngine
         foreach($structure as $_ref) {
             HtmlHelper::getNewId($_ref, true);
         }
-        $this->registry->setEntry('page_structure', $structure);
+        $this->__registry->setEntry('page_structure', $structure);
         return $this;
     }
 
@@ -222,7 +215,7 @@ class TemplateEngine
      */
     public function getPageStructure()
     {
-        return $this->registry->getEntry('page_structure', array());
+        return $this->__registry->getEntry('page_structure', array());
     }
 
     /**
@@ -233,7 +226,7 @@ class TemplateEngine
      */
     public function setLayoutsDir($path)
     {
-        $this->view->setIncludePath($path);
+        $this->__view->setIncludePath($path);
         return $this;
     }
 
@@ -247,13 +240,13 @@ class TemplateEngine
      * @param   string $var The variable to set
      * @param   mixed $val The value of the variable to set
      * @return  self
-     * @see     \TemplateEngine\TemplateEngine::templateFallback()
+     * @see     \TemplateEngine\TemplateEngine::assetsLoaderFallback()
      */
-    public function setToTemplate($var, $val)
+    public function setToAssetsLoader($var, $val)
     {
         $args = func_get_args();
         array_shift($args);
-        $this->templateFallback($var, $args, 'set');
+        $this->assetsLoaderFallback($var, $args, 'set');
         return $this;
     }
 
@@ -262,13 +255,13 @@ class TemplateEngine
      *
      * @param   string $var The variable to get
      * @return  mixed
-     * @see     \TemplateEngine\TemplateEngine::templateFallback()
+     * @see     \TemplateEngine\TemplateEngine::assetsLoaderFallback()
      */
-    public function getFromTemplate($var)
+    public function getFromAssetsLoader($var)
     {
         $args = func_get_args();
         array_shift($args);
-        return $this->templateFallback($var, $args, 'get');
+        return $this->assetsLoaderFallback($var, $args, 'get');
     }
 
     /**
@@ -280,10 +273,10 @@ class TemplateEngine
      * @return  mixed
      * @see     \TemplateEngine\TemplateEngine::_runFallbackMethod()
      */
-    public function templateFallback($name, array $args = array(), $fallback = null)
+    public function assetsLoaderFallback($name, array $args = array(), $fallback = null)
     {
         return $this->_runFallbackMethod(
-            $this->template, $name, $args, ($this->getFlags() & TemplateEngine::THROW_TEMPLATE_ERRORS), $fallback
+            $this->__assets_loader, $name, $args, ($this->getFlags() & TemplateEngine::THROW_TEMPLATE_ERRORS), $fallback
         );
     }
 
@@ -329,7 +322,7 @@ class TemplateEngine
     public function viewFallback($name, array $args = array(), $fallback = null)
     {
         return $this->_runFallbackMethod(
-            $this->view, $name, $args, ($this->getFlags() & TemplateEngine::THROW_VIEW_ERRORS), $fallback
+            $this->__view, $name, $args, ($this->getFlags() & TemplateEngine::THROW_VIEW_ERRORS), $fallback
         );
     }
 
@@ -341,7 +334,7 @@ class TemplateEngine
      */
     public function useAssetsPreset($preset_name = null)
     {
-        $preset = $this->assets_loader->getPreset($preset_name);
+        $preset = $this->__assets_loader->getPreset($preset_name);
         $preset->load();
     }
 
@@ -352,8 +345,8 @@ class TemplateEngine
      */
     public function includePackagesViewsFunctions()
     {
-        $_assets_package = Package::createFromAssetsLoader($this->assets_loader);
-        foreach ($this->assets_loader->getAssetsDb() as $package=>$config) {
+        $_assets_package = Package::createFromAssetsLoader($this->__assets_loader);
+        foreach ($this->__assets_loader->getAssetsDb() as $package=>$config) {
             if (!empty($config['views_functions'])) {
                 $assets_package = clone $_assets_package;
                 $assets_package->loadFromArray($config);
@@ -378,7 +371,7 @@ class TemplateEngine
      */
     protected function _prepareRendering()
     {
-        $this->view->addDefaultViewParam('_template', $this);
+        $this->__view->addDefaultViewParam('_template', $this);
 
         $structure = $this->getPageStructure();
         if (empty($structure)) {
@@ -416,12 +409,12 @@ class TemplateEngine
     public function render($view, array $params = array(), $display = false, $exit = false)
     {
         $this->_prepareRendering();
-        $this->view->render($view, $params);
+        $this->__view->render($view, $params);
         if ($display) {
-            echo $this->view->getOutput();
+            echo $this->__view->getOutput();
             if ($exit) exit(0);
         } else {
-            return $this->view->getOutput();
+            return $this->__view->getOutput();
         }
     }
 
@@ -437,8 +430,8 @@ class TemplateEngine
     public function display($view, array $params = array(), $exit = false)
     {
         $this->_prepareRendering();
-        $this->view->render($view, $params);
-        echo $this->view->getOutput();
+        $this->__view->render($view, $params);
+        echo $this->__view->getOutput();
         if ($exit) exit(0);
     }
 
@@ -460,12 +453,12 @@ class TemplateEngine
     ) {
         $var = $this->_getFallbackVarname($varname);
 
-        $template_val = $this->_runFallbackMethod($this->template, $var, $arguments, $throw_errors, $fallback);
+        $template_val = $this->_runFallbackMethod($this->__assets_loader, $var, $arguments, $throw_errors, $fallback);
         if (!empty($template_val)) {
             return $template_val;
         }
 
-        $view_val = $this->_runFallbackMethod($this->view, $var, $arguments, $throw_errors, $fallback);
+        $view_val = $this->_runFallbackMethod($this->__view, $var, $arguments, $throw_errors, $fallback);
         if (!empty($view_val)) {
             return $view_val;
         }
@@ -555,7 +548,7 @@ class TemplateEngine
      */
     public function offsetExists($offset)
     {
-        $val = $this->registry->getEntry($offset, null);
+        $val = $this->__registry->getEntry($offset, null);
         if (empty($val)) {
             $val = $this->_getFallbackMethod($offset, array(), false, 'get');
         }
@@ -570,7 +563,7 @@ class TemplateEngine
      */
     public function offsetGet($offset)
     {
-        $val = $this->registry->getEntry($offset, null);
+        $val = $this->__registry->getEntry($offset, null);
         if (empty($val)) {
             $val = $this->_getFallbackMethod($offset, array(), false, 'get');
         }
@@ -586,7 +579,7 @@ class TemplateEngine
      */
     public function offsetSet($offset, $value)
     {
-        $this->registry->setEntry($offset, $value);
+        $this->__registry->setEntry($offset, $value);
     }
     
     /**
@@ -597,7 +590,7 @@ class TemplateEngine
      */
     public function offsetUnset($offset)
     {
-        $this->registry->setEntry($offset, null);
+        $this->__registry->setEntry($offset, null);
     }
 
 // ------------------------
@@ -612,10 +605,10 @@ class TemplateEngine
      */
     public function setAssetsLoader(AssetsLoader $loader)
     {
-        $this->assets_loader = $loader;
-        $assets_db = $this->assets_loader->getAssets();
+        $this->__assets_loader = $loader;
+        $assets_db = $this->__assets_loader->getAssets();
         if (!empty($assets_db)) {
-            $_assets_package = Package::createFromAssetsLoader($this->assets_loader);
+            $_assets_package = Package::createFromAssetsLoader($this->__assets_loader);
             foreach ($assets_db as $package=>$config) {
                 if (!empty($config['views_path'])) {
                     $assets_package = clone $_assets_package;
@@ -639,7 +632,7 @@ class TemplateEngine
      */
     public function getAssetsLoader()
     {
-        return $this->assets_loader;
+        return $this->__assets_loader;
     }
 
     /**
@@ -652,10 +645,10 @@ class TemplateEngine
     {
         $this->setAssetsLoader($loader);
         $this
-            ->setLayoutsDir( $this->assets_loader->getAssetsRealPath() )
-            ->setToTemplate('setWebRootPath', $this->assets_loader->getDocumentRoot() )
-            ->setToView('addDefaultViewParam', 'assets', $this->assets_loader->getAssetsDirectory() )
-            ->setToTemplate('setWebRootPath', $this->assets_loader->getDocumentRoot() )
+            ->setLayoutsDir( $this->__assets_loader->getAssetsRealPath() )
+            ->setToAssetsLoader('setWebRootPath', $this->__assets_loader->getDocumentRoot() )
+            ->setToView('addDefaultViewParam', 'assets', $this->__assets_loader->getAssetsDirectory() )
+            ->setToAssetsLoader('setWebRootPath', $this->__assets_loader->getDocumentRoot() )
             ;
         return $this;
     }
