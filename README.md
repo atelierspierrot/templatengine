@@ -115,7 +115,7 @@ The latest version of this documentation is available online at <http://docs.ate
 
 >    http://github.com/atelierspierrot/templatengine
 
->    Copyleft 2013-2014, Pierre Cassat and contributors
+>    Copyleft 2013-2015, Pierre Cassat and contributors
 
 >    Licensed under the GPL Version 3 license.
 
