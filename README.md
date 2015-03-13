@@ -119,4 +119,4 @@ Author & License
 
 >    Les Ateliers Pierrot - Paris, France
 
->    <www.ateliers-pierrot.fr> - <contact@ateliers-pierrot.fr>
+>    <http://www.ateliers-pierrot.fr/> - <contact@ateliers-pierrot.fr>
