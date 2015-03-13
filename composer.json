@@ -4,7 +4,7 @@
     "description": "A PHP package to build HTML5 views (based on HTML5 Boilerplate layouts).",
     "keywords": [ "template engine", "boilerplate" ],
     "homepage": "http://github.com/atelierspierrot/templatengine",
-    "license": "GPL-3.0",
+    "license": "Apache-2.0",
     "authors": [{
         "name": "Les Ateliers Pierrot & contributors",
         "email": "contact@ateliers-pierrot.fr",
