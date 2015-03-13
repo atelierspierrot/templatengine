@@ -137,7 +137,7 @@ class TemplateEngineAutoloadGenerator
      * @param \Composer\Package\PackageInterface $package
      * @param string $assets_package_dir
      * @param string $vendor_package_dir
-     * @return void
+     * @return array|null
      */
     public function parseComposerExtra(PackageInterface $package, $assets_package_dir, $vendor_package_dir)
     {
