@@ -36,7 +36,7 @@ use \Assets\Package\Preset;
 /**
  * General template builder
  *
- * @author  Piero Wbmstr <me@e-piwi.fr>
+ * @author  piwi <me@e-piwi.fr>
  */
 class TemplateEngine
     extends AbstractSingleton

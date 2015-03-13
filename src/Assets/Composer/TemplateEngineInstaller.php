@@ -29,7 +29,7 @@ use \Composer\Script\Event;
 use \Assets\Composer\TemplateEngineAutoloadGenerator;
 
 /**
- * @author  Piero Wbmstr <me@e-piwi.fr>
+ * @author  piwi <me@e-piwi.fr>
  */
 class TemplateEngineInstaller
 {

@@ -28,7 +28,7 @@ use \Library\Helper\Html;
 use \Library\Helper\ConditionalComment;
 
 /**
- * @author  Piero Wbmstr <me@e-piwi.fr>
+ * @author  piwi <me@e-piwi.fr>
  */
 class MetaTag
     extends AbstractTemplateObject

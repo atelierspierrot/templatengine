@@ -27,7 +27,7 @@ use \Assets\AbstractCompressorAdapter;
 /**
  * Compressor for assets optimization: combination (merge) and minification
  *
- * @author  Piero Wbmstr <me@e-piwi.fr>
+ * @author  piwi <me@e-piwi.fr>
  */
 class Compressor
 {

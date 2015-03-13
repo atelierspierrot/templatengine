@@ -25,7 +25,7 @@ namespace TemplateEngine\TemplateObject\Abstracts;
 use \TemplateEngine\Template;
 
 /**
- * @author  Piero Wbmstr <me@e-piwi.fr>
+ * @author  piwi <me@e-piwi.fr>
  */
 abstract class AbstractTemplateObject
 {

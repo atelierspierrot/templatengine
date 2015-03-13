@@ -30,7 +30,7 @@ use \AssetsManager\Package\AbstractAssetsPackage;
 use \AssetsManager\Package\Preset;
 
 /**
- * @author  Piero Wbmstr <me@e-piwi.fr>
+ * @author  piwi <me@e-piwi.fr>
  */
 class Package extends AssetsPackage
 {

@@ -39,7 +39,7 @@ use \Assets\Composer\TemplateEngineConfig;
 use \Assets\Composer\TemplateEngineInstaller;
 
 /**
- * @author  Piero Wbmstr <me@e-piwi.fr>
+ * @author  piwi <me@e-piwi.fr>
  */
 class TemplateEngineAutoloadGenerator
     extends AutoloadGenerator

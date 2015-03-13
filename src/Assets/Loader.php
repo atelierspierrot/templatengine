@@ -28,7 +28,7 @@ use \Library\Helper\Directory as DirectoryHelper;
 use AssetsManager\Loader as AssetsLoader;
 
 /**
- * @author  Piero Wbmstr <me@e-piwi.fr>
+ * @author  piwi <me@e-piwi.fr>
  */
 class Loader
     extends AssetsLoader

@@ -27,7 +27,7 @@ namespace Assets;
  *
  * All Compressor adapters must extend this abstract class and defines its abstract methods
  *
- * @author  Piero Wbmstr <me@e-piwi.fr>
+ * @author  piwi <me@e-piwi.fr>
  */
 abstract class AbstractCompressorAdapter
 {

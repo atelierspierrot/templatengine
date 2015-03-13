@@ -31,7 +31,7 @@ use \Patterns\Abstracts\AbstractView;
  *
  * Construct the views passing them arguments
  *
- * @author  Piero Wbmstr <me@e-piwi.fr>
+ * @author  piwi <me@e-piwi.fr>
  */
 class View
     extends AbstractView

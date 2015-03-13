@@ -28,8 +28,8 @@ use \TemplateEngine\TemplateObject\Abstracts\FileTemplateObjectInterface;
 use \Library\Helper\Html;
 
 /**
- * @author Piero Wbmstr <me@e-piwi.fr>
- * @todo        Manage files priority
+ * @author  piwi <me@e-piwi.fr>
+ * @TODO    Manage files priority
  */
 class JavascriptFile
     extends AbstractFileTemplateObject

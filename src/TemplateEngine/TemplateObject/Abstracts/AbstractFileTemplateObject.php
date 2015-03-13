@@ -28,7 +28,7 @@ use \TemplateEngine\Template;
 use \Assets\Compressor;
 
 /**
- * @author  Piero Wbmstr <me@e-piwi.fr>
+ * @author  piwi <me@e-piwi.fr>
  */
 abstract class AbstractFileTemplateObject
     extends AbstractTemplateObject

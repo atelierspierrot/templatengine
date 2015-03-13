@@ -25,7 +25,7 @@ namespace TemplateEngine\TemplateObject\Abstracts;
 use \TemplateEngine\TemplateObject\Abstracts\TemplateObjectInterface;
 
 /**
- * @author  Piero Wbmstr <me@e-piwi.fr>
+ * @author  piwi <me@e-piwi.fr>
  */
 interface FileTemplateObjectInterface
     extends TemplateObjectInterface

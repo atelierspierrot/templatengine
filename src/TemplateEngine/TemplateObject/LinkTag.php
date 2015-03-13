@@ -27,7 +27,7 @@ use \TemplateEngine\TemplateObject\Abstracts\TemplateObjectInterface;
 use \Library\Helper\Html;
 
 /**
- * @author  Piero Wbmstr <me@e-piwi.fr>
+ * @author  piwi <me@e-piwi.fr>
  */
 class LinkTag
     extends AbstractTemplateObject
