@@ -2,7 +2,7 @@
 /**
  * This file is part of the TemplateEngine package.
  *
- * Copyright (c) 2013-2015 Pierre Cassat <me@e-piwi.fr> and contributors
+ * Copyright (c) 2013-2016 Pierre Cassat <me@e-piwi.fr> and contributors
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -81,10 +81,10 @@ class View
         $this->setParams($params);
 
         $_params = $this->getParams();
-        $_view = $this->getTemplate( $this->getView() );
+        $_view = $this->getTemplate($this->getView());
         $_template = TemplateEngine::getInstance();
         if ($_view && @file_exists($_view)) {
-/*
+            /*
 echo 'Loading view file "'.$_view.'" passing arguments:';
 echo '<pre>';
 var_dump($_params);
@@ -96,7 +96,7 @@ echo '</pre>';
             ob_start();
             $_template->includePackagesViewsFunctions();
             include $_view;
-            $this->setOutput( ob_get_contents() );
+            $this->setOutput(ob_get_contents());
             ob_end_clean();
         } else {
             throw new TemplateEngineException(
@@ -227,7 +227,7 @@ echo '</pre>';
         } elseif (false!==$path_rp = realpath($path)) {
             return $path_rp;
         } else {
-            foreach($this->getIncludePath() as $_path) {
+            foreach ($this->getIncludePath() as $_path) {
                 $_f = DirectoryHelper::slashDirname($_path).$path;
                 if (file_exists($_f)) {
                     return $_f;
@@ -236,7 +236,4 @@ echo '</pre>';
         }
         return null;
     }
-
 }
-
-// Endfile

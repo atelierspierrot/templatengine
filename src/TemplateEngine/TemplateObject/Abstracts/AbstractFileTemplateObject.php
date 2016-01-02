@@ -2,7 +2,7 @@
 /**
  * This file is part of the TemplateEngine package.
  *
- * Copyright (c) 2013-2015 Pierre Cassat <me@e-piwi.fr> and contributors
+ * Copyright (c) 2013-2016 Pierre Cassat <me@e-piwi.fr> and contributors
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -57,8 +57,8 @@ abstract class AbstractFileTemplateObject
         $this->__template = $_tpl;
         $this->__compressor = new Compressor;
         $this->__compressor
-            ->setWebRootPath( $this->__template->getWebRootPath() )
-            ->setDestinationDir( $this->__template->getAssetsCachePath() );
+            ->setWebRootPath($this->__template->getWebRootPath())
+            ->setDestinationDir($this->__template->getAssetsCachePath());
         $this->init();
     }
 
@@ -73,13 +73,15 @@ abstract class AbstractFileTemplateObject
     protected function mergeStack(array $stack, $silent = true, $direct_output = false)
     {
         $this->__compressor->reset();
-        if (false===$silent)
+        if (false===$silent) {
             $this->__compressor->setSilent(false);
-        if (true===$direct_output)
+        }
+        if (true===$direct_output) {
             $this->__compressor->setDirectOutput(true);
+        }
 
         return $this->__compressor
-            ->setFilesStack( $stack )
+            ->setFilesStack($stack)
             ->merge()
             ->getDestinationWebPath();
     }
@@ -95,17 +97,16 @@ abstract class AbstractFileTemplateObject
     protected function minifyStack(array $stack, $silent = true, $direct_output = false)
     {
         $this->__compressor->reset();
-        if (false===$silent)
+        if (false===$silent) {
             $this->__compressor->setSilent(false);
-        if (true===$direct_output)
+        }
+        if (true===$direct_output) {
             $this->__compressor->setDirectOutput(true);
+        }
 
         return $this->__compressor
-            ->setFilesStack( $stack )
+            ->setFilesStack($stack)
             ->minify()
             ->getDestinationWebPath();
     }
-
 }
-
-// Endfile

@@ -2,7 +2,7 @@
 /**
  * This file is part of the TemplateEngine package.
  *
- * Copyright (c) 2013-2015 Pierre Cassat <me@e-piwi.fr> and contributors
+ * Copyright (c) 2013-2016 Pierre Cassat <me@e-piwi.fr> and contributors
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -102,14 +102,18 @@ class Compressor
     public function __construct(array $files_stack = array(), $destination_file = null, $destination_dir = null, $adapter_type = null)
     {
         $this->reset(true);
-        if (!empty($files_stack))
-            $this->setFilesStack( $files_stack );
-        if (!empty($destination_file))
-            $this->setDestinationFile( $destination_file );
-        if (!empty($destination_dir))
-            $this->setDestinationDir( $destination_dir );
-        if (!empty($adapter_type))
-            $this->setAdapterType( $adapter_type );
+        if (!empty($files_stack)) {
+            $this->setFilesStack($files_stack);
+        }
+        if (!empty($destination_file)) {
+            $this->setDestinationFile($destination_file);
+        }
+        if (!empty($destination_dir)) {
+            $this->setDestinationDir($destination_dir);
+        }
+        if (!empty($adapter_type)) {
+            $this->setAdapterType($adapter_type);
+        }
     }
 
     /**
@@ -119,12 +123,15 @@ class Compressor
      */
     protected function init()
     {
-        if (true===$this->isInited) return;
+        if (true===$this->isInited) {
+            return;
+        }
 
         $this->_cleanFilesStack();
 
-        if (empty($this->__adapter_type))
+        if (empty($this->__adapter_type)) {
             $this->_guessAdapterType();
+        }
 
         if (!empty($this->__adapter_type)) {
             if (class_exists($this->__adapter_type)) {
@@ -378,13 +385,13 @@ class Compressor
             $this->init();
 
             $_fs = array();
-            foreach($this->files_stack as $_file) {
+            foreach ($this->files_stack as $_file) {
                 $_fs[] = $_file->getFilename();
             }
             if (!empty($_fs)) {
                 sort($_fs);
                 $this->setDestinationFile(
-                    md5( join('', $_fs) )
+                    md5(join('', $_fs))
                     .'_'.$this->__adapter_action
                     .'.'.$this->__adapter->file_extension
                 );
@@ -510,9 +517,10 @@ class Compressor
      */
     public function fileExists()
     {
-        if (empty($this->destination_file))
+        if (empty($this->destination_file)) {
             $this->guessDestinationFilename();
-        return file_exists( $this->getDestinationRealPath() );
+        }
+        return file_exists($this->getDestinationRealPath());
     }
 
     /**
@@ -524,11 +532,12 @@ class Compressor
     {
         if ($this->fileExists()) {
             $this->_cleanFilesStack();
-            $_dest = new \SplFileInfo( $this->getDestinationRealPath() );
+            $_dest = new \SplFileInfo($this->getDestinationRealPath());
             if (!empty($this->files_stack)) {
-                foreach($this->files_stack as $_file) {
-                    if ($_file->getMTime() > $_dest->getMTime())
+                foreach ($this->files_stack as $_file) {
+                    if ($_file->getMTime() > $_dest->getMTime()) {
                         return true;
+                    }
                 }
                 return false;
             }
@@ -549,9 +558,9 @@ class Compressor
     {
         $files = $this->getFilesStack();
         if (!empty($files)) {
-            foreach($files as $_file) {
+            foreach ($files as $_file) {
                 $this->addContent(
-                    file_get_contents( $_file->getRealPath() ),
+                    file_get_contents($_file->getRealPath()),
                     $_file->getPathname()
                 );
             }
@@ -569,8 +578,9 @@ class Compressor
         $this->_cleanFilesStack();
         $this->init();
 
-        if (empty($this->destination_file) && false===$this->direct_output)
+        if (empty($this->destination_file) && false===$this->direct_output) {
             $this->guessDestinationFilename();
+        }
 
         if (!method_exists($this->__adapter, $this->__adapter_action)) {
             throw new \RuntimeException(
@@ -580,7 +590,7 @@ class Compressor
 
         if (false===$this->direct_output) {
             if (!$this->mustRefresh()) {
-                $this->output = file_get_contents( $this->getDestinationRealPath() );
+                $this->output = file_get_contents($this->getDestinationRealPath());
                 return $this;
             }
         }
@@ -588,7 +598,7 @@ class Compressor
         $this->prepare();
         $stack = $this->getContents();
         $contents = array();
-        foreach($stack as $_name=>$_content) {
+        foreach ($stack as $_name=>$_content) {
             $contents[] = '';
             $contents[] = $this->__adapter->buildComment($_name);
             $contents[] = $this->__adapter->{$this->__adapter_action}($_content);
@@ -648,10 +658,12 @@ class Compressor
      */
     protected function _cleanFilesStack()
     {
-        if (true===$this->isCleaned_files_stack) return;
+        if (true===$this->isCleaned_files_stack) {
+            return;
+        }
 
         $new_stack = array();
-        foreach($this->files_stack as $_file) {
+        foreach ($this->files_stack as $_file) {
             if (is_object($_file) && ($_file instanceof \SplFileInfo)) {
                 $new_stack[] = $_file;
             } elseif (is_string($_file) && @file_exists($_file)) {
@@ -678,7 +690,7 @@ class Compressor
         if (!empty($this->files_stack)) {
             $_fs = $this->files_stack;
             $_file = array_shift($_fs);
-            $this->setAdapterType( $_file->getExtension() );
+            $this->setAdapterType($_file->getExtension());
             return true;
         } elseif (false===$this->silent) {
             throw new \RuntimeException(
@@ -700,8 +712,9 @@ class Compressor
      */
     protected function _writeDestinationFile()
     {
-        if (empty($this->destination_file))
+        if (empty($this->destination_file)) {
             $this->guessDestinationFilename();
+        }
 
         $content = $this->_getHeaderComment()."\n".$this->output;
         $dest_file = $this->getDestinationRealPath();
@@ -729,7 +742,4 @@ class Compressor
             sprintf('Generated by %s class on %s at %s', __CLASS__, date('Y-m-d'), date('H:i'))
         );
     }
-
 }
-
-// Endfile

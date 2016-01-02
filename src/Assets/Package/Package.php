@@ -2,7 +2,7 @@
 /**
  * This file is part of the TemplateEngine package.
  *
- * Copyright (c) 2013-2015 Pierre Cassat <me@e-piwi.fr> and contributors
+ * Copyright (c) 2013-2016 Pierre Cassat <me@e-piwi.fr> and contributors
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -227,7 +227,7 @@ class Package extends AssetsPackage
      * This is the data stored in the `Loader\Assets::ASSETS_DB_FILENAME`.
      *
      * @return array
-     */    
+     */
     public function getArray()
     {
         $package = array(
@@ -251,8 +251,8 @@ class Package extends AssetsPackage
      */
      public function loadFromArray(array $entries)
      {
-        foreach ($entries as $var=>$val) {
-            switch ($var) {
+         foreach ($entries as $var=>$val) {
+             switch ($var) {
                 case 'name': $this->setName($val); break;
                 case 'version': $this->setVersion($val); break;
                 case 'relative_path': $this->setRelativePath($val); break;
@@ -264,10 +264,7 @@ class Package extends AssetsPackage
                 case 'views_path': $this->setViewsPaths(is_array($val) ? $val : array($val), null); break;
                 case 'views_functions': $this->setViewsFunctionsPaths(is_array($val) ? $val : array($val), null); break;
             }
-        }
-        return $this;
+         }
+         return $this;
      }
-
 }
-
-// Endfile

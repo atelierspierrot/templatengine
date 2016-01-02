@@ -2,7 +2,7 @@
 /**
  * This file is part of the TemplateEngine package.
  *
- * Copyright (c) 2013-2015 Pierre Cassat <me@e-piwi.fr> and contributors
+ * Copyright (c) 2013-2016 Pierre Cassat <me@e-piwi.fr> and contributors
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ class CssTag
     implements TemplateObjectInterface
 {
 
-// ------------------------
+    // ------------------------
 // TemplateObjectInterface
 // ------------------------
 
@@ -66,7 +66,7 @@ class CssTag
     public function add($tag_content)
     {
         if (!empty($tag_content)) {
-            $this->__template->registry->addEntry( $tag_content, 'css_entries');
+            $this->__template->registry->addEntry($tag_content, 'css_entries');
         }
         return $this;
     }
@@ -81,8 +81,8 @@ class CssTag
     public function set(array $tags)
     {
         if (!empty($tags)) {
-            foreach($tags as $_tag) {
-                $this->add( $_tag );
+            foreach ($tags as $_tag) {
+                $this->add($_tag);
             }
         }
         return $this;
@@ -95,7 +95,7 @@ class CssTag
      */
     public function get()
     {
-        return $this->__template->registry->getEntry( 'css_entries', false, array() );
+        return $this->__template->registry->getEntry('css_entries', false, array());
     }
     
     /**
@@ -107,13 +107,10 @@ class CssTag
     public function write($mask = '%s')
     {
         $content='';
-        foreach($this->get() as $entry) {
+        foreach ($this->get() as $entry) {
             $content .= $entry."\n";
         }
-        $str = sprintf($mask, Html::writeHtmlTag( 'style', $content ));
+        $str = sprintf($mask, Html::writeHtmlTag('style', $content));
         return $str;
     }
-
 }
-
-// Endfile

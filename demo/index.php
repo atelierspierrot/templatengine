@@ -6,7 +6,7 @@
  * `E_ALL & ~E_STRICT` => for hard dev in PHP5.4 avoiding strict warnings
  * `E_ALL & ~E_NOTICE & ~E_STRICT` => classic setting
  */
-@ini_set('display_errors','1'); @error_reporting(E_ALL);
+@ini_set('display_errors', '1'); @error_reporting(E_ALL);
 //@ini_set('display_errors','1'); @error_reporting(E_ALL & ~E_STRICT);
 //@ini_set('display_errors','1'); @error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT);
 
@@ -31,4 +31,3 @@ $ctrl->distribute();
 
 
 exit('ERROR IN RENDERING !');
-// Endfile

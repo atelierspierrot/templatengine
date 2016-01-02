@@ -2,7 +2,7 @@
 /**
  * This file is part of the TemplateEngine package.
  *
- * Copyright (c) 2013-2015 Pierre Cassat <me@e-piwi.fr> and contributors
+ * Copyright (c) 2013-2016 Pierre Cassat <me@e-piwi.fr> and contributors
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,7 +36,7 @@ interface FileTemplateObjectInterface
      * @param mixed $arg
      * @return self Must return the object itself for method chaining
      */
-    public function addIfExists( $arg );
+    public function addIfExists($arg);
 
     /**
      * Merge the files if possible and loads them in files_merged stack
@@ -49,14 +49,14 @@ interface FileTemplateObjectInterface
      * @param mixed $arg
      * @return self Must return the object itself for method chaining
      */
-    public function addMerged( $arg );
+    public function addMerged($arg);
 
     /**
      * Set a stack of merged files
      * @param mixed $arg
      * @return self Must return the object itself for method chaining
      */
-    public function setMerged( array $arg );
+    public function setMerged(array $arg);
 
     /**
      * Get the stack of merged files
@@ -68,7 +68,7 @@ interface FileTemplateObjectInterface
      * @param string $mask A mask to write each line via "sprintf()"
      * @return string Must return a string ready to write
      */
-    public function writeMerged( $mask='%s' );
+    public function writeMerged($mask='%s');
 
     /**
      * Minify the files if possible and loads them in files_minified stack
@@ -81,14 +81,14 @@ interface FileTemplateObjectInterface
      * @param mixed $arg
      * @return self Must return the object itself for method chaining
      */
-    public function addMinified( $arg );
+    public function addMinified($arg);
 
     /**
      * Set a stack of minified files
      * @param mixed $arg
      * @return self Must return the object itself for method chaining
      */
-    public function setMinified( array $arg );
+    public function setMinified(array $arg);
 
     /**
      * Get the stack of minified files
@@ -100,8 +100,5 @@ interface FileTemplateObjectInterface
      * @param string $mask A mask to write each line via "sprintf()"
      * @return string Must return a string ready to write
      */
-    public function writeMinified( $mask='%s' );
-
+    public function writeMinified($mask='%s');
 }
-
-// Endfile

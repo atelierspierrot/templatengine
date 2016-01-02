@@ -2,7 +2,7 @@
 /**
  * This file is part of the TemplateEngine package.
  *
- * Copyright (c) 2013-2015 Pierre Cassat <me@e-piwi.fr> and contributors
+ * Copyright (c) 2013-2016 Pierre Cassat <me@e-piwi.fr> and contributors
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,7 +35,7 @@ class MetaTag
     implements TemplateObjectInterface
 {
 
-// ------------------------
+    // ------------------------
 // TemplateObjectInterface
 // ------------------------
 
@@ -69,7 +69,7 @@ class MetaTag
      */
     public function add($name, $content = '', $http_equiv = false, $condition = null)
     {
-        $this->__template->registry->addEntry( array(
+        $this->__template->registry->addEntry(array(
             'name'=>$name,
             'content'=>$content,
             'http-equiv'=>$http_equiv,
@@ -88,7 +88,7 @@ class MetaTag
     public function set(array $tags)
     {
         if (!empty($tags)) {
-            foreach($tags as $_tag) {
+            foreach ($tags as $_tag) {
                 if (is_array($_tag) && isset($_tag['name']) && isset($_tag['content'])) {
                     $this->add(
                         $_tag['name'],
@@ -109,7 +109,7 @@ class MetaTag
      */
     public function get()
     {
-        return $this->__template->registry->getEntry( 'meta_tags', false, array() );
+        return $this->__template->registry->getEntry('meta_tags', false, array());
     }
 
     /**
@@ -121,12 +121,13 @@ class MetaTag
     public function write($mask = '%s')
     {
         $str='';
-        foreach ($this->cleanStack( $this->get(), 'name' ) as $entry) {
+        foreach ($this->cleanStack($this->get(), 'name') as $entry) {
             $tag_attrs = array();
-            if (true===$entry['http-equiv'])
+            if (true===$entry['http-equiv']) {
                 $tag_attrs['http-equiv'] = $entry['name'];
-            else
+            } else {
                 $tag_attrs['name'] = $entry['name'];
+            }
             $tag_attrs['content'] = $entry['content'];
             $tag = Html::writeHtmlTag('meta', null, $tag_attrs, true);
             if (isset($entry['condition']) && !empty($entry['condition'])) {
@@ -136,7 +137,4 @@ class MetaTag
         }
         return $str;
     }
-
 }
-
-// Endfile

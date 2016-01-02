@@ -2,7 +2,7 @@
 /**
  * This file is part of the TemplateEngine package.
  *
- * Copyright (c) 2013-2015 Pierre Cassat <me@e-piwi.fr> and contributors
+ * Copyright (c) 2013-2016 Pierre Cassat <me@e-piwi.fr> and contributors
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -153,8 +153,8 @@ class JavascriptFile
     public function set(array $files)
     {
         if (!empty($files)) {
-            foreach($files as $_file) {
-                $this->add( $_file );
+            foreach ($files as $_file) {
+                $this->add($_file);
             }
         }
         return $this;
@@ -167,7 +167,7 @@ class JavascriptFile
      */
     public function get()
     {
-        return $this->registry->getEntry( 'javascript_files', false, array() );
+        return $this->registry->getEntry('javascript_files', false, array());
     }
     
     /**
@@ -179,12 +179,12 @@ class JavascriptFile
     public function write($mask = '%s')
     {
         $str='';
-        foreach($this->cleanStack( $this->get(), 'path' ) as $entry) {
+        foreach ($this->cleanStack($this->get(), 'path') as $entry) {
             $tag_attrs = array(
                 'type'=>'text/javascript',
                 'src'=>$entry['path']
             );
-            $str .= sprintf($mask, Html::writeHtmlTag( 'script', null, $tag_attrs ));
+            $str .= sprintf($mask, Html::writeHtmlTag('script', null, $tag_attrs));
         }
         return $str;
     }
@@ -200,10 +200,10 @@ class JavascriptFile
      */
     public function merge()
     {
-        $cleaned_stack = $this->cleanStack( $this->get(), 'path' );
+        $cleaned_stack = $this->cleanStack($this->get(), 'path');
         if (!empty($cleaned_stack)) {
-            $this->addMerged( 
-                $this->mergeStack( $this->extractFromStack( $cleaned_stack, 'path' ) )
+            $this->addMerged(
+                $this->mergeStack($this->extractFromStack($cleaned_stack, 'path'))
             );
         }
         return $this;
@@ -234,8 +234,8 @@ class JavascriptFile
     public function setMerged(array $files)
     {
         if (!empty($files)) {
-            foreach($files as $_file) {
-                $this->addMerged( $_file );
+            foreach ($files as $_file) {
+                $this->addMerged($_file);
             }
         }
         return $this;
@@ -248,7 +248,7 @@ class JavascriptFile
      */
     public function getMerged()
     {
-        return $this->registry->getEntry( 'javascript_merged_files', false, array() );
+        return $this->registry->getEntry('javascript_merged_files', false, array());
     }
     
     /**
@@ -257,12 +257,12 @@ class JavascriptFile
     public function writeMerged($mask = '%s')
     {
         $str='';
-        foreach($this->cleanStack( $this->getMerged(), 'path' ) as $entry) {
+        foreach ($this->cleanStack($this->getMerged(), 'path') as $entry) {
             $tag_attrs = array(
                 'type'=>'text/javascript',
                 'src'=>$entry['path']
             );
-            $str .= sprintf($mask, Html::writeHtmlTag( 'script', null, $tag_attrs ));
+            $str .= sprintf($mask, Html::writeHtmlTag('script', null, $tag_attrs));
         }
         return $str;
     }
@@ -274,17 +274,17 @@ class JavascriptFile
      */
     public function minify()
     {
-        $cleaned_stack = $this->cleanStack( $this->get(), 'path' );
+        $cleaned_stack = $this->cleanStack($this->get(), 'path');
         if (!empty($cleaned_stack)) {
-            foreach($cleaned_stack as $i=>$item) {
+            foreach ($cleaned_stack as $i=>$item) {
                 if (isset($item['minified']) && true===$item['minified']) {
                     unset($cleaned_stack[$i]);
                 }
             }
         }
         if (!empty($cleaned_stack)) {
-            $this->addMinified( 
-                $this->minifyStack( $this->extractFromStack( $cleaned_stack, 'path' ) )
+            $this->addMinified(
+                $this->minifyStack($this->extractFromStack($cleaned_stack, 'path'))
             );
         }
         return $this;
@@ -315,8 +315,8 @@ class JavascriptFile
     public function setMinified(array $files)
     {
         if (!empty($files)) {
-            foreach($files as $_file) {
-                $this->addMinified( $_file );
+            foreach ($files as $_file) {
+                $this->addMinified($_file);
             }
         }
         return $this;
@@ -329,7 +329,7 @@ class JavascriptFile
      */
     public function getMinified()
     {
-        return $this->registry->getEntry( 'javascript_minified_files', false, array() );
+        return $this->registry->getEntry('javascript_minified_files', false, array());
     }
     
     /**
@@ -338,16 +338,13 @@ class JavascriptFile
     public function writeMinified($mask = '%s')
     {
         $str='';
-        foreach($this->cleanStack( $this->getMinified(), 'path' ) as $entry) {
+        foreach ($this->cleanStack($this->getMinified(), 'path') as $entry) {
             $tag_attrs = array(
                 'type'=>'text/javascript',
                 'src'=>$entry['path']
             );
-            $str .= sprintf($mask, Html::writeHtmlTag( 'script', null, $tag_attrs ));
+            $str .= sprintf($mask, Html::writeHtmlTag('script', null, $tag_attrs));
         }
         return $str;
     }
-
 }
-
-// Endfile

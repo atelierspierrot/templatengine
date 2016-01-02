@@ -2,7 +2,7 @@
 /**
  * This file is part of the TemplateEngine package.
  *
- * Copyright (c) 2013-2015 Pierre Cassat <me@e-piwi.fr> and contributors
+ * Copyright (c) 2013-2016 Pierre Cassat <me@e-piwi.fr> and contributors
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -221,7 +221,7 @@ class TemplateEngine
      */
     public function setPageStructure(array $structure)
     {
-        foreach($structure as $_ref) {
+        foreach ($structure as $_ref) {
             HtmlHelper::getNewId($_ref, true);
         }
         $this->registry->setEntry('page_structure', $structure);
@@ -397,7 +397,6 @@ class TemplateEngine
         if (empty($structure)) {
             $this->setPageStructure(self::$default_page_structure);
         }
-
     }
 
     /**
@@ -412,7 +411,9 @@ class TemplateEngine
      */
     public function renderLayout($view = null, array $params = array(), $display = false, $exit = false)
     {
-        if (is_null($view)) $view = $this->getPageLayout();
+        if (is_null($view)) {
+            $view = $this->getPageLayout();
+        }
         return $this->render($view, $params, $display, $exit);
     }
 
@@ -432,7 +433,9 @@ class TemplateEngine
         $this->view->render($view, $params);
         if ($display) {
             echo $this->view->getOutput();
-            if ($exit) exit(0);
+            if ($exit) {
+                exit(0);
+            }
         } else {
             return $this->view->getOutput();
         }
@@ -452,7 +455,9 @@ class TemplateEngine
         $this->_prepareRendering();
         $this->view->render($view, $params);
         echo $this->view->getOutput();
-        if ($exit) exit(0);
+        if ($exit) {
+            exit(0);
+        }
     }
 
 // ------------------------
@@ -494,10 +499,12 @@ class TemplateEngine
      */
     protected function _getFallbackVarname($name)
     {
-        if (false===strpos($name, '_')) return $name;
+        if (false===strpos($name, '_')) {
+            return $name;
+        }
         $parts = explode('_', $name);
         $str = '';
-        foreach($parts as $_part) {
+        foreach ($parts as $_part) {
             $str .= strlen($str) ? ucfirst($_part) : $_part;
         }
         return $str;
@@ -520,14 +527,16 @@ class TemplateEngine
             try {
                 $object->{$varname} = $args;
                 return $object;
-            } catch(\Exception $e) {}
+            } catch (\Exception $e) {
+            }
         }
 
         if (method_exists($object, $varname)) {
             try {
                 $val = call_user_func_array(array($object, $varname), $arguments);
                 return $val;
-            } catch(\Exception $e) {}
+            } catch (\Exception $e) {
+            }
         }
 
         if (!empty($fallback)) {
@@ -536,7 +545,8 @@ class TemplateEngine
                 try {
                     $val = call_user_func_array(array($object, $_meth), $arguments);
                     return $val;
-                } catch(\Exception $e) {}
+                } catch (\Exception $e) {
+                }
             }
         }
 
@@ -662,10 +672,10 @@ class TemplateEngine
     {
         $this->setAssetsLoader($loader);
         $this
-            ->setLayoutsDir( $this->assets_loader->getAssetsRealPath() )
-            ->setToTemplate('setWebRootPath', $this->assets_loader->getAssetsWebPath() )
-            ->setToView('addDefaultViewParam', 'assets', $this->assets_loader->getAssetsWebPath() )
-            ->setToTemplate('setWebRootPath', $this->assets_loader->getDocumentRoot() )
+            ->setLayoutsDir($this->assets_loader->getAssetsRealPath())
+            ->setToTemplate('setWebRootPath', $this->assets_loader->getAssetsWebPath())
+            ->setToView('addDefaultViewParam', 'assets', $this->assets_loader->getAssetsWebPath())
+            ->setToTemplate('setWebRootPath', $this->assets_loader->getDocumentRoot())
             ;
         return $this;
     }
@@ -708,7 +718,7 @@ class TemplateEngine
             try {
                 $val = call_user_func_array($value, $arguments);
                 return $val;
-            } catch(Exception $e) {
+            } catch (Exception $e) {
                 self::__error(sprintf('Closure error: "%s"!', $e->getMessage()), $e->getFile(), $e->getLine());
             }
         } else {
@@ -733,16 +743,13 @@ class TemplateEngine
                 return implode($glue, $value);
             }
             return get_class($value);
-        } elseif(is_array($value)) {
+        } elseif (is_array($value)) {
             return implode($glue, $value);
-        } elseif(is_bool($value)) {
+        } elseif (is_bool($value)) {
             return (true===$value ? 'true' : 'false');
-        } elseif(is_callable($value)) {
+        } elseif (is_callable($value)) {
             return self::__closurable($value);
         }
         return (string) $value;
     }
-
 }
-
-// Endfile

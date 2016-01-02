@@ -2,7 +2,7 @@
 /**
  * This file is part of the TemplateEngine package.
  *
- * Copyright (c) 2013-2015 Pierre Cassat <me@e-piwi.fr> and contributors
+ * Copyright (c) 2013-2016 Pierre Cassat <me@e-piwi.fr> and contributors
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ class TitleTag
     implements TemplateObjectInterface
 {
 
-// ------------------------
+    // ------------------------
 // TemplateObjectInterface
 // ------------------------
 
@@ -65,7 +65,7 @@ class TitleTag
      */
     public function add($title)
     {
-        $this->__template->registry->addEntry( $title, 'header_title');
+        $this->__template->registry->addEntry($title, 'header_title');
         return $this;
     }
 
@@ -79,8 +79,8 @@ class TitleTag
     public function set(array $strs)
     {
         if (!empty($strs)) {
-            foreach($strs as $_str) {
-                $this->add( $_str );
+            foreach ($strs as $_str) {
+                $this->add($_str);
             }
         }
         return $this;
@@ -93,7 +93,7 @@ class TitleTag
      */
     public function get()
     {
-        return $this->__template->registry->getEntry( 'header_title', false, array() );
+        return $this->__template->registry->getEntry('header_title', false, array());
     }
 
     /**
@@ -105,10 +105,10 @@ class TitleTag
     public function write($mask = '%s')
     {
         $str='';
-        foreach($this->cleanStack( $this->get() ) as $entry) {
+        foreach ($this->cleanStack($this->get()) as $entry) {
             $str .= (strlen($str)>0 ? $this->separator : '').$entry;
         }
-        $title_str = Html::writeHtmlTag( 'title', strip_tags($str) );
+        $title_str = Html::writeHtmlTag('title', strip_tags($str));
         return sprintf($mask, $title_str);
     }
 
@@ -129,7 +129,4 @@ class TitleTag
         $this->separator = $str;
         return $this;
     }
-
 }
-
-// Endfile

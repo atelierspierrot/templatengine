@@ -2,7 +2,7 @@
 /**
  * This file is part of the TemplateEngine package.
  *
- * Copyright (c) 2013-2015 Pierre Cassat <me@e-piwi.fr> and contributors
+ * Copyright (c) 2013-2016 Pierre Cassat <me@e-piwi.fr> and contributors
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,14 +44,14 @@ interface TemplateObjectInterface
      * @param mixed $arg
      * @return self Must return the object itself for method chaining
      */
-    public function add( $arg );
+    public function add($arg);
 
     /**
      * Set a stack of entries
      * @param mixed $arg
      * @return self Must return the object itself for method chaining
      */
-    public function set( array $arg );
+    public function set(array $arg);
 
     /**
      * Get the stack of entries
@@ -63,8 +63,5 @@ interface TemplateObjectInterface
      * @param string $mask A mask to write each line via "sprintf()"
      * @return string Must return a string ready to write
      */
-    public function write( $mask='%s' );
-
+    public function write($mask='%s');
 }
-
-// Endfile

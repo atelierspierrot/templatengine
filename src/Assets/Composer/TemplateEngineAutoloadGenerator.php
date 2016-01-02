@@ -2,7 +2,7 @@
 /**
  * This file is part of the TemplateEngine package.
  *
- * Copyright (c) 2013-2015 Pierre Cassat <me@e-piwi.fr> and contributors
+ * Copyright (c) 2013-2016 Pierre Cassat <me@e-piwi.fr> and contributors
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -102,7 +102,9 @@ class TemplateEngineAutoloadGenerator
         $package_map = $this->buildPackageMap($this->_composer->getInstallationManager(), $this->_package, $local_repo->getPackages());
 
         foreach ($package_map as $i=>$package) {
-            if ($i===0) { continue; }
+            if ($i===0) {
+                continue;
+            }
             $package_object = $package[0];
             $package_install_path = $package[1];
             if (empty($package_install_path)) {
@@ -141,7 +143,9 @@ class TemplateEngineAutoloadGenerator
     public function parseComposerExtra(PackageInterface $package, $assets_package_dir, $vendor_package_dir)
     {
         $data = $this->_autoloader->getAssetsInstaller()->parseComposerExtra($package, $assets_package_dir);
-        if (is_null($data)) $data = array();
+        if (is_null($data)) {
+            $data = array();
+        }
         $extra = $package->getExtra();
         $assets_package_dir = rtrim($assets_package_dir, '/') . '/';
         if (strlen($vendor_package_dir)) {
@@ -189,7 +193,4 @@ class TemplateEngineAutoloadGenerator
 */
         return !empty($data) ? $data : null;
     }
-
 }
-
-// Endfile

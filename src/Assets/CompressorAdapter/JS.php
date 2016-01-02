@@ -2,7 +2,7 @@
 /**
  * This file is part of the TemplateEngine package.
  *
- * Copyright (c) 2013-2015 Pierre Cassat <me@e-piwi.fr> and contributors
+ * Copyright (c) 2013-2016 Pierre Cassat <me@e-piwi.fr> and contributors
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ class JS
 
     public $file_extension = 'js';
 
-    public static function merge( $input )
+    public static function merge($input)
     {
         $input = preg_replace('!/\*.*?\*/!s', '', $input);
         $output = trim($input);
@@ -65,14 +65,17 @@ class JS
                         $i = 1 + strpos($input, '*/', $i);
                         continue 2;
                     } elseif (!count($inQuotes) && $nextChr == '/') {
-                        if (strpos($input, "\n", $i))
+                        if (strpos($input, "\n", $i)) {
                             $i = strpos($input, "\n", $i);
-                        else
+                        } else {
                             $i = strlen($input);
+                        }
                         continue 2;
                     } elseif (!count($inQuotes)) {
                         $eolPos = strpos($input, "\n", $i);
-                        if ($eolPos===false) $eolPos = $inputs_count;
+                        if ($eolPos===false) {
+                            $eolPos = $inputs_count;
+                        }
                         $eol = substr($input, $i, $eolPos-$i);
                         if (!preg_match('`^(/.+(?<=\\\/)/(?!/)[gim]*)[^gim]`U', $eol, $m)) {
                             preg_match('`^(/.+(?<!/)/(?!/)[gim]*)[^gim]`U', $eol, $m);
@@ -101,7 +104,7 @@ class JS
                 case "\t":
                 case "\n":
                     if (!count($inQuotes)) {
-                        if (   strstr("{$noSpacesAround} \t\n", $nextChr)
+                        if (strstr("{$noSpacesAround} \t\n", $nextChr)
                             || strstr("{$noSpacesAround} \t\n", $prevChr)
                         ) {
                             continue 2;
@@ -127,7 +130,4 @@ class JS
     {
         return sprintf('/* %s */', $str);
     }
-
 }
-
-// Endfile

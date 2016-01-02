@@ -4,8 +4,12 @@ use Library\Helper\Html as HtmlHelper;
 
 // --------------------------------
 // the content
-if (empty($content)) $content = 'Test title';
-if (!is_array($content)) $content = array($content);
+if (empty($content)) {
+    $content = 'Test title';
+}
+if (!is_array($content)) {
+    $content = array($content);
+}
 
 ?>
 <header role="banner">

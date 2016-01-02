@@ -2,7 +2,7 @@
 /**
  * This file is part of the TemplateEngine package.
  *
- * Copyright (c) 2013-2015 Pierre Cassat <me@e-piwi.fr> and contributors
+ * Copyright (c) 2013-2016 Pierre Cassat <me@e-piwi.fr> and contributors
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ class LinkTag
     implements TemplateObjectInterface
 {
 
-// ------------------------
+    // ------------------------
 // TemplateObjectInterface
 // ------------------------
 
@@ -66,7 +66,7 @@ class LinkTag
     public function add($tag_attributes)
     {
         if (!empty($tag_attributes)) {
-            $this->__template->registry->addEntry( $tag_attributes, 'link_tags');
+            $this->__template->registry->addEntry($tag_attributes, 'link_tags');
         }
         return $this;
     }
@@ -81,8 +81,8 @@ class LinkTag
     public function set(array $tags)
     {
         if (!empty($tags)) {
-            foreach($tags as $_tag) {
-                $this->add( $_tag );
+            foreach ($tags as $_tag) {
+                $this->add($_tag);
             }
         }
         return $this;
@@ -95,7 +95,7 @@ class LinkTag
      */
     public function get()
     {
-        return $this->__template->registry->getEntry( 'link_tags', false, array() );
+        return $this->__template->registry->getEntry('link_tags', false, array());
     }
 
     /**
@@ -109,12 +109,9 @@ class LinkTag
         $str='';
 // allow multi same links
 //        foreach($this->cleanStack( $this->get(), 'rel' ) as $entry) {
-        foreach($this->get() as $entry) {
-            $str .= sprintf($mask, Html::writeHtmlTag( 'link', null, $entry, true ));
+        foreach ($this->get() as $entry) {
+            $str .= sprintf($mask, Html::writeHtmlTag('link', null, $entry, true));
         }
         return $str;
     }
-
 }
-
-// Endfile

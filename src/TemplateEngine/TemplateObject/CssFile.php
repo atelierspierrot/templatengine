@@ -2,7 +2,7 @@
 /**
  * This file is part of the TemplateEngine package.
  *
- * Copyright (c) 2013-2015 Pierre Cassat <me@e-piwi.fr> and contributors
+ * Copyright (c) 2013-2016 Pierre Cassat <me@e-piwi.fr> and contributors
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,7 +35,7 @@ class CssFile
     implements FileTemplateObjectInterface
 {
 
-// ------------------------
+    // ------------------------
 // TemplateObjectInterface
 // ------------------------
 
@@ -89,7 +89,7 @@ class CssFile
     {
         $_fp = $this->__template->findAsset($file_path);
         if ($_fp || \AssetsManager\Loader::isUrl($file_path)) {
-            $this->registry->addEntry( array(
+            $this->registry->addEntry(array(
                 'file'=>$_fp, 'media'=>$media, 'condition'=>$condition
             ), 'css_files');
         } else {
@@ -110,7 +110,7 @@ class CssFile
     public function set(array $files)
     {
         if (!empty($files)) {
-            foreach($files as $_file) {
+            foreach ($files as $_file) {
                 if (is_array($_file) && isset($_file['file'])) {
                     $this->add(
                         $_file['file'],
@@ -118,7 +118,7 @@ class CssFile
                         isset($_file['condition']) ? $_file['condition'] : null
                     );
                 } elseif (is_string($_file)) {
-                    $this->add( $_file );
+                    $this->add($_file);
                 }
             }
         }
@@ -144,14 +144,15 @@ class CssFile
     public function write($mask = '%s')
     {
         $str='';
-        foreach($this->cleanStack($this->get(), 'file') as $entry) {
+        foreach ($this->cleanStack($this->get(), 'file') as $entry) {
             $tag_attrs = array(
                 'rel'=>'stylesheet',
                 'type'=>'text/css',
                 'href'=>$entry['file']
             );
-            if (isset($entry['media']) && !empty($entry['media']) && $entry['media']!='screen')
+            if (isset($entry['media']) && !empty($entry['media']) && $entry['media']!='screen') {
                 $tag_attrs['media'] = $entry['media'];
+            }
             $tag = Html::writeHtmlTag('link', null, $tag_attrs, true);
             if (isset($entry['condition']) && !empty($entry['condition'])) {
                 $tag = ConditionalComment::buildCondition($tag, $entry['condition']);
@@ -175,22 +176,24 @@ class CssFile
         $css_files = $this->cleanStack($this->get(), 'file');
 
         $organized_css = array( 'rest'=>array() );
-        foreach($css_files as $_file) {
+        foreach ($css_files as $_file) {
             if (!empty($_file['media'])) {
-                if (!isset($organized_css[ $_file['media'] ]))
+                if (!isset($organized_css[ $_file['media'] ])) {
                     $organized_css[ $_file['media'] ] = array();
+                }
                 $organized_css[ $_file['media'] ][] = $_file;
             } else {
                 $organized_css['rest'][] = $_file;
             }
         }
 
-        foreach($organized_css as $media=>$stack) {
-            $cleaned_stack = $this->extractFromStack( $stack, 'file' );
-            if (!empty($cleaned_stack))
+        foreach ($organized_css as $media=>$stack) {
+            $cleaned_stack = $this->extractFromStack($stack, 'file');
+            if (!empty($cleaned_stack)) {
                 $this->addMerged(
                     $this->mergeStack($cleaned_stack), $media=='rest' ? 'screen' : $media
                 );
+            }
         }
 
         return $this;
@@ -208,7 +211,7 @@ class CssFile
     {
         $_fp = $this->__template->findAsset($file_path);
         if ($_fp || \AssetsManager\Loader::isUrl($file_path)) {
-            $this->registry->addEntry( array(
+            $this->registry->addEntry(array(
                 'file'=>$_fp, 'media'=>$media
             ), 'css_merged_files');
         } else {
@@ -229,15 +232,16 @@ class CssFile
     public function setMerged(array $files)
     {
         if (!empty($files)) {
-            foreach($files as $_file) {
+            foreach ($files as $_file) {
                 if (is_array($_file) && isset($_file['file'])) {
-                    if (isset($_file['media']))
-                        $this->add( $_file['file'], $_file['media'] );
-                    else
-                        $this->add( $_file['file'] );
+                    if (isset($_file['media'])) {
+                        $this->add($_file['file'], $_file['media']);
+                    } else {
+                        $this->add($_file['file']);
+                    }
+                } elseif (is_string($_file)) {
+                    $this->add($_file);
                 }
-                elseif (is_string($_file))
-                    $this->add( $_file );
             }
         }
         return $this;
@@ -262,15 +266,16 @@ class CssFile
     public function writeMerged($mask = '%s')
     {
         $str='';
-        foreach($this->cleanStack( $this->getMerged(), 'file' ) as $entry) {
+        foreach ($this->cleanStack($this->getMerged(), 'file') as $entry) {
             $tag_attrs = array(
                 'rel'=>'stylesheet',
                 'type'=>'text/css',
                 'href'=>$entry['file']
             );
-            if (isset($entry['media']) && !empty($entry['media']) && $entry['media']!='screen')
+            if (isset($entry['media']) && !empty($entry['media']) && $entry['media']!='screen') {
                 $tag_attrs['media'] = $entry['media'];
-            $str .= sprintf($mask, Html::writeHtmlTag( 'link', null, $tag_attrs, true ));
+            }
+            $str .= sprintf($mask, Html::writeHtmlTag('link', null, $tag_attrs, true));
         }
         return $str;
     }
@@ -285,22 +290,24 @@ class CssFile
         $css_files = $this->cleanStack($this->get(), 'file');
 
         $organized_css = array('rest'=>array());
-        foreach($css_files as $_file) {
+        foreach ($css_files as $_file) {
             if (!empty($_file['media'])) {
-                if (!isset($organized_css[ $_file['media'] ]))
+                if (!isset($organized_css[ $_file['media'] ])) {
                     $organized_css[ $_file['media'] ] = array();
+                }
                 $organized_css[ $_file['media'] ][] = $_file;
             } else {
                 $organized_css['rest'][] = $_file;
             }
         }
 
-        foreach($organized_css as $media=>$stack) {
-            $cleaned_stack = $this->extractFromStack( $stack, 'file' );
-            if (!empty($cleaned_stack))
+        foreach ($organized_css as $media=>$stack) {
+            $cleaned_stack = $this->extractFromStack($stack, 'file');
+            if (!empty($cleaned_stack)) {
                 $this->addMinified(
-                    $this->minifyStack( $cleaned_stack ), $media=='rest' ? 'screen' : $media
+                    $this->minifyStack($cleaned_stack), $media=='rest' ? 'screen' : $media
                 );
+            }
         }
 
         return $this;
@@ -318,7 +325,7 @@ class CssFile
     {
         $_fp = $this->__template->findAsset($file_path);
         if ($_fp || \AssetsManager\Loader::isUrl($file_path)) {
-            $this->registry->addEntry( array(
+            $this->registry->addEntry(array(
                 'file'=>$_fp, 'media'=>$media
             ), 'css_minified_files');
         } else {
@@ -339,15 +346,16 @@ class CssFile
     public function setMinified(array $files)
     {
         if (!empty($files)) {
-            foreach($files as $_file) {
+            foreach ($files as $_file) {
                 if (is_array($_file) && isset($_file['file'])) {
-                    if (isset($_file['media']))
-                        $this->add( $_file['file'], $_file['media'] );
-                    else
-                        $this->add( $_file['file'] );
+                    if (isset($_file['media'])) {
+                        $this->add($_file['file'], $_file['media']);
+                    } else {
+                        $this->add($_file['file']);
+                    }
+                } elseif (is_string($_file)) {
+                    $this->add($_file);
                 }
-                elseif (is_string($_file))
-                    $this->add( $_file );
             }
         }
         return $this;
@@ -372,19 +380,17 @@ class CssFile
     public function writeMinified($mask = '%s')
     {
         $str='';
-        foreach($this->cleanStack( $this->getMinified(), 'file' ) as $entry) {
+        foreach ($this->cleanStack($this->getMinified(), 'file') as $entry) {
             $tag_attrs = array(
                 'rel'=>'stylesheet',
                 'type'=>'text/css',
                 'href'=>$entry['file']
             );
-            if (isset($entry['media']) && !empty($entry['media']) && $entry['media']!='screen')
+            if (isset($entry['media']) && !empty($entry['media']) && $entry['media']!='screen') {
                 $tag_attrs['media'] = $entry['media'];
+            }
             $str .= sprintf($mask, Html::writeHtmlTag('link', null, $tag_attrs, true));
         }
         return $str;
     }
-
 }
-
-// Endfile

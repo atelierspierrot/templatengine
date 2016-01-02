@@ -2,7 +2,7 @@
 /**
  * This file is part of the TemplateEngine package.
  *
- * Copyright (c) 2013-2015 Pierre Cassat <me@e-piwi.fr> and contributors
+ * Copyright (c) 2013-2016 Pierre Cassat <me@e-piwi.fr> and contributors
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ class CSS
 
     public $file_extension = 'css';
 
-    public static function merge( $input )
+    public static function merge($input)
     {
         $input = preg_replace('!/\*.*?\*/!s', '', $input);
         $output = trim($input);
@@ -43,10 +43,10 @@ class CSS
     /**
      * Inspired by <http://code.seebz.net/p/minify-css/>
      */
-    public static function minify( $input )
+    public static function minify($input)
     {
         $input = self::merge($input);
-        $input = str_replace(array("\r","\n"), '', $input);
+        $input = str_replace(array("\r", "\n"), '', $input);
         $input = preg_replace('`([^*/])\/\*([^*]|[*](?!/)){5,}\*\/([^*/])`Us', '$1$3', $input);
         $input = preg_replace('`\s*({|}|,|:|;)\s*`', '$1', $input);
         $input = str_replace(';}', '}', $input);
@@ -55,11 +55,8 @@ class CSS
         return $input;
     }
 
-    public static function buildComment( $str )
+    public static function buildComment($str)
     {
         return sprintf('/* %s */', $str);
     }
-
 }
-
-// Endfile

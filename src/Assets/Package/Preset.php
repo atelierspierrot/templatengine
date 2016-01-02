@@ -2,7 +2,7 @@
 /**
  * This file is part of the TemplateEngine package.
  *
- * Copyright (c) 2013-2015 Pierre Cassat <me@e-piwi.fr> and contributors
+ * Copyright (c) 2013-2016 Pierre Cassat <me@e-piwi.fr> and contributors
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -55,7 +55,9 @@ class Preset extends OriginalPreset
      */
     public function load()
     {
-        if (empty($this->_statements)) parent::load();
+        if (empty($this->_statements)) {
+            parent::load();
+        }
 
         /* @var $template_engine \TemplateEngine\TemplateEngine */
         $template_engine = TemplateEngine::getInstance();
@@ -70,9 +72,7 @@ class Preset extends OriginalPreset
                     } else {
                         $template_object->add($css['src'], $css['media']);
                     }
-                }
-                
-                elseif ('jsfiles_header'===$type) {
+                } elseif ('jsfiles_header'===$type) {
                     $template_object = $template_engine->getTemplateObject('JavascriptFile', 'jsfiles_header');
                     $js = $statement->getData();
                     if (
@@ -83,9 +83,7 @@ class Preset extends OriginalPreset
                     } else {
                         $template_object->add($js['src']);
                     }
-                }
-                
-                elseif (in_array($type, array('js', 'jsfiles_footer'))) {
+                } elseif (in_array($type, array('js', 'jsfiles_footer'))) {
                     $template_object = $template_engine->getTemplateObject('JavascriptFile', 'jsfiles_footer');
                     $js = $statement->getData();
                     if (
@@ -100,7 +98,4 @@ class Preset extends OriginalPreset
             }
         }
     }
-
 }
-
-// Endfile

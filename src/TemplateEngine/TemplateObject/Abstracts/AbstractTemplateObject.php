@@ -2,7 +2,7 @@
 /**
  * This file is part of the TemplateEngine package.
  *
- * Copyright (c) 2013-2015 Pierre Cassat <me@e-piwi.fr> and contributors
+ * Copyright (c) 2013-2016 Pierre Cassat <me@e-piwi.fr> and contributors
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,7 +40,7 @@ abstract class AbstractTemplateObject
      *
      * @param \TemplateEngine\Template $_tpl The whole template object
      */
-    public function __construct( Template $_tpl )
+    public function __construct(Template $_tpl)
     {
         $this->__template = $_tpl;
         $this->init();
@@ -64,14 +64,16 @@ abstract class AbstractTemplateObject
     protected function cleanStack(array $stack, $clean_by = null)
     {
         $new_stack = array();
-        foreach($stack as $_entry) {
+        foreach ($stack as $_entry) {
             if (is_array($_entry) && !empty($clean_by)) {
-                if (isset($_entry[$clean_by]) && !array_key_exists($_entry[$clean_by], $new_stack))
+                if (isset($_entry[$clean_by]) && !array_key_exists($_entry[$clean_by], $new_stack)) {
                     $new_stack[ $_entry[$clean_by] ] = $_entry;
+                }
             } elseif (is_string($_entry)) {
                 $ok = array_search($_entry, $new_stack);
-                if (false===$ok)
+                if (false===$ok) {
                     $new_stack[] = $_entry;
+                }
             }
         }
         return array_values($new_stack);
@@ -87,14 +89,11 @@ abstract class AbstractTemplateObject
     protected function extractFromStack(array $stack, $clean_by)
     {
         $new_stack = array();
-        foreach($stack as $_entry) {
+        foreach ($stack as $_entry) {
             if (is_array($_entry) && isset($_entry[$clean_by])) {
                 $new_stack[] = $_entry[$clean_by];
             }
         }
         return $new_stack;
     }
-
 }
-
-// Endfile

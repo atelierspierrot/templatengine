@@ -2,7 +2,7 @@
 /**
  * This file is part of the TemplateEngine package.
  *
- * Copyright (c) 2013-2015 Pierre Cassat <me@e-piwi.fr> and contributors
+ * Copyright (c) 2013-2016 Pierre Cassat <me@e-piwi.fr> and contributors
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -66,7 +66,7 @@ class Template
      * @return  self
      * @throws  \InvalidArgumentException if the path doesn't exist
      */
-    public function setWebRootPath( $path )
+    public function setWebRootPath($path)
     {
         if (@file_exists($path) && is_dir($path)) {
             $this->web_root_path = realpath($path).'/';
@@ -95,7 +95,7 @@ class Template
      * @return  self
      * @throws  \InvalidArgumentException if the path doesn't exist
      */
-    public function setCachePath( $path )
+    public function setCachePath($path)
     {
         if (@file_exists($path) && is_dir($path)) {
             $this->cache_path = realpath($path).'/';
@@ -126,7 +126,7 @@ class Template
      * @return  self
      * @throws  \InvalidArgumentException if the path doesn't exist
      */
-    public function setAssetsCachePath( $path )
+    public function setAssetsCachePath($path)
     {
         if (@file_exists($path) && is_dir($path)) {
             $this->assets_cache_path = realpath($path).'/';
@@ -163,13 +163,13 @@ class Template
      */
     public function getTemplateObject($_type, $_ref = null)
     {
-        $stack_name = !is_null($_ref) ? $_ref : $this->getTemplateObjectClassName( $_type );
+        $stack_name = !is_null($_ref) ? $_ref : $this->getTemplateObjectClassName($_type);
 
-        if (!$this->registry->isEntry( $stack_name, 'template_objects' )) {
-            $this->createNewTemplateObject( $_type, $_ref );
+        if (!$this->registry->isEntry($stack_name, 'template_objects')) {
+            $this->createNewTemplateObject($_type, $_ref);
         }
 
-        return $this->registry->getEntry( $stack_name, 'template_objects' );
+        return $this->registry->getEntry($stack_name, 'template_objects');
     }
 
     /**
@@ -183,13 +183,13 @@ class Template
      */
     public function createNewTemplateObject($_type, $_ref = null)
     {
-        $_cls = $this->getTemplateObjectClassName( $_type );
+        $_cls = $this->getTemplateObjectClassName($_type);
         $stack_name = !is_null($_ref) ? $_ref : $_cls;
 
         if (class_exists($_cls)) {
             try {
-                $_tpl_object = new $_cls( $this );
-            } catch ( \Exception $e ) {
+                $_tpl_object = new $_cls($this);
+            } catch (\Exception $e) {
                 throw new \RuntimeException(
                     sprintf('An error occurred while trying to create Template Object "%s"!', $_cls)
                 );
@@ -199,7 +199,7 @@ class Template
                     sprintf('A Template Object must extends the "\TemplateEngine\TemplateObject\Abstracts\AbstractTemplateObject" class (got "%s")!', $_cls)
                 );
             } else {
-                $this->registry->setEntry( $stack_name, $_tpl_object, 'template_objects' );
+                $this->registry->setEntry($stack_name, $_tpl_object, 'template_objects');
             }
         } else {
             throw new \RuntimeException(
@@ -214,7 +214,7 @@ class Template
      * @param   string $_type The template object type
      * @return  string The template object class name
      */
-    public function getTemplateObjectClassName( $_type )
+    public function getTemplateObjectClassName($_type)
     {
         return '\TemplateEngine\TemplateObject\\'.ucfirst($_type);
     }
@@ -229,9 +229,9 @@ class Template
      * @param   string $file_path The file path to search
      * @return  string The relative web ready path for this file, null otherwise
      */
-    public function findAsset( $file_path )
+    public function findAsset($file_path)
     {
-        $real_path = $this->findRealPath( $file_path );
+        $real_path = $this->findRealPath($file_path);
         if ($real_path) {
             return trim(FilesystemHelper::resolveRelatedPath($this->web_root_path, $real_path), '/');
         }
@@ -244,7 +244,7 @@ class Template
      * @param   string $file_path The file path to search
      * @return  string The absolute path for this file, null otherwise
      */
-    public function findRealPath( $file_path )
+    public function findRealPath($file_path)
     {
         if (@file_exists($file_path)) {
             return realpath($file_path);
@@ -254,7 +254,4 @@ class Template
         }
         return null;
     }
-
 }
-
-// Endfile

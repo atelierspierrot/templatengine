@@ -16,15 +16,16 @@ $(function() {
 
 // --------------------------------
 // the content
-if (empty($content)) $content = '<p>Test content</p>';
+if (empty($content)) {
+    $content = '<p>Test content</p>';
+}
 
 $public_sources = true;
 $url_sources = "http://github.com/atelierspierrot/templatengine";
 $host_sources_name = "GitHub";
 $host_sources_home = "http://github.com/";
 
-$make_navigation_list_from_content = function(array $ctt, array $attrs)
-{
+$make_navigation_list_from_content = function (array $ctt, array $attrs) {
     $str = '';
     foreach ($ctt as $var=>$val) {
         if (is_array($val)) {

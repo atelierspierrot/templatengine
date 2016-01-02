@@ -3,9 +3,7 @@
  */
 
 use TemplateEngine\TemplateEngine;
-
 use Assets\Loader as AssetsLoader;
-
 use Library\Helper\Html as HtmlHelper;
 use Library\Helper\Url as UrlHelper;
 
@@ -30,9 +28,9 @@ exit('yo');
         $this->template_engine
             ->guessFromAssetsLoader($this->loader)
             ->setLayoutsDir(__DIR__.'/../www/')
-            ->setToTemplate('setCachePath', __DIR__.'/tmp' )
-            ->setToTemplate('setAssetsCachePath', __DIR__.'/tmp' )
-            ->setToView('setIncludePath', __DIR__.'/views' )
+            ->setToTemplate('setCachePath', __DIR__.'/tmp')
+            ->setToTemplate('setAssetsCachePath', __DIR__.'/tmp')
+            ->setToView('setIncludePath', __DIR__.'/views')
             ;
     }
 
@@ -78,7 +76,7 @@ exit('yo');
         }
         $this->template_engine
             ->templateFallback('getTemplateObject', array('TitleTag'))
-            ->add( $title );
+            ->add($title);
 
         $title_block = array(
             'title'=> isset($params['title']) ? $params['title'] : $title,
@@ -111,7 +109,7 @@ exit('yo');
 // ------------------------
 
 
-    function indexAction()
+    public function indexAction()
     {
         return array(
             'content'   =>'YO',
@@ -121,7 +119,7 @@ exit('yo');
         );
     }
 
-    function helloAction()
+    public function helloAction()
     {
         return array(
             'output'=> $this->template_engine->render(
@@ -135,7 +133,7 @@ exit('yo');
         );
     }
 
-    function fctsAction()
+    public function fctsAction()
     {
         return array(
             'output'=> $this->template_engine->render(
@@ -145,7 +143,7 @@ exit('yo');
         );
     }
 
-    function testAction()
+    public function testAction()
     {
         return array(
             'output'=> $this->template_engine->render(
@@ -155,7 +153,7 @@ exit('yo');
         );
     }
 
-    function loremipsumAction()
+    public function loremipsumAction()
     {
         return array(
             'output'=> $this->template_engine->render(
@@ -165,7 +163,7 @@ exit('yo');
         );
     }
 
-    function commonAction($action)
+    public function commonAction($action)
     {
         return array(
             'output'=> $this->template_engine->render(
@@ -174,7 +172,4 @@ exit('yo');
             'title' => ucfirst(Library\Helper\Text::getHumanReadable($action))
         );
     }
-
 }
-
-// Endfile
