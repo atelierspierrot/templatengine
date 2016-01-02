@@ -2,20 +2,19 @@
 /**
  * This file is part of the TemplateEngine package.
  *
- * Copyleft (ↄ) 2013-2015 Pierre Cassat <me@e-piwi.fr> and contributors
+ * Copyright (c) 2013-2016 Pierre Cassat <me@e-piwi.fr> and contributors
  * 
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
+ *      http://www.apache.org/licenses/LICENSE-2.0
  * 
- * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  * The source code of this package is available online at 
  * <http://github.com/atelierspierrot/templatengine>.
@@ -40,7 +39,7 @@ use \Assets\Composer\TemplateEngineConfig;
 use \Assets\Composer\TemplateEngineInstaller;
 
 /**
- * @author  Piero Wbmstr <me@e-piwi.fr>
+ * @author  piwi <me@e-piwi.fr>
  */
 class TemplateEngineAutoloadGenerator
     extends AutoloadGenerator
@@ -103,7 +102,9 @@ class TemplateEngineAutoloadGenerator
         $package_map = $this->buildPackageMap($this->_composer->getInstallationManager(), $this->_package, $local_repo->getPackages());
 
         foreach ($package_map as $i=>$package) {
-            if ($i===0) { continue; }
+            if ($i===0) {
+                continue;
+            }
             $package_object = $package[0];
             $package_install_path = $package[1];
             if (empty($package_install_path)) {
@@ -137,12 +138,14 @@ class TemplateEngineAutoloadGenerator
      * @param \Composer\Package\PackageInterface $package
      * @param string $assets_package_dir
      * @param string $vendor_package_dir
-     * @return void
+     * @return array|null
      */
     public function parseComposerExtra(PackageInterface $package, $assets_package_dir, $vendor_package_dir)
     {
         $data = $this->_autoloader->getAssetsInstaller()->parseComposerExtra($package, $assets_package_dir);
-        if (is_null($data)) $data = array();
+        if (is_null($data)) {
+            $data = array();
+        }
         $extra = $package->getExtra();
         $assets_package_dir = rtrim($assets_package_dir, '/') . '/';
         if (strlen($vendor_package_dir)) {
@@ -190,7 +193,4 @@ class TemplateEngineAutoloadGenerator
 */
         return !empty($data) ? $data : null;
     }
-
 }
-
-// Endfile

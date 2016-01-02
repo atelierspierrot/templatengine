@@ -2,20 +2,19 @@
 /**
  * This file is part of the TemplateEngine package.
  *
- * Copyleft (ↄ) 2013-2015 Pierre Cassat <me@e-piwi.fr> and contributors
+ * Copyright (c) 2013-2016 Pierre Cassat <me@e-piwi.fr> and contributors
  * 
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
+ *      http://www.apache.org/licenses/LICENSE-2.0
  * 
- * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  * The source code of this package is available online at 
  * <http://github.com/atelierspierrot/templatengine>.
@@ -26,7 +25,7 @@ namespace TemplateEngine\TemplateObject\Abstracts;
 use \TemplateEngine\Template;
 
 /**
- * @author  Piero Wbmstr <me@e-piwi.fr>
+ * @author  piwi <me@e-piwi.fr>
  */
 abstract class AbstractTemplateObject
 {
@@ -41,7 +40,7 @@ abstract class AbstractTemplateObject
      *
      * @param \TemplateEngine\Template $_tpl The whole template object
      */
-    public function __construct( Template $_tpl )
+    public function __construct(Template $_tpl)
     {
         $this->__template = $_tpl;
         $this->init();
@@ -65,14 +64,16 @@ abstract class AbstractTemplateObject
     protected function cleanStack(array $stack, $clean_by = null)
     {
         $new_stack = array();
-        foreach($stack as $_entry) {
+        foreach ($stack as $_entry) {
             if (is_array($_entry) && !empty($clean_by)) {
-                if (isset($_entry[$clean_by]) && !array_key_exists($_entry[$clean_by], $new_stack))
+                if (isset($_entry[$clean_by]) && !array_key_exists($_entry[$clean_by], $new_stack)) {
                     $new_stack[ $_entry[$clean_by] ] = $_entry;
+                }
             } elseif (is_string($_entry)) {
                 $ok = array_search($_entry, $new_stack);
-                if (false===$ok)
+                if (false===$ok) {
                     $new_stack[] = $_entry;
+                }
             }
         }
         return array_values($new_stack);
@@ -88,14 +89,11 @@ abstract class AbstractTemplateObject
     protected function extractFromStack(array $stack, $clean_by)
     {
         $new_stack = array();
-        foreach($stack as $_entry) {
+        foreach ($stack as $_entry) {
             if (is_array($_entry) && isset($_entry[$clean_by])) {
                 $new_stack[] = $_entry[$clean_by];
             }
         }
         return $new_stack;
     }
-
 }
-
-// Endfile

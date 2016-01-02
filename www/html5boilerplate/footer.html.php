@@ -15,8 +15,12 @@ $(function() {
 
 // --------------------------------
 // the content
-if (empty($content)) $content = 'Test footer';
-if (!is_array($content)) $content = array($content);
+if (empty($content)) {
+    $content = 'Test footer';
+}
+if (!is_array($content)) {
+    $content = array($content);
+}
 
 ?>
 <footer id="<?php _getid('footer'); ?>">

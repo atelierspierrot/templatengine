@@ -1,11 +1,14 @@
 Template Engine
 ===============
 
+[![documentation](http://img.ateliers-pierrot-static.fr/read-the-doc.svg)](http://docs.ateliers-pierrot.fr/templatengine/)
+
 A PHP package to build HTML5 views (based on [HTML5 Boilerplate](http://html5boilerplate.com/)
 layouts and the [Composer Assets Plugin](https://github.com/atelierspierrot/assets-manager)).
 
 
-## What is this package ?
+What is this package ?
+----------------------
 
 This package defines a simple Template Engine to manage PHP view files, some HTML files including
 PHP scripts to build views passing them parameters and objects and some tools to manage global
@@ -17,7 +20,8 @@ Documentation](http://docs.ateliers-pierrot.fr/templatengine/) for more informat
 complete demonstration is available in the package itself (PHP server is required).**
 
 
-## Installation
+Installation
+------------
 
 This package requires that you use [Composer](http://getcomposer.org/) to manage your dependencies.
 
@@ -38,7 +42,8 @@ The `Assets` and `TemplateEngine` namespaces will be automatically added to the 
 Composer autoloader.
 
 
-## Composer Extra settings
+Composer Extra settings
+-----------------------
 
 Using the `Template Engine`, you can define some extra features in your package's `composer.json`
 to specify some paths and presets used by the engine.
@@ -89,40 +94,29 @@ layout files, the global templates to use as other partial views wrapper. These 
 must exist.
 
 
-## Views functions
+Views functions
+---------------
 
 Any package defining the extra `views-functions` setting can define a set of standalone
 methods to use in view files ; all functions files of the declared `views-functions` are loaded
 for all views, so all of these methods may be accessible in any view file.
 
 
-## Development
-
-To install all PHP packages for development, just run:
-
-    ~$ composer install --dev
-
-A documentation can be generated with [Sami](https://github.com/fabpot/Sami) running:
-
-    ~$ php vendor/sami/sami/sami.php render sami.config.php
-
-The latest version of this documentation is available online at <http://docs.ateliers-pierrot.fr/templatengine/>.
-
-
-## Author & License
+Author & License
+----------------
 
 >    Template Engine
 
 >    http://github.com/atelierspierrot/templatengine
 
->    Copyleft 2013-2015, Pierre Cassat and contributors
+>    Copyright (c) 2013-2016 Pierre Cassat and contributors
 
->    Licensed under the GPL Version 3 license.
+>    Licensed under the Apache 2 license.
 
->    http://opensource.org/licenses/GPL-3.0
+>    http://www.apache.org/licenses/LICENSE-2.0
 
 >    ----
 
 >    Les Ateliers Pierrot - Paris, France
 
->    <www.ateliers-pierrot.fr> - <contact@ateliers-pierrot.fr>
+>    <http://www.ateliers-pierrot.fr/> - <contact@ateliers-pierrot.fr>

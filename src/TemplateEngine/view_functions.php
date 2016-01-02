@@ -2,20 +2,19 @@
 /**
  * This file is part of the TemplateEngine package.
  *
- * Copyleft (ↄ) 2013-2015 Pierre Cassat <me@e-piwi.fr> and contributors
+ * Copyright (c) 2013-2016 Pierre Cassat <me@e-piwi.fr> and contributors
  * 
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
+ *      http://www.apache.org/licenses/LICENSE-2.0
  * 
- * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  * The source code of this package is available online at 
  * <http://github.com/atelierspierrot/templatengine>.
@@ -37,8 +36,7 @@ use \TemplateEngine\TemplateEngine;
 use \Library\Helper;
 use \Library\Tool;
 
-if (!function_exists('_array')) 
-{
+if (!function_exists('_array')) {
     /**
      * Always return an array
      *
@@ -51,8 +49,7 @@ if (!function_exists('_array'))
     }
 }
 
-if (!function_exists('_attribute')) 
-{
+if (!function_exists('_attribute')) {
     /**
      * Build an HTML attribute string
      *
@@ -66,8 +63,7 @@ if (!function_exists('_attribute'))
     }
 }
 
-if (!function_exists('_bit')) 
-{
+if (!function_exists('_bit')) {
     /**
      * Build a text representation of a bit value as `true` or `false`
      *
@@ -82,8 +78,7 @@ if (!function_exists('_bit'))
     }
 }
 
-if (!function_exists('_cut')) 
-{
+if (!function_exists('_cut')) {
     /**
      * Cut a string at a certain characters count adding it a suffix string
      *
@@ -101,8 +96,7 @@ if (!function_exists('_cut'))
     }
 }
 
-if (!function_exists('_default')) 
-{
+if (!function_exists('_default')) {
     /**
      * Get a variable value if it is defined, or a default value otherwise
      *
@@ -118,8 +112,7 @@ if (!function_exists('_default'))
     }
 }
 
-if (!function_exists('_dump')) 
-{
+if (!function_exists('_dump')) {
     /**
      * Dump an array
      *
@@ -136,7 +129,7 @@ if (!function_exists('_dump'))
     {
         $array = _array($array);
         $list = '';
-        foreach($array as $key=>$value) {
+        foreach ($array as $key=>$value) {
             if ($only_string_index && !is_string($key)) {
                 $list .= sprintf($no_index_mask_item, TemplateEngine::__string($value));
             } else {
@@ -147,8 +140,7 @@ if (!function_exists('_dump'))
     }
 }
 
-if (!function_exists('_echo')) 
-{
+if (!function_exists('_echo')) {
     /**
      * Echo or return a value
      *
@@ -186,8 +178,7 @@ if (!function_exists('_echo'))
     }
 }
 
-if (!function_exists('_else')) 
-{
+if (!function_exists('_else')) {
     /**
      * Emulate a "if ... else ..."
      *
@@ -205,8 +196,7 @@ if (!function_exists('_else'))
     }
 }
 
-if (!function_exists('_error')) 
-{
+if (!function_exists('_error')) {
     /**
      * Throws a TemplateEngine error
      *
@@ -222,8 +212,7 @@ if (!function_exists('_error'))
     }
 }
 
-if (!function_exists('_escape')) 
-{
+if (!function_exists('_escape')) {
     /**
      * Protect a string with `htmlentities`
      *
@@ -238,8 +227,7 @@ if (!function_exists('_escape'))
     }
 }
 
-if (!function_exists('_eval')) 
-{
+if (!function_exists('_eval')) {
     /**
      * Evaluation of code
      *
@@ -258,8 +246,7 @@ if (!function_exists('_eval'))
     }
 }
 
-if (!function_exists('_filename')) 
-{
+if (!function_exists('_filename')) {
     /**
      * Get a formated filename
      *
@@ -277,8 +264,7 @@ if (!function_exists('_filename'))
     }
 }
 
-if (!function_exists('_getid')) 
-{
+if (!function_exists('_getid')) {
     /**
      * Get a uniq DOM ID for an element
      *
@@ -295,8 +281,7 @@ if (!function_exists('_getid'))
     }
 }
 
-if (!function_exists('_iecc')) 
-{
+if (!function_exists('_iecc')) {
     /**
      * Internet Explorer Conditional Comment
      *
@@ -316,8 +301,7 @@ if (!function_exists('_iecc'))
     }
 }
 
-if (!function_exists('_if')) 
-{
+if (!function_exists('_if')) {
     /**
      * Emulation of "if ... else ..."
      *
@@ -342,8 +326,7 @@ if (!function_exists('_if'))
     }
 }
 
-if (!function_exists('_isfalse')) 
-{
+if (!function_exists('_isfalse')) {
     /**
      * Test if a value is evaluated as `false`
      *
@@ -356,8 +339,7 @@ if (!function_exists('_isfalse'))
     }
 }
 
-if (!function_exists('_isnotfalse')) 
-{
+if (!function_exists('_isnotfalse')) {
     /**
      * Test if a value is NOT evaluated as `false`
      *
@@ -370,8 +352,7 @@ if (!function_exists('_isnotfalse'))
     }
 }
 
-if (!function_exists('_isnottrue')) 
-{
+if (!function_exists('_isnottrue')) {
     /**
      * Test if a value is NOT evaluated as `true`
      *
@@ -384,8 +365,7 @@ if (!function_exists('_isnottrue'))
     }
 }
 
-if (!function_exists('_isnotnull')) 
-{
+if (!function_exists('_isnotnull')) {
     /**
      * Test if a value is NOT evaluated as `null`
      *
@@ -398,8 +378,7 @@ if (!function_exists('_isnotnull'))
     }
 }
 
-if (!function_exists('_isnull')) 
-{
+if (!function_exists('_isnull')) {
     /**
      * Test if a value is evaluated as `null`
      *
@@ -412,8 +391,7 @@ if (!function_exists('_isnull'))
     }
 }
 
-if (!function_exists('_istrue')) 
-{
+if (!function_exists('_istrue')) {
     /**
      * Test if a value is evaluated as `true`
      *
@@ -426,8 +404,7 @@ if (!function_exists('_istrue'))
     }
 }
 
-if (!function_exists('_javascript')) 
-{
+if (!function_exists('_javascript')) {
     /**
      * Protect a string for javascript usage
      *
@@ -444,8 +421,7 @@ if (!function_exists('_javascript'))
     }
 }
 
-if (!function_exists('_keys')) 
-{
+if (!function_exists('_keys')) {
     /**
      * Get the keys of an array
      *
@@ -458,8 +434,7 @@ if (!function_exists('_keys'))
     }
 }
 
-if (!function_exists('_loremipsum')) 
-{
+if (!function_exists('_loremipsum')) {
     /**
      * Get a fake "lorem ipsum" string 
      *
@@ -479,8 +454,7 @@ if (!function_exists('_loremipsum'))
     }
 }
 
-if (!function_exists('_lower')) 
-{
+if (!function_exists('_lower')) {
     /**
      * Get a string in lowercase
      *
@@ -495,8 +469,7 @@ if (!function_exists('_lower'))
     }
 }
 
-if (!function_exists('_newid')) 
-{
+if (!function_exists('_newid')) {
     /**
      * Get a uniq DOM ID for an element
      *
@@ -513,8 +486,7 @@ if (!function_exists('_newid'))
     }
 }
 
-if (!function_exists('_onoff')) 
-{
+if (!function_exists('_onoff')) {
     /**
      * Build a text representation of a bit value as `on` or `off`
      *
@@ -529,8 +501,7 @@ if (!function_exists('_onoff'))
     }
 }
 
-if (!function_exists('_para')) 
-{
+if (!function_exists('_para')) {
     /**
      * Build an HTML paragraph
      *
@@ -546,8 +517,7 @@ if (!function_exists('_para'))
     }
 }
 
-if (!function_exists('_render')) 
-{
+if (!function_exists('_render')) {
     /**
      * Render a template view
      *
@@ -568,8 +538,7 @@ if (!function_exists('_render'))
     }
 }
 
-if (!function_exists('_replace')) 
-{
+if (!function_exists('_replace')) {
     /**
      * Alias of `str_replace`
      *
@@ -587,8 +556,7 @@ if (!function_exists('_replace'))
     }
 }
 
-if (!function_exists('_set')) 
-{
+if (!function_exists('_set')) {
     /**
      * Set a variable in the views environment
      *
@@ -602,8 +570,7 @@ if (!function_exists('_set'))
     }
 }
 
-if (!function_exists('_string')) 
-{
+if (!function_exists('_string')) {
     /**
      * Always return a string
      *
@@ -620,8 +587,7 @@ if (!function_exists('_string'))
     }
 }
 
-if (!function_exists('_tag')) 
-{
+if (!function_exists('_tag')) {
     /**
      * Build an HTML tag block
      *
@@ -636,7 +602,7 @@ if (!function_exists('_tag'))
     {
         $attr_str = '';
         if (!empty($attrs)) {
-            foreach($attrs as $var=>$val) {
+            foreach ($attrs as $var=>$val) {
                 $attr_str .= ' '._attribute($var, $val);
             }
         }
@@ -644,8 +610,7 @@ if (!function_exists('_tag'))
     }
 }
 
-if (!function_exists('_unset')) 
-{
+if (!function_exists('_unset')) {
     /**
      * Unset a variable in the views environment
      *
@@ -658,8 +623,7 @@ if (!function_exists('_unset'))
     }
 }
 
-if (!function_exists('_upper')) 
-{
+if (!function_exists('_upper')) {
     /**
      * Get a string in uppercase
      *
@@ -674,8 +638,7 @@ if (!function_exists('_upper'))
     }
 }
 
-if (!function_exists('_url')) 
-{
+if (!function_exists('_url')) {
     /**
      * URL manager
      *
@@ -693,8 +656,7 @@ if (!function_exists('_url'))
     }
 }
 
-if (!function_exists('_use')) 
-{
+if (!function_exists('_use')) {
     /**
      * Assets packages automatic inclusion
      *
@@ -703,13 +665,14 @@ if (!function_exists('_use'))
      */
     function _use($preset_name = null)
     {
-        if (empty($preset_name)) return;
+        if (empty($preset_name)) {
+            return;
+        }
         TemplateEngine::getInstance()->useAssetsPreset($preset_name);
     }
 }
 
-if (!function_exists('_use_layout')) 
-{
+if (!function_exists('_use_layout')) {
     /**
      * Change or set the global page layout
      *
@@ -718,13 +681,14 @@ if (!function_exists('_use_layout'))
      */
     function _use_layout($layout = null)
     {
-        if (empty($layout)) return;
+        if (empty($layout)) {
+            return;
+        }
         TemplateEngine::getInstance()->setPageLayout($layout);
     }
 }
 
-if (!function_exists('_values')) 
-{
+if (!function_exists('_values')) {
     /**
      * Get the values of an array
      *
@@ -736,5 +700,3 @@ if (!function_exists('_values'))
         return array_values(_array($array));
     }
 }
-
-// Endfile

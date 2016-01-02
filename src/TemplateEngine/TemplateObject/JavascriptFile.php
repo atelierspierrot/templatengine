@@ -2,20 +2,19 @@
 /**
  * This file is part of the TemplateEngine package.
  *
- * Copyleft (ↄ) 2013-2015 Pierre Cassat <me@e-piwi.fr> and contributors
+ * Copyright (c) 2013-2016 Pierre Cassat <me@e-piwi.fr> and contributors
  * 
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
+ *      http://www.apache.org/licenses/LICENSE-2.0
  * 
- * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  * The source code of this package is available online at 
  * <http://github.com/atelierspierrot/templatengine>.
@@ -29,8 +28,8 @@ use \TemplateEngine\TemplateObject\Abstracts\FileTemplateObjectInterface;
 use \Library\Helper\Html;
 
 /**
- * @author Piero Wbmstr <me@e-piwi.fr>
- * @todo        Manage files priority
+ * @author  piwi <me@e-piwi.fr>
+ * @TODO    Manage files priority
  */
 class JavascriptFile
     extends AbstractFileTemplateObject
@@ -154,8 +153,8 @@ class JavascriptFile
     public function set(array $files)
     {
         if (!empty($files)) {
-            foreach($files as $_file) {
-                $this->add( $_file );
+            foreach ($files as $_file) {
+                $this->add($_file);
             }
         }
         return $this;
@@ -168,7 +167,7 @@ class JavascriptFile
      */
     public function get()
     {
-        return $this->registry->getEntry( 'javascript_files', false, array() );
+        return $this->registry->getEntry('javascript_files', false, array());
     }
     
     /**
@@ -180,12 +179,12 @@ class JavascriptFile
     public function write($mask = '%s')
     {
         $str='';
-        foreach($this->cleanStack( $this->get(), 'path' ) as $entry) {
+        foreach ($this->cleanStack($this->get(), 'path') as $entry) {
             $tag_attrs = array(
                 'type'=>'text/javascript',
                 'src'=>$entry['path']
             );
-            $str .= sprintf($mask, Html::writeHtmlTag( 'script', null, $tag_attrs ));
+            $str .= sprintf($mask, Html::writeHtmlTag('script', null, $tag_attrs));
         }
         return $str;
     }
@@ -201,10 +200,10 @@ class JavascriptFile
      */
     public function merge()
     {
-        $cleaned_stack = $this->cleanStack( $this->get(), 'path' );
+        $cleaned_stack = $this->cleanStack($this->get(), 'path');
         if (!empty($cleaned_stack)) {
-            $this->addMerged( 
-                $this->mergeStack( $this->extractFromStack( $cleaned_stack, 'path' ) )
+            $this->addMerged(
+                $this->mergeStack($this->extractFromStack($cleaned_stack, 'path'))
             );
         }
         return $this;
@@ -235,8 +234,8 @@ class JavascriptFile
     public function setMerged(array $files)
     {
         if (!empty($files)) {
-            foreach($files as $_file) {
-                $this->addMerged( $_file );
+            foreach ($files as $_file) {
+                $this->addMerged($_file);
             }
         }
         return $this;
@@ -249,7 +248,7 @@ class JavascriptFile
      */
     public function getMerged()
     {
-        return $this->registry->getEntry( 'javascript_merged_files', false, array() );
+        return $this->registry->getEntry('javascript_merged_files', false, array());
     }
     
     /**
@@ -258,12 +257,12 @@ class JavascriptFile
     public function writeMerged($mask = '%s')
     {
         $str='';
-        foreach($this->cleanStack( $this->getMerged(), 'path' ) as $entry) {
+        foreach ($this->cleanStack($this->getMerged(), 'path') as $entry) {
             $tag_attrs = array(
                 'type'=>'text/javascript',
                 'src'=>$entry['path']
             );
-            $str .= sprintf($mask, Html::writeHtmlTag( 'script', null, $tag_attrs ));
+            $str .= sprintf($mask, Html::writeHtmlTag('script', null, $tag_attrs));
         }
         return $str;
     }
@@ -275,17 +274,17 @@ class JavascriptFile
      */
     public function minify()
     {
-        $cleaned_stack = $this->cleanStack( $this->get(), 'path' );
+        $cleaned_stack = $this->cleanStack($this->get(), 'path');
         if (!empty($cleaned_stack)) {
-            foreach($cleaned_stack as $i=>$item) {
+            foreach ($cleaned_stack as $i=>$item) {
                 if (isset($item['minified']) && true===$item['minified']) {
                     unset($cleaned_stack[$i]);
                 }
             }
         }
         if (!empty($cleaned_stack)) {
-            $this->addMinified( 
-                $this->minifyStack( $this->extractFromStack( $cleaned_stack, 'path' ) )
+            $this->addMinified(
+                $this->minifyStack($this->extractFromStack($cleaned_stack, 'path'))
             );
         }
         return $this;
@@ -316,8 +315,8 @@ class JavascriptFile
     public function setMinified(array $files)
     {
         if (!empty($files)) {
-            foreach($files as $_file) {
-                $this->addMinified( $_file );
+            foreach ($files as $_file) {
+                $this->addMinified($_file);
             }
         }
         return $this;
@@ -330,7 +329,7 @@ class JavascriptFile
      */
     public function getMinified()
     {
-        return $this->registry->getEntry( 'javascript_minified_files', false, array() );
+        return $this->registry->getEntry('javascript_minified_files', false, array());
     }
     
     /**
@@ -339,16 +338,13 @@ class JavascriptFile
     public function writeMinified($mask = '%s')
     {
         $str='';
-        foreach($this->cleanStack( $this->getMinified(), 'path' ) as $entry) {
+        foreach ($this->cleanStack($this->getMinified(), 'path') as $entry) {
             $tag_attrs = array(
                 'type'=>'text/javascript',
                 'src'=>$entry['path']
             );
-            $str .= sprintf($mask, Html::writeHtmlTag( 'script', null, $tag_attrs ));
+            $str .= sprintf($mask, Html::writeHtmlTag('script', null, $tag_attrs));
         }
         return $str;
     }
-
 }
-
-// Endfile

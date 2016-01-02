@@ -4,30 +4,30 @@
     "description": "A PHP package to build HTML5 views (based on HTML5 Boilerplate layouts).",
     "keywords": [ "template engine", "boilerplate" ],
     "homepage": "http://github.com/atelierspierrot/templatengine",
-    "license": "GPL-3.0",
+    "license": "Apache-2.0",
     "authors": [{
         "name": "Les Ateliers Pierrot & contributors",
         "email": "contact@ateliers-pierrot.fr",
         "homepage": "http://www.ateliers-pierrot.fr/"
     },{
         "name": "Pierre Cassat",
-        "email": "me@e-piwi.fr",
-        "homepage": "http://github.com/piwi"
+        "homepage": "http://e-piwi.fr/"
     }],
     "require": {
         "php": ">=5.3.0",
         "atelierspierrot/patterns": "1.*",
         "atelierspierrot/library": "1.*",
-        "atelierspierrot/assets-manager": "1.*"
+        "atelierspierrot/assets-manager": "dev-dev"
     },
     "require-dev": {
         "atelierspierrot/gentleface-sprites": "1.*",
-        "sami/sami": "dev-master",
-        "phpmd/phpmd" : "1.4.*"
+        "sami/sami": "@stable",
+        "fabpot/php-cs-fixer": "@stable",
+        "phpmd/phpmd" : "@stable"
     },
-    "autoload": { "psr-0": {
-        "TemplateEngine": "src",
-        "Assets": "src"
+    "autoload": { "psr-4": {
+        "TemplateEngine\\": "src/TemplateEngine/",
+        "Assets\\": "src/Assets/"
     } },
     "extra": {
         "assets-dir": "www",
@@ -60,5 +60,10 @@
             "dev-master": "1.0-dev"
         }
     },
-    "scripts": { "post-autoload-dump": "Assets\\Composer\\TemplateEngineInstaller::postAutoloadDump" }
+    "scripts": {
+        "post-autoload-dump": "Assets\\Composer\\TemplateEngineInstaller::postAutoloadDump",
+        "build-doc": "php vendor/bin/sami.php update .sami.php",
+        "update-doc": "php vendor/bin/sami.php update .sami.php",
+        "cs-fixer": "php vendor/bin/php-cs-fixer fix -v"
+    }
 }

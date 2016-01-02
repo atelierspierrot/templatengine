@@ -1,9 +1,17 @@
 <?php
 
-if (!isset($merge_css)) $merge_css = false;
-if (!isset($minify_css)) $minify_css = false;
-if (!isset($merge_js)) $merge_js = false;
-if (!isset($minify_js)) $minify_js = false;
+if (!isset($merge_css)) {
+    $merge_css = false;
+}
+if (!isset($minify_css)) {
+    $minify_css = false;
+}
+if (!isset($merge_js)) {
+    $merge_js = false;
+}
+if (!isset($minify_js)) {
+    $minify_js = false;
+}
 
 // --------------------------------
 // the "classic" assets web accessible directory
@@ -85,53 +93,53 @@ $_template->getTemplateObject('LinkTag')->reset();
 // => favicon.ico
 if (file_exists($assets.'icons/favicon.ico')) {
     $_template->getTemplateObject('LinkTag')
-        ->add( array(
+        ->add(array(
             'rel'=>'icon',
             'href'=>$assets.'icons/favicon.ico',
             'type'=>'image/x-icon'
-        ) )
-        ->add( array(
+        ))
+        ->add(array(
             'rel'=>'shortcut icon',
             'href'=>$assets.'icons/favicon.ico',
             'type'=>'image/x-icon'
-        ) );
+        ));
 }
 
 // the followings are taken from <http://mathiasbynens.be/notes/touch-icons>
 // => For third-generation iPad with high-resolution Retina display: apple-touch-icon-144x144-precomposed.png
 if (file_exists($assets.'icons/apple-touch-icon-144x144-precomposed.png')) {
     $_template->getTemplateObject('LinkTag')
-        ->add( array(
+        ->add(array(
             'rel'=>'apple-touch-icon-precomposed',
             'href'=>$assets.'icons/apple-touch-icon-144x144-precomposed.png',
             'sizes'=>'144x144'
-        ) );
+        ));
 }
 // => For iPhone with high-resolution Retina display: apple-touch-icon-114x114-precomposed.png
 if (file_exists($assets.'icons/apple-touch-icon-114x114-precomposed.png')) {
     $_template->getTemplateObject('LinkTag')
-        ->add( array(
+        ->add(array(
             'rel'=>'apple-touch-icon-precomposed',
             'href'=>$assets.'icons/apple-touch-icon-114x114-precomposed.png',
             'sizes'=>'114x114'
-        ) );
+        ));
 }
 // => For first- and second-generation iPad: apple-touch-icon-72x72-precomposed.png
 if (file_exists($assets.'icons/apple-touch-icon-72x72-precomposed.png')) {
     $_template->getTemplateObject('LinkTag')
-        ->add( array(
+        ->add(array(
             'rel'=>'apple-touch-icon-precomposed',
             'href'=>$assets.'icons/apple-touch-icon-72x72-precomposed.png',
             'sizes'=>'72x72'
-        ) );
+        ));
 }
 // => For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: apple-touch-icon-precomposed.png
 if (file_exists($assets.'icons/apple-touch-icon-precomposed.png')) {
     $_template->getTemplateObject('LinkTag')
-        ->add( array(
+        ->add(array(
             'rel'=>'apple-touch-icon-precomposed',
             'href'=>$assets.'icons/apple-touch-icon-precomposed.png'
-        ) );
+        ));
 }
 
 // => + old ones
@@ -145,14 +153,14 @@ $_template->getTemplateObject('TitleTag')->reset();
 // => $title
 if (!empty($title)) {
     $_template->getTemplateObject('TitleTag')
-        ->add( $title );
+        ->add($title);
 }
 // => + old ones
 $_template->getTemplateObject('TitleTag')->set($old_titles);
 // => meta_title last
 if (!empty($meta_title)) {
     $_template->getTemplateObject('TitleTag')
-        ->add( $meta_title );
+        ->add($meta_title);
 }
 
 // ------------------
@@ -193,7 +201,9 @@ $_template->getTemplateObject('JavascriptFile', 'jsfiles_footer')
 
 // --------------------------------
 // the content
-if (empty($content)) $content = '<p>Test content</p>';
+if (empty($content)) {
+    $content = '<p>Test content</p>';
+}
 
 //echo '<pre>';var_dump($_template);exit('yo');
 
@@ -223,19 +233,21 @@ echo
     $_template->getTemplateObject('TitleTag')->write("\n\t\t %s "),
     $_template->getTemplateObject('LinkTag')->write("\n\t\t %s ");
 
-if (true===$minify_css)
+if (true===$minify_css) {
     echo $_template->getTemplateObject('CssFile')->minify()->writeMinified("\n\t\t %s ");
-elseif (true===$merge_css)
+} elseif (true===$merge_css) {
     echo $_template->getTemplateObject('CssFile')->merge()->writeMerged("\n\t\t %s ");
-else
+} else {
     echo $_template->getTemplateObject('CssFile')->write("\n\t\t %s ");
+}
 
-if (true===$minify_js)
+if (true===$minify_js) {
     echo $_template->getTemplateObject('JavascriptFile', 'jsfiles_header')->minify()->writeMinified("\n\t\t %s ");
-elseif (true===$merge_js)
+} elseif (true===$merge_js) {
     echo $_template->getTemplateObject('JavascriptFile', 'jsfiles_header')->merge()->writeMerged("\n\t\t %s ");
-else
+} else {
     echo $_template->getTemplateObject('JavascriptFile', 'jsfiles_header')->write("\n\t\t %s ");
+}
 
 _echo("\n");
 ?>
@@ -251,7 +263,7 @@ _echo("\n");
 ?>
         <a id="top"></a>
 
-<?php foreach($_template->getPageStructure() as $item) : ?>
+<?php foreach ($_template->getPageStructure() as $item) : ?>
     <?php if (isset($$item)) : ?>
 
         <?php
@@ -271,7 +283,7 @@ _echo("\n");
 
             <?php if (is_array($$item)) : ?>
             <ul>
-                <?php foreach($$item as $var=>$val) : ?>
+                <?php foreach ($$item as $var=>$val) : ?>
                 <li><a href="<?php echo $var; ?>"><?php echo $val; ?></a></li>
                 <?php endforeach; ?>
             </ul>
@@ -288,12 +300,13 @@ _echo("\n");
     </div>
 
 <?php
-if (true===$minify_js)
+if (true===$minify_js) {
     echo $_template->getTemplateObject('JavascriptFile', 'jsfiles_footer')->minify()->writeMinified("\n\t %s ");
-elseif (true===$merge_js)
+} elseif (true===$merge_js) {
     echo $_template->getTemplateObject('JavascriptFile', 'jsfiles_footer')->merge()->writeMerged("\n\t\t %s ");
-else
+} else {
     echo $_template->getTemplateObject('JavascriptFile', 'jsfiles_footer')->write("\n\t %s ");
+}
 
 echo
     $_template->getTemplateObject('JavascriptTag')->write("%s"),
